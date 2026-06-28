@@ -41,5 +41,11 @@ export const maskRise = {
   },
 };
 
-/** Default viewport config for `whileInView`. */
-export const viewportOnce = { once: true, amount: 0.25 };
+/**
+ * Default viewport config for `whileInView`. `amount: 'some'` fires as soon as
+ * any part of the element enters — so tall containers (e.g. cards that stack
+ * into a single column on mobile) reliably reveal instead of staying hidden
+ * when a fixed fraction never fits the viewport. `margin` triggers slightly
+ * before the element fully reaches the fold.
+ */
+export const viewportOnce = { once: true, amount: 'some', margin: '0px 0px -10% 0px' };
