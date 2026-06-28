@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { Download } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Parallax } from '@/components/ui/Parallax';
@@ -76,18 +75,6 @@ export function About() {
               </div>
             ))}
           </dl>
-
-          <a
-            href={siteConfig.cv.path}
-            download
-            className="mt-8 inline-flex h-11 items-center gap-2 rounded-pill border border-border-strong px-6 text-label text-text transition-colors hover:border-accent hover:text-accent"
-          >
-            <Download className="h-4 w-4" aria-hidden="true" />
-            Download CV
-            <span className="font-mono text-caption text-faint">
-              PDF · {siteConfig.cv.updated}
-            </span>
-          </a>
 
           <div className="mt-8">
             <p className="font-mono text-caption uppercase tracking-[0.18em] text-faint">
