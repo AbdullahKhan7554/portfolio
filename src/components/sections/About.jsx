@@ -4,6 +4,7 @@ import { Section } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Parallax } from '@/components/ui/Parallax';
 import { FloatingShapes } from '@/components/ui/FloatingShapes';
+import { SocialLinks } from '@/components/ui/SocialLinks';
 import { siteConfig } from '@/config/site';
 
 const FACTS = [
@@ -87,6 +88,13 @@ export function About() {
               PDF · {siteConfig.cv.updated}
             </span>
           </a>
+
+          <div className="mt-8">
+            <p className="font-mono text-caption uppercase tracking-[0.18em] text-faint">
+              Follow
+            </p>
+            <SocialLinks className="mt-3" />
+          </div>
         </Reveal>
       </div>
     </Section>
