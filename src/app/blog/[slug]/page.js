@@ -23,15 +23,29 @@ export async function generateMetadata({ params }) {
 }
 
 function articleSchema(post) {
+  const url = `${siteConfig.url}/blog/${post.slug}`;
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
+    dateModified: post.date,
     articleSection: post.category,
-    author: { '@type': 'Person', name: siteConfig.brand.founder },
-    publisher: { '@type': 'Organization', name: siteConfig.brand.name },
+    url,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    image: `${siteConfig.url}/opengraph-image`,
+    inLanguage: 'en',
+    author: {
+      '@type': 'Person',
+      name: siteConfig.brand.founder,
+      url: siteConfig.url,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.brand.name,
+      logo: { '@type': 'ImageObject', url: `${siteConfig.url}/logo.png` },
+    },
   };
 }
 
