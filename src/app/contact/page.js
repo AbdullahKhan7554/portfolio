@@ -5,7 +5,7 @@ import { ContactForm } from '@/components/forms/ContactForm';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { siteConfig } from '@/config/site';
 import { buildMetadata } from '@/lib/seo';
-import { breadcrumbSchema, jsonLd } from '@/lib/schema';
+import { breadcrumbSchema, contactPageSchema, jsonLd } from '@/lib/schema';
 
 export const metadata = buildMetadata({
   title: 'Contact',
@@ -37,6 +37,10 @@ export default async function ContactPage({ searchParams }) {
             { name: 'Contact', path: '/contact' },
           ]),
         )}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(contactPageSchema())}
       />
       <PageHeader
         eyebrow="Let's Talk"

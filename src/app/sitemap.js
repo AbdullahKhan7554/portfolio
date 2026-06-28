@@ -1,5 +1,6 @@
 import { siteConfig } from '@/config/site';
 import { caseStudies } from '@/content/caseStudies';
+import { posts } from '@/content/blog';
 
 export default function sitemap() {
   const now = new Date();
@@ -25,5 +26,13 @@ export default function sitemap() {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...workRoutes];
+  // Blog posts auto-included from content/blog — adding a new post adds its URL.
+  const blogRoutes = posts.map((p) => ({
+    url: `${siteConfig.url}/blog/${p.slug}`,
+    lastModified: p.date ? new Date(p.date) : now,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...workRoutes, ...blogRoutes];
 }

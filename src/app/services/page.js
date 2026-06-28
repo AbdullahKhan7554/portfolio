@@ -8,7 +8,7 @@ import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { engagementSteps } from '@/content/process';
 import { siteConfig } from '@/config/site';
 import { buildMetadata } from '@/lib/seo';
-import { breadcrumbSchema, jsonLd } from '@/lib/schema';
+import { breadcrumbSchema, servicesSchema, jsonLd } from '@/lib/schema';
 
 export const metadata = buildMetadata({
   title: 'Services',
@@ -28,6 +28,10 @@ export default function ServicesPage() {
             { name: 'Services', path: '/services' },
           ]),
         )}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(servicesSchema())}
       />
       <PageHeader
         eyebrow="Services"

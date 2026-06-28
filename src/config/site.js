@@ -16,7 +16,7 @@
  */
 
 const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://avenixstudio.com'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://www.avenixstudios.com'
 ).replace(/\/$/, '');
 
 export const siteConfig = {

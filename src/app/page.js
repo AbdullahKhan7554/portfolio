@@ -13,12 +13,17 @@ import { FAQ } from '@/components/sections/FAQ';
 import { About } from '@/components/sections/About';
 import { Contact } from '@/components/sections/Contact';
 import { buildMetadata } from '@/lib/seo';
+import { professionalServiceSchema, jsonLd } from '@/lib/schema';
 
 export const metadata = buildMetadata({ path: '/' });
 
 export default function HomePage() {
   return (
     <main id="main">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(professionalServiceSchema())}
+      />
       <Hero />
       <CaseStudies />
       <About />
