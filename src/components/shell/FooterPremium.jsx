@@ -11,10 +11,20 @@ import {
   useTransform,
   useReducedMotion,
 } from 'framer-motion';
+import { Github, Linkedin, Instagram, Facebook, Mail } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 
 const GOLD = '#C9A227';
 const EASE_OUT = [0.16, 1, 0.3, 1];
+
+/** X (formerly Twitter) brand glyph — lucide only ships the old bird. */
+function XIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+    </svg>
+  );
+}
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
@@ -35,10 +45,11 @@ const SERVICE_LINKS = [
 ];
 
 const CONNECT_LINKS = [
-  { label: 'LinkedIn', href: siteConfig.social.linkedin },
-  { label: 'GitHub', href: siteConfig.social.github },
-  { label: 'Instagram', href: siteConfig.social.instagram },
-  { label: 'X', href: siteConfig.social.x },
+  { label: 'LinkedIn', href: siteConfig.social.linkedin, Icon: Linkedin },
+  { label: 'GitHub', href: siteConfig.social.github, Icon: Github },
+  { label: 'Instagram', href: siteConfig.social.instagram, Icon: Instagram },
+  { label: 'Facebook', href: siteConfig.social.facebook, Icon: Facebook },
+  { label: 'X', href: siteConfig.social.x, Icon: XIcon },
 ];
 
 const containerV = {
@@ -51,7 +62,7 @@ const itemV = {
 };
 
 /** Magnetic footer link with a gold underline that grows from the left. */
-function FooterLink({ href, children, external = false }) {
+function FooterLink({ href, children, external = false, icon: Icon }) {
   const ref = useRef(null);
   const reduced = useReducedMotion();
   const x = useMotionValue(0);
@@ -73,13 +84,20 @@ function FooterLink({ href, children, external = false }) {
   }
 
   const cls =
-    'group relative inline-flex w-fit items-center text-body-sm text-muted transition-colors duration-300 hover:text-text-strong';
+    'group relative inline-flex w-fit items-center gap-2 text-body-sm text-muted transition-colors duration-300 hover:text-text-strong';
   const underline = (
     <span
       aria-hidden="true"
       className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
       style={{ backgroundColor: GOLD }}
     />
+  );
+  const content = (
+    <>
+      {Icon && <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />}
+      <span>{children}</span>
+      {underline}
+    </>
   );
 
   if (external) {
@@ -95,8 +113,7 @@ function FooterLink({ href, children, external = false }) {
         style={{ x: sx, y: sy }}
         className={cls}
       >
-        {children}
-        {underline}
+        {content}
       </motion.a>
     );
   }
@@ -109,8 +126,7 @@ function FooterLink({ href, children, external = false }) {
       className="w-fit"
     >
       <Link href={href} className={cls}>
-        {children}
-        {underline}
+        {content}
       </Link>
     </motion.div>
   );
@@ -249,11 +265,15 @@ export function FooterPremium() {
         <motion.div variants={itemV} className={columnHover}>
           <FooterHeading>Connect</FooterHeading>
           {CONNECT_LINKS.map((l) => (
-            <FooterLink key={l.label} href={l.href} external>
+            <FooterLink key={l.label} href={l.href} external icon={l.Icon}>
               {l.label}
             </FooterLink>
           ))}
-          <FooterLink href={`mailto:${siteConfig.contact.email}`} external>
+          <FooterLink
+            href={`mailto:${siteConfig.contact.email}`}
+            external
+            icon={Mail}
+          >
             {siteConfig.contact.email}
           </FooterLink>
         </motion.div>

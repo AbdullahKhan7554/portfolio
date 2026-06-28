@@ -78,6 +78,7 @@ export const siteConfig = {
       'https://www.linkedin.com/in/mabdullahabdulqayyum-khan-8baa97362/',
     x: 'https://x.com/avenixstudio',
     instagram: 'https://www.instagram.com/avenix_studios/',
+    facebook: 'https://www.facebook.com/profile.php?id=61591556996767',
   },
 
   // --- Primary navigation --------------------------------------------------
