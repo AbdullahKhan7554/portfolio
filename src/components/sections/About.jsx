@@ -10,7 +10,7 @@ import { siteConfig } from '@/config/site';
 const FACTS = [
   { label: 'Based in', value: siteConfig.contact.location },
   { label: 'Timezone', value: siteConfig.contact.timezone },
-  { label: 'Focus', value: 'MERN · Next.js' },
+  { label: 'Focus', value: 'MERN · Next.js · SEO · AI Automation' },
   { label: 'Serving', value: 'Local & international' },
 ];
 
