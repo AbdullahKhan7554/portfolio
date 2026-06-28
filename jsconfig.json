@@ -4,9 +4,17 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowJs": true,
     "checkJs": false,
-    "jsx": "preserve"
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*", "next.config.mjs"],
+  "include": ["src/**/*", "next.config.mjs", "*.mjs"],
   "exclude": ["node_modules", ".next"]
 }
