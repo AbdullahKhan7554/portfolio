@@ -74,9 +74,10 @@ export const siteConfig = {
   // --- Social links --------------------------------------------------------
   social: {
     github: 'https://github.com/AbdullahKhan7554',
-    linkedin: 'https://www.linkedin.com/in/abdullah-khan',
+    linkedin:
+      'https://www.linkedin.com/in/mabdullahabdulqayyum-khan-8baa97362/',
     x: 'https://x.com/avenixstudio',
-    instagram: 'https://instagram.com/avenixstudio',
+    instagram: 'https://www.instagram.com/avenix_studios/',
   },
 
   // --- Primary navigation --------------------------------------------------

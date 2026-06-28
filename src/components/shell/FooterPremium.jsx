@@ -37,6 +37,7 @@ const SERVICE_LINKS = [
 const CONNECT_LINKS = [
   { label: 'LinkedIn', href: siteConfig.social.linkedin },
   { label: 'GitHub', href: siteConfig.social.github },
+  { label: 'Instagram', href: siteConfig.social.instagram },
   { label: 'X', href: siteConfig.social.x },
 ];
 
