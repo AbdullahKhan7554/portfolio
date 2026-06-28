@@ -1,7 +1,7 @@
 import { siteConfig, organizationSchemaData } from '@/config/site';
 import { services } from '@/content/services';
 
-/** JSON-LD: Organization (the Avenix Studio brand). */
+/** JSON-LD: Organization (the Avenix Studio brand). Injected site-wide. */
 export function organizationSchema() {
   return {
     '@context': 'https://schema.org',
@@ -9,14 +9,21 @@ export function organizationSchema() {
     name: organizationSchemaData.name,
     legalName: organizationSchemaData.legalName,
     url: organizationSchemaData.url,
-    logo: organizationSchemaData.logo,
+    logo: {
+      '@type': 'ImageObject',
+      url: organizationSchemaData.logo,
+    },
+    image: organizationSchemaData.logo,
+    description: siteConfig.seo.description,
     email: organizationSchemaData.email,
+    telephone: siteConfig.contact.phone,
     foundingDate: organizationSchemaData.foundingDate,
     founder: {
       '@type': 'Person',
       name: organizationSchemaData.founder.name,
       jobTitle: organizationSchemaData.founder.jobTitle,
     },
+    // sameAs: official social profiles (Instagram, Facebook, LinkedIn, GitHub, X).
     sameAs: organizationSchemaData.sameAs,
     areaServed: organizationSchemaData.areaServed,
     address: {
@@ -24,6 +31,14 @@ export function organizationSchema() {
       addressLocality: organizationSchemaData.address.locality,
       addressRegion: organizationSchemaData.address.region,
       addressCountry: organizationSchemaData.address.country,
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: organizationSchemaData.email,
+      telephone: siteConfig.contact.phone,
+      areaServed: organizationSchemaData.areaServed,
+      availableLanguage: ['English'],
     },
   };
 }
