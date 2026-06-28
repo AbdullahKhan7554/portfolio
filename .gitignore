@@ -1,0 +1,43 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+Thumbs.db
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files — NEVER commit secrets
+.env
+.env*.local
+.env.local
+.env.development.local
+.env.production.local
+
+# vercel
+.vercel
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Stray root assets (canonical copies live in /public)
+/logo.png
+/web.png
+
+# Windows
+desktop.ini

@@ -1,0 +1,239 @@
+/* ===========================================================================
+   OBSIDIAN ATELIER — Design Tokens (Design TRD §7)
+   Three layers: Primitive → Semantic → Component.
+   Components reference SEMANTIC tokens only. Never use a raw hex in a component.
+   =========================================================================== */
+
+:root {
+  /* ============ PRIMITIVE: COLOR ============ */
+  --obsidian-950: #0a0a0b;
+  --obsidian-900: #111014;
+  --obsidian-850: #16151a;
+  --obsidian-800: #1c1b21;
+  --obsidian-700: #26252c;
+  --obsidian-600: #34323b;
+  --obsidian-500: #4a4853;
+  --obsidian-400: #6e6b78;
+  --obsidian-300: #97949f;
+  --obsidian-200: #c4c1ca;
+  --obsidian-100: #e4e1e8;
+  --paper-50: #f6f3ee;
+  --paper-100: #ede9e2;
+  --amber-300: #f2d29b;
+  --amber-400: #ecc079;
+  --amber-500: #e3a857;
+  --amber-600: #d08c3a;
+  --amber-700: #a66c28;
+  --green-500: #57b894;
+  --gold-500: #e0b341;
+  --red-500: #e0685e;
+  --blue-500: #6fa8dc;
+
+  /* ============ PRIMITIVE: TYPOGRAPHY ============ */
+  /* The --font-* loader variables are injected onto <html> by next/font
+     (see src/lib/fonts.js). These tokens add the documented fallback stacks. */
+  --font-display: var(--font-outfit), 'Inter', system-ui, sans-serif;
+  --font-sans: var(--font-outfit), 'Inter', system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), 'SF Mono', 'JetBrains Mono', monospace;
+
+  --fs-display: clamp(3.25rem, 8vw + 1rem, 8.5rem);
+  --fs-h1: clamp(2.5rem, 5vw + 1rem, 5rem);
+  --fs-h2: clamp(2rem, 3vw + 1rem, 3.25rem);
+  --fs-h3: clamp(1.5rem, 1.5vw + 1rem, 2rem);
+  --fs-h4: clamp(1.25rem, 1vw + 0.75rem, 1.5rem);
+  --fs-lead: clamp(1.125rem, 0.5vw + 1rem, 1.375rem);
+  --fs-body: 1rem;
+  --fs-body-sm: 0.9375rem;
+  --fs-label: 0.875rem;
+  --fs-caption: 0.8125rem;
+  --fs-eyebrow: 0.75rem;
+
+  --lh-tight: 0.92;
+  --lh-snug: 1.1;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.65;
+  --tracking-tighter: -0.03em;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.01em;
+  --tracking-eyebrow: 0.18em;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* ============ PRIMITIVE: SPACE / RADIUS / SIZE ============ */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+  --space-12: 6rem;
+  --space-16: 8rem;
+  --space-20: 10rem;
+  --space-24: 12rem;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+  --container: 1360px;
+  --container-bleed: 1560px;
+  --measure: 66ch;
+
+  /* ============ PRIMITIVE: SHADOW / BLUR ============ */
+  --shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.3);
+  --shadow-md: 0 8px 24px -8px hsl(0 0% 0% / 0.5);
+  --shadow-lg: 0 24px 64px -16px hsl(0 0% 0% / 0.6);
+  --glow-accent: 0 0 0 1px hsl(35 72% 62% / 0.35),
+    0 8px 40px -8px hsl(35 72% 62% / 0.45);
+  --blur-sm: 8px;
+  --blur-md: 16px;
+  --blur-lg: 40px;
+
+  /* ============ PRIMITIVE: MOTION ============ */
+  --dur-instant: 100ms;
+  --dur-fast: 200ms;
+  --dur-base: 300ms;
+  --dur-slow: 500ms;
+  --dur-slower: 800ms;
+  --dur-reveal: 1000ms;
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0.05, 0.36, 1);
+  --ease-magnetic: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ============ PRIMITIVE: Z-INDEX ============ */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-header: 200;
+  --z-cursor: 300;
+  --z-overlay: 400;
+  --z-modal: 500;
+  --z-toast: 600;
+
+  /* ============ SEMANTIC (DARK = DEFAULT) ============ */
+  --bg: var(--obsidian-950);
+  --bg-alt: var(--obsidian-900);
+  --surface: var(--obsidian-850);
+  --surface-raised: var(--obsidian-800);
+  --text: var(--paper-50);
+  --text-strong: var(--paper-100);
+  --text-muted: var(--obsidian-300);
+  --text-faint: var(--obsidian-400);
+  --accent: var(--amber-500);
+  --accent-hover: var(--amber-400);
+  --accent-pressed: var(--amber-600);
+  --on-accent: var(--obsidian-950);
+  --border: var(--obsidian-600);
+  --border-strong: var(--obsidian-700);
+  --success: var(--green-500);
+  --warning: var(--gold-500);
+  --error: var(--red-500);
+  --info: var(--blue-500);
+  --focus-ring: var(--amber-500);
+
+  --gradient-hero-glow: radial-gradient(
+    60% 50% at 50% 0%,
+    hsl(35 72% 62% / 0.14) 0%,
+    hsl(35 72% 62% / 0.04) 40%,
+    transparent 72%
+  );
+  --gradient-section-veil: linear-gradient(
+    180deg,
+    hsl(38 33% 95% / 0.05) 0%,
+    transparent 24%
+  );
+  --gradient-amber-text: linear-gradient(
+    100deg,
+    #ecc079 0%,
+    #e3a857 45%,
+    #f2d29b 100%
+  );
+  --gradient-card-sheen: linear-gradient(
+    180deg,
+    hsl(38 33% 95% / 0.06) 0%,
+    transparent 12%
+  );
+
+  /* ============ COMPONENT ============ */
+  --btn-primary-bg: var(--accent);
+  --btn-primary-text: var(--on-accent);
+  --btn-primary-bg-hover: var(--accent-hover);
+  --btn-secondary-border: var(--border-strong);
+  --btn-secondary-text: var(--text);
+  --btn-ghost-text: var(--text-muted);
+  --btn-radius: var(--radius-pill);
+
+  --card-bg: var(--surface);
+  --card-border: var(--border);
+  --card-border-hover: var(--accent);
+  --card-radius: var(--radius-lg);
+  --card-pad: var(--space-5);
+
+  --input-bg: var(--surface);
+  --input-border: var(--border-strong);
+  --input-text: var(--text);
+  --input-placeholder: var(--text-faint);
+  --input-ring: var(--focus-ring);
+  --input-radius: var(--radius-sm);
+  --input-error: var(--error);
+
+  --nav-bg: hsl(252 11% 4% / 0.72);
+  --nav-border: var(--border);
+  --nav-blur: var(--blur-md);
+
+  --tag-bg: var(--surface-raised);
+  --tag-text: var(--text-muted);
+  --tag-active-bg: var(--accent);
+  --tag-active-text: var(--on-accent);
+
+  --grain-opacity: 0.035;
+  --noise-opacity: 0.04;
+}
+
+/* ============ OPTIONAL LIGHT THEME ("Atelier Daylight") ============ */
+[data-theme='light'] {
+  --bg: #f4f1eb;
+  --bg-alt: #efebe3;
+  --surface: #fbfaf7;
+  --surface-raised: #ffffff;
+  --text: #1a1916;
+  --text-strong: #100f0d;
+  --text-muted: #5c5850;
+  --text-faint: #8c877d;
+  --accent: #a66c28;
+  --accent-hover: #be7e32;
+  --accent-pressed: #8a5a20;
+  --on-accent: #fbfaf7;
+  --border: #e2dcd2;
+  --border-strong: #d4ccbf;
+  --grain-opacity: 0.02;
+  --nav-bg: hsl(40 20% 95% / 0.8);
+}
+
+/* ============ REDUCED MOTION: neutralize motion tokens ============ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant: 0ms;
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+    --dur-slower: 0ms;
+    --dur-reveal: 0ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
