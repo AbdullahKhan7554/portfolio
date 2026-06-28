@@ -76,7 +76,6 @@ export const siteConfig = {
     github: 'https://github.com/AbdullahKhan7554',
     linkedin:
       'https://www.linkedin.com/in/mabdullahabdulqayyum-khan-8baa97362/',
-    x: 'https://x.com/avenixstudio',
     instagram: 'https://www.instagram.com/avenix_studios/',
     facebook: 'https://www.facebook.com/profile.php?id=61591556996767',
   },
