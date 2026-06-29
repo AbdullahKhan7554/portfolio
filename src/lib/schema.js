@@ -65,7 +65,7 @@ export function professionalServiceSchema() {
     '@type': 'ProfessionalService',
     name: siteConfig.brand.name,
     url: siteConfig.url,
-    image: `${siteConfig.url}/opengraph-image`,
+    image: siteConfig.seo.ogImage.url,
     logo: `${siteConfig.url}/logo.png`,
     description: siteConfig.seo.description,
     email: siteConfig.contact.email,

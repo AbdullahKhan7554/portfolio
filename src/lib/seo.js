@@ -22,11 +22,18 @@ export function buildMetadata(opts = {}) {
     : siteConfig.seo.defaultTitle;
   const resolvedDesc = description || siteConfig.seo.description;
 
-  // When no custom image is provided, omit `images` so Next's file-convention
-  // opengraph-image (which also generates twitter:image) is used automatically.
-  const customImages = ogImage
-    ? [{ url: ogImage, width: 1200, height: 630, alt: siteConfig.seo.ogImage.alt }]
-    : undefined;
+  // Resolve a single, ABSOLUTE 1200×630 social image. Defaults to the official
+  // Avenix Studio brand card (/og-image.png); a per-page `ogImage` overrides it.
+  // An explicit absolute image keeps previews identical across WhatsApp,
+  // Facebook, LinkedIn, X, Discord & Telegram — none of which run JS, so the URL
+  // must be reachable without auth or redirects.
+  const { width, height, type, alt } = siteConfig.seo.ogImage;
+  const imageUrl = ogImage
+    ? ogImage.startsWith('http')
+      ? ogImage
+      : `${siteConfig.url}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`
+    : siteConfig.seo.ogImage.url;
+  const ogImages = [{ url: imageUrl, width, height, type, alt }];
 
   return {
     title: resolvedTitle,
@@ -43,7 +50,7 @@ export function buildMetadata(opts = {}) {
       description: resolvedDesc,
       url: canonical,
       locale: siteConfig.seo.locale,
-      ...(customImages ? { images: customImages } : {}),
+      images: ogImages,
     },
     twitter: {
       card: 'summary_large_image',
@@ -51,7 +58,7 @@ export function buildMetadata(opts = {}) {
       creator: siteConfig.seo.twitterHandle,
       title: resolvedTitle,
       description: resolvedDesc,
-      ...(customImages ? { images: customImages.map((i) => i.url) } : {}),
+      images: [imageUrl],
     },
   };
 }

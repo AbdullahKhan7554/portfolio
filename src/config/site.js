@@ -115,11 +115,16 @@ export const siteConfig = {
       'Conversion-focused websites',
     ],
     locale: 'en_US',
-    /** Open Graph image — 1200×630. Generated dynamically at /opengraph-image. */
+    /**
+     * Open Graph / social preview image — official Avenix Studio brand card.
+     * Static 1200×630 PNG served from /public so the absolute URL is stable and
+     * publicly cacheable for WhatsApp, Facebook, LinkedIn, X, Discord & Telegram.
+     */
     ogImage: {
-      url: `${SITE_URL}/opengraph-image`,
+      url: `${SITE_URL}/og-image.png`,
       width: 1200,
       height: 630,
+      type: 'image/png',
       alt: 'Avenix Studio — Premium Full-Stack Web Development by Abdullah Khan',
     },
     twitterHandle: '@avenixstudio',

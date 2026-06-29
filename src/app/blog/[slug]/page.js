@@ -34,7 +34,7 @@ function articleSchema(post) {
     articleSection: post.category,
     url,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    image: `${siteConfig.url}/opengraph-image`,
+    image: siteConfig.seo.ogImage.url,
     inLanguage: 'en',
     author: {
       '@type': 'Person',
