@@ -40,7 +40,7 @@ export default function BlogPage() {
           {posts.map((post, i) => (
             <RevealItem key={post.slug}>
               <Link
-                href={`/blog/${post.slug}`}
+                href={post.href ?? `/blog/${post.slug}`}
                 className="group grid gap-3 py-8 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-8"
               >
                 <span className="font-mono text-caption text-faint">

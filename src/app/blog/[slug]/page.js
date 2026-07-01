@@ -8,7 +8,7 @@ import { breadcrumbSchema, jsonLd } from '@/lib/schema';
 import { siteConfig } from '@/config/site';
 
 export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
+  return posts.filter((p) => !p.href).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }) {
@@ -68,7 +68,7 @@ function Block({ block }) {
 export default async function BlogPostPage({ params }) {
   const { slug } = await params;
   const post = getPost(slug);
-  if (!post) notFound();
+  if (!post || post.href) notFound();
 
   const crumbs = [
     { name: 'Home', path: '/' },

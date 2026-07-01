@@ -7,6 +7,16 @@
  */
 export const posts = [
   {
+    slug: 'website-development-pakistan',
+    href: '/website-development-pakistan',
+    title: 'Website Development in Pakistan: Ultimate 2026 Guide',
+    excerpt:
+      'The complete 2026 guide to website development in Pakistan — costs, types, process, and how to choose the right developer for clinics, gyms, law firms & more.',
+    category: 'Web Development',
+    date: '2026-01-20',
+    readingTime: '28 min read',
+  },
+  {
     slug: 'why-your-business-website-needs-to-be-fast',
     title: 'Why a fast website is the cheapest marketing you can buy',
     excerpt:
