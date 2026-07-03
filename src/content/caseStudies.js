@@ -79,7 +79,7 @@ export const caseStudies = [
     type: 'fitness',
     niche: 'Gym & Fitness',
     year: '2024',
-    liveUrl: 'https://xtreme2.vercel.app',
+    liveUrl: 'https://xtremefitnesstudio.com',
     isLive: true,
     featured: false,
     image: '/images/work/xtreme.png',

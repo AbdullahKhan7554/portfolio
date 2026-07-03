@@ -10,7 +10,7 @@ import { Parallax } from '@/components/ui/Parallax';
 import { Tag } from '@/components/ui/Badge';
 import { siteConfig } from '@/config/site';
 
-const TRUST = ['6 projects shipped', '2 live client domains', 'Next.js · MERN'];
+const TRUST = ['6 projects shipped', '3 live client domains', 'Next.js · MERN'];
 
 export function Hero() {
   const glowRef = useRef(null);
