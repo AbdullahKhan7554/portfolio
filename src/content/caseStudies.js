@@ -53,7 +53,7 @@ export const caseStudies = [
     year: '2024',
     liveUrl: 'https://viola-brown.vercel.app',
     isLive: true,
-    featured: true,
+    featured: false,
     image: '/images/work/voila.png',
     summary:
       'A premium multi-page presence for a luxury clinic — treatment storytelling, a bridal journey, and SEO-ready depth.',
@@ -161,7 +161,7 @@ export const caseStudies = [
     year: '2025',
     liveUrl: 'https://scissorsvipsalon.com',
     isLive: true,
-    featured: true,
+    featured: false,
     image: '/images/work/scissors.png',
     summary:
       'A production salon website live on a custom domain — premium presentation for a real paying client.',
@@ -362,21 +362,23 @@ export const caseStudies = [
     year: '2025',
     liveUrl: 'https://electronics-flame.vercel.app',
     isLive: true,
-    featured: false,
+    featured: true,
     image: '/images/work/New Multi Electronics.png',
-    summary: 'A modern storefront website for an electronics business, built with Next.js.',
+    summary:
+      'A full-stack e-commerce website for an electronics store — a React storefront backed by a Node.js/Express API, SQL database, Supabase, and Cloudinary media.',
     problem:
-      'An electronics business needed a fast, modern website to showcase its products and drive enquiries.',
+      'An electronics business needed a complete e-commerce platform — not just a storefront, but a real backend to manage products, orders, and media.',
     solution: [
-      'Fast Next.js build with a clear product structure',
-      'Mobile-first, brand-aligned presentation',
-      'Enquiry-focused layout and calls to action',
+      'React storefront with product browsing and cart',
+      'Node.js + Express.js REST API with a SQL database',
+      'Supabase for data/auth and Cloudinary for product image hosting',
+      'Full end-to-end e-commerce flow from catalog to checkout',
     ],
     results: [
       { value: 1, suffix: '', label: 'Live deployment' },
-      { value: 100, suffix: '%', label: 'Mobile-first delivery' },
+      { value: 100, suffix: '%', label: 'Full-stack build' },
     ],
-    tech: ['Next.js', 'React', 'Tailwind CSS', 'Vercel'],
+    tech: ['React', 'Node.js', 'Express.js', 'SQL', 'Supabase', 'Cloudinary'],
   },
   {
     slug: 'forward-solution',
@@ -387,7 +389,7 @@ export const caseStudies = [
     year: '2025',
     liveUrl: 'https://forward-solution.vercel.app',
     isLive: true,
-    featured: false,
+    featured: true,
     image: '/images/work/agriprom.png',
     summary: 'A modern website for a business solutions company, built with Next.js.',
     problem:
