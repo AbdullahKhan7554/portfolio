@@ -14,8 +14,8 @@
 export const proofStats = [
   { value: 113, suffix: '+', label: 'Reviews showcased', context: 'Voila Luxury Skincare' },
   { value: 30, suffix: '+', label: 'Reviews surfaced', context: 'Smile Heaven Dental' },
-  { value: 6, suffix: '', label: 'Projects shipped', context: 'Across clinics, gyms & salons' },
-  { value: 2, suffix: '', label: 'Live custom-domain clients', context: 'builtugym.com · scissorsvipsalon.com' },
+  { value: 17, suffix: '', label: 'Projects shipped', context: 'Across clinics, gyms, salons & e-commerce' },
+  { value: 5, suffix: '', label: 'Live client projects', context: 'Real businesses, live in production' },
 ];
 
 export const testimonials = [
