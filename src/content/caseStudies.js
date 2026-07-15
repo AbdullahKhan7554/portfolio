@@ -378,6 +378,31 @@ export const caseStudies = [
     ],
     tech: ['Next.js', 'React', 'Tailwind CSS', 'Vercel'],
   },
+  {
+    slug: 'forward-solution',
+    title: 'Forward Solution Website',
+    client: 'Forward Solution',
+    type: 'live',
+    niche: 'Business Solutions',
+    year: '2025',
+    liveUrl: 'https://forward-solution.vercel.app',
+    isLive: true,
+    featured: false,
+    image: '/images/work/agriprom.png',
+    summary: 'A modern website for a business solutions company, built with Next.js.',
+    problem:
+      'A business solutions company needed a fast, credible website to present its offering and generate enquiries.',
+    solution: [
+      'Fast Next.js build with a clear services structure',
+      'Mobile-first, brand-aligned presentation',
+      'Enquiry-focused layout and calls to action',
+    ],
+    results: [
+      { value: 1, suffix: '', label: 'Live deployment' },
+      { value: 100, suffix: '%', label: 'Mobile-first delivery' },
+    ],
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'Vercel'],
+  },
 ];
 
 export function getCaseStudy(slug) {
