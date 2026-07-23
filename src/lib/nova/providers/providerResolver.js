@@ -19,7 +19,8 @@ export const PROVIDER_ENV = Object.freeze({
     modelVar: 'GEMINI_MODEL',
     baseUrlVar: 'GEMINI_BASE_URL',
     defaultModel: 'gemini-1.5-flash',
-    defaultBaseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai',
+    // Official Generative Language API base (native, not OpenAI-compat).
+    defaultBaseUrl: 'https://generativelanguage.googleapis.com/v1beta',
   },
   nvidia: {
     keyVar: 'NVIDIA_API_KEY',
