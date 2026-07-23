@@ -30,6 +30,7 @@ import { withRetry } from './retry';
  * @param {Object} [input.config]                         aiConfig override
  * @param {ReturnType<typeof createKnowledgeService>} [input.knowledgeService]  injectable (DI/testing)
  * @param {AbortSignal} [input.signal]                    cancellation
+ * @param {string} [input.directive]                      per-turn instruction (from the orchestrator)
  * @returns {Promise<AsyncGenerator<string>>}             token stream
  */
 export async function createChatStream({
@@ -40,6 +41,7 @@ export async function createChatStream({
   config = aiConfig,
   knowledgeService,
   signal,
+  directive = '',
 }) {
   const resolvedProviderId = providerId || config.defaultProvider;
 
@@ -49,11 +51,16 @@ export async function createChatStream({
 
   // 2) System prompt builder — identity + grounding, all from the active company.
   const knowledge = buildKnowledgePrompt(documents);
-  const system = buildSystemPrompt({
+  const baseSystem = buildSystemPrompt({
     identity: { assistantName: company.assistantName, brandName: company.brandName },
     sections: config.prompts,
     knowledge,
   });
+  // The orchestrator (5C) decides WHAT to do this turn; the provider only
+  // phrases it. Appended as an instruction — no business logic in the provider.
+  const system = directive
+    ? `${baseSystem}\n\n# This turn (follow exactly)\n${directive}`
+    : baseSystem;
 
   // 3) Context builder — trim history to the token budget (reserving output).
   const ctx = buildContext({

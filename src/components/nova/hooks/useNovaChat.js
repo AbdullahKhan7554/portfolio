@@ -31,6 +31,9 @@ export function useNovaChat(config) {
   const [isTyping, setIsTyping] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
   const abortRef = useRef(null);
+  // Opaque orchestrator state (5C). The UI only carries it between turns — it
+  // makes no sales/lead decisions itself.
+  const conversationStateRef = useRef(null);
 
   /** Cancel an in-flight response. */
   const stop = useCallback(() => {
@@ -92,7 +95,11 @@ export function useNovaChat(config) {
         const res = await fetch(config.apiPath || '/api/nova/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ companyId: config.companyId, messages: history }),
+          body: JSON.stringify({
+            companyId: config.companyId,
+            messages: history,
+            state: conversationStateRef.current,
+          }),
           signal: controller.signal,
         });
 
@@ -100,6 +107,16 @@ export function useNovaChat(config) {
           setIsTyping(false);
           showError();
           return;
+        }
+
+        // Carry the orchestrator's updated state forward to the next turn.
+        const encodedState = res.headers.get('X-Nova-State');
+        if (encodedState) {
+          try {
+            conversationStateRef.current = JSON.parse(decodeURIComponent(encodedState));
+          } catch {
+            /* ignore malformed state header */
+          }
         }
 
         const reader = res.body.getReader();

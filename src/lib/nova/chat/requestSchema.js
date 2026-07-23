@@ -18,6 +18,8 @@ export const chatRequestSchema = z.object({
     )
     .min(1)
     .max(50),
+  /** Opaque orchestrator state round-tripped by the UI (in-memory; optional). */
+  state: z.any().optional(),
 });
 
 /** @typedef {z.infer<typeof chatRequestSchema>} ChatRequest */

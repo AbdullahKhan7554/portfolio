@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { serverEnv, isOpenAIConfigured } from '@/lib/env';
-import { chatRequestSchema, createChatStream, rateLimitHook } from '@/lib/nova/chat';
+import { chatRequestSchema, runConversationTurn, rateLimitHook } from '@/lib/nova/chat';
 import { ProviderConfigError, ProviderError, ValidationError } from '@/lib/nova';
 
 /**
@@ -71,11 +71,12 @@ export async function POST(request) {
     );
   }
 
-  // 4) Build the request lifecycle and open the token stream.
+  // 4) Orchestrator-driven turn → knowledge-grounded streaming reply.
   try {
-    const iterator = await createChatStream({
+    const { stream, updatedState, nextStage } = await runConversationTurn({
       companyId: parsed.data.companyId,
       messages: parsed.data.messages,
+      state: parsed.data.state,
       providerId: 'openai',
       providerConfig: {
         apiKey: serverEnv.openaiApiKey,
@@ -85,11 +86,15 @@ export async function POST(request) {
       signal: request.signal,
     });
 
-    return new Response(iteratorToStream(iterator), {
+    return new Response(iteratorToStream(stream), {
       headers: {
         'Content-Type': 'text/plain; charset=utf-8',
         'Cache-Control': 'no-store, no-transform',
         'X-Accel-Buffering': 'no', // disable proxy buffering so tokens flush live
+        // Orchestrator state round-trips to the UI (in-memory; no persistence).
+        'X-Nova-State': encodeURIComponent(JSON.stringify(updatedState)),
+        'X-Nova-Stage': nextStage,
+        'Access-Control-Expose-Headers': 'X-Nova-State, X-Nova-Stage',
       },
     });
   } catch (err) {

@@ -7,3 +7,4 @@ export { buildKnowledgePrompt } from './knowledgePrompt';
 export { rateLimitHook } from './rateLimit';
 export { withRetry } from './retry';
 export { createChatStream } from './chatService';
+export { runConversationTurn } from './conversationRuntime';
