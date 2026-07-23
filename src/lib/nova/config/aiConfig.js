@@ -13,11 +13,11 @@
  */
 export const aiConfig = {
   /**
-   * Default adapter id resolved by the provider factory. The runtime resolves
-   * the ACTIVE provider from the environment (NOVA_PROVIDER); this is only the
-   * fallback default. Supported: 'gemini' (Google AI Studio) and 'nvidia' (NIM).
+   * Default adapter id. NVIDIA NIM is the only active provider; the runtime
+   * resolves it from the environment. (Gemini remains in the codebase but is
+   * not active/selectable.)
    */
-  defaultProvider: 'gemini',
+  defaultProvider: 'nvidia',
 
   /** Per-provider NON-SECRET settings (secrets/keys come from the environment). */
   providers: {

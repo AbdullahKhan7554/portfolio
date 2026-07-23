@@ -8,14 +8,18 @@
  */
 import { OpenAIProvider } from './openaiProvider';
 import { AnthropicProvider } from './anthropicProvider';
-import { GeminiProvider } from './geminiProvider';
 import { NvidiaProvider } from './nvidiaProvider';
 import { LocalProvider } from './localProvider';
 import { ProviderNotFoundError } from '../types/errors';
 
-/** Default id → adapter registry. */
+/**
+ * Default id → adapter registry. NVIDIA NIM is the only ACTIVE provider.
+ *
+ * Gemini is intentionally NOT imported or registered here so its adapter is
+ * never loaded/initialized. Its file (./geminiProvider) is kept for future use;
+ * to re-enable, restore the import and a `gemini` entry below.
+ */
 export const defaultProviderRegistry = Object.freeze({
-  gemini: GeminiProvider,
   nvidia: NvidiaProvider,
   openai: OpenAIProvider,
   anthropic: AnthropicProvider,

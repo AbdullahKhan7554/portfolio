@@ -10,7 +10,7 @@
  * changes nothing here — the factory + BaseProvider contract absorb it.
  */
 import { aiConfig } from '../config/aiConfig';
-import { createProvider } from '../providers/providerFactory';
+import { createModelRouter } from '../router';
 import { buildSystemPrompt } from '../core/systemPromptBuilder';
 import { buildContext } from '../core/contextBuilder';
 import { toProviderMessages } from '../core/messageFormatter';
@@ -70,23 +70,25 @@ export async function createChatStream({
     reserveForResponse: config.maxResponseTokens,
   });
 
-  // 4) Provider (factory) — isolated adapter; config (incl. secret) injected here.
-  const provider = createProvider(resolvedProviderId, {
-    ...config.providers[resolvedProviderId],
-    ...providerConfig,
+  // 4) Model router — selects the active NIM model (NOVA_MODEL) and owns the
+  //    underlying provider. The runtime never picks a model itself.
+  const router = createModelRouter({
+    providerId: resolvedProviderId,
+    providerConfig: { ...config.providers[resolvedProviderId], ...providerConfig },
   });
-  const check = provider.validateConfig();
+  const check = router.validate();
   if (!check.ok) {
     throw new ProviderConfigError(
-      `Provider "${resolvedProviderId}" is missing config: ${check.missing.join(', ')}.`,
+      `Nova model/provider is not ready: ${check.missing.join(', ')}.`,
       check.missing,
     );
   }
 
-  // 5) Streaming response — retry wrapper is a placeholder (single attempt).
+  // 5) Streaming response — the runtime only ever calls router.stream(...).
+  //    Retry wrapper is a placeholder (single attempt).
   return withRetry(
     () =>
-      provider.stream({
+      router.stream({
         system: ctx.system,
         messages: toProviderMessages(ctx.messages),
         temperature: config.temperature,

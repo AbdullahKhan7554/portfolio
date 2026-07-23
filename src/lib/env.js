@@ -21,13 +21,12 @@ export const isEmailConfigured = Boolean(serverEnv.resendApiKey);
 
 /**
  * Resolve the ACTIVE Nova AI provider from the environment (server-only, so
- * keys never reach the client). Provider-agnostic: `NOVA_PROVIDER` selects
- * (gemini | nvidia); if that provider's key is missing, resolution falls back
- * to any other supported provider that has a key. Returns `{ ok, providerId,
- * apiKey, model, baseUrl, missing, fallback }`.
+ * keys never reach the client). NVIDIA NIM is the only active provider — there
+ * is no provider selection and no fallback. Returns `{ ok, providerId, apiKey,
+ * model, baseUrl, missing, fallback }`.
  */
 export function resolveActiveProvider() {
-  return resolveProviderConfig(process.env, { preferred: process.env.NOVA_PROVIDER });
+  return resolveProviderConfig(process.env);
 }
 
 /** True when the active provider has its required key configured. */

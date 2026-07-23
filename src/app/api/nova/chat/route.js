@@ -49,14 +49,15 @@ export async function POST(request) {
     );
   }
 
-  // 2) Provider readiness — config-driven resolution with a LOGGED root cause.
+  // 2) Provider readiness — NVIDIA-only resolution with a LOGGED root cause.
+  // Graceful 503 (never a 500) so the UI shows a friendly fallback message.
   const provider = resolveActiveProvider();
   if (!provider.ok) {
     // eslint-disable-next-line no-console
-    console.error('[Nova] 503 ai_not_configured — active provider is not configured', {
+    console.error('[Nova] 503 ai_not_configured — NVIDIA provider is not configured', {
       provider: provider.providerId,
       missingEnv: provider.missing,
-      hint: `Set ${provider.missing.join(', ')} in .env.local, or set NOVA_PROVIDER to a configured provider.`,
+      hint: `Set ${provider.missing.join(', ')} in .env.local to enable Nova.`,
     });
     return NextResponse.json(
       {
@@ -64,7 +65,7 @@ export async function POST(request) {
         error: 'ai_not_configured',
         provider: provider.providerId,
         missing: provider.missing,
-        message: `Nova provider "${provider.providerId}" is not configured.`,
+        message: 'Nova is temporarily unavailable. Please try again later.',
       },
       { status: 503 },
     );

@@ -20,7 +20,8 @@ export { aiConfig } from './config/aiConfig';
 export { BaseProvider } from './providers/baseProvider';
 export { OpenAIProvider } from './providers/openaiProvider';
 export { AnthropicProvider } from './providers/anthropicProvider';
-export { GeminiProvider } from './providers/geminiProvider';
+// GeminiProvider is intentionally NOT re-exported so its adapter is not loaded.
+// The file is retained for future use (see providers/geminiProvider.js).
 export { NvidiaProvider } from './providers/nvidiaProvider';
 export { LocalProvider } from './providers/localProvider';
 export {
@@ -28,6 +29,16 @@ export {
   SUPPORTED_PROVIDERS,
   PROVIDER_ENV,
 } from './providers/providerResolver';
+
+// Model router (multi-model NVIDIA NIM)
+export {
+  ModelRouter,
+  createModelRouter,
+  modelRegistry,
+  ModelRegistry,
+  resolveActiveModelId,
+  DEFAULT_MODEL_ID,
+} from './router';
 export {
   createProvider,
   registerProvider,
