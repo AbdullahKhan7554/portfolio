@@ -22,7 +22,7 @@ export const aiConfig = {
   /** Per-provider NON-SECRET settings (secrets/keys come from the environment). */
   providers: {
     gemini: {
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.0-flash',
       baseUrl: 'https://generativelanguage.googleapis.com/v1beta',
       temperature: 0.6,
     },

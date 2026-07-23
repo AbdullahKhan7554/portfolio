@@ -17,8 +17,11 @@ import { ProviderError, ProviderConfigError } from '../types/errors';
 
 /** Official Generative Language API base. */
 const DEFAULT_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
-/** Configurable default model (used only when GEMINI_MODEL is unset). */
-const DEFAULT_MODEL = 'gemini-1.5-flash';
+/**
+ * Configurable default model, used only when GEMINI_MODEL is unset. Must be a
+ * currently-supported production model (gemini-1.5-flash is retired and 404s).
+ */
+const DEFAULT_MODEL = 'gemini-2.0-flash';
 
 async function safeText(res) {
   try {

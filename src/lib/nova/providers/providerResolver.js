@@ -18,7 +18,8 @@ export const PROVIDER_ENV = Object.freeze({
     keyVar: 'GEMINI_API_KEY',
     modelVar: 'GEMINI_MODEL',
     baseUrlVar: 'GEMINI_BASE_URL',
-    defaultModel: 'gemini-1.5-flash',
+    // Current supported production default (gemini-1.5-flash is retired / 404s).
+    defaultModel: 'gemini-2.0-flash',
     // Official Generative Language API base (native, not OpenAI-compat).
     defaultBaseUrl: 'https://generativelanguage.googleapis.com/v1beta',
   },

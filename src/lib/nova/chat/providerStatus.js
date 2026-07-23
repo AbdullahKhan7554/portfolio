@@ -30,6 +30,7 @@ export function getProviderStatus() {
   }
   return {
     providerId: active.providerId,
+    model: active.model,
     envVar: active.envVar,
     missing: active.missing,
     fallback: active.fallback,
@@ -47,6 +48,8 @@ export function logProviderStatus() {
 
   // eslint-disable-next-line no-console
   console.log(`[Nova] ${mark(true)} Active Provider: ${s.providerId}${s.fallback ? ' (fallback)' : ''}`);
+  // eslint-disable-next-line no-console
+  console.log(`[Nova] ${mark(Boolean(s.model))} Resolved Model: ${s.model || '(none)'}`);
   // eslint-disable-next-line no-console
   console.log(
     `[Nova] ${mark(s.loaded)} Provider Loaded: ${s.loaded ? 'registered in factory' : s.error || 'not registered'}`,
