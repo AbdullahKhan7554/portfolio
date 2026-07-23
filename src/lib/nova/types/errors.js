@@ -46,6 +46,19 @@ export class ProviderConfigError extends NovaError {
   }
 }
 
+/** An upstream provider request failed (network, non-2xx, interrupted stream). */
+export class ProviderError extends NovaError {
+  /** @param {string} providerId @param {string} message @param {{status?:number, detail?:string, cause?:any}} [meta] */
+  constructor(providerId, message, meta = {}) {
+    super(message, 'PROVIDER_ERROR');
+    this.name = 'ProviderError';
+    this.providerId = providerId;
+    this.status = meta.status;
+    this.detail = meta.detail;
+    if (meta.cause) this.cause = meta.cause;
+  }
+}
+
 /** A domain object failed schema validation. */
 export class ValidationError extends NovaError {
   /** @param {string} message @param {Array<object>} [issues] */

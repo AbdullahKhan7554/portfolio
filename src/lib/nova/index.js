@@ -52,6 +52,7 @@ export {
   NotImplementedError,
   ProviderNotFoundError,
   ProviderConfigError,
+  ProviderError,
   ValidationError,
 } from './types/errors';
 

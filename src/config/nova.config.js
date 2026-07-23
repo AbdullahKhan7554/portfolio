@@ -11,9 +11,9 @@
  *   • theme.dark / theme.light — full color palettes (resolved to CSS vars)
  *   • launcher — floating-button label & position
  *
- * NOTE (Milestone 1): this is a UI-only widget. `placeholderReply` is a clearly
- * labelled preview string shown after a visitor sends a message — there is no
- * AI, no network call, and no business logic. Live responses arrive later.
+ * As of Milestone 4 the widget streams real answers from the Nova chat API,
+ * grounded in the active company's knowledge base. `companyId` selects that
+ * tenant; `apiPath` is the streaming endpoint. No secrets live here.
  * ============================================================================
  */
 export const novaConfig = {
@@ -24,19 +24,19 @@ export const novaConfig = {
   /** Square-ish brand mark; shown in the header & assistant avatars. */
   logo: '/logo.png',
 
+  // --- AI backend (config-driven; no secrets) ------------------------------
+  /** Active company/tenant whose knowledge grounds Nova's replies. */
+  companyId: 'avenix',
+  /** Streaming chat endpoint. */
+  apiPath: '/api/nova/chat',
+
   // --- Conversation copy ---------------------------------------------------
   welcomeMessage:
     "Hi, I'm Nova 👋 — your guide here. Ask about recent work, services, or how a project comes together, and I'll point you in the right direction.",
   inputPlaceholder: 'Ask Nova anything…',
-  /**
-   * UI-preview acknowledgement (Milestone 1 only). Shown after the visitor
-   * sends a message so the typing indicator + assistant bubble can be seen.
-   * Set to an empty string to disable the preview reply entirely.
-   */
-  placeholderReply:
-    "Thanks — that's noted. Nova's live answers are coming in a future update. For now, feel free to keep exploring or reach out directly.",
-  /** How long the typing indicator shows before the preview reply (ms). */
-  typingDelayMs: 1100,
+  /** Shown in the chat if a response fails or Nova is not configured. */
+  errorMessage:
+    "Sorry — I couldn't respond just now. Please try again in a moment, or reach out directly.",
 
   // --- Suggested prompts (chips) ------------------------------------------
   quickReplies: [

@@ -10,7 +10,7 @@ import { SendButton } from './SendButton';
  * Shift+Enter for a newline. Owns only its draft text.
  */
 export function MessageInput() {
-  const { config, sendMessage } = useNova();
+  const { config, sendMessage, isStreaming, stop } = useNova();
   const [value, setValue] = useState('');
   const textareaRef = useRef(null);
 
@@ -24,7 +24,7 @@ export function MessageInput() {
 
   function submit() {
     const text = value.trim();
-    if (!text) return;
+    if (!text || isStreaming) return;
     sendMessage(text);
     setValue('');
     requestAnimationFrame(() => textareaRef.current?.focus());
@@ -59,7 +59,11 @@ export function MessageInput() {
           placeholder={config.inputPlaceholder}
           className="max-h-32 flex-1 resize-none bg-transparent text-[0.95rem] leading-6 text-[var(--nova-text)] placeholder:text-[var(--nova-text-muted)] focus:outline-none"
         />
-        <SendButton disabled={!value.trim()} />
+        <SendButton
+          disabled={!value.trim()}
+          streaming={isStreaming}
+          onStop={stop}
+        />
       </div>
     </form>
   );
