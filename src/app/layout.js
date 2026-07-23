@@ -12,6 +12,7 @@ import { Analytics } from '@/components/Analytics';
 import { SmoothScroll } from '@/components/providers/SmoothScroll';
 import { CinematicIntro } from '@/components/intro/CinematicIntro';
 import { FloatingWhatsApp } from '@/components/ui/FloatingWhatsApp';
+import { NovaWidget } from '@/components/nova';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Header } from '@/components/shell/Header';
 import { Footer } from '@/components/shell/Footer';
@@ -82,6 +83,7 @@ export default function RootLayout({ children }) {
           <Footer />
         </SmoothScroll>
         <FloatingWhatsApp />
+        <NovaWidget />
         <Analytics />
       </body>
     </html>
