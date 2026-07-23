@@ -1,14 +1,15 @@
 import { NextResponse } from 'next/server';
-import { serverEnv, isOpenAIConfigured } from '@/lib/env';
+import { resolveActiveProvider } from '@/lib/env';
 import { chatRequestSchema, runConversationTurn, rateLimitHook } from '@/lib/nova/chat';
 import { ProviderConfigError, ProviderError, ValidationError } from '@/lib/nova';
 
 /**
- * Nova chat — streaming conversation endpoint (Milestone 4).
+ * Nova chat — streaming conversation endpoint.
  *
- * Server-side only. Reads the OpenAI key from the environment (never exposed to
- * the client), grounds the reply in the active company's knowledge, and streams
- * plain-text tokens back. Cancellation propagates via `request.signal`.
+ * Server-side only. Resolves the ACTIVE provider (Gemini / NVIDIA NIM) from the
+ * environment (keys never exposed to the client), grounds the reply in the
+ * active company's knowledge, and streams plain-text tokens back. Cancellation
+ * propagates via `request.signal`.
  *
  * Conversation only — no lead capture, memory, analytics, or tools.
  */
@@ -48,10 +49,23 @@ export async function POST(request) {
     );
   }
 
-  // 2) Provider readiness — graceful, non-streaming error the UI can fall back on.
-  if (!isOpenAIConfigured) {
+  // 2) Provider readiness — config-driven resolution with a LOGGED root cause.
+  const provider = resolveActiveProvider();
+  if (!provider.ok) {
+    // eslint-disable-next-line no-console
+    console.error('[Nova] 503 ai_not_configured — active provider is not configured', {
+      provider: provider.providerId,
+      missingEnv: provider.missing,
+      hint: `Set ${provider.missing.join(', ')} in .env.local, or set NOVA_PROVIDER to a configured provider.`,
+    });
     return NextResponse.json(
-      { ok: false, error: 'ai_not_configured', message: 'Nova is not configured yet.' },
+      {
+        ok: false,
+        error: 'ai_not_configured',
+        provider: provider.providerId,
+        missing: provider.missing,
+        message: `Nova provider "${provider.providerId}" is not configured.`,
+      },
       { status: 503 },
     );
   }
@@ -77,11 +91,11 @@ export async function POST(request) {
       companyId: parsed.data.companyId,
       messages: parsed.data.messages,
       state: parsed.data.state,
-      providerId: 'openai',
+      providerId: provider.providerId,
       providerConfig: {
-        apiKey: serverEnv.openaiApiKey,
-        model: serverEnv.openaiModel,
-        baseUrl: serverEnv.openaiBaseUrl,
+        apiKey: provider.apiKey,
+        model: provider.model,
+        baseUrl: provider.baseUrl,
       },
       signal: request.signal,
     });
@@ -98,10 +112,28 @@ export async function POST(request) {
       },
     });
   } catch (err) {
+    // Always log the REAL root cause (never a silent 503/502).
+    // eslint-disable-next-line no-console
+    console.error('[Nova] chat turn failed', {
+      provider: provider.providerId,
+      errorType: err?.name,
+      code: err?.code,
+      status: err?.status,
+      missing: err?.missing,
+      detail: err?.detail,
+      message: err?.message,
+    });
+
     // Pre-stream failures map to sensible statuses (headers not yet sent).
     if (err instanceof ProviderConfigError) {
       return NextResponse.json(
-        { ok: false, error: 'ai_not_configured', message: 'Nova is not configured yet.' },
+        {
+          ok: false,
+          error: 'ai_not_configured',
+          provider: provider.providerId,
+          missing: err.missing,
+          message: `Nova provider "${provider.providerId}" is missing configuration.`,
+        },
         { status: 503 },
       );
     }

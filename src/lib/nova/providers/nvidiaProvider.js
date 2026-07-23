@@ -1,9 +1,9 @@
 /**
- * Nova — Google AI Studio (Gemini) adapter.
+ * Nova — NVIDIA NIM adapter.
  *
- * Talks to Gemini through its OpenAI-compatible endpoint, so it reuses the
- * shared transport. All Gemini-specific config (base URL, model) stays here;
- * no other module knows this provider's details. Server-side only.
+ * NVIDIA NIM exposes an OpenAI-compatible Chat Completions API, so it reuses the
+ * shared transport. All NVIDIA-specific config (base URL, model) stays here.
+ * Server-side only; no other module knows this provider's details.
  */
 import { BaseProvider } from './baseProvider';
 import {
@@ -12,20 +12,20 @@ import {
   streamChatCompletion,
 } from './openaiCompatible';
 
-const DEFAULT_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta/openai';
-const DEFAULT_MODEL = 'gemini-1.5-flash';
+const DEFAULT_BASE_URL = 'https://integrate.api.nvidia.com/v1';
+const DEFAULT_MODEL = 'meta/llama-3.1-8b-instruct';
 
-export class GeminiProvider extends BaseProvider {
+export class NvidiaProvider extends BaseProvider {
   get id() {
-    return 'gemini';
+    return 'nvidia';
   }
 
   get label() {
-    return 'Google AI Studio (Gemini)';
+    return 'NVIDIA NIM';
   }
 
   capabilities() {
-    return { streaming: true, tools: false, vision: true };
+    return { streaming: true, tools: false, vision: false };
   }
 
   validateConfig() {

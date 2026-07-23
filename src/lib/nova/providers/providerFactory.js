@@ -9,14 +9,16 @@
 import { OpenAIProvider } from './openaiProvider';
 import { AnthropicProvider } from './anthropicProvider';
 import { GeminiProvider } from './geminiProvider';
+import { NvidiaProvider } from './nvidiaProvider';
 import { LocalProvider } from './localProvider';
 import { ProviderNotFoundError } from '../types/errors';
 
 /** Default id → adapter registry. */
 export const defaultProviderRegistry = Object.freeze({
+  gemini: GeminiProvider,
+  nvidia: NvidiaProvider,
   openai: OpenAIProvider,
   anthropic: AnthropicProvider,
-  gemini: GeminiProvider,
   local: LocalProvider,
 });
 

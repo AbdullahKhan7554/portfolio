@@ -21,7 +21,13 @@ export { BaseProvider } from './providers/baseProvider';
 export { OpenAIProvider } from './providers/openaiProvider';
 export { AnthropicProvider } from './providers/anthropicProvider';
 export { GeminiProvider } from './providers/geminiProvider';
+export { NvidiaProvider } from './providers/nvidiaProvider';
 export { LocalProvider } from './providers/localProvider';
+export {
+  resolveProviderConfig,
+  SUPPORTED_PROVIDERS,
+  PROVIDER_ENV,
+} from './providers/providerResolver';
 export {
   createProvider,
   registerProvider,

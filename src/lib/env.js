@@ -7,21 +7,30 @@
  * falls back to WhatsApp) instead of crashing the build.
  */
 import 'server-only';
+import { resolveProviderConfig } from '@/lib/nova/providers/providerResolver';
 
 export const serverEnv = {
   resendApiKey: process.env.RESEND_API_KEY || '',
   contactFromEmail:
     process.env.CONTACT_FROM_EMAIL || 'Avenix Studio <onboarding@resend.dev>',
   contactToEmail: process.env.CONTACT_TO_EMAIL || 'abdullahqayyum1041@gmail.com',
-
-  // --- Nova AI (server-only; never exposed to the client) ------------------
-  openaiApiKey: process.env.OPENAI_API_KEY || '',
-  openaiModel: process.env.OPENAI_MODEL || 'gpt-4o-mini',
-  openaiBaseUrl: process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1',
 };
 
 /** True when transactional email is fully configured. */
 export const isEmailConfigured = Boolean(serverEnv.resendApiKey);
 
-/** True when the OpenAI provider has a key and can serve Nova responses. */
-export const isOpenAIConfigured = Boolean(serverEnv.openaiApiKey);
+/**
+ * Resolve the ACTIVE Nova AI provider from the environment (server-only, so
+ * keys never reach the client). Provider-agnostic: `NOVA_PROVIDER` selects
+ * (gemini | nvidia); if that provider's key is missing, resolution falls back
+ * to any other supported provider that has a key. Returns `{ ok, providerId,
+ * apiKey, model, baseUrl, missing, fallback }`.
+ */
+export function resolveActiveProvider() {
+  return resolveProviderConfig(process.env, { preferred: process.env.NOVA_PROVIDER });
+}
+
+/** True when the active provider has its required key configured. */
+export function isProviderConfigured() {
+  return resolveActiveProvider().ok;
+}
