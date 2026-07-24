@@ -32,6 +32,28 @@ import { createLeadWriter } from '../data/leadWriter';
 import { buildAnalyticsService, ANALYTICS_EVENT } from '../analytics';
 import { createProviderCapabilityRegistry } from '../providers/capabilities';
 import { createRuntimeValidator } from '../runtime';
+import { createEmailService, DEFAULT_SEQUENCE_KEY } from '../email';
+
+/**
+ * Phase 2 (email automation): after a lead is SUCCESSFULLY persisted, schedule
+ * the company's nurture sequence. This is an ADDITIVE hook — the Lead Engine and
+ * Lead Repository are never modified. A company with no configured sequence is a
+ * silent skip, and any failure here is swallowed so it can never break chat.
+ * @param {{ companyId:string, lead:{ email?:string, fullName?:string } }} args
+ */
+async function scheduleNurtureAfterLead({ companyId, lead }) {
+  try {
+    const recipient = lead?.email;
+    if (!recipient) return;
+    const email = createEmailService();
+    await email.scheduleSequence(companyId, DEFAULT_SEQUENCE_KEY, recipient, {
+      name: lead?.fullName || 'there',
+    });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('[Nova Email] scheduleSequence failed (non-fatal)', err?.message);
+  }
+}
 
 /**
  * Default memory service (lazy). A single instance persists conversations across
@@ -443,6 +465,8 @@ export async function runConversationTurn({
       if (result?.ok) {
         leadSaved = true;
         analytics.track(ANALYTICS_EVENT.LEAD_SAVED, { conversationId });
+        // Phase 2: schedule the nurture sequence AFTER a successful save.
+        await scheduleNurtureAfterLead({ companyId, lead });
       } else {
         // eslint-disable-next-line no-console
         console.error('[Nova Lead] persist failed', result?.error);
