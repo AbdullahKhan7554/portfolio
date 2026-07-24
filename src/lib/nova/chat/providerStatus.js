@@ -7,7 +7,7 @@
  */
 import { resolveActiveProvider } from '@/lib/env';
 import { createProvider } from '../providers/providerFactory';
-import { resolveActiveModelId, modelRegistry } from '../router';
+import { resolveActiveModelId, registryForProvider } from '../router';
 
 /**
  * @returns {{ providerId:string, modelId:string, model:string|null, modelKnown:boolean,
@@ -16,8 +16,8 @@ import { resolveActiveModelId, modelRegistry } from '../router';
  */
 export function getProviderStatus() {
   const active = resolveActiveProvider();
-  const modelId = resolveActiveModelId(process.env);
-  const entry = modelRegistry.get(modelId);
+  const modelId = resolveActiveModelId(process.env, active.providerId);
+  const entry = registryForProvider(active.providerId).get(modelId);
   const nimModel = entry?.nimModel || null;
 
   let loaded = false;

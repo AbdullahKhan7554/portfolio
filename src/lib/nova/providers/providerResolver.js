@@ -1,25 +1,28 @@
 /**
  * Nova — provider resolution (PURE, config-driven).
  *
- * NVIDIA NIM is the ONLY active provider. Gemini remains in the codebase (its
- * adapter file + the config entry below are retained for future use) but is
- * intentionally NOT selectable and is never resolved, loaded, or initialized.
- * There is deliberately NO fallback to another provider.
+ * The active provider is selected by the `AI_PROVIDER` env var and defaults to
+ * NVIDIA NIM when unset or set to an unknown value (so NVIDIA remains the safe
+ * default/fallback). Currently selectable: `nvidia` (default) and `groq`.
+ * Gemini remains in the codebase (its env entry below is retained for future
+ * use) but is intentionally NOT selectable.
  *
  * No secrets are hardcoded: keys are read from the `env` object passed in (the
  * server passes `process.env`), so this stays testable and client-safe.
  */
 
-/** The single active provider. */
-export const ACTIVE_PROVIDER = 'nvidia';
+/** The default active provider when `AI_PROVIDER` is unset/unknown. */
+export const DEFAULT_PROVIDER = 'nvidia';
 
-/** Providers considered by resolution — only the active one. */
-export const SUPPORTED_PROVIDERS = Object.freeze([ACTIVE_PROVIDER]);
+/** Back-compat alias — the default active provider. */
+export const ACTIVE_PROVIDER = DEFAULT_PROVIDER;
+
+/** Providers selectable via `AI_PROVIDER`. NVIDIA stays the default/fallback. */
+export const SUPPORTED_PROVIDERS = Object.freeze(['nvidia', 'groq']);
 
 /**
  * Env var names + non-secret defaults per provider.
- * NOTE: `gemini` is retained for future use only — it is NOT active. Re-enable
- * it by adding it back to SUPPORTED_PROVIDERS and re-registering its adapter.
+ * NOTE: `gemini` is retained for future use only — it is NOT selectable.
  */
 export const PROVIDER_ENV = Object.freeze({
   nvidia: {
@@ -28,6 +31,13 @@ export const PROVIDER_ENV = Object.freeze({
     baseUrlVar: 'NVIDIA_BASE_URL',
     defaultModel: 'meta/llama-3.1-8b-instruct',
     defaultBaseUrl: 'https://integrate.api.nvidia.com/v1',
+  },
+  groq: {
+    keyVar: 'GROQ_API_KEY',
+    modelVar: 'GROQ_MODEL',
+    baseUrlVar: 'GROQ_BASE_URL',
+    defaultModel: 'llama-3.1-8b-instant',
+    defaultBaseUrl: 'https://api.groq.com/openai/v1',
   },
   // ── Retained for future use — INACTIVE (not selectable) ──────────────────
   gemini: {
@@ -38,6 +48,17 @@ export const PROVIDER_ENV = Object.freeze({
     defaultBaseUrl: 'https://generativelanguage.googleapis.com/v1beta',
   },
 });
+
+/**
+ * Select the active provider id from the environment. Reads `AI_PROVIDER`,
+ * normalizes it, and falls back to NVIDIA when unset or unknown.
+ * @param {Record<string,string|undefined>} [env]
+ * @returns {string}
+ */
+export function resolveActiveProviderId(env = {}) {
+  const requested = String(env.AI_PROVIDER || '').trim().toLowerCase();
+  return SUPPORTED_PROVIDERS.includes(requested) ? requested : DEFAULT_PROVIDER;
+}
 
 /** Read one provider's config from an env-like object. */
 function readProvider(id, env) {
@@ -53,16 +74,17 @@ function readProvider(id, env) {
 }
 
 /**
- * Resolve the active provider — always NVIDIA. No preference override, no
- * fallback to any other provider. If NVIDIA's key is missing, returns
- * `ok:false` with the missing env var so the caller can respond gracefully.
+ * Resolve the active provider selected by `AI_PROVIDER` (defaulting to NVIDIA).
+ * If the selected provider's key is missing, returns `ok:false` with the missing
+ * env var so the caller can respond gracefully. Selecting the provider does NOT
+ * change how it executes — it only chooses which config to read.
  *
  * @param {Record<string,string|undefined>} [env]
  * @returns {{ providerId:string, apiKey:string, model:string, baseUrl:string,
  *            envVar:string, ok:boolean, missing:string[], fallback:boolean }}
  */
 export function resolveProviderConfig(env = {}) {
-  const cfg = readProvider(ACTIVE_PROVIDER, env);
+  const cfg = readProvider(resolveActiveProviderId(env), env);
   return cfg.apiKey
     ? { ...cfg, ok: true, missing: [], fallback: false }
     : { ...cfg, ok: false, missing: [cfg.envVar], fallback: false };

@@ -9,6 +9,7 @@
 import { OpenAIProvider } from './openaiProvider';
 import { AnthropicProvider } from './anthropicProvider';
 import { NvidiaProvider } from './nvidiaProvider';
+import { GroqProvider } from './groqProvider';
 import { LocalProvider } from './localProvider';
 import { ProviderNotFoundError } from '../types/errors';
 
@@ -21,6 +22,7 @@ import { ProviderNotFoundError } from '../types/errors';
  */
 export const defaultProviderRegistry = Object.freeze({
   nvidia: NvidiaProvider,
+  groq: GroqProvider,
   openai: OpenAIProvider,
   anthropic: AnthropicProvider,
   local: LocalProvider,

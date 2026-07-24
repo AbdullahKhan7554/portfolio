@@ -13,11 +13,12 @@
  */
 export const aiConfig = {
   /**
-   * Default adapter id. NVIDIA NIM is the only active provider; the runtime
-   * resolves it from the environment. (Gemini remains in the codebase but is
-   * not active/selectable.)
+   * Default adapter id. Selected by the `AI_PROVIDER` env var (e.g.
+   * `AI_PROVIDER=groq`), defaulting to NVIDIA NIM when unset — so NVIDIA remains
+   * the fallback. The route resolves the active provider server-side; this value
+   * is the runtime's fallback when no providerId is passed.
    */
-  defaultProvider: 'nvidia',
+  defaultProvider: process.env.AI_PROVIDER || 'nvidia',
 
   /** Per-provider NON-SECRET settings (secrets/keys come from the environment). */
   providers: {
@@ -29,6 +30,11 @@ export const aiConfig = {
     nvidia: {
       model: 'meta/llama-3.1-8b-instruct',
       baseUrl: 'https://integrate.api.nvidia.com/v1',
+      temperature: 0.6,
+    },
+    groq: {
+      model: 'llama-3.1-8b-instant',
+      baseUrl: 'https://api.groq.com/openai/v1',
       temperature: 0.6,
     },
     openai: { model: '', temperature: 0.6 },

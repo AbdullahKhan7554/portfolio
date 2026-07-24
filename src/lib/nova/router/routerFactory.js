@@ -7,7 +7,7 @@
  */
 import { createProvider as defaultCreateProvider } from '../providers/providerFactory';
 import { ModelRouter } from './modelRouter';
-import { modelRegistry } from './modelRegistry';
+import { registryForProvider } from './modelRegistry';
 import { resolveActiveModelId } from './routingConfig';
 
 /**
@@ -23,14 +23,16 @@ export function createModelRouter({
   createProvider = defaultCreateProvider,
   providerId = 'nvidia',
   providerConfig = {},
-  registry = modelRegistry,
+  registry,
   activeModelId,
 } = {}) {
   return new ModelRouter({
     createProvider,
     providerId,
     providerConfig,
-    registry,
-    activeModelId: activeModelId ?? resolveActiveModelId(process.env),
+    // Registry + active model are scoped to the active provider. NVIDIA resolves
+    // to the NIM registry/model exactly as before; Groq resolves to its own.
+    registry: registry ?? registryForProvider(providerId),
+    activeModelId: activeModelId ?? resolveActiveModelId(process.env, providerId),
   });
 }

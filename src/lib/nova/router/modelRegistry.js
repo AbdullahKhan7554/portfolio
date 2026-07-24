@@ -70,3 +70,36 @@ export function createModelRegistry(models) {
 
 /** Default registry seeded with the bundled NIM models. */
 export const modelRegistry = new ModelRegistry();
+
+/**
+ * Groq model registry (CONFIG data). Groq serves its own OpenAI-compatible
+ * catalog — the model string sent to the API is stored in `nimModel` (kept as
+ * the generic "API model string" field so the ModelRouter needs no change).
+ * Separate from NIM_MODELS so NVIDIA's catalog and failover are never touched.
+ */
+export const GROQ_MODELS = Object.freeze({
+  'llama-3.1-8b-instant': {
+    id: 'llama-3.1-8b-instant',
+    label: 'Llama 3.1 8B Instant',
+    nimModel: 'llama-3.1-8b-instant', // API model string sent to Groq
+  },
+});
+
+/** Default registry seeded with the bundled Groq models. */
+export const groqModelRegistry = new ModelRegistry(GROQ_MODELS);
+
+/** Per-provider registry table. Unknown providers fall back to the NIM registry. */
+const REGISTRY_BY_PROVIDER = Object.freeze({
+  nvidia: modelRegistry,
+  groq: groqModelRegistry,
+});
+
+/**
+ * The model registry scoped to a provider. NVIDIA (and any unknown provider)
+ * resolves to the NIM registry, preserving existing behavior exactly.
+ * @param {string} providerId
+ * @returns {ModelRegistry}
+ */
+export function registryForProvider(providerId) {
+  return REGISTRY_BY_PROVIDER[providerId] || modelRegistry;
+}

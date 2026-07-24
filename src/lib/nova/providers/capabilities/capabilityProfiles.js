@@ -44,6 +44,16 @@ export const PROVIDER_CAPABILITIES = Object.freeze({
     maxContextTokens: 1000000,
     maxOutputTokens: 8192,
   }),
+  groq: Object.freeze({
+    supportsStreaming: true,
+    supportsTools: false,
+    supportsImages: false,
+    supportsVision: false,
+    supportsSystemPrompt: true,
+    supportsJSON: false,
+    maxContextTokens: 131072,
+    maxOutputTokens: 8192,
+  }),
   openai: Object.freeze({
     supportsStreaming: true,
     supportsTools: true,

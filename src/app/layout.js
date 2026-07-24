@@ -10,9 +10,7 @@ import {
 } from '@/lib/schema';
 import { Analytics } from '@/components/Analytics';
 import { SmoothScroll } from '@/components/providers/SmoothScroll';
-import { CinematicIntro } from '@/components/intro/CinematicIntro';
-import { FloatingWhatsApp } from '@/components/ui/FloatingWhatsApp';
-import { NovaWidget } from '@/components/nova';
+import { ClientOverlays } from '@/components/ClientOverlays';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Header } from '@/components/shell/Header';
 import { Footer } from '@/components/shell/Footer';
@@ -75,15 +73,13 @@ export default function RootLayout({ children }) {
           Skip to content
         </a>
         <div className="grain" aria-hidden="true" />
-        <CinematicIntro />
         <CustomCursor />
         <SmoothScroll>
           <Header />
           {children}
           <Footer />
         </SmoothScroll>
-        <FloatingWhatsApp />
-        <NovaWidget />
+        <ClientOverlays />
         <Analytics />
       </body>
     </html>
