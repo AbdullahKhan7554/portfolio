@@ -38,22 +38,21 @@ const isFn = (o, name) => Boolean(o) && typeof o[name] === 'function';
  * @returns {ReadinessResult}
  */
 export function validateRuntimeReadiness(services = {}) {
-  const {
-    providerId,
-    providerConfig,
-    capabilityRegistry,
-    knowledgeService,
-    memory,
-    analytics,
-    planner,
-    toolRouter,
-  } = services;
-
   const warnings = [];
   const errors = [];
   const checks = {};
 
   try {
+    const {
+      providerId,
+      providerConfig,
+      capabilityRegistry,
+      knowledgeService,
+      memory,
+      analytics,
+      planner,
+      toolRouter,
+    } = services && typeof services === 'object' ? services : {};
     // Provider configured — a default is resolved downstream, so absence degrades.
     checks.providerConfigured = Boolean(providerId || providerConfig);
     if (!checks.providerConfigured) {

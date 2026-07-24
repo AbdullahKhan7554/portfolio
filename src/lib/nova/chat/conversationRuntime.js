@@ -85,6 +85,17 @@ function getDefaultCapabilityRegistry() {
   return defaultCapabilityRegistry;
 }
 
+/**
+ * Default runtime readiness validator (lazy). Validates configuration only —
+ * informational health, never changes behavior or blocks streaming; injection
+ * overrides it (DI).
+ */
+let defaultRuntimeValidator = null;
+function getDefaultRuntimeValidator() {
+  if (!defaultRuntimeValidator) defaultRuntimeValidator = createRuntimeValidator();
+  return defaultRuntimeValidator;
+}
+
 /** Latest user message from the running history. */
 function lastUserMessage(messages = []) {
   for (let i = messages.length - 1; i >= 0; i -= 1) {
@@ -282,8 +293,9 @@ function buildTurnDirective(action) {
  * @param {object} [input.handoffService]            injectable human-handoff service (DI); defaults to the shared service
  * @param {object} [input.analytics]                 injectable Analytics service (DI); defaults to the shared service
  * @param {object} [input.capabilityRegistry]        injectable Provider Capability registry (DI); read-only metadata
+ * @param {object} [input.runtimeValidator]          injectable readiness validator (DI); config-only health check
  * @param {AbortSignal} [input.signal]
- * @returns {Promise<{ stream:AsyncGenerator<string>, updatedState:object, nextStage:string, assistantAction:object, toolResults:Array, executionPlan:object, handoffRequired:boolean, providerCapabilities:object }>}
+ * @returns {Promise<{ stream:AsyncGenerator<string>, updatedState:object, nextStage:string, assistantAction:object, toolResults:Array, executionPlan:object, handoffRequired:boolean, providerCapabilities:object, runtimeHealth:object }>}
  */
 export async function runConversationTurn({
   companyId,
@@ -300,6 +312,7 @@ export async function runConversationTurn({
   handoffService = defaultHumanHandoff,
   analytics = getDefaultAnalytics(),
   capabilityRegistry = getDefaultCapabilityRegistry(),
+  runtimeValidator = getDefaultRuntimeValidator(),
   providerId,
   providerConfig,
   config,
@@ -393,6 +406,21 @@ export async function runConversationTurn({
   //      tool routing. Graceful — unknown/undefined provider → safe defaults.
   const providerCapabilities = capabilityRegistry.get(providerId);
 
+  // M20: production readiness — validate the runtime's collaborators ONCE before
+  //      the stream. Configuration-only, informational: it never throws, never
+  //      blocks streaming, and never alters behavior. Chat continues regardless;
+  //      only unrecoverable config errors surface (as `runtimeHealth.errors`).
+  const runtimeHealth = runtimeValidator.validate({
+    providerId,
+    providerConfig,
+    capabilityRegistry,
+    knowledgeService,
+    memory,
+    analytics,
+    planner,
+    toolRouter,
+  });
+
   // 5) Reuse the existing streaming pipeline (knowledge + provider) with merged history.
   const rawStream = await createChatStream({
     companyId,
@@ -428,5 +456,6 @@ export async function runConversationTurn({
     executionPlan,
     handoffRequired,
     providerCapabilities,
+    runtimeHealth,
   };
 }
