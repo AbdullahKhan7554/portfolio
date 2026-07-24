@@ -35,6 +35,8 @@ import { leadCaptureEngine as defaultLeadEngine } from '../leads';
 import { createLeadWriter } from '../data/leadWriter';
 import { defaultHumanHandoff, DEFAULT_HANDOFF_DIRECTIVE } from './humanHandoff';
 import { buildAnalyticsService, ANALYTICS_EVENT } from '../analytics';
+import { createProviderCapabilityRegistry } from '../providers/capabilities';
+import { createRuntimeValidator } from '../runtime';
 
 /**
  * Default memory service (lazy). A single instance persists conversations across
@@ -70,6 +72,17 @@ let defaultAnalytics = null;
 function getDefaultAnalytics() {
   if (!defaultAnalytics) defaultAnalytics = buildAnalyticsService();
   return defaultAnalytics;
+}
+
+/**
+ * Default provider capability registry (lazy). Read-only metadata the runtime
+ * QUERIES to describe the selected provider; injection overrides it (DI). It
+ * never changes provider behavior.
+ */
+let defaultCapabilityRegistry = null;
+function getDefaultCapabilityRegistry() {
+  if (!defaultCapabilityRegistry) defaultCapabilityRegistry = createProviderCapabilityRegistry();
+  return defaultCapabilityRegistry;
 }
 
 /** Latest user message from the running history. */
@@ -268,8 +281,9 @@ function buildTurnDirective(action) {
  * @param {object} [input.leadWriter]                injectable lead persistence (DI); defaults to the shared writer
  * @param {object} [input.handoffService]            injectable human-handoff service (DI); defaults to the shared service
  * @param {object} [input.analytics]                 injectable Analytics service (DI); defaults to the shared service
+ * @param {object} [input.capabilityRegistry]        injectable Provider Capability registry (DI); read-only metadata
  * @param {AbortSignal} [input.signal]
- * @returns {Promise<{ stream:AsyncGenerator<string>, updatedState:object, nextStage:string, assistantAction:object, toolResults:Array, executionPlan:object, handoffRequired:boolean }>}
+ * @returns {Promise<{ stream:AsyncGenerator<string>, updatedState:object, nextStage:string, assistantAction:object, toolResults:Array, executionPlan:object, handoffRequired:boolean, providerCapabilities:object }>}
  */
 export async function runConversationTurn({
   companyId,
@@ -285,6 +299,7 @@ export async function runConversationTurn({
   leadWriter = getDefaultLeadWriter(),
   handoffService = defaultHumanHandoff,
   analytics = getDefaultAnalytics(),
+  capabilityRegistry = getDefaultCapabilityRegistry(),
   providerId,
   providerConfig,
   config,
@@ -373,6 +388,11 @@ export async function runConversationTurn({
   //      actual selection/failover — this only observes the requested provider).
   analytics.track(ANALYTICS_EVENT.PROVIDER_SELECTED, { providerId: providerId ?? 'default' });
 
+  // M19: READ-ONLY provider capabilities. Purely informational metadata exposed
+  //      on the turn result; it never alters provider execution, streaming, or
+  //      tool routing. Graceful — unknown/undefined provider → safe defaults.
+  const providerCapabilities = capabilityRegistry.get(providerId);
+
   // 5) Reuse the existing streaming pipeline (knowledge + provider) with merged history.
   const rawStream = await createChatStream({
     companyId,
@@ -399,5 +419,14 @@ export async function runConversationTurn({
     analytics,
   });
 
-  return { stream, updatedState, nextStage, assistantAction, toolResults, executionPlan, handoffRequired };
+  return {
+    stream,
+    updatedState,
+    nextStage,
+    assistantAction,
+    toolResults,
+    executionPlan,
+    handoffRequired,
+    providerCapabilities,
+  };
 }
