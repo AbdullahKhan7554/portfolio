@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 /**
@@ -33,12 +33,14 @@ const REVEAL_AT = 2600;
 export function CinematicIntro() {
   const [mounted, setMounted] = useState(false); // overlay in the tree
   const [phase, setPhase] = useState('in'); // 'in' → 'out'
-  const startedRef = useRef(false);
 
   useEffect(() => {
-    if (startedRef.current) return;
-    startedRef.current = true;
-
+    // NOTE: no "already started" ref-guard here. Under React StrictMode (dev),
+    // the effect runs setup → cleanup → setup on mount; a guard that skips the
+    // second setup would let the first cleanup's clearTimeout win and leave the
+    // overlay stuck open forever. Keeping setup/cleanup symmetric means the
+    // second setup simply re-arms a fresh hide timer. The [] deps already ensure
+    // this only fires on real mounts (full page loads), never on soft nav.
     const root = document.documentElement;
 
     let play = false;

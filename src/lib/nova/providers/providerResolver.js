@@ -74,6 +74,36 @@ function readProvider(id, env) {
 }
 
 /**
+ * Resolve a SPECIFIC provider's config by id from an env-like object. If the
+ * provider's key is missing, returns `ok:false` with the missing env var so the
+ * caller can respond gracefully. Reading a provider does NOT change how it
+ * executes — it only chooses which config to read.
+ *
+ * @param {string} id
+ * @param {Record<string,string|undefined>} [env]
+ * @returns {{ providerId:string, apiKey:string, model:string, baseUrl:string,
+ *            envVar:string, ok:boolean, missing:string[], fallback:boolean }}
+ */
+export function resolveProviderConfigById(id, env = {}) {
+  const cfg = readProvider(id, env);
+  if (!cfg) {
+    return {
+      providerId: id,
+      apiKey: '',
+      model: '',
+      baseUrl: '',
+      envVar: '',
+      ok: false,
+      missing: [`provider:${id}`],
+      fallback: false,
+    };
+  }
+  return cfg.apiKey
+    ? { ...cfg, ok: true, missing: [], fallback: false }
+    : { ...cfg, ok: false, missing: [cfg.envVar], fallback: false };
+}
+
+/**
  * Resolve the active provider selected by `AI_PROVIDER` (defaulting to NVIDIA).
  * If the selected provider's key is missing, returns `ok:false` with the missing
  * env var so the caller can respond gracefully. Selecting the provider does NOT
@@ -84,8 +114,21 @@ function readProvider(id, env) {
  *            envVar:string, ok:boolean, missing:string[], fallback:boolean }}
  */
 export function resolveProviderConfig(env = {}) {
-  const cfg = readProvider(resolveActiveProviderId(env), env);
-  return cfg.apiKey
-    ? { ...cfg, ok: true, missing: [], fallback: false }
-    : { ...cfg, ok: false, missing: [cfg.envVar], fallback: false };
+  return resolveProviderConfigById(resolveActiveProviderId(env), env);
+}
+
+/**
+ * OPTIONAL cross-provider fallback target, selected by the `FALLBACK_PROVIDER`
+ * env var. Returns a supported provider id, or `null` when unset/unknown — in
+ * which case the router keeps its current SINGLE-provider behavior (no
+ * cross-provider fallback). This makes the primary→fallback pair explicit and
+ * configurable rather than a hardcoded special case, and keeps the whole feature
+ * strictly opt-in.
+ *
+ * @param {Record<string,string|undefined>} [env]
+ * @returns {string|null}
+ */
+export function resolveFallbackProviderId(env = {}) {
+  const requested = String(env.FALLBACK_PROVIDER || '').trim().toLowerCase();
+  return SUPPORTED_PROVIDERS.includes(requested) ? requested : null;
 }

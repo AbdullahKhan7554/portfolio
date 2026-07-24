@@ -11,6 +11,10 @@
  */
 import { aiConfig } from '../config/aiConfig';
 import { createModelRouter } from '../router';
+import {
+  resolveFallbackProviderId,
+  resolveProviderConfigById,
+} from '../providers/providerResolver';
 import { buildSystemPrompt } from '../core/systemPromptBuilder';
 import { buildContext } from '../core/contextBuilder';
 import { toProviderMessages } from '../core/messageFormatter';
@@ -74,31 +78,103 @@ export async function createChatStream({
     reserveForResponse: config.maxResponseTokens,
   });
 
-  // 4) Model router — selects the active NIM model (NOVA_MODEL) and owns the
-  //    underlying provider. The runtime never picks a model itself.
-  const router = createModelRouter({
+  // 4) Model router(s) — the PRIMARY provider (AI_PROVIDER) selects its model
+  //    (NOVA_MODEL) and owns its own in-provider failover chain, exactly as
+  //    before. When FALLBACK_PROVIDER is set (opt-in), a SECOND provider is
+  //    prepared so the SAME request can transparently fall through to it if the
+  //    primary fails BEFORE any token reaches the client (see
+  //    streamAcrossProviders). When unset, this is a single-provider chain and
+  //    behaves byte-for-byte as today.
+  const primaryRouter = createModelRouter({
     providerId: resolvedProviderId,
     providerConfig: { ...config.providers[resolvedProviderId], ...providerConfig },
   });
-  const check = router.validate();
-  if (!check.ok) {
+
+  let fallbackRouter = null;
+  const fallbackId = resolveFallbackProviderId(process.env);
+  if (fallbackId && fallbackId !== resolvedProviderId) {
+    // The fallback provider's own secret/base URL come from its env vars; its
+    // model + in-provider failover are resolved by createModelRouter exactly as
+    // if it were the primary — NVIDIA's path is unchanged when it is the fallback.
+    const fcfg = resolveProviderConfigById(fallbackId, process.env);
+    fallbackRouter = createModelRouter({
+      providerId: fallbackId,
+      providerConfig: {
+        ...config.providers[fallbackId],
+        apiKey: fcfg.apiKey,
+        model: fcfg.model,
+        baseUrl: fcfg.baseUrl,
+      },
+    });
+  }
+
+  // Readiness: unchanged for the single-provider case (throw if the primary is
+  // not configured). With a configured, ready fallback the request can still be
+  // served even when the primary itself is not ready.
+  const primaryCheck = primaryRouter.validate();
+  if (!primaryCheck.ok && !(fallbackRouter && fallbackRouter.validate().ok)) {
     throw new ProviderConfigError(
-      `Nova model/provider is not ready: ${check.missing.join(', ')}.`,
-      check.missing,
+      `Nova model/provider is not ready: ${primaryCheck.missing.join(', ')}.`,
+      primaryCheck.missing,
     );
   }
 
-  // 5) Streaming response — the runtime only ever calls router.stream(...).
-  //    Retry wrapper is a placeholder (single attempt).
-  return withRetry(
-    () =>
-      router.stream({
-        system: ctx.system,
-        messages: toProviderMessages(ctx.messages),
-        temperature: config.temperature,
-        maxTokens: config.maxResponseTokens,
-        signal,
-      }),
-    { retries: 0 },
-  );
+  // Ordered attempt chain: primary first, then the optional cross-provider fallback.
+  const chain = [{ providerId: resolvedProviderId, router: primaryRouter }];
+  if (fallbackRouter) chain.push({ providerId: fallbackId, router: fallbackRouter });
+
+  // 5) Streaming response — TRUE incremental streaming. The cross-provider
+  //    fallback decision happens BEFORE the first token is yielded to the
+  //    client; once tokens flow, a later failure fails cleanly (no mid-stream
+  //    switch, no duplicate output). Retry wrapper is a placeholder (single attempt).
+  const streamParams = {
+    system: ctx.system,
+    messages: toProviderMessages(ctx.messages),
+    temperature: config.temperature,
+    maxTokens: config.maxResponseTokens,
+    signal,
+  };
+  return withRetry(() => streamAcrossProviders(chain, streamParams), { retries: 0 });
+}
+
+/**
+ * Cross-provider failover as a TRUE passthrough stream. Tries each provider's
+ * router in order; a failure is only recoverable BEFORE the first token is
+ * yielded — once streaming to the client has begun, the error propagates (no
+ * mid-stream switch, no duplicated/corrupted output). A client abort never
+ * triggers fallback. With a single-entry chain this is a plain passthrough,
+ * identical to calling `router.stream()` directly.
+ *
+ * @param {Array<{providerId:string, router:import('../router').ModelRouter}>} chain
+ * @param {object} params  provider stream params (system, messages, temperature, ...)
+ */
+async function* streamAcrossProviders(chain, params) {
+  let lastError;
+  for (let i = 0; i < chain.length; i += 1) {
+    const { providerId, router } = chain[i];
+    let started = false;
+    try {
+      for await (const token of router.stream(params)) {
+        started = true;
+        yield token; // immediate passthrough — no buffering
+      }
+      return; // completed successfully on this provider
+    } catch (err) {
+      // Already streaming to the client, or the client aborted → cannot switch;
+      // fail cleanly with the original error (no silent mid-stream retry).
+      if (started || params.signal?.aborted || err?.name === 'AbortError') throw err;
+      lastError = err;
+      const next = chain[i + 1];
+      if (next) {
+        // eslint-disable-next-line no-console
+        console.log(
+          `[Nova Router]\nCross-provider fallback: "${providerId}" failed before streaming ` +
+            `(${err?.status ?? err?.code ?? err?.name ?? 'error'}).\n` +
+            `Falling through to "${next.providerId}".`,
+        );
+      }
+      // No next provider → fall out of the loop and rethrow below.
+    }
+  }
+  throw lastError;
 }
