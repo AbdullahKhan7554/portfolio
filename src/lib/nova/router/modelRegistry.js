@@ -12,7 +12,7 @@
  */
 
 export const NIM_MODELS = Object.freeze({
-  'glm-5.2': { id: 'glm-5.2', label: 'GLM 5.2', nimModel: 'zai-org/glm-5.2' },
+  'glm-5.2': { id: 'glm-5.2', label: 'GLM 5.2', nimModel: 'z-ai/glm-5.2' },
   'minimax-m3': { id: 'minimax-m3', label: 'MiniMax M3', nimModel: 'minimaxai/minimax-m3' },
   'deepseek-v4-pro': {
     id: 'deepseek-v4-pro',
@@ -26,7 +26,10 @@ export const NIM_MODELS = Object.freeze({
   },
   'kimi-2.6': { id: 'kimi-2.6', label: 'Kimi 2.6', nimModel: 'moonshotai/kimi-k2.6' },
   // Qwen 3.6 not in the NIM catalog — mapped to the latest real Qwen entry.
-  'qwen-3.6': { id: 'qwen-3.6', label: 'Qwen 3.6', nimModel: 'qwen/qwen3.5-122b-a10b' },
+  'qwen-3.6': { id: 'qwen-3.5', label: 'Qwen 3.5', nimModel: 'qwen/qwen3.5-397b-a17b' },
+
+'nemotron-ultra': { id: 'nemotron-3-ultra-550b-a55b', label: 'nemotron-3-ultra-550b-a55b', nimModel: 'nvidia/nemotron-3-ultra-550b-a55b' },
+
 });
 
 /** Registry of available NIM models. Holds config only — no I/O, no logic. */
