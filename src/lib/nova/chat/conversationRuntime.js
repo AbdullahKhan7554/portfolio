@@ -22,18 +22,13 @@
  * No business decisions are made here — the orchestrator controls the
  * conversation, the provider only phrases, the knowledge service only grounds.
  */
-import { conversationOrchestrator as defaultOrchestrator } from '../orchestrator';
 import { ACTION } from '../orchestrator/orchestratorConfig';
 import { buildMemoryService } from '../memory';
 import { createKnowledgeService } from '../knowledge';
 import { createChatStream } from './chatService';
 import { getDefaultToolRouter, parseToolCalls, runToolCalls } from './toolRuntime';
 import { buildGroundingContext } from './contextInjection';
-import { defaultIntentPlanner } from '../planner';
-import { salesEngine as defaultSalesEngine } from '../sales';
-import { leadCaptureEngine as defaultLeadEngine } from '../leads';
 import { createLeadWriter } from '../data/leadWriter';
-import { defaultHumanHandoff, DEFAULT_HANDOFF_DIRECTIVE } from './humanHandoff';
 import { buildAnalyticsService, ANALYTICS_EVENT } from '../analytics';
 import { createProviderCapabilityRegistry } from '../providers/capabilities';
 import { createRuntimeValidator } from '../runtime';
@@ -94,6 +89,49 @@ let defaultRuntimeValidator = null;
 function getDefaultRuntimeValidator() {
   if (!defaultRuntimeValidator) defaultRuntimeValidator = createRuntimeValidator();
   return defaultRuntimeValidator;
+}
+
+/**
+ * P1 (perf): the conversation-logic defaults are DYNAMICALLY imported and cached
+ * the first time a turn actually needs them, so importing the chat runtime no
+ * longer eagerly evaluates the orchestrator / planner / sales / lead / handoff
+ * subtrees (or their config data). Each default stays a shared singleton;
+ * injection still overrides it (DI). Behavior is unchanged — the same objects,
+ * resolved one turn later, before any streaming begins.
+ */
+let defaultOrchestrator = null;
+async function getDefaultOrchestrator() {
+  if (!defaultOrchestrator) ({ conversationOrchestrator: defaultOrchestrator } = await import('../orchestrator'));
+  return defaultOrchestrator;
+}
+
+let defaultPlanner = null;
+async function getDefaultPlanner() {
+  if (!defaultPlanner) ({ defaultIntentPlanner: defaultPlanner } = await import('../planner'));
+  return defaultPlanner;
+}
+
+let defaultSalesEngine = null;
+async function getDefaultSalesEngine() {
+  if (!defaultSalesEngine) ({ salesEngine: defaultSalesEngine } = await import('../sales'));
+  return defaultSalesEngine;
+}
+
+let defaultLeadEngine = null;
+async function getDefaultLeadEngine() {
+  if (!defaultLeadEngine) ({ leadCaptureEngine: defaultLeadEngine } = await import('../leads'));
+  return defaultLeadEngine;
+}
+
+let defaultHandoff = null;
+let defaultHandoffDirective = null;
+async function getDefaultHandoff() {
+  if (!defaultHandoff) {
+    const mod = await import('./humanHandoff');
+    defaultHandoff = mod.defaultHumanHandoff;
+    defaultHandoffDirective = mod.DEFAULT_HANDOFF_DIRECTIVE;
+  }
+  return { service: defaultHandoff, directive: defaultHandoffDirective };
 }
 
 /** Latest user message from the running history. */
@@ -238,15 +276,15 @@ function buildLeadDirective(leadEngine, leadState) {
  * (injected) handoff service. Gracefully falls back to the default directive if
  * the service is missing or throws. No CRM integration here.
  */
-function buildHandoffDirective(handoffService, context) {
+function buildHandoffDirective(handoffService, context, fallback) {
   try {
     if (handoffService && typeof handoffService.directive === 'function') {
-      return handoffService.directive(context) || DEFAULT_HANDOFF_DIRECTIVE;
+      return handoffService.directive(context) || fallback;
     }
   } catch {
     /* fall through to default */
   }
-  return DEFAULT_HANDOFF_DIRECTIVE;
+  return fallback;
 }
 
 /**
@@ -301,15 +339,15 @@ export async function runConversationTurn({
   companyId,
   messages,
   state,
-  orchestrator = defaultOrchestrator,
+  orchestrator,
   memory = getDefaultMemory(),
   toolRouter = getDefaultToolRouter(),
   knowledgeService = getDefaultKnowledgeService(),
-  planner = defaultIntentPlanner,
-  salesEngine = defaultSalesEngine,
-  leadEngine = defaultLeadEngine,
+  planner,
+  salesEngine,
+  leadEngine,
   leadWriter = getDefaultLeadWriter(),
-  handoffService = defaultHumanHandoff,
+  handoffService,
   analytics = getDefaultAnalytics(),
   capabilityRegistry = getDefaultCapabilityRegistry(),
   runtimeValidator = getDefaultRuntimeValidator(),
@@ -329,6 +367,8 @@ export async function runConversationTurn({
   const merged = mergeHistory(history, messages || []);
 
   // 2) Orchestrator controls the conversation (unchanged — newest user message).
+  //    P1: resolve the default orchestrator lazily (only now, at first turn).
+  orchestrator = orchestrator || (await getDefaultOrchestrator());
   const { assistantAction, nextStage, updatedState: orchestratorState } = orchestrator.process(
     lastUserMessage(messages),
     state || undefined,
@@ -352,6 +392,8 @@ export async function runConversationTurn({
 
   // 4c) M13: classify the request into an execution plan (planning only — the
   //     planner never executes anything; the plan is returned for the caller).
+  //     P1: resolve the default planner lazily (only when a chat turn runs).
+  planner = planner || (await getDefaultPlanner());
   const executionPlan = planner.plan({
     message: userText,
     config: { companyId },
@@ -366,16 +408,24 @@ export async function runConversationTurn({
   //     completely unchanged.
   const directiveParts = [baseDirective];
   if (executionPlan.salesMode) {
+    // P1: the Sales Engine default loads only on a sales turn (never on plain chat).
+    salesEngine = salesEngine || (await getDefaultSalesEngine());
     directiveParts.push(buildSalesDirective(salesEngine, updatedState.sales));
   }
   if (executionPlan.captureLead) {
+    // P1: the Lead Engine default loads only on a lead-capture turn.
+    leadEngine = leadEngine || (await getDefaultLeadEngine());
     directiveParts.push(buildLeadDirective(leadEngine, updatedState.lead));
   }
   // M17: the planner DECIDES (requiresHuman); the runtime only ROUTES — append a
   //      human-handoff directive and expose handoffRequired. Graceful if missing.
   const handoffRequired = executionPlan.requiresHuman === true;
   if (handoffRequired) {
-    directiveParts.push(buildHandoffDirective(handoffService, { companyId, conversationId }));
+    // P1: the handoff module loads only when a handoff is actually requested.
+    const { service: defaultHandoffSvc, directive: fallbackDirective } = await getDefaultHandoff();
+    directiveParts.push(
+      buildHandoffDirective(handoffService || defaultHandoffSvc, { companyId, conversationId }, fallbackDirective),
+    );
     analytics.track(ANALYTICS_EVENT.HANDOFF_REQUESTED, { conversationId });
   }
   const directive = directiveParts.filter(Boolean).join('\n\n');
@@ -384,15 +434,19 @@ export async function runConversationTurn({
   //     Trigger = Lead Engine reports complete; saved once (round-tripped flag +
   //     repository dedup); failures are normalized and never break chat.
   let leadSaved = state?.leadSaved === true;
-  if (!leadSaved && updatedState.lead && leadEngine.isComplete(updatedState.lead)) {
-    const { lead } = leadEngine.summary(updatedState.lead);
-    const result = await leadWriter.persist(lead, { companyId, conversationId });
-    if (result?.ok) {
-      leadSaved = true;
-      analytics.track(ANALYTICS_EVENT.LEAD_SAVED, { conversationId });
-    } else {
-      // eslint-disable-next-line no-console
-      console.error('[Nova Lead] persist failed', result?.error);
+  if (!leadSaved && updatedState.lead) {
+    // P1: resolve the Lead Engine only when there is lead state to evaluate.
+    leadEngine = leadEngine || (await getDefaultLeadEngine());
+    if (leadEngine.isComplete(updatedState.lead)) {
+      const { lead } = leadEngine.summary(updatedState.lead);
+      const result = await leadWriter.persist(lead, { companyId, conversationId });
+      if (result?.ok) {
+        leadSaved = true;
+        analytics.track(ANALYTICS_EVENT.LEAD_SAVED, { conversationId });
+      } else {
+        // eslint-disable-next-line no-console
+        console.error('[Nova Lead] persist failed', result?.error);
+      }
     }
   }
   updatedState.leadSaved = leadSaved;
