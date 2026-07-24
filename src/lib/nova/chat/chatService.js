@@ -42,6 +42,7 @@ export async function createChatStream({
   knowledgeService,
   signal,
   directive = '',
+  context,
 }) {
   const resolvedProviderId = providerId || config.defaultProvider;
 
@@ -50,7 +51,10 @@ export async function createChatStream({
   const { config: company, documents } = await kms.getKnowledge(companyId);
 
   // 2) System prompt builder — identity + grounding, all from the active company.
-  const knowledge = buildKnowledgePrompt(documents);
+  //    M12: when the runtime injects relevant `context` (from search()), use it
+  //    as the grounding instead of the whole knowledge base. Falls back to the
+  //    full KB only when no context was injected (backward compatible).
+  const knowledge = context !== undefined ? context : buildKnowledgePrompt(documents);
   const baseSystem = buildSystemPrompt({
     identity: { assistantName: company.assistantName, brandName: company.brandName },
     sections: config.prompts,
