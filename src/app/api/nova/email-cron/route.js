@@ -5,10 +5,12 @@ import { createEmailService } from '@/lib/nova/email';
  * Nova Email — cron consumer. Sends every DUE nurture email (status='pending',
  * scheduled_for <= now), claiming each row before send to avoid double-sends.
  *
- * Triggered by Vercel Cron (see vercel.json). Vercel injects
- * `Authorization: Bearer $CRON_SECRET` on scheduled invocations; this route
- * fails CLOSED — if `CRON_SECRET` is unset, or the header does not match, it
- * returns 401. This keeps the endpoint from being publicly triggerable.
+ * Triggered by an EXTERNAL scheduler (e.g. cron-job.org) — NOT Vercel Cron. The
+ * caller must present `Authorization: Bearer <CRON_SECRET>`; the route compares
+ * that header against `process.env.CRON_SECRET` and fails CLOSED (401) when the
+ * secret is unset or the header does not match. This keeps the endpoint from
+ * being publicly triggerable. Both GET and POST are accepted (most external cron
+ * services default to GET).
  *
  * Server-side only; secrets stay in the environment.
  */
@@ -41,7 +43,7 @@ async function handle(request) {
   }
 }
 
-// Vercel Cron issues GET; POST is accepted too for manual/testing parity.
+// External cron services default to GET; POST is accepted too (same handler).
 export async function GET(request) {
   return handle(request);
 }

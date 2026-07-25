@@ -1,8 +1,0 @@
-{
-  "crons": [
-    {
-      "path": "/api/nova/email-cron",
-      "schedule": "*/5 * * * *"
-    }
-  ]
-}
