@@ -32,7 +32,7 @@ import { createLeadWriter } from '../data/leadWriter';
 import { buildAnalyticsService, ANALYTICS_EVENT } from '../analytics';
 import { createProviderCapabilityRegistry } from '../providers/capabilities';
 import { createRuntimeValidator } from '../runtime';
-import { createEmailService, DEFAULT_SEQUENCE_KEY } from '../email';
+import { createEmailService, leadNurtureSequenceKey } from '../email';
 
 /**
  * Phase 2 (email automation): after a lead is SUCCESSFULLY persisted, schedule
@@ -46,7 +46,7 @@ async function scheduleNurtureAfterLead({ companyId, lead }) {
     const recipient = lead?.email;
     if (!recipient) return;
     const email = createEmailService();
-    await email.scheduleSequence(companyId, DEFAULT_SEQUENCE_KEY, recipient, {
+    await email.scheduleSequence(companyId, leadNurtureSequenceKey(companyId), recipient, {
       name: lead?.fullName || 'there',
     });
   } catch (err) {

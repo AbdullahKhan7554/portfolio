@@ -31,6 +31,21 @@ export const NURTURE_SEQUENCES = Object.freeze({
 });
 
 /**
+ * Which named sequence is the LEAD-capture nurture sequence, per company. This
+ * keeps the generic lead-save hook config-driven: it resolves the right sequence
+ * key for each company instead of hardcoding one, so adding a new company is a
+ * config-only change. Companies not listed fall back to DEFAULT_SEQUENCE_KEY.
+ */
+export const LEAD_NURTURE_SEQUENCE_KEY = Object.freeze({
+  'nova-test': 'default_lead_nurture',
+  avenix: 'avenix_lead_nurture',
+});
+
+/** The lead-nurture sequence key for a company (falls back to the default). */
+export const leadNurtureSequenceKey = (companyId) =>
+  LEAD_NURTURE_SEQUENCE_KEY[companyId] || DEFAULT_SEQUENCE_KEY;
+
+/**
  * Resolve an ordered list of steps for a company + sequence, or null when the
  * company has no such sequence configured (callers skip silently on null).
  * @param {string} companyId

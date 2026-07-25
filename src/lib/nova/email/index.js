@@ -31,6 +31,8 @@ export {
 export {
   NURTURE_SEQUENCES,
   DEFAULT_SEQUENCE_KEY,
+  LEAD_NURTURE_SEQUENCE_KEY,
+  leadNurtureSequenceKey,
   getSequence,
 } from './nurtureSequences';
 export { createEmailService, renderTemplate } from './emailService';
