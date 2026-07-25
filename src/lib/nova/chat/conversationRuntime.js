@@ -56,6 +56,38 @@ async function scheduleNurtureAfterLead({ companyId, lead }) {
 }
 
 /**
+ * Phase 5 (internal notification): after a lead is SUCCESSFULLY persisted, send an
+ * IMMEDIATE internal email to the business owner so they know about the lead right
+ * away — sent NOW (transactional) via the same email module, not scheduled. The
+ * owner address is read from LEAD_NOTIFICATION_EMAIL so it stays configurable per
+ * deploy; when unset this is a silent skip. Fully isolated: this runs AFTER the
+ * customer nurture is already scheduled, and any failure here is swallowed so it
+ * can NEVER affect the customer welcome/nurture emails or the lead save itself.
+ * @param {{ companyId:string, lead:object, service?:string }} args
+ */
+async function notifyOwnerOfLead({ companyId, lead, service }) {
+  try {
+    const owner = process.env.LEAD_NOTIFICATION_EMAIL;
+    if (!owner) return; // not configured → skip silently
+    const email = createEmailService();
+    await email.sendNow(companyId, 'internal_lead_notification', owner, {
+      name: lead?.fullName || '—',
+      email: lead?.email || '—',
+      phone: lead?.phone || '—',
+      company: lead?.companyName || '—',
+      businessType: lead?.businessType || '—',
+      service: service || 'New inquiry',
+      projectDescription: lead?.projectDescription || '—',
+      budget: lead?.budget || '—',
+      timeline: lead?.timeline || '—',
+    });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('[Nova Email] internal lead notification failed (non-fatal)', err?.message);
+  }
+}
+
+/**
  * Default memory service (lazy). A single instance persists conversations across
  * turns/requests for the in-memory strategy; injection overrides it (DI).
  * Strategy is resolved entirely from aiConfig.memory.strategy inside M9.
@@ -465,8 +497,18 @@ export async function runConversationTurn({
       if (result?.ok) {
         leadSaved = true;
         analytics.track(ANALYTICS_EVENT.LEAD_SAVED, { conversationId });
-        // Phase 2: schedule the nurture sequence AFTER a successful save.
+        // Phase 2: schedule the customer nurture sequence AFTER a successful save.
         await scheduleNurtureAfterLead({ companyId, lead });
+        // Phase 5: notify the business owner immediately (internal, transactional).
+        //          Runs AFTER the customer nurture and is fully isolated — a failure
+        //          here never affects the customer emails or the lead save. `service`
+        //          is the recommended/intended service label (best-effort, optional).
+        const svc = updatedState.sales?.recommendation || updatedState.sales?.intent || null;
+        await notifyOwnerOfLead({
+          companyId,
+          lead,
+          service: svc ? svc.charAt(0).toUpperCase() + svc.slice(1) : 'New inquiry',
+        });
       } else {
         // eslint-disable-next-line no-console
         console.error('[Nova Lead] persist failed', result?.error);
