@@ -16,6 +16,14 @@ import { defaultScheduledEmailRepository } from './scheduledEmailRepository';
 import { getSequence as defaultGetSequence } from './nurtureSequences';
 import { EmailConfigError, TemplateNotFoundError } from './emailErrors';
 
+/**
+ * Bounded retry policy for transient send failures. A row is retried up to
+ * MAX_SEND_RETRIES times (each retry bumps retry_count and pushes scheduled_for
+ * out by RETRY_BACKOFF_MS); only a failure once these are exhausted is permanent.
+ */
+const MAX_SEND_RETRIES = 3;
+const RETRY_BACKOFF_MS = 5 * 60_000; // 5 minutes
+
 /** Minimal HTML escaping for interpolated variable VALUES (not the body itself). */
 function esc(value = '') {
   return String(value)
@@ -143,15 +151,19 @@ export function createEmailService({
    * Cron worker: send every DUE pending row (scheduled_for <= now). Each row is
    * atomically CLAIMED (pending→processing) before sending, so a crash mid-run
    * never double-sends on the next run. Each row then transitions to 'sent'
-   * (with sent_at) or 'failed' (with error_message).
+   * (with sent_at) or, on a send failure, is either RESCHEDULED for a bounded
+   * retry (back to 'pending', retry_count bumped, scheduled_for pushed out by a
+   * backoff) or — once the retries are exhausted — marked 'failed' permanently.
+   * This stops a transient network blip from silently losing an email forever.
    *
    * @param {{ limit?:number }} [opts]
-   * @returns {Promise<{ ok:true, processed:number, sent:object[], failed:object[] }>}
+   * @returns {Promise<{ ok:true, processed:number, sent:object[], retried:object[], failed:object[] }>}
    */
   async function processDueBatch({ limit = 50 } = {}) {
     requireProviderConfigured();
     const due = await scheduled.findDue({ limit });
     const sent = [];
+    const retried = [];
     const failed = [];
 
     for (const row of due) {
@@ -166,12 +178,37 @@ export function createEmailService({
         await scheduled.markSent(row.id);
         sent.push({ id: row.id, messageId: result.id, to: row.recipient_email });
       } catch (err) {
-        await scheduled.markFailed(row.id, err?.message);
-        failed.push({ id: row.id, to: row.recipient_email, error: err?.message });
+        // Bounded retry: a send failure is treated as transient until we have
+        // exhausted MAX_SEND_RETRIES. We reschedule (pending + backoff) up to that
+        // many times; only a failure AFTER the last retry is a permanent 'failed'.
+        const attempted = Number(claimed.retry_count ?? row.retry_count ?? 0);
+        if (attempted < MAX_SEND_RETRIES) {
+          const retryCount = attempted + 1;
+          await scheduled.scheduleRetry(row.id, {
+            retryCount,
+            message: err?.message,
+            delayMs: RETRY_BACKOFF_MS,
+          });
+          // eslint-disable-next-line no-console
+          console.warn(
+            `[Nova Email cron] transient send failure — rescheduling retry ${retryCount}/${MAX_SEND_RETRIES} ` +
+              `in ${RETRY_BACKOFF_MS / 60_000}m`,
+            { id: row.id, to: row.recipient_email, retryCount, error: err?.message },
+          );
+          retried.push({ id: row.id, to: row.recipient_email, retryCount });
+        } else {
+          await scheduled.markFailed(row.id, err?.message);
+          // eslint-disable-next-line no-console
+          console.error(
+            `[Nova Email cron] permanent send failure — retries exhausted (${attempted}/${MAX_SEND_RETRIES})`,
+            { id: row.id, to: row.recipient_email, retryCount: attempted, error: err?.message },
+          );
+          failed.push({ id: row.id, to: row.recipient_email, error: err?.message, retryCount: attempted });
+        }
       }
     }
 
-    return { ok: true, processed: due.length, sent, failed };
+    return { ok: true, processed: due.length, sent, retried, failed };
   }
 
   return { sendNow, scheduleSequence, processDueBatch };

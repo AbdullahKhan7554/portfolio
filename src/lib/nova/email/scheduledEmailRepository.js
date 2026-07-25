@@ -103,7 +103,31 @@ export function createScheduledEmailRepository({
     });
   }
 
-  return { insert, findDue, claim, markSent, markFailed, configured };
+  /**
+   * Release a claimed row back to 'pending' for a BOUNDED retry after a transient
+   * send failure: bumps `retry_count`, pushes `scheduled_for` out by a backoff so
+   * the next cron run picks it up later (not instantly), and records the last
+   * error for visibility. The claim guard still holds — only this worker (which
+   * moved the row to 'processing') writes here, so there is no double-send race.
+   * @param {string} id
+   * @param {{ retryCount:number, message?:string, delayMs?:number }} opts
+   */
+  async function scheduleRetry(id, { retryCount, message, delayMs = 5 * 60_000 } = {}) {
+    requireConfigured();
+    const q = `${base}?id=eq.${encodeURIComponent(id)}`;
+    await fetchImpl(q, {
+      method: 'PATCH',
+      headers,
+      body: JSON.stringify({
+        status: 'pending',
+        retry_count: retryCount,
+        scheduled_for: new Date(Date.now() + delayMs).toISOString(),
+        error_message: String(message ?? 'send failed').slice(0, 500),
+      }),
+    });
+  }
+
+  return { insert, findDue, claim, markSent, markFailed, scheduleRetry, configured };
 }
 
 /** Default repository wired from env (server-side; service-role only). */
