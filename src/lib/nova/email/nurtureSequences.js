@@ -7,7 +7,9 @@
  * NO code change; the EmailService reads this to lay down `scheduled_emails` rows.
  *
  * The `nova-test` sequence uses deliberately SHORT delays so the cron can be
- * verified end to end in minutes rather than hours.
+ * verified end to end in minutes rather than hours. The `avenix` sequence is the
+ * REAL production nurture for avenixstudios.com (immediate welcome + a 3-day
+ * follow-up).
  */
 
 /** Default sequence name used when a caller does not specify one. */
@@ -18,6 +20,12 @@ export const NURTURE_SEQUENCES = Object.freeze({
     default_lead_nurture: [
       { templateKey: 'welcome_test', delayMinutes: 1 },
       { templateKey: 'nurture_followup', delayMinutes: 3 },
+    ],
+  },
+  avenix: {
+    avenix_lead_nurture: [
+      { templateKey: 'avenix_welcome', delayMinutes: 0 }, // immediate on lead capture
+      { templateKey: 'avenix_followup', delayMinutes: 4320 }, // +3 days
     ],
   },
 });
