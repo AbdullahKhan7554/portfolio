@@ -9,8 +9,8 @@
  *
  * It returns RAW candidate strings keyed by lead field. It does NOT validate or
  * normalize — the engine runs the SAME per-field validators (validateEmail /
- * validateBudget / validateTimeline→normalizeTimeline / validateName) on these
- * candidates, so nothing here bypasses validation. Conservative by design: only
+ * validateBudget / validateTimeline→normalizeTimeline / validateName / validatePhone)
+ * on these candidates, so nothing here bypasses validation. Conservative by design: only
  * high-confidence, explicitly-marked matches are returned (name especially — it
  * requires an explicit marker, never just a capitalized word).
  */
@@ -35,6 +35,16 @@ const TIMELINE_RE =
 const NAME_RE =
   /(?:\bmy name is\b|\bname is\b|\bname'?s\b|\bthis is\b|\bi am\b|\bi'?m\b|\bname\b[:\-]?)\s+([a-z][a-z.'-]*(?:\s+[a-z][a-z.'-]*)?)/i;
 
+/**
+ * A phone number: either marker-led ("phone/mobile/whatsapp/number/call me … 0300…"),
+ * or a distinctive local/international format on its own. A digit run must be ≥8
+ * long, so it never grabs a short budget figure. The engine's validatePhone has
+ * the final say (7–15 digits after stripping separators).
+ */
+const PHONE_MARKER_RE =
+  /(?:phone|mobile|cell|whats\s?app|number|contact(?:\s+me)?|call\s+me|reach\s+me)\b[^\d+]{0,8}(\+?\d[\d\s().-]{6,16}\d)/i;
+const PHONE_STRICT_RE = /(\+92[\s-]?3\d{2}[\s-]?\d{7}|\b03\d{2}[\s-]?\d{7}\b|\+\d{9,15}\b)/;
+
 /** Words that commonly follow a "name marker" but are NOT names (false-positive guard). */
 const NAME_STOPWORDS = new Set([
   'looking', 'interested', 'trying', 'here', 'not', 'just', 'still', 'really', 'going', 'gonna',
@@ -54,6 +64,11 @@ function firstMatch(msg, res) {
     if (m) return clean(m[1] || m[0]);
   }
   return null;
+}
+
+function extractPhone(msg) {
+  const m = msg.match(PHONE_MARKER_RE) || msg.match(PHONE_STRICT_RE);
+  return m ? clean(m[1] || m[0]) : null;
 }
 
 function extractName(msg) {
@@ -88,6 +103,9 @@ export function extractLeadFields(message) {
 
   const timeline = msg.match(TIMELINE_RE);
   if (timeline) out[LEAD_FIELD.TIMELINE] = clean(timeline[0]);
+
+  const phone = extractPhone(msg);
+  if (phone) out[LEAD_FIELD.PHONE] = phone;
 
   const name = extractName(msg);
   if (name) out[LEAD_FIELD.FULL_NAME] = name;

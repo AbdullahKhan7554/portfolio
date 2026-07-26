@@ -73,7 +73,7 @@ async function notifyOwnerOfLead({ companyId, lead, service }) {
     await email.sendNow(companyId, 'internal_lead_notification', owner, {
       name: lead?.fullName || '—',
       email: lead?.email || '—',
-      phone: lead?.phone || '—',
+      phone: lead?.phone || 'Not provided',
       company: lead?.companyName || '—',
       businessType: lead?.businessType || '—',
       service: service || 'New inquiry',

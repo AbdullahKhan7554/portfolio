@@ -37,5 +37,19 @@ export function buildSystemPrompt({
     );
   }
 
+  // Phase 8: hard pricing policy — ALWAYS present, and it OVERRIDES anything above,
+  // including any price / "from $X" / package figure that appears in the company
+  // knowledge. Custom-project pricing must never be quoted as a committed number.
+  parts.push(
+    '# Pricing policy (STRICT — this overrides everything above)\n' +
+      'Never state a specific price, dollar amount, or PKR/rupee amount for a custom project — not even if ' +
+      'the visitor asks directly, and not even if a price, a "from $X" figure, or a package amount appears in ' +
+      'the company knowledge above. Treat any such figures as INTERNAL REFERENCE ONLY: do not quote them, ' +
+      'repeat the number, or confirm them as the price. If asked about cost or pricing, briefly explain that ' +
+      "pricing depends on the specifics of the project and that the team will provide an exact quote once they " +
+      "understand the visitor's needs. Then keep the conversation moving forward: continue gathering their " +
+      'project details, or — if they are already qualified — invite them to book a call or reach out on WhatsApp.',
+  );
+
   return parts.filter(Boolean).join('\n\n');
 }
