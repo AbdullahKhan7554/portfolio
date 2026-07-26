@@ -49,9 +49,14 @@ export const LEAD_FIELDS = Object.freeze({
   },
   [LEAD_FIELD.PHONE]: {
     key: LEAD_FIELD.PHONE,
-    prompt: 'What phone or WhatsApp number should we use?',
+    // Phase 9: phone is now an explicitly-asked step, but SKIPPABLE — a decline
+    // ("no" / "skip") completes it with no value instead of re-asking. It is
+    // marked required so it is actually asked before completion; `skippable`
+    // lets a decline satisfy that requirement (see leadCaptureEngine.submit).
+    prompt: 'What phone or WhatsApp number should we use? (optional — just reply "skip" if you prefer not to share one)',
     validate: 'phone',
-    required: false,
+    required: true,
+    skippable: true,
   },
   [LEAD_FIELD.COMPANY_NAME]: {
     key: LEAD_FIELD.COMPANY_NAME,
@@ -93,11 +98,11 @@ const F = LEAD_FIELD;
  */
 export const LEAD_FLOWS = Object.freeze({
   default: [F.FULL_NAME, F.EMAIL, F.PHONE, F.PROJECT_DESCRIPTION, F.BUDGET, F.TIMELINE],
-  website: [F.FULL_NAME, F.EMAIL, F.COMPANY_NAME, F.PROJECT_DESCRIPTION, F.BUDGET, F.TIMELINE],
-  automation: [F.FULL_NAME, F.EMAIL, F.COMPANY_NAME, F.BUSINESS_TYPE, F.PROJECT_DESCRIPTION, F.TIMELINE],
-  seo: [F.FULL_NAME, F.EMAIL, F.COMPANY_NAME, F.PROJECT_DESCRIPTION, F.TIMELINE],
-  branding: [F.FULL_NAME, F.EMAIL, F.COMPANY_NAME, F.PROJECT_DESCRIPTION, F.BUDGET, F.TIMELINE],
-  ecommerce: [F.FULL_NAME, F.EMAIL, F.COMPANY_NAME, F.PROJECT_DESCRIPTION, F.BUDGET, F.TIMELINE],
+  website: [F.FULL_NAME, F.EMAIL, F.PHONE, F.COMPANY_NAME, F.PROJECT_DESCRIPTION, F.BUDGET, F.TIMELINE],
+  automation: [F.FULL_NAME, F.EMAIL, F.PHONE, F.COMPANY_NAME, F.BUSINESS_TYPE, F.PROJECT_DESCRIPTION, F.TIMELINE],
+  seo: [F.FULL_NAME, F.EMAIL, F.PHONE, F.COMPANY_NAME, F.PROJECT_DESCRIPTION, F.TIMELINE],
+  branding: [F.FULL_NAME, F.EMAIL, F.PHONE, F.COMPANY_NAME, F.PROJECT_DESCRIPTION, F.BUDGET, F.TIMELINE],
+  ecommerce: [F.FULL_NAME, F.EMAIL, F.PHONE, F.COMPANY_NAME, F.PROJECT_DESCRIPTION, F.BUDGET, F.TIMELINE],
 });
 
 /** Resolve a flow's ordered field list, falling back to `default`. */

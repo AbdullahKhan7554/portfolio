@@ -98,6 +98,21 @@ export function validateTimeline(input) {
   return ok(normalizeTimeline(value));
 }
 
+/**
+ * Lightweight decline detection (Phase 9) — used only for SKIPPABLE fields (phone)
+ * so "no" / "skip" / "rather not" is accepted as a decline instead of being
+ * validated as a bad phone number and re-asked forever. Keyword-based, anchored
+ * so an actual phone number is never read as a decline. Pure.
+ * @param {string} input
+ * @returns {boolean}
+ */
+export function isDecline(input) {
+  const t = String(input ?? '').trim().toLowerCase();
+  if (!t) return false;
+  if (/^(?:no|nope|nah|na|n\/a|none|skip|pass|nothing)\b/.test(t)) return true;
+  return /\b(?:no\s+thanks?|no\s+thank\s+you|rather\s+not|prefer\s+not|don'?t\s+want|not\s+comfortable|not\s+right\s+now|not\s+now|maybe\s+later|leave\s+it|i'?ll\s+pass|i\s+pass)\b/.test(t);
+}
+
 /** Registry: validator kind → function. Extend without touching the engine. */
 export const VALIDATORS = Object.freeze({
   text: validateText,

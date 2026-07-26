@@ -8,7 +8,7 @@
  */
 import { getFlowFields, LEAD_FIELDS } from './leadConfig';
 import { createLeadState, setValue, isComplete, completionPercentage } from './leadState';
-import { validateField } from './leadValidators';
+import { validateField, isDecline } from './leadValidators';
 import { extractLeadFields } from './leadExtractor';
 import { nextQuestion } from './leadQuestions';
 import { buildLeadSummary } from './leadSummary';
@@ -66,8 +66,17 @@ export function createLeadCaptureEngine({ fields = LEAD_FIELDS, resolveFlow = ge
       if (!key || isSet(working, key)) {
         return { state: working, ok: true, error: null, done: isComplete(working) };
       }
+      const def = fields[key];
 
-      const result = validateField(fields[key], rawValue);
+      // Phase 9: SKIPPABLE fields (phone) accept a decline ("no" / "skip") — mark
+      // the field addressed with a null value and move on, instead of validating
+      // the decline as a bad answer and re-asking forever.
+      if (def?.skippable && isDecline(rawValue)) {
+        const skipped = setValue(working, key, null); // completed; null renders as "Not provided"
+        return { state: skipped, ok: true, error: null, done: isComplete(skipped) };
+      }
+
+      const result = validateField(def, rawValue);
       if (!result.ok) {
         return { state: working, ok: false, error: result.error, done: false };
       }
