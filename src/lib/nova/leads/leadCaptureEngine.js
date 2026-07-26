@@ -9,6 +9,7 @@
 import { getFlowFields, LEAD_FIELDS } from './leadConfig';
 import { createLeadState, setValue, isComplete, completionPercentage } from './leadState';
 import { validateField } from './leadValidators';
+import { extractLeadFields } from './leadExtractor';
 import { nextQuestion } from './leadQuestions';
 import { buildLeadSummary } from './leadSummary';
 
@@ -38,18 +39,39 @@ export function createLeadCaptureEngine({ fields = LEAD_FIELDS, resolveFlow = ge
      * @returns {{ state:import('./leadState').LeadState, ok:boolean, error?:string, done:boolean }}
      */
     submit(state, rawValue, fieldKey) {
-      const key = fieldKey || nextQuestion(state)?.field;
-      if (!key) return { state, ok: true, error: null, done: true };
+      const isSet = (st, field) => st.values[field] != null && st.values[field] !== '';
+      const store = (st, field, value, raw) => {
+        const s = setValue(st, field, value);
+        // Keep the original text alongside the normalized value (no info lost).
+        return { ...s, raw: { ...(s.raw || {}), [field]: String(raw ?? '').trim() } };
+      };
 
-      const def = fields[key];
-      const result = validateField(def, rawValue);
-      if (!result.ok) {
-        return { state, ok: false, error: result.error, done: false };
+      // Phase 7b: multi-field PRE-PASS. Pull any clearly-marked fields (email,
+      // budget, timeline, name) from ANYWHERE in the message and store each that
+      // is still unset AND passes its OWN validator — so one message can answer
+      // several fields instead of silently dropping all but the current one.
+      // Validation is never bypassed; extraction only decides WHICH text to
+      // validate for each field.
+      let working = state;
+      for (const [field, candidate] of Object.entries(extractLeadFields(rawValue))) {
+        if (!fields[field] || isSet(working, field)) continue; // unknown or already captured — never overwrite
+        const res = validateField(fields[field], candidate);
+        if (res.ok) working = store(working, field, res.value, candidate);
       }
 
-      const stored = setValue(state, key, result.value);
-      // Keep the original text alongside the normalized value (no info lost).
-      const nextState = { ...stored, raw: { ...(stored.raw || {}), [key]: String(rawValue ?? '').trim() } };
+      // Single-field flow for the field the orchestrator was expecting — UNLESS
+      // the pre-pass already filled it (then the message was consumed above).
+      // nextField is read from the ORIGINAL state (the field that was asked).
+      const key = fieldKey || nextQuestion(state)?.field;
+      if (!key || isSet(working, key)) {
+        return { state: working, ok: true, error: null, done: isComplete(working) };
+      }
+
+      const result = validateField(fields[key], rawValue);
+      if (!result.ok) {
+        return { state: working, ok: false, error: result.error, done: false };
+      }
+      const nextState = store(working, key, result.value, rawValue);
       return { state: nextState, ok: true, error: null, done: isComplete(nextState) };
     },
 

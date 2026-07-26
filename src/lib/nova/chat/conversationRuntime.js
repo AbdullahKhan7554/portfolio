@@ -318,7 +318,7 @@ function buildLeadDirective(leadEngine, leadState) {
     if (!leadState) return base;
     const question = leadEngine.nextQuestion(leadState);
     return question
-      ? `Ask exactly one short question to collect the visitor's ${question.field}: "${question.prompt}". Do not ask anything else this turn. Do NOT thank them as if finished or imply their details have been submitted — this detail is still needed before you can wrap up. Ask ONLY about this field. Do not ask for any other information (like phone, company name, etc.) unless it is the field specified.`
+      ? `Ask exactly one short question to collect the visitor's ${question.field}: "${question.prompt}". Do not ask anything else this turn. Do NOT thank them as if finished or imply their details have been submitted — this detail is still needed before you can wrap up. Ask ONLY about this field. Do not ask for any other information (like phone, company name, etc.) unless it is the field specified. If they already shared other details earlier, briefly acknowledge those and ask only for this one still-missing field — never claim to have saved anything they did not actually provide.`
       : "Thank the visitor — you have their details; let them know the team will follow up shortly.";
   } catch {
     return base;
@@ -350,7 +350,7 @@ function buildTurnDirective(action) {
     case ACTION.ASK:
       return `Ask the visitor exactly one short, friendly question to get this: "${action.prompt}". Do not ask anything else this turn.${
         action.error ? ` Their last answer for this was not usable (${action.error}); gently ask again for it specifically.` : ''
-      } Do NOT thank them as if the conversation is finished or claim their information has been sent to the team — you still need this before wrapping up. Ask ONLY about the field specified above. Do not ask for any other information (like phone, company name, etc.) unless it is the field specified.`;
+      } Do NOT thank them as if the conversation is finished or claim their information has been sent to the team — you still need this before wrapping up. Ask ONLY about the field specified above. Do not ask for any other information (like phone, company name, etc.) unless it is the field specified. If the visitor already gave some details earlier, briefly acknowledge those and ask only for this one still-missing field — never claim to have saved anything they did not actually provide.`;
     case ACTION.RECOMMEND: {
       const label = action.recommendation?.name || action.recommendation?.serviceId || 'the best-fit option';
       return `Recommend "${label}" in 2–3 sentences, grounded in the company knowledge, explaining why it fits what they described, then ask if they'd like to proceed.`;
