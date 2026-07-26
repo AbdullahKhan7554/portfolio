@@ -243,6 +243,19 @@ async function safeAppend(memory, conversationId, message, companyId) {
 }
 
 /**
+ * Phase 7d: decorate the model's streamed lead-in — defuse any stray question
+ * mark it emits (so it cannot sneak in a substitute question), then append the
+ * exact server-owned question / confirmation VERBATIM. Stays fully streaming:
+ * the suffix is yielded right after the model's tokens, never buffered.
+ */
+async function* decorateStream(stream, { stripQuestionMarks = false, suffix = null } = {}) {
+  for await (const token of stream) {
+    yield stripQuestionMarks ? token.replace(/\?/g, '.') : token;
+  }
+  if (suffix) yield suffix;
+}
+
+/**
  * True passthrough stream: yields every token immediately (no buffering) while
  * accumulating the assistant text ONLY to persist it after completion. The
  * assistant message is saved solely on a successful, non-aborted stream — so
@@ -318,8 +331,10 @@ function buildLeadDirective(leadEngine, leadState) {
     if (!leadState) return base;
     const question = leadEngine.nextQuestion(leadState);
     return question
-      ? `Ask exactly one short question to collect the visitor's ${question.field}: "${question.prompt}". Do not ask anything else this turn. Do NOT thank them as if finished or imply their details have been submitted — this detail is still needed before you can wrap up. Ask ONLY about this field. Do not ask for any other information (like phone, company name, etc.) unless it is the field specified. If they already shared other details earlier, briefly acknowledge those and ask only for this one still-missing field — never claim to have saved anything they did not actually provide.`
-      : "Thank the visitor — you have their details; let them know the team will follow up shortly.";
+      ? `The ONLY field to collect this turn is "${question.field}". Say exactly this (you may lightly rephrase for tone, but the topic must be this and ONLY this): "${question.prompt}".` +
+          ` Do NOT ask about phone number, country, scheduling a call, or ANY topic that is not this exact question — those are not fields we collect. Ask this one thing and nothing else; if unsure, ask exactly the question above.` +
+          ` Do NOT thank them as if finished or imply their details are submitted — this is still needed. Never claim to have saved anything they did not actually provide.`
+      : 'The lead is fully captured. Simply thank the visitor and confirm the team will reach out shortly — do not ask any further questions.';
   } catch {
     return base;
   }
@@ -348,21 +363,57 @@ function buildHandoffDirective(handoffService, context, fallback) {
 function buildTurnDirective(action) {
   switch (action?.type) {
     case ACTION.ASK:
-      return `Ask the visitor exactly one short, friendly question to get this: "${action.prompt}". Do not ask anything else this turn.${
-        action.error ? ` Their last answer for this was not usable (${action.error}); gently ask again for it specifically.` : ''
-      } Do NOT thank them as if the conversation is finished or claim their information has been sent to the team — you still need this before wrapping up. Ask ONLY about the field specified above. Do not ask for any other information (like phone, company name, etc.) unless it is the field specified. If the visitor already gave some details earlier, briefly acknowledge those and ask only for this one still-missing field — never claim to have saved anything they did not actually provide.`;
+      return (
+        `Say exactly this to the visitor (you may lightly rephrase for tone, but the TOPIC must be this and ONLY this): "${action.prompt}".` +
+        ` Ask this one thing and nothing else this turn.` +
+        (action.error ? ` Their last answer for this was not usable (${action.error}); ask for it again, specifically.` : '') +
+        ` Do NOT ask about phone number, country, scheduling a call, availability, or anything that is not the exact question above — those are not things we collect. If you are unsure what to ask, ask exactly what is specified above.` +
+        ` Do NOT thank them as if the conversation is finished or claim their information has been sent to the team — you still need this answer first.` +
+        ` If the visitor already gave some details earlier, briefly acknowledge that, but still ask only for this one thing — never claim to have saved anything they did not actually provide.`
+      );
     case ACTION.RECOMMEND: {
       const label = action.recommendation?.name || action.recommendation?.serviceId || 'the best-fit option';
       return `Recommend "${label}" in 2–3 sentences, grounded in the company knowledge, explaining why it fits what they described, then ask if they'd like to proceed.`;
     }
     case ACTION.COMPLETE:
-      return 'Warmly thank the visitor and tell them the team will follow up shortly. Do not ask any further questions.';
+      return 'The lead is fully captured. Simply thank the visitor and confirm the team will reach out shortly — do not ask any further questions.';
     case ACTION.SAY:
     default:
       return action?.message
         ? `Convey this naturally in one short, warm message: "${action.message}"`
         : '';
   }
+}
+
+/** Deterministic confirmation appended by the server on the COMPLETE turn (Phase 7d). */
+const LEAD_COMPLETE_CONFIRMATION =
+  "You're all set — our team now has your details and will reach out to you shortly.";
+
+/**
+ * Phase 7d — directive for a lead ASK turn. The SERVER appends the exact field
+ * question after the model's output, so the model must produce ONLY a short warm
+ * lead-in with no question of its own (and no question mark, which the stream
+ * decorator also strips as a safety net).
+ */
+function buildLeadInDirective(action) {
+  const errPart = action?.error
+    ? ' Their previous answer for this was not usable, so gently acknowledge that in your sentence.'
+    : '';
+  return (
+    'Write ONE short, warm sentence (15 words max) that reacts naturally to what the visitor just said. ' +
+    'Do NOT ask any question. Do NOT include a question mark. Do NOT request any information or introduce any ' +
+    'new topic — the exact question the visitor needs to answer is added by the system immediately after your ' +
+    `sentence.${errPart}`
+  );
+}
+
+/** Phase 7d — directive for the COMPLETE turn (short warm closing; confirmation is appended). */
+function buildClosingDirective() {
+  return (
+    'Write ONE short, warm closing sentence thanking the visitor for their time. Do NOT ask any question or ' +
+    'include a question mark — a confirmation that the team will follow up is added by the system right after ' +
+    'your sentence.'
+  );
 }
 
 /**
@@ -493,6 +544,25 @@ export async function runConversationTurn({
   }
   const directive = directiveParts.filter(Boolean).join('\n\n');
 
+  // Phase 7d: deterministic question / closing. On a lead ASK turn the SERVER
+  // appends the exact field question (verbatim), so the model is constrained to a
+  // short warm lead-in with NO question of its own; on the COMPLETE turn the
+  // confirmation is appended the same way. This guarantees the required question /
+  // confirmation always reaches the visitor, instead of trusting the model to
+  // phrase it (which Phase 7c proved it does not reliably do).
+  let effectiveDirective = directive;
+  let deterministicSuffix = null;
+  let stripQuestionMarks = false;
+  if (assistantAction?.type === ACTION.ASK && assistantAction?.source === 'lead' && assistantAction?.prompt) {
+    effectiveDirective = buildLeadInDirective(assistantAction);
+    deterministicSuffix = `\n\n${assistantAction.prompt}`;
+    stripQuestionMarks = true;
+  } else if (assistantAction?.type === ACTION.COMPLETE) {
+    effectiveDirective = buildClosingDirective();
+    deterministicSuffix = `\n\n${LEAD_COMPLETE_CONFIRMATION}`;
+    stripQuestionMarks = true;
+  }
+
   // 4e) M16: persist a COMPLETED lead once, via the existing Lead Repository.
   //     Trigger = Lead Engine reports complete; saved once (round-tripped flag +
   //     repository dedup); failures are normalized and never break chat.
@@ -562,14 +632,17 @@ export async function runConversationTurn({
     config,
     knowledgeService,
     signal,
-    directive,
+    directive: effectiveDirective,
     context,
   });
 
   // 6) Stream tokens straight through; after completion save the assistant reply
   //    and run any tool calls it contains (results populate `toolResults`).
+  //    Phase 7d: decorate the model's lead-in with the deterministic question /
+  //    confirmation before persistence sees it (so the full message is saved).
   const toolResults = [];
-  const stream = persistOnComplete(rawStream, {
+  const decorated = decorateStream(rawStream, { stripQuestionMarks, suffix: deterministicSuffix });
+  const stream = persistOnComplete(decorated, {
     memory,
     conversationId,
     companyId,
