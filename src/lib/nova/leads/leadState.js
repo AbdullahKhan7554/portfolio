@@ -21,6 +21,9 @@ export function createLeadState(flow = 'default') {
     flow,
     fields: [...getFlowFields(flow)],
     values: {},
+    // Original (pre-normalization) text per field, so nothing is lost when a
+    // value is normalized (e.g. free-text timeline → a canonical bucket).
+    raw: {},
     completedFields: [],
   };
 }

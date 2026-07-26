@@ -318,7 +318,7 @@ function buildLeadDirective(leadEngine, leadState) {
     if (!leadState) return base;
     const question = leadEngine.nextQuestion(leadState);
     return question
-      ? `Ask exactly one short question to collect the visitor's ${question.field}: "${question.prompt}". Do not ask anything else this turn.`
+      ? `Ask exactly one short question to collect the visitor's ${question.field}: "${question.prompt}". Do not ask anything else this turn. Do NOT thank them as if finished or imply their details have been submitted — this detail is still needed before you can wrap up.`
       : "Thank the visitor — you have their details; let them know the team will follow up shortly.";
   } catch {
     return base;
@@ -349,8 +349,8 @@ function buildTurnDirective(action) {
   switch (action?.type) {
     case ACTION.ASK:
       return `Ask the visitor exactly one short, friendly question to get this: "${action.prompt}". Do not ask anything else this turn.${
-        action.error ? ` Their last answer was invalid (${action.error}); gently ask again.` : ''
-      }`;
+        action.error ? ` Their last answer for this was not usable (${action.error}); gently ask again for it specifically.` : ''
+      } Do NOT thank them as if the conversation is finished or claim their information has been sent to the team — you still need this before wrapping up.`;
     case ACTION.RECOMMEND: {
       const label = action.recommendation?.name || action.recommendation?.serviceId || 'the best-fit option';
       return `Recommend "${label}" in 2–3 sentences, grounded in the company knowledge, explaining why it fits what they described, then ask if they'd like to proceed.`;
@@ -493,7 +493,10 @@ export async function runConversationTurn({
     leadEngine = leadEngine || (await getDefaultLeadEngine());
     if (leadEngine.isComplete(updatedState.lead)) {
       const { lead } = leadEngine.summary(updatedState.lead);
-      const result = await leadWriter.persist(lead, { companyId, conversationId });
+      // Phase 6a: preserve the visitor's ORIGINAL timeline wording (before it was
+      // normalized to a bucket) in the lead record's metadata — no info lost.
+      const rawTimeline = updatedState.lead?.raw?.timeline ?? null;
+      const result = await leadWriter.persist(lead, { companyId, conversationId, rawTimeline });
       if (result?.ok) {
         leadSaved = true;
         analytics.track(ANALYTICS_EVENT.LEAD_SAVED, { conversationId });

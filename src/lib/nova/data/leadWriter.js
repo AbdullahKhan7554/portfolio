@@ -74,11 +74,12 @@ export function defaultLeadStore(env = process.env) {
  * directly; anything else captured (conversationId, companyName, businessType)
  * is preserved in `metadata`. `status` starts at 'new'; `source` is 'chatbot'.
  */
-function toRow(lead = {}, { companyId, conversationId }) {
+function toRow(lead = {}, { companyId, conversationId, rawTimeline }) {
   const metadata = {};
   if (conversationId) metadata.conversationId = conversationId;
   if (lead.companyName) metadata.companyName = lead.companyName;
   if (lead.businessType) metadata.businessType = lead.businessType;
+  if (rawTimeline) metadata.raw_timeline = rawTimeline;
 
   return {
     company_id: companyId ?? null,
@@ -110,9 +111,9 @@ export function createLeadWriter({ leadStore, table = LEADS_TABLE } = {}) {
    * Persist a completed lead (idempotent per conversation). Returns a normalized
    * RepositoryResult — same shape as before.
    * @param {object} lead                    lead summary fields
-   * @param {{ companyId?:string, conversationId?:string }} [context]
+   * @param {{ companyId?:string, conversationId?:string, rawTimeline?:string }} [context]
    */
-  async function persist(lead, { companyId, conversationId } = {}) {
+  async function persist(lead, { companyId, conversationId, rawTimeline } = {}) {
     try {
       if (!store.configured) {
         return repoFailure('Lead repository is not connected.', { metadata: { skipped: true } });
@@ -124,7 +125,7 @@ export function createLeadWriter({ leadStore, table = LEADS_TABLE } = {}) {
         if (existing) return repoSuccess(existing, { metadata: { deduped: true } });
       }
 
-      const row = await store.insert(toRow(lead, { companyId, conversationId }));
+      const row = await store.insert(toRow(lead, { companyId, conversationId, rawTimeline }));
       return repoSuccess(row ?? {}, { metadata: { saved: true } });
     } catch (e) {
       return repoFailure(normalizeError(e));

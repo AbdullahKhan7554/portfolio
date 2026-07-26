@@ -47,7 +47,9 @@ export function createLeadCaptureEngine({ fields = LEAD_FIELDS, resolveFlow = ge
         return { state, ok: false, error: result.error, done: false };
       }
 
-      const nextState = setValue(state, key, result.value);
+      const stored = setValue(state, key, result.value);
+      // Keep the original text alongside the normalized value (no info lost).
+      const nextState = { ...stored, raw: { ...(stored.raw || {}), [key]: String(rawValue ?? '').trim() } };
       return { state: nextState, ok: true, error: null, done: isComplete(nextState) };
     },
 

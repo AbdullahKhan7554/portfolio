@@ -33,13 +33,30 @@ export const STAGE = Object.freeze({
  * @type {Record<string, string[]>}
  */
 export const INTENT_KEYWORDS = Object.freeze({
-  [INTENT.WEBSITE]: ['website', 'web app', 'landing', 'site', 'portfolio', 'nextjs', 'react'],
-  [INTENT.ECOMMERCE]: ['ecommerce', 'e-commerce', 'store', 'shop', 'cart', 'checkout', 'products', 'payments'],
-  [INTENT.AUTOMATION]: ['automation', 'automate', 'workflow', 'integration', 'api', 'crm', 'zapier', 'bot'],
-  [INTENT.BRANDING]: ['branding', 'brand', 'logo', 'identity', 'design system', 'rebrand'],
-  [INTENT.SEO]: ['seo', 'search', 'ranking', 'traffic', 'google', 'keywords', 'organic'],
-  [INTENT.CONSULTATION]: ['consultation', 'consult', 'advice', 'strategy', 'call', 'meeting', 'talk'],
-  [INTENT.PRICING]: ['price', 'pricing', 'cost', 'quote', 'budget', 'how much', 'rates'],
+  [INTENT.WEBSITE]: [
+    'website', 'web site', 'web app', 'webpage', 'web page', 'web design', 'web dev',
+    'landing', 'landing page', 'site', 'redesign', 'portfolio', 'blog', 'business site',
+    'company site', 'online presence', 'web presence', 'nextjs', 'next.js', 'react',
+  ],
+  [INTENT.ECOMMERCE]: [
+    'ecommerce', 'e-commerce', 'ecom', 'online store', 'online shop', 'store', 'shop',
+    'sell online', 'selling online', 'sell products', 'sell my', 'storefront', 'cart',
+    'checkout', 'products', 'payments', 'shopify', 'woocommerce', 'dropship',
+  ],
+  [INTENT.AUTOMATION]: [
+    'automation', 'automate', 'automated', 'workflow', 'integration', 'integrate', 'api',
+    'crm', 'zapier', 'bot', 'chatbot', 'ai assistant', 'ai agent',
+  ],
+  [INTENT.BRANDING]: [
+    'branding', 'brand', 'logo', 'identity', 'brand identity', 'visual identity',
+    'design system', 'rebrand', 'rebranding',
+  ],
+  [INTENT.SEO]: [
+    'seo', 'search engine', 'search ranking', 'ranking', 'rank', 'traffic', 'google',
+    'keywords', 'organic', 'visibility',
+  ],
+  [INTENT.CONSULTATION]: ['consultation', 'consult', 'advice', 'strategy', 'call', 'meeting', 'talk', 'discuss'],
+  [INTENT.PRICING]: ['price', 'pricing', 'cost', 'quote', 'budget', 'how much', 'rates', 'estimate'],
   [INTENT.SUPPORT]: ['support', 'help', 'issue', 'bug', 'broken', 'fix', 'maintenance', 'error'],
 });
 
