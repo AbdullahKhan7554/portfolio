@@ -484,9 +484,14 @@ export async function runConversationTurn({
   // 2) Orchestrator controls the conversation (unchanged — newest user message).
   //    P1: resolve the default orchestrator lazily (only now, at first turn).
   orchestrator = orchestrator || (await getDefaultOrchestrator());
+  // Prior USER-message texts (never assistant text — its prompts contain
+  // field-like tokens). Lets lead capture backfill fields already stated during
+  // qualification instead of re-asking them.
+  const userHistory = merged.filter((m) => m.role === 'user').map((m) => m.content);
   const { assistantAction, nextStage, updatedState: orchestratorState } = orchestrator.process(
     lastUserMessage(messages),
     state || undefined,
+    { history: userHistory },
   );
   // Carry the conversation id forward so the runtime restores the same thread.
   const updatedState = { ...orchestratorState, conversationId };

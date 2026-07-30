@@ -6,12 +6,22 @@
  * Conversation-driven: it exposes exactly ONE next question at a time and only
  * advances when a submitted value passes validation.
  */
-import { getFlowFields, LEAD_FIELDS } from './leadConfig';
+import { getFlowFields, LEAD_FIELDS, LEAD_FIELD } from './leadConfig';
 import { createLeadState, setValue, isComplete, completionPercentage } from './leadState';
 import { validateField, isDecline } from './leadValidators';
 import { extractLeadFields } from './leadExtractor';
 import { nextQuestion } from './leadQuestions';
 import { buildLeadSummary } from './leadSummary';
+
+/** Fields safe to pre-fill from earlier free-text chat (users state these early). */
+const BACKFILL_FIELDS = [LEAD_FIELD.BUDGET, LEAD_FIELD.TIMELINE];
+
+const isSet = (st, field) => st.values[field] != null && st.values[field] !== '';
+const store = (st, field, value, raw) => {
+  const s = setValue(st, field, value);
+  // Keep the original text alongside the normalized value (no info lost).
+  return { ...s, raw: { ...(s.raw || {}), [field]: String(raw ?? '').trim() } };
+};
 
 /**
  * @param {Object} [deps]
@@ -28,6 +38,29 @@ export function createLeadCaptureEngine({ fields = LEAD_FIELDS, resolveFlow = ge
       return state;
     },
 
+    /**
+     * Pre-fill fields from earlier free-text messages (e.g. qualification chat
+     * before capture began). Reuses the SAME extractor + validators as `submit`;
+     * only whitelisted fields that are still unset are stored — never overwrites.
+     * @param {import('./leadState').LeadState} state
+     * @param {string[]} messages   prior user-message texts, oldest→newest
+     * @param {{ only?: string[] }} [opts]
+     */
+    backfill(state, messages = [], { only = BACKFILL_FIELDS } = {}) {
+      let working = state;
+      for (const message of messages) {
+        const extracted = extractLeadFields(message);
+        for (const field of only) {
+          const candidate = extracted[field];
+          if (candidate == null) continue;
+          if (!fields[field] || isSet(working, field)) continue; // unknown or already captured
+          const res = validateField(fields[field], candidate);
+          if (res.ok) working = store(working, field, res.value, candidate);
+        }
+      }
+      return working;
+    },
+
     /** The single next question, or null when required fields are complete. */
     nextQuestion(state) {
       return nextQuestion(state);
@@ -39,13 +72,6 @@ export function createLeadCaptureEngine({ fields = LEAD_FIELDS, resolveFlow = ge
      * @returns {{ state:import('./leadState').LeadState, ok:boolean, error?:string, done:boolean }}
      */
     submit(state, rawValue, fieldKey) {
-      const isSet = (st, field) => st.values[field] != null && st.values[field] !== '';
-      const store = (st, field, value, raw) => {
-        const s = setValue(st, field, value);
-        // Keep the original text alongside the normalized value (no info lost).
-        return { ...s, raw: { ...(s.raw || {}), [field]: String(raw ?? '').trim() } };
-      };
-
       // Phase 7b: multi-field PRE-PASS. Pull any clearly-marked fields (email,
       // budget, timeline, name) from ANYWHERE in the message and store each that
       // is still unset AND passes its OWN validator — so one message can answer

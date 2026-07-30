@@ -95,20 +95,26 @@ export function createConversationOrchestrator({
     }
   }
 
-  /** Ensure a lead state exists, using the flow mapped from the sales intent. */
-  function ensureLead(state) {
+  /**
+   * Ensure a lead state exists, using the flow mapped from the sales intent.
+   * On first creation (lead-capture start), backfill budget/timeline from the
+   * prior conversation so already-answered fields are not re-asked.
+   */
+  function ensureLead(state, history = []) {
     if (state.lead) return state;
     const flow = resolveLeadFlow(state.sales.intent, config);
-    return { ...state, lead: leadEngine.start(flow) };
+    const lead = leadEngine.backfill(leadEngine.start(flow), history);
+    return { ...state, lead };
   }
 
   /**
    * Advance the conversation with an inbound user message.
    * @param {string} message
    * @param {object} [inputState]  omit to begin a new conversation
+   * @param {{ history?: string[] }} [opts]  prior user-message texts (for lead backfill)
    * @returns {{ assistantAction:object, nextStage:string, updatedState:object }}
    */
-  function process(message, inputState) {
+  function process(message, inputState, { history = [] } = {}) {
     let state = inputState || start();
 
     // 1) Route the message to the engine that owns the CURRENT stage.
@@ -118,7 +124,7 @@ export function createConversationOrchestrator({
       const q = salesEngine.getNextQuestion(state.sales);
       if (q) state = { ...state, sales: salesEngine.answer(state.sales, q.key, message) };
     } else if (state.stage === STAGE.LEAD_CAPTURE) {
-      state = ensureLead(state);
+      state = ensureLead(state, history);
       const result = leadEngine.submit(state.lead, message);
       state = { ...state, lead: result.state };
       // Invalid input: re-ask the same field (no stage advance).
@@ -142,8 +148,9 @@ export function createConversationOrchestrator({
     const target = computeNextStage(view(state), config);
     let updatedState = { ...state, stage: target };
 
-    // 3) Entering lead capture: lazily create the lead flow from the intent.
-    if (target === STAGE.LEAD_CAPTURE) updatedState = ensureLead(updatedState);
+    // 3) Entering lead capture: lazily create the lead flow from the intent,
+    //    backfilling budget/timeline from the prior conversation history.
+    if (target === STAGE.LEAD_CAPTURE) updatedState = ensureLead(updatedState, history);
 
     // 4) Produce the assistant action for the new stage.
     return {
