@@ -35,11 +35,10 @@ export default async function LeadDetailPage({ params }) {
   const { messages } = lead ? await getConversationByLeadId(lead.id) : { messages: [] };
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] px-6 py-8 text-[var(--text)]">
-      <div className="mx-auto max-w-3xl">
-        <Link href="/dashboard" className="text-sm text-[var(--text-muted)] hover:text-[var(--text)]">
-          ← Back to leads
-        </Link>
+    <div className="mx-auto max-w-3xl">
+      <Link href="/dashboard" className="text-sm text-[var(--text-muted)] hover:text-[var(--text)]">
+        ← Back to leads
+      </Link>
 
         {error ? (
           <p className="mt-6 text-sm text-red-500">Could not load lead: {error}</p>
@@ -101,12 +100,13 @@ export default async function LeadDetailPage({ params }) {
                   ))}
                 </div>
               ) : (
-                <p className="mt-2 text-sm text-[var(--text-muted)]">No transcript available.</p>
+                <div className="mt-3 rounded-[var(--radius-lg)] border border-dashed border-[var(--border)] p-6 text-center text-sm text-[var(--text-muted)]">
+                  No transcript available.
+                </div>
               )}
             </section>
           </>
         )}
-      </div>
-    </main>
+    </div>
   );
 }

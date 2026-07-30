@@ -1,7 +1,5 @@
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/server';
 import { listLeads, LEAD_STATUSES, LEAD_SOURCES } from '@/lib/supabase/leads';
-import { LogoutButton } from './LogoutButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -28,33 +26,13 @@ export default async function DashboardPage({ searchParams }) {
   const status = typeof params.status === 'string' ? params.status : '';
   const source = typeof params.source === 'string' ? params.source : '';
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
   const { rows, error } = await listLeads({ search, status, source });
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] px-6 py-8 text-[var(--text)]">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-lg font-semibold text-[var(--text-strong)]">Leads Dashboard</h1>
-            <p className="mt-1 text-sm text-[var(--text-muted)]">Signed in as {user?.email}</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/dashboard/analytics"
-              className="text-sm text-[var(--text-muted)] hover:text-[var(--text)]"
-            >
-              Analytics
-            </Link>
-            <LogoutButton />
-          </div>
-        </div>
+    <div className="mx-auto max-w-6xl">
+      <h1 className="text-lg font-semibold text-[var(--text-strong)]">Leads Dashboard</h1>
 
-        <form method="get" className="mt-6 flex flex-wrap items-center gap-2">
+      <form method="get" className="mt-6 flex flex-wrap items-center gap-2">
           <input
             type="text"
             name="q"
@@ -97,31 +75,30 @@ export default async function DashboardPage({ searchParams }) {
 
         {error ? (
           <p className="mt-6 text-sm text-red-500">Could not load leads: {error}</p>
+        ) : rows.length === 0 ? (
+          <div className="mt-4 rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-10 text-center text-sm text-[var(--text-muted)]">
+            No leads found.
+          </div>
         ) : (
-          <div className="mt-4 overflow-x-auto rounded-[var(--radius-lg)] border border-[var(--border)]">
-            <table className="w-full border-collapse">
-              <thead className="bg-[var(--surface)]">
-                <tr>
-                  <th className={head}>Name</th>
-                  <th className={head}>Email</th>
-                  <th className={head}>Phone</th>
-                  <th className={head}>Project</th>
-                  <th className={head}>Budget</th>
-                  <th className={head}>Timeline</th>
-                  <th className={head}>Source</th>
-                  <th className={head}>Created</th>
-                  <th className={head}>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.length === 0 ? (
+          <>
+            {/* Desktop: table */}
+            <div className="mt-4 hidden overflow-x-auto rounded-[var(--radius-lg)] border border-[var(--border)] md:block">
+              <table className="w-full border-collapse">
+                <thead className="bg-[var(--surface)]">
                   <tr>
-                    <td className={`${cell} text-[var(--text-muted)]`} colSpan={9}>
-                      No leads found.
-                    </td>
+                    <th className={head}>Name</th>
+                    <th className={head}>Email</th>
+                    <th className={head}>Phone</th>
+                    <th className={head}>Project</th>
+                    <th className={head}>Budget</th>
+                    <th className={head}>Timeline</th>
+                    <th className={head}>Source</th>
+                    <th className={head}>Created</th>
+                    <th className={head}>Status</th>
                   </tr>
-                ) : (
-                  rows.map((lead) => (
+                </thead>
+                <tbody>
+                  {rows.map((lead) => (
                     <tr key={lead.id} className="border-t border-[var(--border)] hover:bg-[var(--surface)]">
                       <td className={cell}>
                         <Link
@@ -142,13 +119,45 @@ export default async function DashboardPage({ searchParams }) {
                       <td className={cell}>{formatDate(lead.created_at)}</td>
                       <td className={cell}>{lead.status || '—'}</td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile: stacked cards */}
+            <div className="mt-4 flex flex-col gap-3 md:hidden">
+              {rows.map((lead) => (
+                <Link
+                  key={lead.id}
+                  href={`/dashboard/leads/${lead.id}`}
+                  className="block rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-4 transition-colors hover:border-[var(--border-strong)]"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="font-medium text-[var(--accent)]">{lead.full_name || 'View'}</span>
+                    <span className="shrink-0 text-xs text-[var(--text-muted)]">{formatDate(lead.created_at)}</span>
+                  </div>
+                  <div className="mt-1 break-words text-sm text-[var(--text-muted)]">{lead.email || '—'}</div>
+                  {lead.project_description && (
+                    <div className="mt-2 text-sm text-[var(--text)]">{truncate(lead.project_description, 90)}</div>
+                  )}
+                  <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-[var(--text-muted)]">
+                    <span>
+                      Status: <span className="text-[var(--text)]">{lead.status || '—'}</span>
+                    </span>
+                    <span>
+                      Source: <span className="text-[var(--text)]">{lead.source || '—'}</span>
+                    </span>
+                    {lead.budget && (
+                      <span>
+                        Budget: <span className="text-[var(--text)]">{lead.budget}</span>
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </>
         )}
-      </div>
-    </main>
+    </div>
   );
 }

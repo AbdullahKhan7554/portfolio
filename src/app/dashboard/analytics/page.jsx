@@ -1,7 +1,4 @@
-import Link from 'next/link';
-import { createClient } from '@/lib/supabase/server';
 import { getLeadAnalytics } from '@/lib/supabase/analytics';
-import { LogoutButton } from '../LogoutButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -34,11 +31,6 @@ function BarRow({ label: l, value, max }) {
 }
 
 export default async function AnalyticsPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
   const { data, error } = await getLeadAnalytics();
 
   const sourceEntries = Object.entries(data?.bySource ?? {});
@@ -48,22 +40,10 @@ export default async function AnalyticsPage() {
   const trendMax = Math.max(1, ...(data?.daily ?? []).map((d) => d.count));
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] px-6 py-8 text-[var(--text)]">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-lg font-semibold text-[var(--text-strong)]">Lead Analytics</h1>
-            <p className="mt-1 text-sm text-[var(--text-muted)]">Signed in as {user?.email}</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Link href="/dashboard" className="text-sm text-[var(--text-muted)] hover:text-[var(--text)]">
-              ← Leads
-            </Link>
-            <LogoutButton />
-          </div>
-        </div>
+    <div className="mx-auto max-w-6xl">
+      <h1 className="text-lg font-semibold text-[var(--text-strong)]">Lead Analytics</h1>
 
-        {error ? (
+      {error ? (
           <p className="mt-6 text-sm text-red-500">Could not load analytics: {error}</p>
         ) : (
           <>
@@ -117,7 +97,6 @@ export default async function AnalyticsPage() {
             </section>
           </>
         )}
-      </div>
-    </main>
+    </div>
   );
 }
