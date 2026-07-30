@@ -67,11 +67,19 @@ export function useNovaChat(config) {
       const assistantId = createId();
       let started = false;
       let whatsappLink = null;
+      let calBookingAvailable = false;
 
       const appendAssistant = (chunk) => {
         setMessages((prev) => [
           ...prev,
-          { id: assistantId, role: MESSAGE_ROLE.ASSISTANT, text: chunk, at: Date.now(), whatsappLink },
+          {
+            id: assistantId,
+            role: MESSAGE_ROLE.ASSISTANT,
+            text: chunk,
+            at: Date.now(),
+            whatsappLink,
+            calBookingAvailable,
+          },
         ]);
       };
       const growAssistant = (chunk) => {
@@ -129,6 +137,8 @@ export function useNovaChat(config) {
             /* ignore malformed whatsapp header */
           }
         }
+        // Cal.com booking offer for this turn (present only on lead completion).
+        if (res.headers.get('X-Nova-Cal') === '1') calBookingAvailable = true;
 
         const reader = res.body.getReader();
         const decoder = new TextDecoder();

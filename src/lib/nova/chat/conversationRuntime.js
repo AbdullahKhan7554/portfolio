@@ -388,7 +388,7 @@ function buildTurnDirective(action) {
 
 /** Deterministic confirmation appended by the server on the COMPLETE turn (Phase 7d). */
 const LEAD_COMPLETE_CONFIRMATION =
-  "You're all set — our team now has your details and will reach out to you shortly. Aap chahein to seedha WhatsApp par bhi baat kar sakte hain.";
+  "You're all set — our team now has your details and will reach out to you shortly. Aap chahein to seedha WhatsApp par baat kar sakte hain, ya abhi ek call book kar lein.";
 
 /**
  * Phase 7d — directive for a lead ASK turn. The SERVER appends the exact field
@@ -569,6 +569,7 @@ export async function runConversationTurn({
   //     repository dedup); failures are normalized and never break chat.
   let leadSaved = state?.leadSaved === true;
   let whatsappLink = null;
+  let calBookingAvailable = false;
   if (!leadSaved && updatedState.lead) {
     // P1: resolve the Lead Engine only when there is lead state to evaluate.
     leadEngine = leadEngine || (await getDefaultLeadEngine());
@@ -581,6 +582,7 @@ export async function runConversationTurn({
       if (result?.ok) {
         leadSaved = true;
         whatsappLink = buildWhatsappLink(lead);
+        calBookingAvailable = true;
         analytics.track(ANALYTICS_EVENT.LEAD_SAVED, { conversationId });
         // Phase 2: schedule the customer nurture sequence AFTER a successful save.
         await scheduleNurtureAfterLead({ companyId, lead });
@@ -678,5 +680,6 @@ export async function runConversationTurn({
     providerCapabilities,
     runtimeHealth,
     whatsappLink,
+    calBookingAvailable,
   };
 }

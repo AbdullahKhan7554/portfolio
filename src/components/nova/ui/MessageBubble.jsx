@@ -8,6 +8,7 @@ import { MESSAGE_ROLE } from '../constants/nova.constants';
 import { formatTime } from '../helpers/nova.helpers';
 import { makeBubbleVariants } from '../animations/nova.animations';
 import { NovaAvatar } from './NovaAvatar';
+import { CalBookingButton } from './CalBookingButton';
 
 /**
  * A single conversation bubble. Aligns right for the visitor, left (with
@@ -49,16 +50,21 @@ export function MessageBubble({ message }) {
           </time>
         </div>
 
-        {!isUser && message.whatsappLink && (
-          <a
-            href={message.whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-1.5 text-[0.8rem] font-medium text-white transition-colors hover:bg-[#1ebe5d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/60"
-          >
-            <MessageCircle size={15} aria-hidden="true" />
-            Continue on WhatsApp
-          </a>
+        {!isUser && (message.whatsappLink || message.calBookingAvailable) && (
+          <div className="mt-1.5 flex flex-wrap gap-2">
+            {message.whatsappLink && (
+              <a
+                href={message.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-1.5 text-[0.8rem] font-medium text-white transition-colors hover:bg-[#1ebe5d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/60"
+              >
+                <MessageCircle size={15} aria-hidden="true" />
+                Continue on WhatsApp
+              </a>
+            )}
+            {message.calBookingAvailable && <CalBookingButton />}
+          </div>
         )}
       </div>
     </motion.div>

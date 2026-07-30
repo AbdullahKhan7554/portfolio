@@ -88,7 +88,7 @@ export async function POST(request) {
 
   // 4) Orchestrator-driven turn → knowledge-grounded streaming reply.
   try {
-    const { stream, updatedState, nextStage, whatsappLink } = await runConversationTurn({
+    const { stream, updatedState, nextStage, whatsappLink, calBookingAvailable } = await runConversationTurn({
       companyId: parsed.data.companyId,
       messages: parsed.data.messages,
       state: parsed.data.state,
@@ -110,7 +110,8 @@ export async function POST(request) {
         'X-Nova-State': encodeURIComponent(JSON.stringify(updatedState)),
         'X-Nova-Stage': nextStage,
         ...(whatsappLink ? { 'X-Nova-WhatsApp': encodeURIComponent(whatsappLink) } : {}),
-        'Access-Control-Expose-Headers': 'X-Nova-State, X-Nova-Stage, X-Nova-WhatsApp',
+        ...(calBookingAvailable ? { 'X-Nova-Cal': '1' } : {}),
+        'Access-Control-Expose-Headers': 'X-Nova-State, X-Nova-Stage, X-Nova-WhatsApp, X-Nova-Cal',
       },
     });
   } catch (err) {
