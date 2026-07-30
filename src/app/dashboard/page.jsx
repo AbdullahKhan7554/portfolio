@@ -43,7 +43,15 @@ export default async function DashboardPage({ searchParams }) {
             <h1 className="text-lg font-semibold text-[var(--text-strong)]">Leads Dashboard</h1>
             <p className="mt-1 text-sm text-[var(--text-muted)]">Signed in as {user?.email}</p>
           </div>
-          <LogoutButton />
+          <div className="flex items-center gap-3">
+            <Link
+              href="/dashboard/analytics"
+              className="text-sm text-[var(--text-muted)] hover:text-[var(--text)]"
+            >
+              Analytics
+            </Link>
+            <LogoutButton />
+          </div>
         </div>
 
         <form method="get" className="mt-6 flex flex-wrap items-center gap-2">

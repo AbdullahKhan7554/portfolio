@@ -47,9 +47,10 @@ export async function getLead(id) {
 export async function updateLeadStatus(id, status) {
   if (!LEAD_STATUSES.includes(status)) return { ok: false, error: 'Invalid status' };
   const supabase = createAdminClient();
+  const now = new Date().toISOString();
   const { data, error } = await supabase
     .from('leads')
-    .update({ status, updated_at: new Date().toISOString() })
+    .update({ status, updated_at: now, status_changed_at: now })
     .eq('id', id)
     .select('status')
     .maybeSingle();
