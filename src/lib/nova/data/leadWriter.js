@@ -74,11 +74,12 @@ export function defaultLeadStore(env = process.env) {
  * directly; anything else captured (conversationId, companyName, businessType)
  * is preserved in `metadata`. `status` starts at 'new'; `source` is 'chatbot'.
  */
-function toRow(lead = {}, { companyId, conversationId, rawTimeline }) {
+function toRow(lead = {}, { companyId, conversationId, rawTimeline, source }) {
   const metadata = {};
   if (conversationId) metadata.conversationId = conversationId;
   if (lead.companyName) metadata.companyName = lead.companyName;
   if (lead.businessType) metadata.businessType = lead.businessType;
+  if (lead.package) metadata.package = lead.package;
   if (rawTimeline) metadata.raw_timeline = rawTimeline;
 
   return {
@@ -90,7 +91,7 @@ function toRow(lead = {}, { companyId, conversationId, rawTimeline }) {
     budget: lead.budget ?? null,
     timeline: lead.timeline ?? null,
     status: 'new',
-    source: 'chatbot',
+    source: source ?? 'chatbot',
     metadata,
   };
 }
@@ -111,9 +112,9 @@ export function createLeadWriter({ leadStore, table = LEADS_TABLE } = {}) {
    * Persist a completed lead (idempotent per conversation). Returns a normalized
    * RepositoryResult — same shape as before.
    * @param {object} lead                    lead summary fields
-   * @param {{ companyId?:string, conversationId?:string, rawTimeline?:string }} [context]
+   * @param {{ companyId?:string, conversationId?:string, rawTimeline?:string, source?:string }} [context]
    */
-  async function persist(lead, { companyId, conversationId, rawTimeline } = {}) {
+  async function persist(lead, { companyId, conversationId, rawTimeline, source } = {}) {
     try {
       if (!store.configured) {
         return repoFailure('Lead repository is not connected.', { metadata: { skipped: true } });
@@ -125,7 +126,7 @@ export function createLeadWriter({ leadStore, table = LEADS_TABLE } = {}) {
         if (existing) return repoSuccess(existing, { metadata: { deduped: true } });
       }
 
-      const row = await store.insert(toRow(lead, { companyId, conversationId, rawTimeline }));
+      const row = await store.insert(toRow(lead, { companyId, conversationId, rawTimeline, source }));
       return repoSuccess(row ?? {}, { metadata: { saved: true } });
     } catch (e) {
       return repoFailure(normalizeError(e));

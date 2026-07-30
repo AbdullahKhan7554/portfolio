@@ -1,23 +1,28 @@
 import 'server-only';
 import { createAdminClient } from './admin';
 import { LEAD_STATUSES } from '@/lib/dashboard/leadStatus';
+import { LEAD_SOURCES } from '@/lib/dashboard/leadSource';
 
 export { LEAD_STATUSES };
+export { LEAD_SOURCES };
 
 const COLUMNS =
-  'id, created_at, full_name, email, phone, project_description, budget, timeline, status';
+  'id, created_at, full_name, email, phone, project_description, budget, timeline, status, source';
 
 /**
- * List leads newest-first, with optional text search (name/email) and status
- * filter. Server-only (service-role).
- * @param {{ search?: string, status?: string }} [opts]
+ * List leads newest-first, with optional text search (name/email), status, and
+ * source filters. Server-only (service-role).
+ * @param {{ search?: string, status?: string, source?: string }} [opts]
  */
-export async function listLeads({ search = '', status = '' } = {}) {
+export async function listLeads({ search = '', status = '', source = '' } = {}) {
   const supabase = createAdminClient();
   let query = supabase.from('leads').select(COLUMNS).order('created_at', { ascending: false });
 
   if (status && LEAD_STATUSES.includes(status)) {
     query = query.eq('status', status);
+  }
+  if (source && LEAD_SOURCES.includes(source)) {
+    query = query.eq('source', source);
   }
   const term = search.trim();
   if (term) {

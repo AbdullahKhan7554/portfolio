@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 import { contactSchema, fieldErrors } from '@/lib/validation';
-import { sendEmail, esc } from '@/lib/email';
 import { rateLimit, clientIp } from '@/lib/rate-limit';
-import { siteConfig } from '@/config/site';
+import { createLeadWriter } from '@/lib/nova/data/leadWriter';
+import { createEmailService } from '@/lib/nova/email/emailService';
+import { novaConfig } from '@/config/nova.config';
 
 export async function POST(request) {
   // Rate limit
@@ -35,28 +36,41 @@ export async function POST(request) {
   // Honeypot — silently accept to not tip off bots
   if (data.company) return NextResponse.json({ ok: true, delivered: false });
 
-  const html = `
-    <h2>New enquiry — ${esc(siteConfig.brand.name)}</h2>
-    <p><strong>Name:</strong> ${esc(data.name)}</p>
-    <p><strong>Email:</strong> ${esc(data.email)}</p>
-    <p><strong>Business type:</strong> ${esc(data.businessType || '—')}</p>
-    <p><strong>Package:</strong> ${esc(data.package || '—')}</p>
-    <p><strong>Message:</strong></p>
-    <p>${esc(data.message).replace(/\n/g, '<br/>')}</p>
-  `;
+  const saved = await createLeadWriter().persist(
+    {
+      fullName: data.name,
+      email: data.email,
+      projectDescription: data.message,
+      businessType: data.businessType,
+      package: data.package,
+    },
+    { companyId: novaConfig.companyId, source: 'contact_form' },
+  );
 
-  const result = await sendEmail({
-    subject: `New enquiry from ${data.name}`,
-    html,
-    replyTo: data.email,
-  });
-
-  if (!result.ok) {
-    // Graceful: tell the client to use WhatsApp fallback
+  if (!saved.ok) {
     return NextResponse.json(
-      { ok: false, delivered: false, reason: result.reason },
-      { status: result.reason === 'email_not_configured' ? 503 : 502 },
+      { ok: false, delivered: false, reason: 'not_configured' },
+      { status: 503 },
     );
+  }
+
+  try {
+    const owner = process.env.LEAD_NOTIFICATION_EMAIL;
+    if (owner) {
+      await createEmailService().sendNow(novaConfig.companyId, 'internal_lead_notification', owner, {
+        name: data.name,
+        email: data.email,
+        phone: 'Not provided',
+        company: '—',
+        businessType: data.businessType || '—',
+        service: 'Contact form enquiry',
+        projectDescription: data.message,
+        budget: '—',
+        timeline: '—',
+      });
+    }
+  } catch (err) {
+    console.error('[Contact] notification failed (non-fatal)', err?.message);
   }
 
   return NextResponse.json({ ok: true, delivered: true });

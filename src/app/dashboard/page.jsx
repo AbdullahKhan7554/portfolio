@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
-import { listLeads, LEAD_STATUSES } from '@/lib/supabase/leads';
+import { listLeads, LEAD_STATUSES, LEAD_SOURCES } from '@/lib/supabase/leads';
 import { LogoutButton } from './LogoutButton';
 
 export const dynamic = 'force-dynamic';
@@ -26,13 +26,14 @@ export default async function DashboardPage({ searchParams }) {
   const params = (await searchParams) || {};
   const search = typeof params.q === 'string' ? params.q : '';
   const status = typeof params.status === 'string' ? params.status : '';
+  const source = typeof params.source === 'string' ? params.source : '';
 
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { rows, error } = await listLeads({ search, status });
+  const { rows, error } = await listLeads({ search, status, source });
 
   return (
     <main className="min-h-screen bg-[var(--bg)] px-6 py-8 text-[var(--text)]">
@@ -65,6 +66,18 @@ export default async function DashboardPage({ searchParams }) {
               </option>
             ))}
           </select>
+          <select
+            name="source"
+            defaultValue={source}
+            className="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm outline-none focus:border-[var(--accent)]"
+          >
+            <option value="">All sources</option>
+            {LEAD_SOURCES.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
           <button
             type="submit"
             className="rounded-[var(--radius-md)] bg-[var(--accent)] px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-[var(--accent-hover)]"
@@ -87,6 +100,7 @@ export default async function DashboardPage({ searchParams }) {
                   <th className={head}>Project</th>
                   <th className={head}>Budget</th>
                   <th className={head}>Timeline</th>
+                  <th className={head}>Source</th>
                   <th className={head}>Created</th>
                   <th className={head}>Status</th>
                 </tr>
@@ -94,7 +108,7 @@ export default async function DashboardPage({ searchParams }) {
               <tbody>
                 {rows.length === 0 ? (
                   <tr>
-                    <td className={`${cell} text-[var(--text-muted)]`} colSpan={8}>
+                    <td className={`${cell} text-[var(--text-muted)]`} colSpan={9}>
                       No leads found.
                     </td>
                   </tr>
@@ -116,6 +130,7 @@ export default async function DashboardPage({ searchParams }) {
                       </td>
                       <td className={cell}>{lead.budget || '—'}</td>
                       <td className={cell}>{lead.timeline || '—'}</td>
+                      <td className={cell}>{lead.source || '—'}</td>
                       <td className={cell}>{formatDate(lead.created_at)}</td>
                       <td className={cell}>{lead.status || '—'}</td>
                     </tr>
