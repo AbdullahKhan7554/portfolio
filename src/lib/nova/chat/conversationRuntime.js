@@ -29,6 +29,7 @@ import { createChatStream } from './chatService';
 import { getDefaultToolRouter, parseToolCalls, runToolCalls } from './toolRuntime';
 import { buildGroundingContext } from './contextInjection';
 import { createLeadWriter } from '../data/leadWriter';
+import { defaultConversationWriter } from '../data/conversationWriter';
 import { buildAnalyticsService, ANALYTICS_EVENT } from '../analytics';
 import { createProviderCapabilityRegistry } from '../providers/capabilities';
 import { createRuntimeValidator } from '../runtime';
@@ -122,6 +123,13 @@ let defaultAnalytics = null;
 function getDefaultAnalytics() {
   if (!defaultAnalytics) defaultAnalytics = buildAnalyticsService();
   return defaultAnalytics;
+}
+
+/** Default conversation writer (lazy). Persists transcripts; non-fatal (Phase 2). */
+let defaultConversationWriterInstance = null;
+function getDefaultConversationWriter() {
+  if (!defaultConversationWriterInstance) defaultConversationWriterInstance = defaultConversationWriter();
+  return defaultConversationWriterInstance;
 }
 
 /**
@@ -264,7 +272,7 @@ async function* decorateStream(stream, { stripQuestionMarks = false, suffix = nu
  */
 async function* persistOnComplete(
   stream,
-  { memory, conversationId, companyId, signal, toolRouter, toolResults, analytics },
+  { memory, conversationId, companyId, signal, toolRouter, toolResults, analytics, conversationWriter, userText },
 ) {
   let assistantText = '';
   let completed = false;
@@ -278,6 +286,10 @@ async function* persistOnComplete(
     if (completed && !signal?.aborted) {
       if (assistantText) {
         await safeAppend(memory, conversationId, { role: 'assistant', content: assistantText }, companyId);
+      }
+      // Phase 2: persist the transcript turn (non-fatal; post-stream, never blocks tokens).
+      if (conversationWriter) {
+        await conversationWriter.recordTurn({ sessionId: conversationId, companyId, userText, assistantText });
       }
       // Milestone 11: provider-agnostic tool execution (post-stream — never buffers tokens).
       if (toolRouter) {
@@ -453,6 +465,7 @@ export async function runConversationTurn({
   salesEngine,
   leadEngine,
   leadWriter = getDefaultLeadWriter(),
+  conversationWriter = getDefaultConversationWriter(),
   handoffService,
   analytics = getDefaultAnalytics(),
   capabilityRegistry = getDefaultCapabilityRegistry(),
@@ -589,6 +602,8 @@ export async function runConversationTurn({
         whatsappLink = buildWhatsappLink(lead);
         calBookingAvailable = true;
         analytics.track(ANALYTICS_EVENT.LEAD_SAVED, { conversationId });
+        // Phase 2: link the transcript to the saved lead (non-fatal).
+        await conversationWriter.linkLead({ sessionId: conversationId, companyId, leadId: result.data?.id });
         // Phase 2: schedule the customer nurture sequence AFTER a successful save.
         await scheduleNurtureAfterLead({ companyId, lead });
         // Phase 5: notify the business owner immediately (internal, transactional).
@@ -660,6 +675,8 @@ export async function runConversationTurn({
     toolRouter,
     toolResults,
     analytics,
+    conversationWriter,
+    userText,
   });
 
   // Phase 7a: one structured, non-PII line per turn so stage/leadSaved progression

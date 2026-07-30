@@ -1,18 +1,12 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getLead } from '@/lib/supabase/leads';
+import { getConversationByLeadId } from '@/lib/supabase/conversations';
+import { normalizePhone as toWaNumber } from '@/lib/nova/whatsapp/normalizePhone';
 import { LeadStatusSelect } from './LeadStatusSelect';
 import { CopyEmailButton } from './CopyEmailButton';
 
 export const dynamic = 'force-dynamic';
-
-/** Best-effort E.164 (digits only) for a wa.me link; assumes PK for local 03… numbers. */
-function toWaNumber(phone) {
-  const digits = String(phone ?? '').replace(/\D/g, '');
-  if (!digits) return '';
-  if (digits.length === 11 && digits.startsWith('0')) return `92${digits.slice(1)}`;
-  return digits;
-}
 
 function formatDateTime(value) {
   return value ? new Date(value).toLocaleString() : '—';
@@ -38,6 +32,7 @@ export default async function LeadDetailPage({ params }) {
   if (!error && !lead) notFound();
 
   const waNumber = lead ? toWaNumber(lead.phone) : '';
+  const { messages } = lead ? await getConversationByLeadId(lead.id) : { messages: [] };
 
   return (
     <main className="min-h-screen bg-[var(--bg)] px-6 py-8 text-[var(--text)]">
@@ -81,6 +76,34 @@ export default async function LeadDetailPage({ params }) {
               <Field label="Created">{formatDateTime(lead.created_at)}</Field>
               <Field label="Updated">{formatDateTime(lead.updated_at)}</Field>
             </dl>
+
+            <section className="mt-6">
+              <h2 className="text-xs font-medium uppercase tracking-wide text-[var(--text-muted)]">
+                Conversation
+              </h2>
+              {messages.length > 0 ? (
+                <div className="mt-3 flex flex-col gap-3 rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-5">
+                  {messages.map((m) => (
+                    <div
+                      key={m.id}
+                      className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div
+                        className={`max-w-[80%] whitespace-pre-wrap break-words rounded-[var(--radius-md)] px-3 py-2 text-sm ${
+                          m.role === 'user'
+                            ? 'bg-[var(--accent)] text-white'
+                            : 'border border-[var(--border)] bg-[var(--bg)] text-[var(--text)]'
+                        }`}
+                      >
+                        {m.content}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="mt-2 text-sm text-[var(--text-muted)]">No transcript available.</p>
+              )}
+            </section>
           </>
         )}
       </div>
