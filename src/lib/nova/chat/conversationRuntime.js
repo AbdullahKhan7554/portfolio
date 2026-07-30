@@ -33,6 +33,7 @@ import { buildAnalyticsService, ANALYTICS_EVENT } from '../analytics';
 import { createProviderCapabilityRegistry } from '../providers/capabilities';
 import { createRuntimeValidator } from '../runtime';
 import { createEmailService, leadNurtureSequenceKey } from '../email';
+import { buildWhatsappLink } from '../whatsapp/buildWhatsappLink';
 
 /**
  * Phase 2 (email automation): after a lead is SUCCESSFULLY persisted, schedule
@@ -387,7 +388,7 @@ function buildTurnDirective(action) {
 
 /** Deterministic confirmation appended by the server on the COMPLETE turn (Phase 7d). */
 const LEAD_COMPLETE_CONFIRMATION =
-  "You're all set — our team now has your details and will reach out to you shortly.";
+  "You're all set — our team now has your details and will reach out to you shortly. Aap chahein to seedha WhatsApp par bhi baat kar sakte hain.";
 
 /**
  * Phase 7d — directive for a lead ASK turn. The SERVER appends the exact field
@@ -567,6 +568,7 @@ export async function runConversationTurn({
   //     Trigger = Lead Engine reports complete; saved once (round-tripped flag +
   //     repository dedup); failures are normalized and never break chat.
   let leadSaved = state?.leadSaved === true;
+  let whatsappLink = null;
   if (!leadSaved && updatedState.lead) {
     // P1: resolve the Lead Engine only when there is lead state to evaluate.
     leadEngine = leadEngine || (await getDefaultLeadEngine());
@@ -578,6 +580,7 @@ export async function runConversationTurn({
       const result = await leadWriter.persist(lead, { companyId, conversationId, rawTimeline });
       if (result?.ok) {
         leadSaved = true;
+        whatsappLink = buildWhatsappLink(lead);
         analytics.track(ANALYTICS_EVENT.LEAD_SAVED, { conversationId });
         // Phase 2: schedule the customer nurture sequence AFTER a successful save.
         await scheduleNurtureAfterLead({ companyId, lead });
@@ -674,5 +677,6 @@ export async function runConversationTurn({
     handoffRequired,
     providerCapabilities,
     runtimeHealth,
+    whatsappLink,
   };
 }

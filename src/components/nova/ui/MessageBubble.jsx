@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
+import { MessageCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useNova } from '../context/NovaContext';
 import { MESSAGE_ROLE } from '../constants/nova.constants';
@@ -27,24 +28,38 @@ export function MessageBubble({ message }) {
     >
       {!isUser && <NovaAvatar config={config} size={28} className="mt-auto" />}
 
-      <div
-        className={cn(
-          'max-w-[78%] rounded-2xl px-3.5 py-2.5 text-[0.92rem] leading-relaxed',
-          isUser
-            ? 'rounded-br-md bg-[var(--nova-user-bubble)] text-[var(--nova-user-text)]'
-            : 'rounded-bl-md bg-[var(--nova-assistant-bubble)] text-[var(--nova-assistant-text)]',
-        )}
-      >
-        <span className="sr-only">
-          {isUser ? 'You said: ' : `${config.assistantName} said: `}
-        </span>
-        <p className="whitespace-pre-wrap break-words">{message.text}</p>
-        <time
-          dateTime={new Date(message.at).toISOString()}
-          className="mt-1 block text-[0.65rem] opacity-50"
+      <div className={cn('flex max-w-[78%] flex-col', isUser ? 'items-end' : 'items-start')}>
+        <div
+          className={cn(
+            'rounded-2xl px-3.5 py-2.5 text-[0.92rem] leading-relaxed',
+            isUser
+              ? 'rounded-br-md bg-[var(--nova-user-bubble)] text-[var(--nova-user-text)]'
+              : 'rounded-bl-md bg-[var(--nova-assistant-bubble)] text-[var(--nova-assistant-text)]',
+          )}
         >
-          {formatTime(message.at)}
-        </time>
+          <span className="sr-only">
+            {isUser ? 'You said: ' : `${config.assistantName} said: `}
+          </span>
+          <p className="whitespace-pre-wrap break-words">{message.text}</p>
+          <time
+            dateTime={new Date(message.at).toISOString()}
+            className="mt-1 block text-[0.65rem] opacity-50"
+          >
+            {formatTime(message.at)}
+          </time>
+        </div>
+
+        {!isUser && message.whatsappLink && (
+          <a
+            href={message.whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-1.5 text-[0.8rem] font-medium text-white transition-colors hover:bg-[#1ebe5d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/60"
+          >
+            <MessageCircle size={15} aria-hidden="true" />
+            Continue on WhatsApp
+          </a>
+        )}
       </div>
     </motion.div>
   );

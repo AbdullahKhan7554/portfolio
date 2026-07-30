@@ -66,11 +66,12 @@ export function useNovaChat(config) {
       abortRef.current = controller;
       const assistantId = createId();
       let started = false;
+      let whatsappLink = null;
 
       const appendAssistant = (chunk) => {
         setMessages((prev) => [
           ...prev,
-          { id: assistantId, role: MESSAGE_ROLE.ASSISTANT, text: chunk, at: Date.now() },
+          { id: assistantId, role: MESSAGE_ROLE.ASSISTANT, text: chunk, at: Date.now(), whatsappLink },
         ]);
       };
       const growAssistant = (chunk) => {
@@ -116,6 +117,16 @@ export function useNovaChat(config) {
             conversationStateRef.current = JSON.parse(decodeURIComponent(encodedState));
           } catch {
             /* ignore malformed state header */
+          }
+        }
+
+        // WhatsApp handoff link for this turn (present only on lead completion).
+        const encodedWhatsapp = res.headers.get('X-Nova-WhatsApp');
+        if (encodedWhatsapp) {
+          try {
+            whatsappLink = decodeURIComponent(encodedWhatsapp);
+          } catch {
+            /* ignore malformed whatsapp header */
           }
         }
 
