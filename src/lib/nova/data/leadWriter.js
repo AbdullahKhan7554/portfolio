@@ -15,6 +15,7 @@
  */
 import { DEFAULT_TABLES, REPOSITORY, repoSuccess, repoFailure } from './repositoryTypes';
 import { normalizeError } from './repositoryErrors';
+import { pushLeadToHubspot } from '../crm/pushLeadToHubspot';
 
 const LEADS_TABLE = DEFAULT_TABLES[REPOSITORY.LEAD]; // 'leads'
 
@@ -58,7 +59,20 @@ export function createSupabaseLeadStore({ url, apiKey, table = LEADS_TABLE, fetc
     return Array.isArray(rows) ? rows[0] ?? null : rows;
   }
 
-  return { configured, findByConversation, insert };
+  /** Patch one row by id. Throws on non-2xx. */
+  async function update(id, patch) {
+    const res = await fetchImpl(`${base}?id=eq.${encodeURIComponent(id)}`, {
+      method: 'PATCH',
+      headers: { ...headers, Prefer: 'return=minimal' },
+      body: JSON.stringify(patch),
+    });
+    if (!res.ok) {
+      const detail = await res.text().catch(() => '');
+      throw new Error(`leads update failed (${res.status}): ${detail}`);
+    }
+  }
+
+  return { configured, findByConversation, insert, update };
 }
 
 /** Default lead store wired from env (server-side; service-role only). */
@@ -109,6 +123,21 @@ export function createLeadWriter({ leadStore, table = LEADS_TABLE } = {}) {
   });
 
   /**
+   * Push a freshly-persisted lead row to HubSpot and mark it synced. Non-fatal:
+   * a CRM failure never affects lead saving (mirrors the internal notification
+   * email). Skips silently when HubSpot is not configured.
+   */
+  async function syncToHubspot(row) {
+    try {
+      if (!row?.id) return;
+      const res = await pushLeadToHubspot(row);
+      if (res.ok) await store.update(row.id, { hubspot_synced: true });
+    } catch (err) {
+      console.error('[HubSpot] sync failed (non-fatal)', err?.message);
+    }
+  }
+
+  /**
    * Persist a completed lead (idempotent per conversation). Returns a normalized
    * RepositoryResult — same shape as before.
    * @param {object} lead                    lead summary fields
@@ -127,6 +156,7 @@ export function createLeadWriter({ leadStore, table = LEADS_TABLE } = {}) {
       }
 
       const row = await store.insert(toRow(lead, { companyId, conversationId, rawTimeline, source }));
+      await syncToHubspot(row);
       return repoSuccess(row ?? {}, { metadata: { saved: true } });
     } catch (e) {
       return repoFailure(normalizeError(e));
