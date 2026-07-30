@@ -42,10 +42,13 @@ export async function getLead(id) {
 export async function updateLeadStatus(id, status) {
   if (!LEAD_STATUSES.includes(status)) return { ok: false, error: 'Invalid status' };
   const supabase = createAdminClient();
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from('leads')
     .update({ status, updated_at: new Date().toISOString() })
-    .eq('id', id);
+    .eq('id', id)
+    .select('status')
+    .maybeSingle();
   if (error) return { ok: false, error: error.message };
-  return { ok: true, error: null };
+  if (!data) return { ok: false, error: 'Lead not found' };
+  return { ok: true, error: null, status: data.status };
 }

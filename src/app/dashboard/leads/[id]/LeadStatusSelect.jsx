@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { LEAD_STATUSES } from '@/lib/dashboard/leadStatus';
 import { updateStatusAction } from './actions';
 
@@ -9,16 +9,28 @@ export function LeadStatusSelect({ id, initialStatus }) {
   const [error, setError] = useState('');
   const [pending, startTransition] = useTransition();
 
+  // Reflect server truth when the row is revalidated with a new value.
+  useEffect(() => {
+    setStatus(initialStatus);
+  }, [initialStatus]);
+
   function onChange(e) {
     const next = e.target.value;
     const prev = status;
     setStatus(next); // optimistic
     setError('');
     startTransition(async () => {
-      const res = await updateStatusAction(id, next);
-      if (!res.ok) {
-        setStatus(prev); // revert
-        setError(res.error || 'Update failed');
+      try {
+        const res = await updateStatusAction(id, next);
+        if (res?.ok) {
+          setStatus(res.status ?? next); // confirm with the persisted value
+        } else {
+          setStatus(prev); // revert
+          setError(res?.error || 'Update failed');
+        }
+      } catch (err) {
+        setStatus(prev); // revert on a thrown/rejected action
+        setError(err?.message || 'Update failed');
       }
     });
   }

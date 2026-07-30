@@ -14,6 +14,7 @@ import { ClientOverlays } from '@/components/ClientOverlays';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Header } from '@/components/shell/Header';
 import { Footer } from '@/components/shell/Footer';
+import { PublicOnly } from '@/components/shell/PublicOnly';
 
 /**
  * Runs BEFORE first paint: on every homepage load/refresh (motion allowed) it
@@ -75,9 +76,13 @@ export default function RootLayout({ children }) {
         <div className="grain" aria-hidden="true" />
         <CustomCursor />
         <SmoothScroll>
-          <Header />
+          <PublicOnly>
+            <Header />
+          </PublicOnly>
           {children}
-          <Footer />
+          <PublicOnly>
+            <Footer />
+          </PublicOnly>
         </SmoothScroll>
         <ClientOverlays />
         <Analytics />
