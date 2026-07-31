@@ -10,6 +10,17 @@ const field =
 const label = 'block text-xs font-medium uppercase tracking-wide text-[var(--text-muted)]';
 const HINT =
   "Nova's search injects roughly the first sentence (~180 characters) of a matching entry, not the whole thing. Front-load the key facts — names, numbers, the direct answer — into your opening sentence, then add lists and detail after that.";
+const GUIDELINE =
+  'One fact, one home: keep a detail like a price, page count, or timeline in a single entry and edit it there. Repeating it across entries leaves stale copies that Nova may retrieve instead of your edit.';
+
+function FieldHelp() {
+  return (
+    <div className="mt-1 flex flex-col gap-1 text-xs text-[var(--text-muted)]">
+      <p>{HINT}</p>
+      <p>{GUIDELINE}</p>
+    </div>
+  );
+}
 
 export function KnowledgeForm({ kind, mode, id, initial = {} }) {
   const router = useRouter();
@@ -63,7 +74,7 @@ export function KnowledgeForm({ kind, mode, id, initial = {} }) {
               onChange={(e) => setAnswer(e.target.value)}
               maxLength={5000}
             />
-            <p className="mt-1 text-xs text-[var(--text-muted)]">{HINT}</p>
+            <FieldHelp />
           </div>
         </>
       ) : (
@@ -101,7 +112,7 @@ export function KnowledgeForm({ kind, mode, id, initial = {} }) {
               onChange={(e) => setContent(e.target.value)}
               maxLength={8000}
             />
-            <p className="mt-1 text-xs text-[var(--text-muted)]">{HINT}</p>
+            <FieldHelp />
           </div>
         </>
       )}
