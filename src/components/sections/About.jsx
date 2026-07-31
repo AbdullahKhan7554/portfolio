@@ -5,6 +5,7 @@ import { Parallax } from '@/components/ui/Parallax';
 import { FloatingShapes } from '@/components/ui/FloatingShapes';
 import { SocialLinks } from '@/components/ui/SocialLinks';
 import { siteConfig } from '@/config/site';
+import { clientConfig } from '@/config/client.config';
 
 const FACTS = [
   { label: 'Based in', value: siteConfig.contact.location },
@@ -30,7 +31,7 @@ export function About() {
           />
           <div className="overflow-hidden rounded-xl border border-border-strong bg-surface shadow-lg">
             <Image
-              src="/images/abdullah-khan.png"
+              src={clientConfig.urls.founderPhoto}
               alt={`Portrait of ${siteConfig.brand.founder}`}
               width={800}
               height={1000}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { siteConfig } from '@/config/site';
 
 /**
  * Avenix Studio — cinematic brand intro.
@@ -113,7 +114,7 @@ export function CinematicIntro() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/logo.png"
-          alt="Avenix Studio"
+          alt={siteConfig.brand.name}
           width={320}
           height={320}
           fetchPriority="high"

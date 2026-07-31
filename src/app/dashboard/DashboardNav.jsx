@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { LogoutButton } from './LogoutButton';
+import { siteConfig } from '@/config/site';
 
 const items = [
   { href: '/dashboard', label: 'Leads' },
@@ -33,7 +34,7 @@ export function DashboardNav({ userEmail }) {
   return (
     <>
       <aside className="sticky top-0 hidden h-screen w-56 shrink-0 flex-col border-r border-[var(--border)] px-3 py-6 md:flex">
-        <div className="px-3 text-sm font-semibold text-[var(--text-strong)]">Avenix Dashboard</div>
+        <div className="px-3 text-sm font-semibold text-[var(--text-strong)]">{`${siteConfig.brand.shortName} Dashboard`}</div>
         <nav className="mt-6 flex flex-col gap-1">
           {items.map((i) => (
             <Link key={i.href} href={i.href} className={linkClass(isActive(pathname, i.href))}>
@@ -49,7 +50,7 @@ export function DashboardNav({ userEmail }) {
 
       <div className="md:hidden">
         <div className="flex items-center justify-between border-b border-[var(--border)] px-4 py-3">
-          <span className="text-sm font-semibold text-[var(--text-strong)]">Avenix Dashboard</span>
+          <span className="text-sm font-semibold text-[var(--text-strong)]">{`${siteConfig.brand.shortName} Dashboard`}</span>
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}

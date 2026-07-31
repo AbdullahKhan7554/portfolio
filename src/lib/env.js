@@ -8,12 +8,13 @@
  */
 import 'server-only';
 import { resolveProviderConfig } from '@/lib/nova/providers/providerResolver';
+import { clientConfig } from '@/config/client.config';
 
 export const serverEnv = {
   resendApiKey: process.env.RESEND_API_KEY || '',
   contactFromEmail:
-    process.env.CONTACT_FROM_EMAIL || 'Avenix Studio <onboarding@resend.dev>',
-  contactToEmail: process.env.CONTACT_TO_EMAIL || 'abdullahqayyum1041@gmail.com',
+    process.env.CONTACT_FROM_EMAIL || `${clientConfig.email.fromName} <onboarding@resend.dev>`,
+  contactToEmail: process.env.CONTACT_TO_EMAIL || clientConfig.contact.email || '',
 };
 
 /** True when transactional email is fully configured. */

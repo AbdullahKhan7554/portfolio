@@ -1,4 +1,5 @@
 import { buildWhatsAppUrl } from '@/lib/whatsapp';
+import { clientConfig } from '@/config/client.config';
 
 /**
  * Build a wa.me deep link prefilled with a captured lead's details.
@@ -10,7 +11,8 @@ export function buildWhatsappLink(lead = {}) {
   const { fullName, projectDescription, budget, timeline } = lead;
   const parts = [];
 
-  parts.push(fullName ? `Hi Avenix Studio, I'm ${fullName}.` : 'Hi Avenix Studio.');
+  const brand = clientConfig.identity.brandName;
+  parts.push(fullName ? `Hi ${brand}, I'm ${fullName}.` : `Hi ${brand}.`);
 
   if (projectDescription) parts.push(`I need: ${projectDescription}.`);
 

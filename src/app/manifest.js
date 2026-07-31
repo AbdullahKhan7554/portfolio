@@ -4,7 +4,7 @@ import { siteConfig } from '@/config/site';
 export default function manifest() {
   return {
     name: siteConfig.brand.name,
-    short_name: 'Avenix',
+    short_name: siteConfig.brand.shortName,
     description: siteConfig.seo.description,
     start_url: '/',
     display: 'standalone',

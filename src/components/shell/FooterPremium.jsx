@@ -285,7 +285,7 @@ export function FooterPremium() {
           }}
           className="avenix-word block select-none font-display text-[clamp(5rem,22vw,20rem)] font-black leading-none"
         >
-          AVENIX
+          {siteConfig.brand.wordmark}
         </motion.span>
 
         {/* cursor-trailing gold glow over the typography */}

@@ -33,5 +33,5 @@ export { KnowledgeRegistry, createKnowledgeRegistry } from './registry';
 export { buildSearchIndex, search } from './search';
 
 // Bundled companies + composition root
-export { avenixCompany, knowledgeRegistry } from './companies';
+export { activeCompany, knowledgeRegistry } from './companies';
 export { createKnowledgeService } from './knowledgeService';

@@ -18,7 +18,7 @@ export function FloatingWhatsApp() {
       href={buildWhatsAppUrl()}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with Avenix Studio on WhatsApp"
+      aria-label={`Chat with ${siteConfig.brand.name} on WhatsApp`}
       onClick={() => trackEvent(AnalyticsEvent.WHATSAPP_CLICK, { source: 'floating' })}
       className="group fixed bottom-5 right-5 z-sticky grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-lg ring-1 ring-black/10 md:bottom-6 md:right-6"
       initial={{ opacity: 0, scale: 0.6, y: 12 }}

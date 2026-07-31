@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { siteConfig } from '@/config/site';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -32,7 +33,7 @@ export default function LoginPage() {
         onSubmit={onSubmit}
         className="w-full max-w-sm rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-6"
       >
-        <h1 className="text-lg font-semibold text-[var(--text-strong)]">Avenix Dashboard</h1>
+        <h1 className="text-lg font-semibold text-[var(--text-strong)]">{`${siteConfig.brand.shortName} Dashboard`}</h1>
         <p className="mt-1 text-sm text-[var(--text-muted)]">Sign in to continue</p>
 
         <label className="mt-5 block text-sm text-[var(--text-muted)]" htmlFor="email">

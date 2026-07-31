@@ -1,24 +1,23 @@
 /**
- * Nova KMS — bundled company registrations.
+ * Nova KMS — active company registration, built from `client.config.js`.
  *
- * This is DATA, not logic: each company is a plain config paired with a folder
- * under the knowledge root. Add a new tenant by appending a config here (and a
- * matching markdown folder) — no engine changes. The engine contains zero
- * company-specific behavior.
+ * DATA, not logic. The single tenant is derived from the client config so
+ * `companyId` and brand identity are single-sourced; a new client changes only
+ * `client.config.js`. The engine contains zero company-specific behavior.
  */
 import { createCompanyConfig } from './companySchema';
 import { createKnowledgeRegistry } from './registry';
+import { clientConfig } from '@/config/client.config';
 
-/** First tenant — Avenix Studio. Pure config; swap/extend freely. */
-export const avenixCompany = createCompanyConfig({
-  companyId: 'avenix',
-  brandName: 'Avenix Studio',
-  knowledgeFolder: 'avenix',
-  website: 'https://www.avenixstudios.com',
-  logo: '/logo.png',
-  primaryColor: '#e3a857',
-  assistantName: 'Nova',
+export const activeCompany = createCompanyConfig({
+  companyId: clientConfig.identity.companyId,
+  brandName: clientConfig.identity.brandName,
+  knowledgeFolder: clientConfig.identity.companyId,
+  website: clientConfig.urls.website,
+  logo: clientConfig.urls.logo,
+  primaryColor: clientConfig.widget.theme.dark.accent,
+  assistantName: clientConfig.identity.assistantName,
 });
 
-/** Default registry, seeded with the bundled companies. */
-export const knowledgeRegistry = createKnowledgeRegistry([avenixCompany]);
+/** Default registry, seeded with the active company. */
+export const knowledgeRegistry = createKnowledgeRegistry([activeCompany]);

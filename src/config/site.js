@@ -1,85 +1,61 @@
 /**
  * ============================================================================
- * Avenix Studio — Centralized Site Configuration (single source of truth)
+ * Site Configuration — the public, non-secret shape components import.
  * ----------------------------------------------------------------------------
- * ALL public, non-secret information lives here. Components must import from
- * this file rather than hardcoding brand strings, links, or contact details.
+ * This is now a thin adapter over `client.config.js` (the single source of
+ * truth). Every client-specific value lives there; this file only reshapes it
+ * into the `siteConfig` structure existing components already consume. To
+ * rebrand, edit `client.config.js` + `.env` — never this file.
  *
- *   • Per-environment public values (URL, analytics IDs, contact channels) are
- *     read from NEXT_PUBLIC_* env vars with safe placeholder fallbacks, so the
- *     site always builds — even with no .env file.
- *   • Secrets (Resend key, delivery inbox) are NEVER read here. They are read
- *     only on the server in src/lib/env.js.
- *
- * To rebrand or go live: edit this file + .env.local. No component code changes.
+ * Secrets are NEVER read here; server-only values live in src/lib/env.js.
  * ============================================================================
  */
-
-const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://www.avenixstudios.com'
-).replace(/\/$/, '');
+import { clientConfig as c } from './client.config';
 
 export const siteConfig = {
-  // --- Brand identity ------------------------------------------------------
   brand: {
-    name: 'Avenix Studio',
-    legalName: 'Avenix Studio',
-    /** Shown in the sticky-header monogram & favicon. */
-    monogram: 'AS',
-    founder: 'Abdullah Khan',
-    role: 'Full-Stack MERN Developer',
-    /** One-line studio descriptor used in footer / about lockups. */
-    descriptor: 'NEXT.JS · PERFORMANCE · CONVERSION',
-    foundingYear: 2023,
-    tagline: 'Premium web engineering for ambitious brands.',
-    /** A confident, outcome-led elevator line (≤ 160 chars for meta reuse). */
-    shortDescription:
-      'Avenix Studio is the digital practice of Abdullah Khan — building fast, scalable, conversion-focused web applications with Next.js and the MERN stack for startups, businesses, and international clients.',
+    name: c.identity.brandName,
+    shortName: c.identity.shortName,
+    wordmark: c.identity.wordmark,
+    legalName: c.identity.legalName,
+    monogram: c.identity.monogram,
+    founder: c.identity.founder,
+    role: c.identity.role,
+    descriptor: c.identity.descriptor,
+    foundingYear: c.identity.foundingYear,
+    tagline: c.identity.tagline,
+    shortDescription: c.identity.shortDescription,
   },
 
-  // --- Canonical URL -------------------------------------------------------
-  url: SITE_URL,
+  url: c.urls.site,
 
-  // --- Contact channels (public) ------------------------------------------
   contact: {
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'abdullahqayyum1041@gmail.com',
-    phone: process.env.NEXT_PUBLIC_CONTACT_PHONE || '+92 302 6234429',
-    /** International format, digits only (no "+"). Used to build wa.me links. */
-    whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '923026234429',
-    /** Default prefilled WhatsApp message. */
-    whatsappMessage:
-      "Hi Abdullah — I found Avenix Studio and I'd like to discuss a project.",
-    location: 'Lahore, Pakistan',
-    timezone: 'PKT (GMT+5)',
-    address: {
-      locality: 'Lahore',
-      region: 'Punjab',
-      country: 'PK',
-    },
+    email: c.contact.email,
+    phone: c.contact.phone,
+    whatsappNumber: c.contact.whatsappNumber,
+    whatsappMessage: c.contact.whatsappMessage,
+    location: c.contact.location,
+    timezone: c.contact.timezone,
+    address: c.contact.address,
   },
 
-  // --- Availability signal -------------------------------------------------
   availability: {
-    open: true,
-    label: 'Available for new projects',
+    open: c.contact.availabilityOpen,
+    label: c.contact.availabilityLabel,
   },
 
-  // --- CV / Resume ---------------------------------------------------------
   cv: {
-    /** Drop the real PDF at /public/abdullah-khan-cv.pdf to enable. */
-    path: '/abdullah-khan-cv.pdf',
-    updated: 'June 2026',
+    path: c.urls.cvPath,
+    updated: c.urls.cvUpdated,
   },
 
-  // --- Social links --------------------------------------------------------
   social: {
-    github: 'https://github.com/AbdullahKhan7554',
-    linkedin: 'https://www.linkedin.com/company/avenix-studio/',
-    instagram: 'https://www.instagram.com/avenix_studios/',
-    facebook: 'https://www.facebook.com/profile.php?id=61591556996767',
+    github: c.social.github,
+    linkedin: c.social.linkedin,
+    instagram: c.social.instagram,
+    facebook: c.social.facebook,
   },
 
-  // --- Primary navigation --------------------------------------------------
   nav: [
     { label: 'Home', href: '/' },
     { label: 'Work', href: '/work' },
@@ -89,45 +65,25 @@ export const siteConfig = {
     { label: 'Contact', href: '/contact' },
   ],
 
-  // --- Analytics (public IDs) ---------------------------------------------
   analytics: {
-    ga4Id: process.env.NEXT_PUBLIC_GA4_ID || '',
-    clarityId: process.env.NEXT_PUBLIC_CLARITY_ID || '',
+    ga4Id: c.analytics.ga4Id,
+    clarityId: c.analytics.clarityId,
   },
 
-  // --- SEO defaults --------------------------------------------------------
   seo: {
-    defaultTitle: 'Avenix Studio — Premium Full-Stack Web Development',
-    /** %s is replaced by the page title on inner routes. */
-    titleTemplate: '%s — Avenix Studio',
-    description:
-      'Avenix Studio — premium Full-Stack MERN & Next.js development by Abdullah Khan. Fast, scalable, conversion-focused websites and web apps for startups, businesses, and international clients.',
-    keywords: [
-      'Avenix Studio',
-      'Abdullah Khan',
-      'Full-Stack Developer',
-      'MERN Stack Developer',
-      'Next.js Developer',
-      'React Developer',
-      'Web Application Development',
-      'Technical SEO',
-      'Premium Web Design',
-      'Conversion-focused websites',
-    ],
-    locale: 'en_US',
-    /**
-     * Open Graph / social preview image — official Avenix Studio brand card.
-     * Static 1200×630 PNG served from /public so the absolute URL is stable and
-     * publicly cacheable for WhatsApp, Facebook, LinkedIn, X, Discord & Telegram.
-     */
+    defaultTitle: c.seo.defaultTitle,
+    titleTemplate: c.seo.titleTemplate,
+    description: c.seo.description,
+    keywords: c.seo.keywords,
+    locale: c.seo.locale,
     ogImage: {
-      url: `${SITE_URL}/og-image.png`,
+      url: c.urls.ogImage,
       width: 1200,
       height: 630,
       type: 'image/png',
-      alt: 'Avenix Studio — Premium Full-Stack Web Development by Abdullah Khan',
+      alt: c.seo.ogImageAlt,
     },
-    twitterHandle: '@avenixstudio',
+    twitterHandle: c.social.twitterHandle,
   },
 };
 
