@@ -8,6 +8,7 @@ import { LogoutButton } from './LogoutButton';
 
 const items = [
   { href: '/dashboard', label: 'Leads' },
+  { href: '/dashboard/knowledge', label: 'Knowledge' },
   { href: '/dashboard/analytics', label: 'Analytics' },
 ];
 

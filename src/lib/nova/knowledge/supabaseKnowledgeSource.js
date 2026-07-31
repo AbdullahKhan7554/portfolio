@@ -128,7 +128,7 @@ export async function loadKnowledgeFromRepositories({
 
   // --- Knowledge documents --------------------------------------------------
   const knowledgeRes = knowledgeRepo
-    ? await knowledgeRepo.findMany({ filters: { company_id: companyId } })
+    ? await knowledgeRepo.findMany({ filters: { company_id: companyId, is_active: true } })
     : null;
   if (knowledgeRes?.ok && Array.isArray(knowledgeRes.data)) {
     const byType = groupBy(knowledgeRes.data, (r) => pick(r, ['doc_type', 'type', 'kind'], 'company'));
@@ -149,7 +149,9 @@ export async function loadKnowledgeFromRepositories({
   }
 
   // --- FAQs -----------------------------------------------------------------
-  const faqRes = faqRepo ? await faqRepo.findMany({ filters: { company_id: companyId } }) : null;
+  const faqRes = faqRepo
+    ? await faqRepo.findMany({ filters: { company_id: companyId, is_active: true } })
+    : null;
   if (faqRes?.ok) {
     const doc = faqDoc(faqRes.data || []);
     if (doc) documents.faq = doc;
