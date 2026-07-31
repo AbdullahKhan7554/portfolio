@@ -25,6 +25,7 @@
 import { ACTION } from '../orchestrator/orchestratorConfig';
 import { buildMemoryService } from '../memory';
 import { createKnowledgeService } from '../knowledge';
+import { createAdminClient } from '../../supabase/admin';
 import { createChatStream } from './chatService';
 import { getDefaultToolRouter, parseToolCalls, runToolCalls } from './toolRuntime';
 import { buildGroundingContext } from './contextInjection';
@@ -107,7 +108,15 @@ function getDefaultMemory() {
  */
 let defaultKnowledgeService = null;
 function getDefaultKnowledgeService() {
-  if (!defaultKnowledgeService) defaultKnowledgeService = createKnowledgeService();
+  if (!defaultKnowledgeService) {
+    // Connect the KMS to Supabase (service-role) when configured; otherwise stay
+    // disconnected so grounding degrades to empty instead of crashing.
+    const supabaseClient =
+      process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY
+        ? createAdminClient()
+        : undefined;
+    defaultKnowledgeService = createKnowledgeService({ supabaseClient });
+  }
   return defaultKnowledgeService;
 }
 
