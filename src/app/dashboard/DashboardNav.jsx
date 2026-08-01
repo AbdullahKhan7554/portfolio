@@ -10,6 +10,7 @@ import { siteConfig } from '@/config/site';
 const items = [
   { href: '/dashboard', label: 'Leads' },
   { href: '/dashboard/knowledge', label: 'Knowledge' },
+  { href: '/dashboard/packages', label: 'Packages' },
   { href: '/dashboard/analytics', label: 'Analytics' },
 ];
 

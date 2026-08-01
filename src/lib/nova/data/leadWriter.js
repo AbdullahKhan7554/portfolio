@@ -16,8 +16,21 @@
 import { DEFAULT_TABLES, REPOSITORY, repoSuccess, repoFailure } from './repositoryTypes';
 import { normalizeError } from './repositoryErrors';
 import { pushLeadToHubspot } from '../crm/pushLeadToHubspot';
+import { sendWhatsappTemplate } from '../whatsapp/sendWhatsappTemplate.js';
 
 const LEADS_TABLE = DEFAULT_TABLES[REPOSITORY.LEAD]; // 'leads'
+
+/** Approved Meta template for the owner's new-lead alert (test number in use). */
+const OWNER_LEAD_ALERT_TEMPLATE = 'nova_owner_lead_alerts';
+
+/** WhatsApp body params must be non-empty and free of newlines/tabs/long spaces. */
+function waText(value, fallback = 'Not provided') {
+  const s = String(value ?? '')
+    .replace(/[\r\n\t]+/g, ' ')
+    .replace(/ {2,}/g, ' ')
+    .trim();
+  return s || fallback;
+}
 
 /**
  * PostgREST-backed lead store (service-role; the leads table is RLS-locked).
@@ -138,6 +151,38 @@ export function createLeadWriter({ leadStore, table = LEADS_TABLE } = {}) {
   }
 
   /**
+   * Alert the business owner on WhatsApp about a new lead (nova_owner_lead_alerts).
+   * Non-fatal: a send failure or missing config never affects lead saving (mirrors
+   * syncToHubspot). Sends to OWNER_WHATSAPP_NUMBER, falling back to the public
+   * business number; skips silently when neither is set.
+   */
+  async function notifyOwnerViaWhatsapp(row) {
+    try {
+      if (!row) return;
+      const to = process.env.OWNER_WHATSAPP_NUMBER || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '';
+      if (!to) return;
+      await sendWhatsappTemplate({
+        to,
+        templateName: OWNER_LEAD_ALERT_TEMPLATE,
+        components: [
+          {
+            type: 'body',
+            parameters: [
+              { type: 'text', text: waText(row.full_name, 'New lead') },
+              { type: 'text', text: waText(row.project_description) },
+              { type: 'text', text: waText(row.budget) },
+              { type: 'text', text: waText(row.timeline) },
+              { type: 'text', text: waText(row.source, 'chatbot') },
+            ],
+          },
+        ],
+      });
+    } catch (err) {
+      console.error('[WhatsApp] owner lead alert failed (non-fatal)', err?.message);
+    }
+  }
+
+  /**
    * Persist a completed lead (idempotent per conversation). Returns a normalized
    * RepositoryResult — same shape as before.
    * @param {object} lead                    lead summary fields
@@ -157,6 +202,7 @@ export function createLeadWriter({ leadStore, table = LEADS_TABLE } = {}) {
 
       const row = await store.insert(toRow(lead, { companyId, conversationId, rawTimeline, source }));
       await syncToHubspot(row);
+      await notifyOwnerViaWhatsapp(row);
       return repoSuccess(row ?? {}, { metadata: { saved: true } });
     } catch (e) {
       return repoFailure(normalizeError(e));

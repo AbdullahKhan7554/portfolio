@@ -46,6 +46,4 @@ export {
   getPackageById,
   scorePackage,
   recommendPackage,
-  avenixPackages,
-  packageRegistry,
 } from './packageConfig';

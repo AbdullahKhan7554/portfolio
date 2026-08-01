@@ -15,8 +15,9 @@
  * Build a Supabase REST-backed template repository.
  * @param {Object} deps
  * @param {string} deps.url        Supabase project URL (NEXT_PUBLIC_SUPABASE_URL)
- * @param {string} deps.apiKey     API key (service role preferred; anon works for
- *                                  the public read policy on email_templates)
+ * @param {string} deps.apiKey     API key — use the SERVICE-ROLE key. email_templates
+ *                                  is RLS-locked with no policies (service-role only);
+ *                                  the anon key will NOT satisfy RLS.
  * @param {string} [deps.table]
  * @param {typeof fetch} [deps.fetchImpl]
  */
@@ -66,9 +67,10 @@ export function createSupabaseTemplateRepository({ url, apiKey, table = 'email_t
 }
 
 /**
- * Default template repository wired from the environment (server-side). Prefers
- * the service-role key; falls back to the anon key (which is sufficient given
- * the public read policy on `email_templates`).
+ * Default template repository wired from the environment (server-side). Uses the
+ * service-role key — `email_templates` is RLS-locked with no policies, so the anon
+ * key will NOT satisfy RLS. The anon fallback below is a last resort only and will
+ * fail closed (no rows) if the service-role key is absent.
  * @param {Record<string,string|undefined>} [env]
  */
 export function defaultTemplateRepository(env = {}) {

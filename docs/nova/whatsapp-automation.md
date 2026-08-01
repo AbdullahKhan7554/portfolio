@@ -15,7 +15,7 @@ Scope (3 sub-features, built in order):
 
 1. Confirm `WHATSAPP_CLOUD_API_TOKEN` (permanent, System User–generated, never-expiring) is in `.env.local` and Vercel, along with `WHATSAPP_PHONE_NUMBER_ID` and `WHATSAPP_BUSINESS_ACCOUNT_ID`.
 2. In Meta → WhatsApp → Message Templates, create and submit for approval:
-   - `nova_owner_lead_alert` (utility category) — variables: lead name, service/project, budget, timeline, source.
+   - `nova_owner_lead_alerts` (utility category) — variables: lead name, service/project, budget, timeline, source.
    - `nova_lead_welcome` (utility category) — variables: lead first name, brief next-step text.
    - `nova_owner_stale_reminder` (utility category) — variables: lead name, hours since capture.
    Utility-category templates approve faster than marketing ones. STOP — do not proceed to Phase 2 or 3 until each relevant template is Meta-approved (Phase 1 doesn't need approval yet, it's just the client).
@@ -29,13 +29,13 @@ Scope (3 sub-features, built in order):
 3. Non-fatal by contract: never throws to the caller — returns `{ ok: true, messageId }` or `{ ok: false, error }`. Missing env vars → `{ ok: false, error: 'not_configured', skipped: true }`, same pattern as `pushLeadToHubspot`.
 4. No wiring into any flow yet.
 
-STOP after Phase 1 for review — verify with a manual test script sending `nova_owner_lead_alert` (once approved) or Meta's default "hello_world" template (if testing before approval) to your own test-recipient number.
+STOP after Phase 1 for review — verify with a manual test script sending `nova_owner_lead_alerts` (once approved) or Meta's default "hello_world" template (if testing before approval) to your own test-recipient number.
 
 ---
 
 ## Phase 2 — Owner New-Lead Alert
 
-1. In the same lead-completion point where the internal email notification and HubSpot sync are triggered, also call `sendTemplateMessage` with `nova_owner_lead_alert`, sending to the owner's WhatsApp number (env var `OWNER_WHATSAPP_NUMBER` — add this, distinct from the business-facing `siteConfig.contact.whatsappNumber` used for visitor handoff, since owner may want alerts on a different number; default to the same number if unset).
+1. In the same lead-completion point where the internal email notification and HubSpot sync are triggered, also call `sendTemplateMessage` with `nova_owner_lead_alerts`, sending to the owner's WhatsApp number (env var `OWNER_WHATSAPP_NUMBER` — add this, distinct from the business-facing `siteConfig.contact.whatsappNumber` used for visitor handoff, since owner may want alerts on a different number; default to the same number if unset).
 2. Fully non-fatal — failure never blocks lead save, email, or HubSpot sync.
 
 STOP after Phase 2 for review — complete a real lead, confirm owner receives the WhatsApp alert.

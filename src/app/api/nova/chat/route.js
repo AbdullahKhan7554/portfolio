@@ -13,7 +13,7 @@ import { ProviderConfigError, ProviderError, ValidationError } from '@/lib/nova'
  *
  * Conversation only — no lead capture, memory, analytics, or tools.
  */
-export const runtime = 'nodejs'; // KMS loader reads the filesystem
+export const runtime = 'nodejs'; // runtime KB is Supabase-only (no filesystem KB loader in this path)
 export const dynamic = 'force-dynamic'; // never cache a streamed conversation
 
 /** Adapt an async token iterator to a web ReadableStream. */
