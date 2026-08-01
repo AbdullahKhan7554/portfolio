@@ -17,11 +17,13 @@ import { DEFAULT_TABLES, REPOSITORY, repoSuccess, repoFailure } from './reposito
 import { normalizeError } from './repositoryErrors';
 import { pushLeadToHubspot } from '../crm/pushLeadToHubspot';
 import { sendWhatsappTemplate } from '../whatsapp/sendWhatsappTemplate.js';
+import { normalizePhone } from '../whatsapp/normalizePhone.js';
 
 const LEADS_TABLE = DEFAULT_TABLES[REPOSITORY.LEAD]; // 'leads'
 
-/** Approved Meta template for the owner's new-lead alert (test number in use). */
+/** Approved Meta templates (test number in use); both are language "English (en)". */
 const OWNER_LEAD_ALERT_TEMPLATE = 'nova_owner_lead_alerts';
+const LEAD_WELCOME_TEMPLATE = 'nova_lead_welcome';
 
 /** WhatsApp body params must be non-empty and free of newlines/tabs/long spaces. */
 function waText(value, fallback = 'Not provided') {
@@ -164,6 +166,7 @@ export function createLeadWriter({ leadStore, table = LEADS_TABLE } = {}) {
       await sendWhatsappTemplate({
         to,
         templateName: OWNER_LEAD_ALERT_TEMPLATE,
+        languageCode: 'en', // nova_owner_lead_alerts is approved in "English (en)", not en_US
         components: [
           {
             type: 'body',
@@ -172,13 +175,32 @@ export function createLeadWriter({ leadStore, table = LEADS_TABLE } = {}) {
               { type: 'text', text: waText(row.project_description) },
               { type: 'text', text: waText(row.budget) },
               { type: 'text', text: waText(row.timeline) },
-              { type: 'text', text: waText(row.source, 'chatbot') },
             ],
           },
         ],
       });
     } catch (err) {
       console.error('[WhatsApp] owner lead alert failed (non-fatal)', err?.message);
+    }
+  }
+
+  /**
+   * Send the lead their welcome WhatsApp (nova_lead_welcome — static body, no
+   * variables). Non-fatal, and skipped silently when the lead has no valid phone
+   * (many leads are email-only). Sent to the LEAD's own number, not the owner's.
+   */
+  async function welcomeLeadViaWhatsapp(row) {
+    try {
+      if (!row) return;
+      const to = normalizePhone(row.phone);
+      if (!to || to.length < 10) return; // no valid phone → skip silently
+      await sendWhatsappTemplate({
+        to,
+        templateName: LEAD_WELCOME_TEMPLATE,
+        languageCode: 'en', // static template, no body components
+      });
+    } catch (err) {
+      console.error('[WhatsApp] lead welcome failed (non-fatal)', err?.message);
     }
   }
 
@@ -203,6 +225,7 @@ export function createLeadWriter({ leadStore, table = LEADS_TABLE } = {}) {
       const row = await store.insert(toRow(lead, { companyId, conversationId, rawTimeline, source }));
       await syncToHubspot(row);
       await notifyOwnerViaWhatsapp(row);
+      await welcomeLeadViaWhatsapp(row);
       return repoSuccess(row ?? {}, { metadata: { saved: true } });
     } catch (e) {
       return repoFailure(normalizeError(e));

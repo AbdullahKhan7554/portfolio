@@ -15,7 +15,7 @@ Scope (3 sub-features, built in order):
 
 1. Confirm `WHATSAPP_CLOUD_API_TOKEN` (permanent, System User–generated, never-expiring) is in `.env.local` and Vercel, along with `WHATSAPP_PHONE_NUMBER_ID` and `WHATSAPP_BUSINESS_ACCOUNT_ID`.
 2. In Meta → WhatsApp → Message Templates, create and submit for approval:
-   - `nova_owner_lead_alerts` (utility category) — variables: lead name, service/project, budget, timeline, source.
+   - `nova_owner_lead_alerts` (utility category) — 4 body params, in this exact order: `{{1}}` name, `{{2}}` project (service/project field), `{{3}}` budget, `{{4}}` timeline. (No "source" param — the approved template does not include it.)
    - `nova_lead_welcome` (utility category) — variables: lead first name, brief next-step text.
    - `nova_owner_stale_reminder` (utility category) — variables: lead name, hours since capture.
    Utility-category templates approve faster than marketing ones. STOP — do not proceed to Phase 2 or 3 until each relevant template is Meta-approved (Phase 1 doesn't need approval yet, it's just the client).
