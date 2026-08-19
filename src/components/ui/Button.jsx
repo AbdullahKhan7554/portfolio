@@ -10,7 +10,9 @@ const MotionLink = motion.create(Link);
 
 const VARIANTS = {
   primary:
-    'bg-accent text-accent-on hover:bg-accent-hover hover:shadow-glow hover:-translate-y-0.5 active:translate-y-0 active:bg-accent-pressed',
+    // Uses the --btn-primary-* tokens rather than --accent directly, so dark
+    // blocks can swap the fill to keep white ink AA-compliant.
+    'bg-[var(--btn-primary-bg)] [color:var(--btn-primary-text)] hover:bg-[var(--btn-primary-bg-hover)] hover:shadow-glow hover:-translate-y-0.5 active:translate-y-0 active:bg-[var(--btn-primary-bg-pressed)]',
   secondary:
     'border border-border-strong text-text hover:border-accent hover:text-text-strong hover:-translate-y-0.5 hover:shadow-md active:translate-y-0',
   ghost: 'text-text-muted hover:text-accent',

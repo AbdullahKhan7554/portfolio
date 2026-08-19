@@ -14,7 +14,6 @@ import {
 import { Github, Linkedin, Instagram, Facebook, Mail } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 
-const GOLD = '#C9A227';
 const EASE_OUT = [0.16, 1, 0.3, 1];
 
 const NAV_LINKS = [
@@ -78,8 +77,7 @@ function FooterLink({ href, children, external = false, icon: Icon }) {
   const underline = (
     <span
       aria-hidden="true"
-      className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100"
-      style={{ backgroundColor: GOLD }}
+      className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-[var(--accent-secondary)] transition-transform duration-300 ease-out group-hover:scale-x-100"
     />
   );
   const content = (
@@ -162,21 +160,17 @@ export function FooterPremium() {
     'flex flex-col items-center gap-3 text-center transition duration-300 hover:brightness-125 sm:col-span-4 sm:items-start sm:text-left lg:col-span-2';
 
   return (
-    <div
-      ref={sectionRef}
-      className="relative overflow-hidden"
-      style={{ backgroundColor: '#090909' }}
-    >
+    /* `theme-dark`: the footer is an intentional dark contrast block (§2). The
+       class supplies both the dark semantic tokens AND the ground colour, so the
+       former hardcoded #090909 is no longer needed. */
+    <div ref={sectionRef} className="theme-dark relative overflow-hidden">
       {/* Glass divider with a faint gold radial highlight at center */}
-      <div
-        aria-hidden="true"
-        className="relative h-px w-full"
-        style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}
-      >
+      <div aria-hidden="true" className="relative h-px w-full bg-border">
         <div
           className="absolute left-1/2 top-1/2 h-[3px] w-1/2 -translate-x-1/2 -translate-y-1/2"
           style={{
-            background: `radial-gradient(ellipse at center, ${GOLD}66, transparent 70%)`,
+            background:
+              'radial-gradient(ellipse at center, hsl(var(--accent-secondary-hsl) / 0.4), transparent 70%)',
           }}
         />
       </div>
@@ -217,7 +211,7 @@ export function FooterPremium() {
             for ambitious brands.
           </p>
 
-          <ul className="mt-7 flex flex-col gap-2 font-mono text-caption uppercase tracking-[0.16em] text-faint">
+          <ul className="mt-6 flex flex-col gap-2 font-mono text-caption uppercase tracking-[0.16em] text-faint">
             <li>Available Worldwide</li>
             <li>Remote First</li>
             <li>Response within 24 Hours</li>
@@ -297,7 +291,8 @@ export function FooterPremium() {
             y: sgy,
             marginLeft: 'max(-21vw, -230px)',
             marginTop: 'max(-21vw, -230px)',
-            background: `radial-gradient(circle, ${GOLD}40, transparent 60%)`,
+            background:
+              'radial-gradient(circle, hsl(var(--accent-secondary-hsl) / 0.25), transparent 60%)',
             mixBlendMode: 'screen',
             opacity: reduced ? 0 : 1,
           }}

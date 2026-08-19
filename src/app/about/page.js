@@ -1,18 +1,48 @@
 import { PageHeader } from '@/components/ui/PageHeader';
-import { About } from '@/components/sections/About';
-import { Section } from '@/components/ui/Section';
-import { RevealGroup, RevealItem } from '@/components/ui/Reveal';
-import { philosophyPillars } from '@/content/whyMe';
+import { WhoWeAre } from '@/components/sections/about/WhoWeAre';
+import { WhyWeExist } from '@/components/sections/about/WhyWeExist';
+import { Founder } from '@/components/sections/about/Founder';
+import { MissionVision } from '@/components/sections/about/MissionVision';
+import { ClientPhilosophy } from '@/components/sections/about/ClientPhilosophy';
+import { Principles } from '@/components/sections/about/Principles';
+import { TrustStandard } from '@/components/sections/about/TrustStandard';
+import { AboutCta } from '@/components/sections/about/AboutCta';
 import { buildMetadata } from '@/lib/seo';
 import { breadcrumbSchema, jsonLd } from '@/lib/schema';
 
 export const metadata = buildMetadata({
   title: 'About',
   description:
-    'Avenix Studio is the digital practice of Abdullah Khan — a Full-Stack MERN developer building premium, high-performance websites and web apps.',
+    'Avenix Studio is a digital product studio combining strategy, design, engineering, AI and growth to build websites, web applications and AI systems for ambitious brands.',
   path: '/about',
 });
 
+/**
+ * This route opens on a dark PageHeader, so it needs the same chrome override
+ * the homepage uses — app/layout.js defaults themeColor to #FFFFFF on the stated
+ * assumption that "inner pages all open on a white PageHeader", which stopped
+ * being true when this hero went dark. Without it the browser bar renders white
+ * directly above near-black. #0A0A0B is --obsidian-950, the value `theme-dark`
+ * assigns to --bg. Next merges viewport shallowly, so this replaces themeColor
+ * only; colorScheme, width and initialScale still come from the root layout.
+ */
+export const viewport = { themeColor: '#0A0A0B' };
+
+/**
+ * /about — who Avenix is, why it exists, what it believes, and who is behind it.
+ *
+ * Deliberately NOT a portfolio page: what Avenix has built lives on /work, what
+ * it offers lives on /services. Nothing here restates either.
+ *
+ * GROUND RHYTHM — dark is reserved for four anchors and never runs adjacent:
+ *   01 dark -> 02 light -> 03 light-alt -> 04 DARK (founder, image anchor)
+ *   -> 05/06 light -> 07 light-alt -> 08 DARK -> 09 light-alt -> 10 DARK
+ * That is what keeps the page from becoming a stack of black cards.
+ *
+ * STRUCTURED DATA: only the breadcrumb is emitted here. Organization and Person
+ * are already injected site-wide from app/layout.js, so adding either would
+ * duplicate them.
+ */
 export default function AboutPage() {
   return (
     <main id="main">
@@ -25,35 +55,36 @@ export default function AboutPage() {
           ]),
         )}
       />
+
+      {/* 01 — About Hero. The shared PageHeader, opted into the dark ground with
+          `theme-dark` (which re-declares the semantic tokens) plus `bg-bg` —
+          PageHeader declares no background of its own, so without the second
+          class the section would stay transparent over the white body. Passed as
+          className; PageHeader itself is untouched and every other page that
+          uses it is unaffected.
+
+          No photograph here on purpose: the homepage hero is image-led, so type
+          on near-black is what makes this read as the same brand without reading
+          as the same page. */}
       <PageHeader
-        eyebrow="About"
-        title="The studio behind the work."
-        intro="Premium engineering, delivered directly. No agency overhead, no hand-offs — just a developer who treats your launch like their own."
+        className="theme-dark bg-bg"
+        eyebrow="01 — About Avenix Studio"
+        title="We build digital products with intent."
+        intro="Avenix Studio is a digital product studio combining strategy, design, engineering, AI and growth — turning ideas into products that earn their place in a business."
         breadcrumbs={[
           { name: 'Home', path: '/' },
           { name: 'About', path: '/about' },
         ]}
       />
 
-      <About />
-
-      <Section
-        eyebrow="Tech Philosophy"
-        title="What I optimize for."
-        intro="Four principles that shape every decision — from the first component to the final deploy."
-      >
-        <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
-          {philosophyPillars.map((pillar) => (
-            <RevealItem
-              key={pillar.title}
-              className="rounded-lg border border-border bg-surface p-6"
-            >
-              <h3 className="font-display text-h4 text-text-strong">{pillar.title}</h3>
-              <p className="mt-2 text-body-sm text-muted">{pillar.description}</p>
-            </RevealItem>
-          ))}
-        </RevealGroup>
-      </Section>
+      <WhoWeAre />
+      <WhyWeExist />
+      <Founder />
+      <MissionVision />
+      <ClientPhilosophy />
+      <Principles />
+      <TrustStandard />
+      <AboutCta />
     </main>
   );
 }

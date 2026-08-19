@@ -1,61 +1,41 @@
-/** "Why Work With Me" differentiators (PRD §7.4) — each backed by a concrete claim. */
+/**
+ * "Why Avenix" differentiators. Four items, headline 3-6 words, supporting line
+ * under 20 — spicy AND short, per the copy brief.
+ *
+ * Item 1 takes the sharpest stance (it names the industry failure mode); the
+ * rest assert what Avenix is rather than what competitors are not. Every claim
+ * traces to something already true of the studio — nothing invented.
+ */
 export const differentiators = [
+  {
+    id: 'direct',
+    icon: 'MessageSquare',
+    title: 'No handoff after the pitch',
+    description:
+      'The engineers who quoted your project are the ones writing it. There’s no second team.',
+  },
   {
     id: 'conversion',
     icon: 'Target',
-    title: 'Conversion-focused',
+    title: 'Pretty doesn’t pay the bills',
     description:
-      'Every layout is engineered to move visitors toward booking, buying, or enquiring — not just to look good.',
-    hero: true,
+      'Every layout is engineered around one outcome — a booking, a sale, an enquiry.',
   },
   {
     id: 'performance',
     icon: 'Gauge',
-    title: 'Engineered for speed',
+    title: 'Speed isn’t a premium tier',
     description:
-      'Core Web Vitals "good", Lighthouse 90+, instant loads. Performance is a feature, not an afterthought.',
+      'Core Web Vitals in the green on every Next.js build. Never an upsell.',
   },
   {
-    id: 'seo',
-    icon: 'Search',
-    title: 'Real technical SEO',
-    description:
-      'Schema, metadata, sitemaps, and clean architecture so you get found — built in from day one.',
-  },
-  {
-    id: 'direct',
-    icon: 'MessageSquare',
-    title: 'Direct with the developer',
-    description:
-      'No agency overhead or account managers. You work with the person who actually builds it.',
-  },
-  {
-    id: 'scalable',
+    id: 'breadth',
     icon: 'Layers',
-    title: 'Built to scale',
+    title: 'One team, not four vendors',
     description:
-      'Clean, component-driven MERN architecture that grows with your business — and stays maintainable.',
-  },
-  {
-    id: 'reliable',
-    icon: 'ShieldCheck',
-    title: 'Reliable & transparent',
-    description:
-      'Fixed quotes, clear timelines, and you own everything. No lock-in, no surprises.',
+      'Web development, AI automation, and digital marketing in-house. Nothing gets lost in between.',
   },
 ];
-
-/** AI-powered workflow capabilities (PRD §7.5). */
-export const aiWorkflow = {
-  intro:
-    'I use modern AI tooling to deliver faster — without ever outsourcing judgment. Every line is reviewed, typed where it matters, tested, and owned.',
-  pipeline: [
-    { step: 'Plan', detail: 'Architecture and decisions made by me, not the AI.' },
-    { step: 'Build', detail: 'AI accelerates boilerplate and repetitive work.' },
-    { step: 'Review', detail: 'Human review for quality, security, and a11y.' },
-    { step: 'Ship', detail: 'Tested, performant, production-ready code.' },
-  ],
-};
 
 /** Performance & SEO commitment scoreboard (PRD §7.6). */
 export const perfCommitments = [

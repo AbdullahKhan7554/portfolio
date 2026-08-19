@@ -1,5 +1,5 @@
 import { siteConfig, organizationSchemaData } from '@/config/site';
-import { services } from '@/content/services';
+import { services } from '@/data/services';
 
 /** JSON-LD: Organization (the Avenix Studio brand). Injected site-wide. */
 export function organizationSchema() {

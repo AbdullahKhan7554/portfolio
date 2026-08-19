@@ -9,6 +9,7 @@ import { engagementSteps } from '@/content/process';
 import { siteConfig } from '@/config/site';
 import { buildMetadata } from '@/lib/seo';
 import { breadcrumbSchema, servicesSchema, jsonLd } from '@/lib/schema';
+import { getPageHero } from '@/content/pageHeroes';
 
 export const metadata = buildMetadata({
   title: 'Services',
@@ -16,6 +17,9 @@ export const metadata = buildMetadata({
     'Transparent web development packages from Avenix Studio — from high-converting landing pages to full-stack MERN applications. Fixed quotes, clear timelines.',
   path: '/services',
 });
+
+/** Dark image hero — see the note in app/about/page.js. #0A0A0B = --obsidian-950. */
+export const viewport = { themeColor: '#0A0A0B' };
 
 export default function ServicesPage() {
   return (
@@ -34,6 +38,7 @@ export default function ServicesPage() {
         dangerouslySetInnerHTML={jsonLd(servicesSchema())}
       />
       <PageHeader
+        hero={getPageHero('/services')}
         eyebrow="Services"
         title="Web that works as hard as you do."
         intro="Every engagement is scoped around a real business outcome — with a transparent process and a fixed quote before any work begins."
@@ -54,7 +59,7 @@ export default function ServicesPage() {
           {engagementSteps.map((step, i) => (
             <RevealItem
               key={step.id}
-              className="rounded-lg border border-border bg-surface p-5"
+              className="card-premium p-5"
             >
               <span className="font-mono text-eyebrow text-accent">
                 {String(i + 1).padStart(2, '0')}
@@ -72,7 +77,7 @@ export default function ServicesPage() {
         <div className="flex flex-col items-center gap-6 rounded-xl border border-border-strong bg-surface p-10 text-center">
           <h2 className="text-h2">Not sure which package fits?</h2>
           <p className="measure text-lead text-muted">
-            Tell me about your project and I&rsquo;ll recommend the right scope — no
+            Tell us about your project and we&rsquo;ll recommend the right scope — no
             pressure, no jargon.
           </p>
           <div className="flex flex-wrap justify-center gap-3">

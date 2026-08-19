@@ -34,8 +34,16 @@ export const clientConfig = {
     descriptor: 'NEXT.JS · PERFORMANCE · CONVERSION',
     foundingYear: 2023,
     tagline: 'Premium web engineering for ambitious brands.',
+    /**
+     * NOTE: currently unread. It is surfaced as `siteConfig.brand.shortDescription`
+     * but nothing consumes that — the string that actually drives page metadata
+     * and the Organization schema is `seo.description` below. Kept in sync
+     * anyway so the two can never drift into contradicting each other, and so a
+     * future consumer inherits the company positioning rather than the old
+     * freelancer framing.
+     */
     shortDescription:
-      'Avenix Studio is the digital practice of Abdullah Khan — building fast, scalable, conversion-focused web applications with Next.js and the MERN stack for startups, businesses, and international clients.',
+      'Avenix Studio is a digital product studio building premium websites, web applications, AI systems and digital experiences for ambitious brands.',
   },
 
   // --- URLs & assets -------------------------------------------------------
@@ -87,22 +95,44 @@ export const clientConfig = {
   seo: {
     defaultTitle: 'Avenix Studio — Premium Full-Stack Web Development',
     titleTemplate: '%s — Avenix Studio',
+    /**
+     * THE EFFECTIVE SITE DESCRIPTION. Two consumers, both verified:
+     *   1. lib/seo.js `buildMetadata` — the fallback for every route that does
+     *      not pass its own `description` (so it becomes the meta description,
+     *      the OG description and the Twitter description).
+     *   2. lib/schema.js `organizationSchema` — read directly as the
+     *      Organization's `description`.
+     * Both keep working unchanged; only the wording moved from freelancer
+     * framing ("...development by Abdullah Khan") to the company as the primary
+     * entity. Length kept near 155 chars so it is not truncated in results.
+     */
     description:
-      'Avenix Studio — premium Full-Stack MERN & Next.js development by Abdullah Khan. Fast, scalable, conversion-focused websites and web apps for startups, businesses, and international clients.',
+      'Avenix Studio is a digital product studio building premium websites, web applications and AI systems for ambitious brands — strategy, design and engineering in one practice.',
+    /**
+     * Ordered by positioning, not volume: the brand and what it is come first.
+     * "Abdullah Khan" is retained because the founder is a real, searched entity
+     * and Person schema is injected site-wide — but it no longer leads, and the
+     * personal job titles ("MERN Stack Developer", "Full-Stack Developer") are
+     * gone in favour of what the studio sells. No stuffing: every term maps to
+     * something the site actually offers.
+     */
     keywords: [
       'Avenix Studio',
+      'digital product studio',
+      'web development',
+      'web design',
+      'web application development',
+      'AI development',
+      'AI automation',
+      'AI agents',
+      'software development',
+      'digital experiences',
+      'Next.js development',
+      'technical SEO',
       'Abdullah Khan',
-      'Full-Stack Developer',
-      'MERN Stack Developer',
-      'Next.js Developer',
-      'React Developer',
-      'Web Application Development',
-      'Technical SEO',
-      'Premium Web Design',
-      'Conversion-focused websites',
     ],
     locale: 'en_US',
-    ogImageAlt: 'Avenix Studio — Premium Full-Stack Web Development by Abdullah Khan',
+    ogImageAlt: 'Avenix Studio — digital product studio for web, applications and AI',
   },
 
   // --- Nova widget copy + theme --------------------------------------------

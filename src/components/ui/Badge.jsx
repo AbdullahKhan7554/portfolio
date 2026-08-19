@@ -1,12 +1,20 @@
 import { cn } from '@/lib/utils';
 
-/** Static mono tag (e.g. a tech chip). */
+/**
+ * Static tech chip — ONE uniform treatment everywhere chips appear. Inter medium
+ * with slight tracking rather than mono, which read as "code sample" next to
+ * prose. Colour comes from the --chip-* tokens, so the look is changed in one
+ * place rather than per instance.
+ */
 export function Tag({ children, className }) {
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded-pill bg-surface-raised px-3 py-1',
-        'font-mono text-caption text-muted',
+        'inline-flex items-center rounded-pill px-3 py-1',
+        'border border-[var(--chip-border)] bg-[var(--chip-bg)]',
+        // `[color:…]` rather than `text-[…]`: tailwind-merge groups both
+        // `text-caption` and `text-[…]` as `text-` utilities and drops the size.
+        'text-caption font-medium tracking-[0.02em] [color:var(--chip-text)]',
         className,
       )}
     >

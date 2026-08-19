@@ -49,7 +49,7 @@ export function FloatingShapes({ className }) {
           opacity: 0.16,
           willChange: 'transform',
           background:
-            'radial-gradient(circle at 50% 50%, hsl(35 72% 62% / 0.55), transparent 70%)',
+            'radial-gradient(circle at 50% 50%, hsl(var(--accent-soft-hsl) / 0.55), transparent 70%)',
         }}
         className="absolute right-[9%] top-[18%] h-28 w-28 rounded-full blur-md"
       />

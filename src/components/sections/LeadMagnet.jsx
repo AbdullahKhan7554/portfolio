@@ -9,7 +9,7 @@ export function LeadMagnet() {
           className="relative overflow-hidden rounded-xl border border-border-strong p-8 md:p-12"
           style={{
             background:
-              'radial-gradient(80% 120% at 50% -10%, hsl(35 72% 62% / 0.12), transparent 60%), var(--surface)',
+              'radial-gradient(80% 120% at 50% -10%, hsl(var(--accent-soft-hsl) / 0.12), transparent 60%), var(--surface)',
           }}
         >
           <div className="grid items-center gap-8 lg:grid-cols-2">

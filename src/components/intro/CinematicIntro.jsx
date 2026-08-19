@@ -44,6 +44,21 @@ export function CinematicIntro() {
     // this only fires on real mounts (full page loads), never on soft nav.
     const root = document.documentElement;
 
+    /**
+     * Take ownership of the release from the <head> gate's dead-man's switch
+     * (see INTRO_GATE in app/layout.js). That timer counts from HTML parse while
+     * everything below counts from mount, so leaving it armed means the two race
+     * on any slow hydration — it would strip `intro-active` while the overlay is
+     * still opaque, and the hero's entrance would play out unseen beneath it.
+     * React is demonstrably alive by this line, so the fallback has done its job
+     * and both branches below release the class themselves.
+     *
+     * Safe unconditionally: the handle is only set on the homepage with motion
+     * allowed, and `clearTimeout(undefined)` is a no-op everywhere else. Also
+     * safe under StrictMode's double-invoke — clearing a cleared id does nothing.
+     */
+    clearTimeout(window.__avxIntroRelease);
+
     let play = false;
     try {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

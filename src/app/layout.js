@@ -20,8 +20,28 @@ import { PublicOnly } from '@/components/shell/PublicOnly';
  * Runs BEFORE first paint: on every homepage load/refresh (motion allowed) it
  * pauses the homepage entrance animations so nothing flashes under the cinematic
  * intro. CinematicIntro removes the class once the logo settles.
+ *
+ * THE TIMEOUT IS A DEAD-MAN'S SWITCH, NOT PART OF THE TIMELINE.
+ * `intro-active` both locks scrolling and freezes `.hero-in` / `.hero-line` at
+ * their first frame — and those keyframes start at `opacity: 0`, so if nothing
+ * ever removed the class the homepage would sit blank and unscrollable forever.
+ * This timer is the only release that does not depend on the React bundle, so it
+ * still fires if the bundle 404s, errors, or never hydrates.
+ *
+ * It is deliberately handed off rather than raced. The two clocks have different
+ * origins: this one starts at HTML parse, CinematicIntro's REVEAL_AT starts at
+ * mount. A fixed value therefore has to outlast hydration or it fires FIRST,
+ * un-pausing the hero underneath a still-opaque overlay — the animations play
+ * out unseen and the staged reveal is gone. Budgeting for that is what made this
+ * 4200ms, and it is why simply shortening it would break the intro on exactly
+ * the slow devices a shorter timeout is meant to help.
+ *
+ * So CinematicIntro clears this handle on mount and takes ownership. Once React
+ * is alive the timer is irrelevant, which decouples the value below from
+ * hydration speed entirely and lets it be tuned for the no-JS case alone: 3000ms
+ * of a blank, locked homepage is the worst a visitor can now experience.
  */
-const INTRO_GATE = `(function(){try{var r=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var d=document.documentElement;if(location.pathname==='/'&&!r){d.classList.add('intro-active');setTimeout(function(){d.classList.remove('intro-active');},4200);}}catch(e){}})();`;
+const INTRO_GATE = `(function(){try{var r=window.matchMedia('(prefers-reduced-motion: reduce)').matches;var d=document.documentElement;if(location.pathname==='/'&&!r){d.classList.add('intro-active');window.__avxIntroRelease=setTimeout(function(){d.classList.remove('intro-active');},3000);}}catch(e){}})();`;
 
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -44,15 +64,26 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: '#0A0A0B',
-  colorScheme: 'dark',
+  // DEFAULT for every route except the homepage: inner pages all open on a
+  // white PageHeader, so white chrome is the correct match.
+  //
+  // A per-scheme array is NOT the right tool for this site: it is light-only
+  // (`colorScheme: 'light'`, `data-theme="light"` on <html>), so keying off
+  // prefers-color-scheme would hand dark chrome to anyone whose OS is in dark
+  // mode while the page under it stayed white. The real split here is
+  // per-ROUTE — the homepage opens on a full-bleed dark hero — so it is
+  // overridden by `export const viewport` in app/page.js. Next merges viewport
+  // shallowly down the segment tree, so that override replaces themeColor only
+  // and everything below is still inherited from here.
+  themeColor: '#FFFFFF',
+  colorScheme: 'light',
   width: 'device-width',
   initialScale: 1,
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="dark" className={fontVariables} suppressHydrationWarning>
+    <html lang="en" data-theme="light" className={fontVariables} suppressHydrationWarning>
       <head>
         <link rel="preload" as="image" href="/logo.png" fetchPriority="high" />
         <script dangerouslySetInnerHTML={{ __html: INTRO_GATE }} />

@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 /**
  * Scroll parallax (GPU translate only). As the element passes through the
@@ -29,7 +30,11 @@ export function Parallax({
   const y = useTransform(scrollYProgress, [0, 1], [distance, -distance]);
 
   return (
-    <div ref={ref} className={className} {...rest}>
+    // `relative` is required, not cosmetic: useScroll measures against this
+    // node, and Framer warns (and computes the offset wrongly) when the target
+    // is position:static. Section wraps every title in a Parallax, so a static
+    // container produced that warning on essentially every page.
+    <div ref={ref} className={cn('relative', className)} {...rest}>
       <motion.div
         className={innerClassName}
         style={{ y: reduced ? 0 : y, willChange: 'transform' }}

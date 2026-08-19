@@ -62,12 +62,12 @@ export default function FreeAuditPage() {
             className="rounded-xl border border-border-strong p-8"
             style={{
               background:
-                'radial-gradient(80% 120% at 50% -10%, hsl(35 72% 62% / 0.12), transparent 60%), var(--surface)',
+                'radial-gradient(80% 120% at 50% -10%, hsl(var(--accent-soft-hsl) / 0.12), transparent 60%), var(--surface)',
             }}
           >
             <h2 className="font-display text-h3 text-text-strong">Request your audit</h2>
             <p className="mt-2 text-body-sm text-muted">
-              Drop your email and website — I&rsquo;ll send your audit shortly.
+              Drop your email and website — we&rsquo;ll send your audit shortly.
             </p>
             <div className="mt-6">
               <LeadMagnetForm />

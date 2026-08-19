@@ -63,12 +63,12 @@ export function ContactForm({ defaultPackage = '' }) {
 
   if (status === 'success') {
     return (
-      <div className="rounded-lg border border-success bg-surface p-8 text-center">
+      <div role="status" className="rounded-lg border border-success bg-surface p-8 text-center">
         <CheckCircle2 className="mx-auto h-10 w-10 text-success" aria-hidden="true" />
         <h3 className="mt-4 font-display text-h3 text-text-strong">Message sent.</h3>
         <p className="measure mx-auto mt-2 text-body text-muted">
-          Thank you — I&rsquo;ll get back to you within one business day. Prefer to
-          talk now? Reach me directly on WhatsApp.
+          Thank you — we&rsquo;ll get back to you within one business day. Prefer to
+          talk now? Reach us directly on WhatsApp.
         </p>
         <div className="mt-6 flex justify-center">
           <WhatsAppButton source="contact-success" variant="primary" />
@@ -78,7 +78,7 @@ export function ContactForm({ defaultPackage = '' }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate aria-live="polite" className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
       {defaultPackage && (
         <p className="rounded-sm border border-border bg-surface px-4 py-2 font-mono text-caption text-muted">
           Selected package: <span className="text-accent">{defaultPackage}</span>
@@ -132,8 +132,8 @@ export function ContactForm({ defaultPackage = '' }) {
 
       {status === 'fallback' && (
         <p className="rounded-sm border border-warning bg-surface px-4 py-3 text-body-sm text-muted" role="alert">
-          The contact form isn&rsquo;t fully configured yet. Please reach me on
-          WhatsApp and I&rsquo;ll respond right away.
+          The contact form isn&rsquo;t fully configured yet. Please reach us on
+          WhatsApp and we&rsquo;ll respond right away.
         </p>
       )}
       {status === 'error' && (

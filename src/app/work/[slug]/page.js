@@ -98,15 +98,29 @@ export default async function CaseStudyPage({ params }) {
           <dl className="mt-5 grid gap-6 border-y border-border py-8 sm:grid-cols-3">
             {study.results.map((stat, i) => (
               <div key={i}>
-                <dt className="font-display text-h2 text-accent">
-                  <Counter
-                    value={stat.value}
-                    decimals={stat.decimals || 0}
-                    prefix={stat.prefix || ''}
-                    suffix={stat.suffix || ''}
-                  />
-                </dt>
-                <dd className="mt-1 text-body-sm text-muted">{stat.label}</dd>
+                {/* A result is only run through the animated Counter when it
+                    actually has a number. Feature-based outcomes ("Live order
+                    tracking") carry a label alone and render as plain text, so
+                    no numeral has to be invented to fit the layout. */}
+                {stat.value === undefined ? (
+                  <>
+                    <dt className="font-display text-h4 text-accent">{stat.label}</dt>
+                    {/* Keeps the dt/dd pairing the <dl> requires valid. */}
+                    <dd aria-hidden="true" />
+                  </>
+                ) : (
+                  <>
+                    <dt className="font-display text-h2 text-accent">
+                      <Counter
+                        value={stat.value}
+                        decimals={stat.decimals || 0}
+                        prefix={stat.prefix || ''}
+                        suffix={stat.suffix || ''}
+                      />
+                    </dt>
+                    <dd className="mt-1 text-body-sm text-muted">{stat.label}</dd>
+                  </>
+                )}
               </div>
             ))}
           </dl>
@@ -119,7 +133,7 @@ export default async function CaseStudyPage({ params }) {
             <p className="measure mt-4 text-body text-muted">{study.problem}</p>
           </Reveal>
           <Reveal>
-            <h2 className="font-display text-h3 text-text-strong">What I built</h2>
+            <h2 className="font-display text-h3 text-text-strong">What we built</h2>
             <ul className="mt-4 flex flex-col gap-3">
               {study.solution.map((point) => (
                 <li key={point} className="flex items-start gap-2 text-body text-muted">

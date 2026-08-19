@@ -42,7 +42,7 @@ export function LeadMagnetForm() {
       <div className="flex items-center gap-3 rounded-md border border-success bg-bg p-5">
         <CheckCircle2 className="h-6 w-6 shrink-0 text-success" aria-hidden="true" />
         <p className="text-body text-text">
-          You&rsquo;re on the list — I&rsquo;ll send your free audit shortly.
+          You&rsquo;re on the list — we&rsquo;ll send your free audit shortly.
         </p>
       </div>
     );
@@ -78,7 +78,19 @@ export function LeadMagnetForm() {
         />
       </div>
       <Honeypot value={values.company} onChange={update('company')} />
-      <Button type="submit" size="lg" className="sm:mt-7" disabled={status === 'loading'}>
+      {/* 1.75rem written out, NOT `sm:mt-7`. This is optical alignment, not
+          rhythm: it drops the button to sit level with the inputs beside it,
+          clearing their label line. `mt-7` looked like a scale step but 7 is
+          not remapped in tailwind.config.js, so it silently resolved to stock
+          Tailwind's 1.75rem — off the --space-* scale. Snapping it to a real
+          token (24px or 32px) would misalign the row, so the value is kept and
+          made explicitly intentional instead. */}
+      <Button
+        type="submit"
+        size="lg"
+        className="sm:mt-[1.75rem]"
+        disabled={status === 'loading'}
+      >
         {status === 'loading' ? 'Sending…' : 'Get my free audit'}
       </Button>
     </form>

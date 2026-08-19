@@ -11,7 +11,12 @@ import { cn } from '@/lib/utils';
  * obsidian field with the project name + live host (TRD §9.1) so proof stays
  * honest and the composition stays premium even without a screenshot.
  */
-export function BrowserMock({ title, url, niche, image, className }) {
+/**
+ * `bare` drops the frame's own border/shadow/radius for when the mock is nested
+ * inside a .card-premium — otherwise the card and the mock draw two competing
+ * frames around the same image.
+ */
+export function BrowserMock({ title, url, niche, image, className, bare = false }) {
   const host = url ? url.replace(/^https?:\/\//, '').replace(/\/$/, '') : '';
 
   // In-frame parallax: the screenshot drifts vertically inside the fixed canvas
@@ -26,16 +31,17 @@ export function BrowserMock({ title, url, niche, image, className }) {
   return (
     <div
       className={cn(
-        'group/mock relative overflow-hidden rounded-md border border-border-strong bg-surface shadow-lg',
+        'group/mock relative overflow-hidden bg-surface',
+        bare ? 'rounded-none' : 'rounded-md border border-border-strong shadow-lg',
         className,
       )}
     >
       {/* chrome */}
       <div className="flex items-center gap-2 border-b border-border bg-bg-alt px-4 py-3">
         <span className="flex gap-1.5" aria-hidden="true">
-          <span className="h-2.5 w-2.5 rounded-pill bg-obsidian-600" />
-          <span className="h-2.5 w-2.5 rounded-pill bg-obsidian-600" />
-          <span className="h-2.5 w-2.5 rounded-pill bg-obsidian-600" />
+          <span className="h-2.5 w-2.5 rounded-pill bg-border-strong" />
+          <span className="h-2.5 w-2.5 rounded-pill bg-border-strong" />
+          <span className="h-2.5 w-2.5 rounded-pill bg-border-strong" />
         </span>
         <span className="ml-2 flex-1 truncate rounded-sm bg-surface-raised px-3 py-1 text-center font-mono text-caption text-muted">
           {host}
@@ -60,7 +66,7 @@ export function BrowserMock({ title, url, niche, image, className }) {
           {/* hairline sheen to seat the screenshot into the obsidian frame */}
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/5"
+            className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-border"
           />
         </div>
       ) : (
@@ -68,7 +74,7 @@ export function BrowserMock({ title, url, niche, image, className }) {
           className="relative flex aspect-[16/10] flex-col items-center justify-center gap-3 p-8 text-center"
           style={{
             background:
-              'radial-gradient(80% 90% at 50% 0%, hsl(35 72% 62% / 0.10), transparent 60%), var(--surface)',
+              'radial-gradient(80% 90% at 50% 0%, hsl(var(--accent-soft-hsl) / 0.10), transparent 60%), var(--surface)',
           }}
         >
           {niche && (

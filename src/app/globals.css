@@ -51,10 +51,9 @@
     color: var(--text-strong);
     font-family: var(--font-display);
     font-weight: var(--weight-medium);
-    font-optical-sizing: auto;
     letter-spacing: var(--tracking-tight);
-    /* Classic editorial polish: contextual ligatures so the Fraunces serif
-       reads timeless rather than default-rendered. */
+    /* `font-optical-sizing` was here for Fraunces' opsz axis; Satoshi has no
+       optical-size axis, so it is removed rather than left as a no-op. */
     font-variant-ligatures: common-ligatures contextual;
     text-wrap: balance;
   }
@@ -99,12 +98,12 @@
     background: var(--bg);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--obsidian-700);
+    background: var(--border-strong);
     border-radius: var(--radius-pill);
     border: 2px solid var(--bg);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--obsidian-600);
+    background: var(--text-faint);
   }
 }
 
@@ -154,6 +153,48 @@
     background: var(--border);
   }
 
+  /* The single card treatment (§2 soft-diffused shadow, §4 hover lift). Defined
+     once so every card on the site moves together instead of drifting; padding,
+     layout and text alignment stay as utilities on the element itself.
+     The amber top rule is a ::before rather than a child node, so applying the
+     card is a one-class change and no markup has to be added per card.
+     `:focus-within` mirrors hover, so keyboard users get the same affordance on
+     the cards that wrap a link. Under reduced motion the global token override
+     zeroes --dur-base and the whole thing resolves instantly. */
+  .card-premium {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-md);
+    transition:
+      transform var(--dur-base) var(--ease-out-quad),
+      border-color var(--dur-base) var(--ease-out-quad),
+      box-shadow var(--dur-base) var(--ease-out-quad);
+  }
+  .card-premium::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-out-quad);
+  }
+  .card-premium:hover,
+  .card-premium:focus-within {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-lg);
+  }
+  .card-premium:hover::before,
+  .card-premium:focus-within::before {
+    transform: scaleX(1);
+  }
+
   /* The single per-page amber text wipe (TRD §5.4) */
   .text-amber-wipe {
     background: var(--gradient-amber-text);
@@ -197,7 +238,7 @@
     z-index: 1;
     pointer-events: none;
     opacity: var(--grain-opacity);
-    mix-blend-mode: overlay;
+    mix-blend-mode: var(--grain-blend);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
@@ -261,6 +302,49 @@
 }
 .hero-in {
   animation: soft-in 0.8s var(--ease-out-expo) both;
+}
+
+/* ===========================================================================
+   HERO — contrast scrim.
+   Desktop: two stacked gradients. The horizontal pass weights darkness to the
+   left, where the copy sits; the vertical pass only anchors the top (under the
+   nav) and the bottom (into the next section). The right half is left
+   near-clear so the photograph reads instead of being uniformly dimmed.
+   =========================================================================== */
+.hero-scrim {
+  background:
+    linear-gradient(
+      100deg,
+      hsl(252 11% 4% / 0.42) 0%,
+      hsl(252 11% 4% / 0.1) 62%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      hsl(252 11% 4% / 0.34) 0%,
+      hsl(252 11% 4% / 0.2) 45%,
+      hsl(252 11% 4% / 0.62) 100%
+    );
+}
+
+/* Below `md` the copy spans the full width and the crop (object-position 78%)
+   puts the subject directly behind it, so a left-weighted wash protects the
+   wrong half. This pass is purely vertical and tracks the image instead: light
+   at the top, where the crop is dark stone and the headline needs the photo to
+   stay visible; heaviest from ~60% down, where the lit doorway and the horizon
+   band sit behind the lead paragraph and the trust chips. Measured against the
+   brightest ground in that band, the lead holds ~4.9:1 and the headline
+   ~3.6:1 (AA for both, the headline being large text). */
+@media (max-width: 767px) {
+  .hero-scrim {
+    background: linear-gradient(
+      180deg,
+      hsl(252 11% 4% / 0.3) 0%,
+      hsl(252 11% 4% / 0.38) 34%,
+      hsl(252 11% 4% / 0.62) 62%,
+      hsl(252 11% 4% / 0.78) 100%
+    );
+  }
 }
 
 /* ===========================================================================
@@ -329,12 +413,18 @@
   inset: 0;
   background: radial-gradient(130% 100% at 50% 32%, transparent 50%, var(--bg) 100%);
 }
+/* Drift distances are percentages of each orb's OWN box, not vw. On desktop
+   they resolve to exactly the previous values (orb 1 is 50vw wide, so its old
+   10vw/7vw drift is 20%/14% of itself, and so on) — this is a no-op there. The
+   difference is portrait: the orbs are re-sized in vmax below, and a vw-based
+   drift would have kept moving them by a phone's narrow width, i.e. barely at
+   all. Percentages scale with whatever size the orb actually is. */
 @keyframes orb-drift-1 {
   from {
     transform: translate3d(0, 0, 0) scale(1);
   }
   to {
-    transform: translate3d(10vw, 7vw, 0) scale(1.3);
+    transform: translate3d(20%, 14%, 0) scale(1.3);
   }
 }
 @keyframes orb-drift-2 {
@@ -342,7 +432,7 @@
     transform: translate3d(0, 0, 0) scale(1.08);
   }
   to {
-    transform: translate3d(-9vw, 6vw, 0) scale(0.85);
+    transform: translate3d(-21.4%, 14.3%, 0) scale(0.85);
   }
 }
 @keyframes orb-drift-3 {
@@ -350,7 +440,39 @@
     transform: translate3d(0, 0, 0) scale(1);
   }
   to {
-    transform: translate3d(7vw, -8vw, 0) scale(1.32);
+    transform: translate3d(19.4%, -22.2%, 0) scale(1.32);
+  }
+}
+
+/* Portrait re-scale. The orbs were sized in `vw`, which is the SHORT axis on a
+   phone: 50vw on a 390px screen is a 195px blob adrift in a ~660px-tall
+   section, so the aurora read as three specks rather than a light field. `vmax`
+   ties them to the long axis instead, restoring the desktop proportions. This
+   matters mainly as the image fallback (the aurora sits at -z-30, beneath the
+   photograph) and while the hero image is still decoding. Blur is eased to
+   52px: three large blurred layers plus a conic sweep is the most expensive
+   thing on the page for a mid-range phone GPU. */
+@media (max-width: 767px) {
+  .hero-orb {
+    filter: blur(52px);
+  }
+  .hero-orb--1 {
+    width: 64vmax;
+    height: 64vmax;
+    left: -24vmax;
+    top: -20vmax;
+  }
+  .hero-orb--2 {
+    width: 54vmax;
+    height: 54vmax;
+    right: -22vmax;
+    top: 4vmax;
+  }
+  .hero-orb--3 {
+    width: 46vmax;
+    height: 46vmax;
+    left: 8vmax;
+    bottom: -18vmax;
   }
 }
 @keyframes sheen-rotate {

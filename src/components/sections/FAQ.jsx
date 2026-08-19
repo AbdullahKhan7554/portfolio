@@ -7,7 +7,7 @@ export function FAQ() {
   return (
     <Section
       id="faq"
-      eyebrow="11 — Questions"
+      eyebrow="06 — Questions"
       title="Everything You Might Ask."
       intro="Straight answers to the questions clients ask most — so the call can focus on your project."
     >

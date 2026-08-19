@@ -4,7 +4,7 @@ export const processSteps = [
     id: 'discovery',
     title: 'Discovery',
     description:
-      'I learn your business, your customers, and the one outcome that matters most — so every decision is aimed at it.',
+      'We learn your business, your customers, and the one outcome that matters most — so every decision is aimed at it.',
     deliverables: ['Goals', 'Scope', 'Sitemap'],
   },
   {
@@ -25,7 +25,7 @@ export const processSteps = [
     id: 'testing',
     title: 'Testing',
     description:
-      'I catch the bugs so your customers never do — cross-device, cross-browser, and accessibility checked.',
+      'We catch the bugs so your customers never do — cross-device, cross-browser, and accessibility checked.',
     deliverables: ['QA', 'A11y', 'Forms'],
   },
   {

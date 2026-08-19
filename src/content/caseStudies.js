@@ -21,6 +21,7 @@ export const PROJECT_TYPES = [
   { id: 'pet', label: 'Pet Care' },
   { id: 'homeservices', label: 'Home Services' },
   { id: 'business', label: 'Business' },
+  { id: 'restaurant', label: 'Restaurant' },
   { id: 'live', label: 'Live Clients' },
 ];
 
@@ -390,9 +391,12 @@ export const caseStudies = [
     tech: ['React', 'Node.js', 'Express.js', 'SQL', 'Supabase', 'Cloudinary'],
   },
   {
+    // Public name is Agriprom (confirmed). `slug` is intentionally left as
+    // 'forward-solution' so the existing /work/forward-solution URL keeps
+    // resolving — changing it would break any live link to this case study.
     slug: 'forward-solution',
-    title: 'Forward Solution Website',
-    client: 'Forward Solution',
+    title: 'Agriprom',
+    client: 'Agriprom Pakistan',
     type: 'business',
     niche: 'Business Solutions',
     year: '2025',
@@ -414,6 +418,39 @@ export const caseStudies = [
     ],
     tech: ['Next.js', 'React', 'Tailwind CSS', 'Vercel'],
   },
+  {
+    slug: 'seven-guys',
+    title: 'Seven Guys',
+    client: 'Seven Guys',
+    type: 'restaurant',
+    niche: 'Restaurant · 3 Branches',
+    year: '2026',
+    liveUrl: 'https://seven-guys-teal.vercel.app',
+    isLive: true,
+    featured: false,
+    image: '/images/work/seven-guys.png',
+    summary:
+      'An online ordering platform that puts all three Seven Guys branches behind a single checkout. Customers choose delivery or pickup up front, the order routes to the right kitchen, and they can follow it from confirmation through to arrival.',
+    problem:
+      'Seven Guys was taking orders by phone across three Gujranwala branches. Every order meant a call, a menu recited down the line, and a manual hand-off to whichever kitchen was nearest — with no way for a customer to browse the full menu, confirm what they had ordered, or see where it had got to.',
+    solution: [
+      'Full online menu with cart and checkout, replacing verbal phone ordering',
+      'Delivery or pickup selected up front, with the order routed to the chosen branch',
+      'Live order tracking so customers can follow an order after checkout',
+      'Branch locator with per-branch directions for all three Gujranwala locations',
+      'WhatsApp and direct-call ordering retained alongside the online flow',
+      'Customer accounts for order history and repeat ordering',
+    ],
+    // Feature-based outcomes: this build has no review count or trading metrics
+    // to cite yet, so nothing numeric is claimed beyond the branch count, which
+    // is verifiable. Entries without `value` render as plain labels.
+    results: [
+      { value: 3, label: 'Branches unified in one ordering flow' },
+      { label: 'Live order tracking' },
+      { label: 'WhatsApp + call ordering integrated' },
+    ],
+    tech: ['Next.js', 'Supabase', 'Cloudinary', 'Tailwind CSS', 'Vercel'],
+  },
 ];
 
 export function getCaseStudy(slug) {
@@ -424,8 +461,46 @@ export function getFeaturedCaseStudies() {
   return caseStudies.filter((c) => c.featured);
 }
 
+/**
+ * Slugs rendered on /work, in display order. This list — not array position —
+ * is the ordering mechanism, so reordering the showcase never means moving
+ * 25-line object literals around. Anything absent from this list is hidden from
+ * /work (its detail page still resolves by direct URL).
+ *
+ * TODO — awaiting case-study data (year, summary, problem, solution, results,
+ * tech) before these can be added:
+ *   'paper-boat'  → slot 5, screenshot ready at /images/work/paperboat.png,
+ *                   live at https://paperboat.live
+ *   'seven-guys'  → slot 7, no screenshot supplied either
+ */
+export const SHOWCASE_ORDER = [
+  'builtu-gym',
+  'xtreme-fitness',
+  'forward-solution', // Agriprom
+  'scissors-vip-salon',
+  // 'paper-boat',     // slot 5 — awaiting case-study data
+  'electronics-store', // New Multi Electronics (NME)
+  'seven-guys',
+];
+
+/** The showcase set, resolved in SHOWCASE_ORDER and skipping unknown slugs. */
+export function getShowcaseCaseStudies() {
+  return SHOWCASE_ORDER.map((slug) => caseStudies.find((c) => c.slug === slug)).filter(
+    Boolean,
+  );
+}
+
+/** Filter pills, narrowed to the types actually present in the showcase. */
+export function getShowcaseTypes() {
+  const present = new Set(getShowcaseCaseStudies().map((c) => c.type));
+  return PROJECT_TYPES.filter(
+    (t) => t.id === 'all' || t.id === 'live' || present.has(t.id),
+  );
+}
+
 export function filterCaseStudies(type) {
-  if (!type || type === 'all') return caseStudies;
-  if (type === 'live') return caseStudies.filter((c) => c.isLive && c.liveUrl);
-  return caseStudies.filter((c) => c.type === type);
+  const items = getShowcaseCaseStudies();
+  if (!type || type === 'all') return items;
+  if (type === 'live') return items.filter((c) => c.isLive && c.liveUrl);
+  return items.filter((c) => c.type === type);
 }

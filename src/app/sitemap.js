@@ -1,5 +1,5 @@
 import { siteConfig } from '@/config/site';
-import { caseStudies } from '@/content/caseStudies';
+import { getShowcaseCaseStudies } from '@/content/caseStudies';
 import { posts } from '@/content/blog';
 
 export default function sitemap() {
@@ -20,7 +20,10 @@ export default function sitemap() {
     priority: r.priority,
   }));
 
-  const workRoutes = caseStudies.map((c) => ({
+  // Only the showcase set is advertised. The other case studies still build and
+  // resolve by direct URL, but listing pages that nothing links to would submit
+  // orphaned URLs to search engines.
+  const workRoutes = getShowcaseCaseStudies().map((c) => ({
     url: `${siteConfig.url}/work/${c.slug}`,
     lastModified: now,
     changeFrequency: 'yearly',

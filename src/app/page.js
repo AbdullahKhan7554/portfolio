@@ -1,21 +1,30 @@
 import { Hero } from '@/components/sections/Hero';
-import { CaseStudies } from '@/components/sections/CaseStudies';
 import { Services } from '@/components/sections/Services';
 import { WhyMe } from '@/components/sections/WhyMe';
 import { Process } from '@/components/sections/Process';
+import { ClientLogoStrip } from '@/components/sections/ClientLogoStrip';
 import { TechStack } from '@/components/sections/TechStack';
-import { AIWorkflow } from '@/components/sections/AIWorkflow';
-import { PerfSEO } from '@/components/sections/PerfSEO';
-import { CurrentlyLearning } from '@/components/sections/CurrentlyLearning';
-import { Testimonials } from '@/components/sections/Testimonials';
-import { LeadMagnet } from '@/components/sections/LeadMagnet';
+import { PricingTeaser } from '@/components/sections/PricingTeaser';
 import { FAQ } from '@/components/sections/FAQ';
-import { About } from '@/components/sections/About';
 import { Contact } from '@/components/sections/Contact';
 import { buildMetadata } from '@/lib/seo';
 import { professionalServiceSchema, jsonLd } from '@/lib/schema';
 
 export const metadata = buildMetadata({ path: '/' });
+
+/**
+ * Homepage-only chrome. This is the one route that opens on a full-bleed dark
+ * hero (`.theme-dark`), so the layout's white `themeColor` put a white browser
+ * bar directly above near-black. #0A0A0B is the hero's own ground
+ * (--obsidian-950).
+ *
+ * Scoped here rather than on the root layout so /about, /services, /work,
+ * /blog and /contact — which all open on a white PageHeader — keep white
+ * chrome. Next merges viewport shallowly along the segment tree, so this
+ * overrides ONLY themeColor; colorScheme, width and initialScale still come
+ * from app/layout.js.
+ */
+export const viewport = { themeColor: '#0A0A0B' };
 
 export default function HomePage() {
   return (
@@ -25,17 +34,12 @@ export default function HomePage() {
         dangerouslySetInnerHTML={jsonLd(professionalServiceSchema())}
       />
       <Hero />
-      <CaseStudies />
-      <About />
       <Services />
       <WhyMe />
       <Process />
-      <AIWorkflow />
-      <PerfSEO />
+      <ClientLogoStrip />
       <TechStack />
-      <CurrentlyLearning />
-      <Testimonials />
-      <LeadMagnet />
+      <PricingTeaser />
       <FAQ />
       <Contact />
     </main>

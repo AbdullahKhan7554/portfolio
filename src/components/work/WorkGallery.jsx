@@ -8,12 +8,12 @@ import { cn } from '@/lib/utils';
 import { BrowserMock } from '@/components/ui/BrowserMock';
 import { Tilt } from '@/components/ui/Tilt';
 import { StatusBadge, Tag } from '@/components/ui/Badge';
-import { PROJECT_TYPES, filterCaseStudies } from '@/content/caseStudies';
+import { getShowcaseTypes, filterCaseStudies } from '@/content/caseStudies';
 import { EASE_OUT_EXPO } from '@/lib/motion';
 
 export function WorkGallery({ initialType = 'all' }) {
   const [type, setType] = useState(
-    PROJECT_TYPES.some((t) => t.id === initialType) ? initialType : 'all',
+    getShowcaseTypes().some((t) => t.id === initialType) ? initialType : 'all',
   );
 
   const selectType = useCallback((id) => {
@@ -31,7 +31,7 @@ export function WorkGallery({ initialType = 'all' }) {
     <div>
       {/* Filter pills */}
       <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by type">
-        {PROJECT_TYPES.map((t) => {
+        {getShowcaseTypes().map((t) => {
           const active = t.id === type;
           return (
             <button
@@ -74,7 +74,7 @@ export function WorkGallery({ initialType = 'all' }) {
                 />
                 <div className="mt-4 flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="font-display text-h4 text-text-strong">{study.title}</h3>
+                    <h2 className="font-display text-h4 text-text-strong">{study.title}</h2>
                     <p className="mt-1 text-body-sm text-muted">{study.summary}</p>
                   </div>
                   {study.isLive && <StatusBadge status="live" label="Live" />}

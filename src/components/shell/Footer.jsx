@@ -18,7 +18,7 @@ export function Footer() {
               <span className="text-amber-wipe">worth shipping</span>.
             </h2>
             <p className="measure text-lead text-muted">
-              Tell me about your project. You&rsquo;ll get a fixed quote, a clear
+              Tell us about your project. You&rsquo;ll get a fixed quote, a clear
               timeline, and a partner who treats your launch like their own.
             </p>
             <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
@@ -34,6 +34,14 @@ export function Footer() {
           </Reveal>
         </div>
       </div>
+
+      {/* Transition band — eases the white page into the dark footer slab so the
+          two grounds meet on a gradient instead of a hard seam. */}
+      <div
+        aria-hidden="true"
+        className="h-[clamp(3rem,7vw,6.5rem)] w-full"
+        style={{ background: 'var(--gradient-slab-enter)' }}
+      />
 
       {/* Premium 4-column brand footer + giant AVENIX wordmark */}
       <FooterPremium />
