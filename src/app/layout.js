@@ -10,6 +10,7 @@ import {
 } from '@/lib/schema';
 import { Analytics } from '@/components/Analytics';
 import { SmoothScroll } from '@/components/providers/SmoothScroll';
+import { TransitionProvider } from '@/components/providers/TransitionProvider';
 import { ClientOverlays } from '@/components/ClientOverlays';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Header } from '@/components/shell/Header';
@@ -106,15 +107,26 @@ export default function RootLayout({ children }) {
         </a>
         <div className="grain" aria-hidden="true" />
         <CustomCursor />
-        <SmoothScroll>
-          <PublicOnly>
-            <Header />
-          </PublicOnly>
-          {children}
-          <PublicOnly>
-            <Footer />
-          </PublicOnly>
-        </SmoothScroll>
+        {/*
+          OUTSIDE SmoothScroll, not inside it. The overlay this renders is
+          `fixed inset-0`, and a fixed element is positioned against the nearest
+          ancestor carrying a transform — which is exactly what a scroll
+          container may set on its subtree. Keeping the provider as the PARENT
+          means the slab is a sibling of that subtree rather than a descendant,
+          so it cannot inherit a containing block and can never drift with the
+          scroll position.
+        */}
+        <TransitionProvider>
+          <SmoothScroll>
+            <PublicOnly>
+              <Header />
+            </PublicOnly>
+            {children}
+            <PublicOnly>
+              <Footer />
+            </PublicOnly>
+          </SmoothScroll>
+        </TransitionProvider>
         <ClientOverlays />
         <Analytics />
       </body>

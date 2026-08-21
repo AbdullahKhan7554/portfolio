@@ -113,6 +113,11 @@ const config = {
         cursor: '300',
         overlay: '400',
         modal: '500',
+        // Above the mobile drawer and Nova (both `modal`, 500) so a drawer
+        // mid-exit cannot paint over the route-transition slab, and below
+        // `toast` (600) so the skip link still wins. See
+        // components/ui/RouteTransitionOverlay.jsx.
+        transition: '550',
         toast: '600',
       },
       keyframes: {

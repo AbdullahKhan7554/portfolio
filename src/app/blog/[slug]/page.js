@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { posts, getPost, formatDate } from '@/content/blog';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { PostCover } from '@/components/ui/PostCover';
 import { Reveal } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
 import { buildMetadata } from '@/lib/seo';
@@ -34,7 +35,13 @@ function articleSchema(post) {
     articleSection: post.category,
     url,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    image: siteConfig.seo.ogImage.url,
+    // The post's own cover when it has one — this field is meant to be the
+    // article's image, and falling back to the site-wide OG card was only ever
+    // a stand-in for not having one. Absolute URL: schema.org consumers do not
+    // resolve site-relative paths.
+    image: post.cover
+      ? `${siteConfig.url}${post.cover.src}`
+      : siteConfig.seo.ogImage.url,
     inLanguage: 'en',
     author: {
       '@type': 'Person',
@@ -86,7 +93,19 @@ export default async function BlogPostPage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(articleSchema(post))}
       />
-      <PageHeader breadcrumbs={crumbs} title={post.title}>
+      <PostCover cover={post.cover} />
+
+      {/* With a cover above it the header is no longer the first thing in
+          <main>, so it must not also reserve room for the navbar — PostCover
+          already did that. `pt-8 md:pt-10` (3rem/4rem, both mapped keys)
+          replaces its `pt-32 md:pt-40` via twMerge and becomes the gap between
+          the art and the breadcrumbs. Posts without a cover pass no className
+          and keep the original padding untouched. */}
+      <PageHeader
+        breadcrumbs={crumbs}
+        title={post.title}
+        className={post.cover ? 'pt-8 md:pt-10' : undefined}
+      >
         <div className="flex flex-wrap items-center gap-3 font-mono text-caption uppercase tracking-[0.12em] text-faint">
           <span className="text-accent">{post.category}</span>
           <span>{formatDate(post.date)}</span>

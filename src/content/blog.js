@@ -4,6 +4,26 @@
  * Sanity without touching the rendering code.
  *
  * Block types: { type: 'p' | 'h2' | 'ul', text? , items? }
+ *
+ * COVERS
+ * `cover: { src, alt }` is the full-bleed banner rendered above the title by
+ * <PostCover>. It lives on the post object rather than in a separate registry
+ * because — unlike the shared page-hero art in src/content/pageHeroes.js, where
+ * one photograph serves three routes — each of these is specific to exactly one
+ * post and could not be reused if it tried.
+ *
+ * Every cover is a 3:2 WebP in public/blogs/, named for the slug it belongs to.
+ * The 1536x1024 PNG masters they were derived from are retained beside them and
+ * are referenced by nothing.
+ *
+ * ALT TEXT DELIBERATELY DOES NOT RESTATE THE TITLE. Each of these images has the
+ * post's headline set into it as artwork, and the <h1> saying the same words
+ * sits directly below the band — alt that repeated it would have a screen reader
+ * announce the title twice in a row. So the alt describes the ILLUSTRATION, the
+ * same convention pageHeroes.js follows.
+ *
+ * `cover` is optional. A post without one renders exactly the header that
+ * shipped before it existed.
  */
 export const posts = [
   {
@@ -15,6 +35,10 @@ export const posts = [
     category: 'Web Development',
     date: '2026-01-20',
     readingTime: '28 min read',
+    cover: {
+      src: '/blogs/website-development-pakistan.webp',
+      alt: 'A laptop showing a code editor on a bright desk, beside a notebook lettered "plan, design, develop, launch" and a mug reading "building digital futures", with an outline map of Pakistan and floating development, responsive, SEO, design and growth tiles behind it',
+    },
   },
   {
     slug: 'why-your-business-website-needs-to-be-fast',
@@ -24,6 +48,10 @@ export const posts = [
     category: 'Performance',
     date: '2026-06-10',
     readingTime: '4 min read',
+    cover: {
+      src: '/blogs/why-your-business-website-needs-to-be-fast.webp',
+      alt: 'A laptop displaying a dark website hero with amber light-trails, surrounded by floating panels reporting a PageSpeed score of 98, a 1.2 second load time and passing Core Web Vitals, next to a speedometer dial reading 1.2s',
+    },
     content: [
       {
         type: 'p',
@@ -57,6 +85,10 @@ export const posts = [
     category: 'Conversion',
     date: '2026-05-22',
     readingTime: '3 min read',
+    cover: {
+      src: '/blogs/whatsapp-first-lead-capture-for-local-business.webp',
+      alt: 'A phone standing on a dark stone ledge showing a contact screen with a green "chat on WhatsApp" button, beside a WhatsApp logo and a chat bubble in which a customer asks to discuss their project',
+    },
     content: [
       {
         type: 'p',

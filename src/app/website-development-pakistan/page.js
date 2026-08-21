@@ -1,4 +1,5 @@
 import { PageHeader } from '@/components/ui/PageHeader';
+import { PostCover } from '@/components/ui/PostCover';
 import { Section } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
@@ -13,6 +14,16 @@ import {
   wdpFaqs,
   wdpHowTo,
 } from '@/content/websiteDevPakistan';
+import { getPost } from '@/content/blog';
+
+/**
+ * This route renders its own body from src/content/websiteDevPakistan.js, but it
+ * is still one of the three posts listed on /blog — src/content/blog.js carries
+ * its listing entry, which is what `href` on that entry points back here for.
+ * The cover is read from that same entry rather than copied into wdpMeta so the
+ * listing and the page can never end up showing different art.
+ */
+const cover = getPost('website-development-pakistan')?.cover;
 
 export const metadata = buildMetadata({
   title: wdpMeta.title,
@@ -40,7 +51,9 @@ function articleSchema() {
     '@type': 'Article',
     headline: 'The Ultimate Guide to Website Development in Pakistan (2026)',
     description: wdpMeta.description,
-    image: siteConfig.seo.ogImage.url,
+    // The post's own cover — absolute, since schema.org consumers do not resolve
+    // site-relative paths. Falls back to the site OG card if the cover is gone.
+    image: cover ? `${siteConfig.url}${cover.src}` : siteConfig.seo.ogImage.url,
     datePublished: wdpMeta.datePublished,
     dateModified: wdpMeta.dateModified,
     inLanguage: 'en',
@@ -182,11 +195,16 @@ export default function WebsiteDevelopmentPakistanPage() {
         dangerouslySetInnerHTML={jsonLd(faqSchema(wdpFaqs))}
       />
 
+      <PostCover cover={cover} />
+
+      {/* See the matching note in app/blog/[slug]/page.js — PostCover has taken
+          over clearing the navbar, so the header drops its own top padding. */}
       <PageHeader
         eyebrow="Guide"
         title="The Ultimate Guide to Website Development in Pakistan (2026)"
         intro="Costs, website types, the build process, the right technology, and how to choose a developer you won't regret — for clinics, gyms, law firms, restaurants, real estate, and startups."
         breadcrumbs={crumbs}
+        className={cover ? 'pt-8 md:pt-10' : undefined}
       >
         <div className="mt-2 flex flex-wrap items-center gap-3 font-mono text-caption uppercase tracking-[0.12em] text-faint">
           <span className="text-accent">By {wdpMeta.author}</span>
