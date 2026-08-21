@@ -29,6 +29,12 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [{ protocol: 'https', hostname: '**' }],
+    // From Next 16 an unlisted `quality` is rejected rather than silently
+    // honoured, so the allow-list is declared now while it is still a no-op.
+    // 75 is the default used wherever the prop is omitted; 80 is PostCover and
+    // BlogCard; 82 is the page heroes. Adding a new quality anywhere means
+    // adding it here too.
+    qualities: [75, 80, 82],
   },
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],

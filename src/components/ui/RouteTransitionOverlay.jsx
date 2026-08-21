@@ -2,22 +2,23 @@
 
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { EASE_OUT_EXPO } from '@/lib/motion';
-import { siteConfig } from '@/config/site';
+import { IntroVisual } from '@/components/intro/IntroVisual';
 
 /**
  * The visual half of the route transition. State lives in TransitionProvider;
  * this component only renders it.
  *
- * BRAND, NOT A SPINNER. An obsidian slab (`theme-dark bg-bg` — the same
- * intentional-contrast-block pattern the hero, /contact and the footer use)
- * carrying the monogram in the amber text wipe, over a hairline with an amber
- * segment sweeping across it. No new colour, no new radius, no raw hex.
+ * BRAND, NOT A SPINNER. The artwork is <IntroVisual variant="route" /> — the
+ * SAME obsidian slab, logo lockup and metallic sweep the entry intro plays, on
+ * a timeline compressed to fit the 500ms floor, over the amber hairline that
+ * keeps moving when a route fetch outlasts it.
  *
- * NO IMAGE ON PURPOSE. `<Logo />` would be the more literal brand mark, but it
- * renders `/logo3-trimmed.png`, and the one moment this overlay exists is the
- * moment the browser is already fetching a new route's payload. A mark that has
- * to win a race against that is a mark that sometimes shows a blank box, so the
- * motif is type + tokens and costs zero requests.
+ * THE IMAGE IS NOW SAFE. This used to be a type-only monogram, on the reasoning
+ * that a mark fetched at the exact moment the browser is pulling a new route's
+ * payload would sometimes show a blank box. That no longer applies: the root
+ * layout preloads /logo.png with `as="image" fetchPriority="high"` in <head>, so
+ * it is decoded long before any navigation can be clicked — including from a
+ * cold entry on a non-homepage route, where the entry intro never runs.
  *
  * `aria-hidden` is deliberate: this is decoration. The announcement is handled
  * by the polite live region in TransitionProvider, so a screen reader hears
@@ -39,7 +40,7 @@ export function RouteTransitionOverlay({ active }) {
           // z-transition (550) sits above the mobile drawer and Nova (both
           // z-modal, 500) so a drawer mid-exit-animation cannot paint over the
           // overlay, and below z-toast (600) so the skip link still wins.
-          className="theme-dark fixed inset-0 z-transition grid place-items-center bg-bg"
+          className="fixed inset-0 z-transition"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -49,24 +50,7 @@ export function RouteTransitionOverlay({ active }) {
           // explicit rather than inherited.
           transition={{ duration: reduced ? 0 : 0.28, ease: EASE_OUT_EXPO }}
         >
-          <div className="flex flex-col items-center gap-5">
-            <span className="text-amber-wipe font-display text-h2 font-black leading-none tracking-[0.18em]">
-              {siteConfig.brand.monogram}
-            </span>
-
-            <span className="relative block h-px w-20 overflow-hidden bg-border">
-              {reduced ? (
-                <span className="absolute inset-y-0 left-0 w-1/3 bg-accent" />
-              ) : (
-                <motion.span
-                  className="absolute inset-y-0 left-0 w-1/3 bg-accent"
-                  initial={{ x: '-100%' }}
-                  animate={{ x: '300%' }}
-                  transition={{ duration: 1.1, ease: 'linear', repeat: Infinity }}
-                />
-              )}
-            </span>
-          </div>
+          <IntroVisual variant="route" reduced={reduced} />
         </motion.div>
       )}
     </AnimatePresence>

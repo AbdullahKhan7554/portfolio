@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { siteConfig } from '@/config/site';
+import { EASE_OUT_EXPO } from '@/lib/motion';
+import { IntroVisual } from './IntroVisual';
 
 /**
  * Avenix Studio — cinematic brand intro.
@@ -23,10 +24,12 @@ import { siteConfig } from '@/config/site';
  * immediately) for reduced-motion or non-home routes — so the site is always
  * reachable. It does not replay on in-app soft navigation (the layout, and thus
  * this component, is not remounted), only on full page loads.
+ *
+ * The slab/logo/sweep artwork itself lives in <IntroVisual>, shared with
+ * <RouteTransitionOverlay>. Everything below is the ENTRY-ONLY half: the gate
+ * handoff, the homepage check, and the timeline. `variant="entry"` selects the
+ * long timing there; this file still owns when it starts and stops.
  */
-
-const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
-const EASE_SWEEP = [0.4, 0, 0.2, 1];
 
 /** ms timeline marker: when the logo settles and we begin the dissolve-out. */
 const REVEAL_AT = 2600;
@@ -94,65 +97,18 @@ export function CinematicIntro() {
   const out = phase === 'out';
 
   return (
+    // Positioning wrapper only. IntroVisual carries no z-index of its own, so
+    // the 9999 that must sit above every other layer is supplied here.
     <motion.div
       aria-hidden="true"
-      className="fixed inset-0 flex items-center justify-center"
-      style={{ backgroundColor: '#0B0B0B', zIndex: 9999 }}
+      className="fixed inset-0"
+      style={{ zIndex: 9999 }}
       initial={{ opacity: 1 }}
       animate={{ opacity: out ? 0 : 1 }}
       transition={{ duration: 0.7, ease: EASE_OUT_EXPO }}
       onAnimationComplete={handleOverlayAnimationComplete}
     >
-      <motion.div
-        className="relative overflow-hidden rounded-2xl"
-        // Feather the logo's black field into the #0B0B0B canvas (no hard square).
-        style={{
-          boxShadow: '0 0 120px 60px #0B0B0B',
-          willChange: 'transform, opacity, filter',
-        }}
-        initial={{ opacity: 0, scale: 0.85, filter: 'blur(8px)' }}
-        animate={{
-          opacity: 1,
-          scale: out ? 0.9 : 1,
-          filter: 'blur(0px)',
-        }}
-        transition={{
-          opacity: { duration: 0.9, delay: 0.3, ease: EASE_OUT_EXPO },
-          filter: { duration: 0.9, delay: 0.3, ease: EASE_OUT_EXPO },
-          scale: out
-            ? { duration: 0.7, ease: EASE_OUT_EXPO }
-            : { duration: 1.0, delay: 0.3, ease: EASE_OUT_EXPO },
-        }}
-      >
-        {/* Plain <img> on purpose: a one-time splash that must paint instantly on
-            any device without depending on the Next image optimizer. */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/logo.png"
-          alt={siteConfig.brand.name}
-          width={320}
-          height={320}
-          fetchPriority="high"
-          decoding="async"
-          draggable={false}
-          className="h-auto w-[clamp(190px,44vw,320px)] select-none"
-        />
-
-        {/* Single thin metallic sweep — fast, elegant, no glow/flare. */}
-        <motion.span
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-          initial={{ x: '-130%' }}
-          animate={{ x: '130%' }}
-          transition={{ duration: 0.85, delay: 2.0, ease: EASE_SWEEP }}
-          style={{
-            background:
-              'linear-gradient(105deg, transparent 42%, rgba(255,255,255,0.10) 47%, rgba(245,222,179,0.55) 50%, rgba(255,255,255,0.10) 53%, transparent 58%)',
-            mixBlendMode: 'screen',
-            willChange: 'transform',
-          }}
-        />
-      </motion.div>
+      <IntroVisual variant="entry" out={out} />
     </motion.div>
   );
 }
