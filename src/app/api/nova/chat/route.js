@@ -16,8 +16,17 @@ import { ProviderConfigError, ProviderError, ValidationError } from '@/lib/nova'
 export const runtime = 'nodejs'; // runtime KB is Supabase-only (no filesystem KB loader in this path)
 export const dynamic = 'force-dynamic'; // never cache a streamed conversation
 
-/** Adapt an async token iterator to a web ReadableStream. */
-function iteratorToStream(iterator) {
+/**
+ * Adapt an async token iterator to a web ReadableStream.
+ *
+ * `createChatStream` returns a LAZY async generator, so the upstream provider
+ * request only fires on the first `pull()` — i.e. inside this stream, AFTER the
+ * POST handler's try/catch has already returned. That makes this catch the only
+ * place a provider failure (bad/EOL model, 401, quota, network) is observable,
+ * so it logs the full root cause here rather than surfacing a bare
+ * "failed to pipe response" in the Vercel function logs.
+ */
+function iteratorToStream(iterator, logContext = {}) {
   const encoder = new TextEncoder();
   return new ReadableStream({
     async pull(controller) {
@@ -29,6 +38,25 @@ function iteratorToStream(iterator) {
         }
         controller.enqueue(encoder.encode(value));
       } catch (err) {
+        // A client abort is normal cancellation, not a failure — don't log it.
+        if (err?.name !== 'AbortError') {
+          // eslint-disable-next-line no-console
+          console.error('[Nova] chat stream failed', {
+            ...logContext,
+            errorType: err?.name,
+            code: err?.code,
+            status: err?.status,
+            providerId: err?.providerId,
+            missing: err?.missing,
+            detail: err?.detail,
+            message: err?.message,
+            cause: err?.cause?.message || err?.cause,
+            stack: err?.stack,
+          });
+          // The full error object too, so nothing is lost to shallow serialization.
+          // eslint-disable-next-line no-console
+          console.error(err);
+        }
         controller.error(err);
       }
     },
@@ -101,7 +129,7 @@ export async function POST(request) {
       signal: request.signal,
     });
 
-    return new Response(iteratorToStream(stream), {
+    return new Response(iteratorToStream(stream, { provider: provider.providerId, model: provider.model, companyId: parsed.data.companyId }), {
       headers: {
         'Content-Type': 'text/plain; charset=utf-8',
         'Cache-Control': 'no-store, no-transform',

@@ -29,8 +29,17 @@ const FAILOVER_PRIORITY = [
   'qwen-3.6',
 ];
 
-/** NVIDIA quota/server statuses that trigger failover (auth/config errors do not). */
-const RETRYABLE_STATUS = new Set([429, 500, 502, 503, 504]);
+/**
+ * Statuses that trigger failover to the next model (auth/config errors do not).
+ *
+ * Quota/server: 429, 500, 502, 503, 504.
+ * Model-availability: 404 (model not found, or not enabled for this account) and
+ * 410 (model reached end-of-life). A retired model is a property of THAT model,
+ * not of the key or the request, so the next model in the chain can still serve
+ * the turn — treating it as fatal took the whole chat down when NVIDIA EOL'd a
+ * model out from under the deployed config.
+ */
+const RETRYABLE_STATUS = new Set([404, 410, 429, 500, 502, 503, 504]);
 
 export class ModelRouter {
   /**
@@ -102,8 +111,8 @@ export class ModelRouter {
 
   /**
    * Stream tokens from the active model. Same params as the provider.
-   * On an NVIDIA quota/server error (429/500/502/503/504) BEFORE the first
-   * token, transparently fails over to the next model in the priority list.
+   * On a retryable error (see RETRYABLE_STATUS) BEFORE the first token,
+   * transparently fails over to the next model in the priority list.
    * Once streaming has started it cannot fail over, so mid-stream errors throw.
    */
   async *stream(params) {
@@ -138,7 +147,7 @@ export class ModelRouter {
           if (next) console.log(`[Nova Router]\n${err.status} received.\nSwitching to ${next}`);
           continue;
         }
-        // Non-retryable (400/401/403/404, network, abort) → throw the original error.
+        // Non-retryable (400/401/403, network, abort) → throw the original error.
         throw err;
       }
     }
@@ -148,7 +157,7 @@ export class ModelRouter {
 
   /**
    * Single-shot completion from the active model. Applies the SAME failover as
-   * `stream()` — retryable NVIDIA errors advance to the next priority model.
+   * `stream()` — retryable errors advance to the next priority model.
    */
   async generate(params) {
     const order = this._attemptOrder();
