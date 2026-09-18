@@ -1,5 +1,6 @@
 import { siteConfig } from '@/config/site';
 import { getShowcaseCaseStudies } from '@/content/caseStudies';
+import { getServicePagePaths } from '@/data/servicePages';
 import { posts } from '@/content/blog';
 
 export default function sitemap() {
@@ -8,6 +9,17 @@ export default function sitemap() {
     { path: '/', priority: 1.0, changeFrequency: 'monthly' },
     { path: '/work', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/services', priority: 0.9, changeFrequency: 'monthly' },
+    // The four dedicated service routes, DERIVED from src/data/servicePages.js
+    // rather than listed here. A fifth service becomes an entry in that array
+    // and appears in the sitemap automatically — the failure mode this avoids
+    // is a new page that ships, renders, and is never submitted because nobody
+    // remembered this file. Same priority as the hub: these are the pages
+    // intended to rank for service intent.
+    ...getServicePagePaths().map((path) => ({
+      path,
+      priority: 0.9,
+      changeFrequency: 'monthly',
+    })),
     { path: '/website-development-pakistan', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/about', priority: 0.7, changeFrequency: 'yearly' },
     { path: '/blog', priority: 0.7, changeFrequency: 'weekly' },

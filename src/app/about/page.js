@@ -1,4 +1,5 @@
 import { PageHeader } from '@/components/ui/PageHeader';
+import { EntitySummary } from '@/components/sections/about/EntitySummary';
 import { WhoWeAre } from '@/components/sections/about/WhoWeAre';
 import { WhyWeExist } from '@/components/sections/about/WhyWeExist';
 import { Founder } from '@/components/sections/about/Founder';
@@ -10,10 +11,15 @@ import { AboutCta } from '@/components/sections/about/AboutCta';
 import { buildMetadata } from '@/lib/seo';
 import { breadcrumbSchema, jsonLd } from '@/lib/schema';
 
+/**
+ * Title names the entity AND the place, because this is the page an answer
+ * engine resolves "who is Avenix Studio" against, and a bare "About" gave it
+ * nothing to anchor on.
+ */
 export const metadata = buildMetadata({
-  title: 'About',
+  absoluteTitle: 'About Avenix Studio — Software & AI Studio in Lahore, Pakistan',
   description:
-    'Avenix Studio is a digital product studio combining strategy, design, engineering, AI and growth to build websites, web applications and AI systems for ambitious brands.',
+    'Avenix Studio is a digital product studio in Lahore, Pakistan, founded in 2023 — custom software, AI automation, mobile apps and SEO, built by one accountable team.',
   path: '/about',
 });
 
@@ -77,6 +83,15 @@ export default function AboutPage() {
         ]}
       />
 
+      {/*
+        Placed FIRST among the body sections, immediately under the hero: the
+        extractable definition should be the first prose on the page, both for
+        an answer engine and for a human who wants the summary before the
+        narrative. Everything below it stays in its documented order and the
+        dark/light ground rhythm noted above is preserved — this section is
+        light-alt, and the section that follows it (WhoWeAre) is light.
+      */}
+      <EntitySummary />
       <WhoWeAre />
       <WhyWeExist />
       <Founder />

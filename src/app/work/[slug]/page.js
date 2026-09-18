@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowUpRight, ArrowRight, Check } from 'lucide-react';
 import { caseStudies, getCaseStudy } from '@/content/caseStudies';
+import { getServicePage } from '@/data/servicePages';
 import { BrowserMock } from '@/components/ui/BrowserMock';
 import { Counter } from '@/components/ui/Counter';
 import { Tag, StatusBadge } from '@/components/ui/Badge';
@@ -21,9 +22,19 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const study = getCaseStudy(slug);
   if (!study) return buildMetadata({ title: 'Case study not found', noIndex: true });
+  /*
+   * `seoTitle` / `seoDescription` are optional overrides that exist only for the
+   * entries whose on-page `summary` is formulaic ("A modern website for a solar
+   * energy company, built with Next.js") — unique as a string, interchangeable
+   * as a search result. Where they are absent this is byte-identical to the
+   * previous behaviour, so the twelve studies with real written summaries are
+   * untouched.
+   */
   return buildMetadata({
-    title: study.title,
-    description: study.summary,
+    ...(study.seoTitle
+      ? { absoluteTitle: `${study.seoTitle} | ${siteConfig.brand.name}` }
+      : { title: study.title }),
+    description: study.seoDescription || study.summary,
     path: `/work/${study.slug}`,
   });
 }
@@ -54,6 +65,11 @@ export default async function CaseStudyPage({ params }) {
     { name: 'Work', path: '/work' },
     { name: study.title, path: `/work/${study.slug}` },
   ];
+
+  // The service this build belongs under. Resolved rather than hardcoded, and
+  // guarded: an entry whose `service` stopped matching a real route renders no
+  // link instead of a 404.
+  const service = getServicePage(study.service);
 
   return (
     <main id="main">
@@ -154,6 +170,37 @@ export default async function CaseStudyPage({ params }) {
             ))}
           </div>
         </Reveal>
+
+        {/*
+          CASE STUDY → SERVICE. The one link this page was missing: a visitor who
+          likes this build had nowhere to go except a generic contact CTA, and a
+          crawler had no path from the proof back to the page that sells the
+          thing. Anchor text names the service, not "click here".
+        */}
+        {service && (
+          <Reveal className="mt-16">
+            <Link
+              href={`/services/${service.slug}`}
+              className="card-premium group flex flex-col items-start gap-4 p-6 md:flex-row md:items-center md:justify-between"
+            >
+              <span>
+                <span className="font-mono text-caption uppercase tracking-[0.18em] text-faint">
+                  The service behind this build
+                </span>
+                <span className="mt-1 block font-display text-h3 text-text-strong">
+                  {service.h1}
+                </span>
+                <span className="measure mt-2 block text-body-sm text-muted">
+                  {service.intro}
+                </span>
+              </span>
+              <ArrowRight
+                className="h-6 w-6 shrink-0 text-accent transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              />
+            </Link>
+          </Reveal>
+        )}
 
         {/* CTA + next */}
         <Reveal className="mt-16 flex flex-col items-start gap-6 rounded-xl border border-border-strong bg-surface p-8 md:flex-row md:items-center md:justify-between">

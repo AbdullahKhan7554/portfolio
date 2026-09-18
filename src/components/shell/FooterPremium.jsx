@@ -11,8 +11,9 @@ import {
   useTransform,
   useReducedMotion,
 } from 'framer-motion';
-import { Github, Linkedin, Instagram, Facebook, Mail } from 'lucide-react';
+import { Github, Linkedin, Instagram, Facebook, Mail, MapPin, Phone } from 'lucide-react';
 import { siteConfig } from '@/config/site';
+import { getServiceSummaries } from '@/data/servicePages';
 
 const EASE_OUT = [0.16, 1, 0.3, 1];
 
@@ -25,13 +26,22 @@ const NAV_LINKS = [
   { label: 'Contact', href: '/contact' },
 ];
 
+/**
+ * Every entry now points at a page that exists.
+ *
+ * Previously this column was six plain strings all linking to /services — six
+ * identical destinations wearing six different anchor texts, which tells a
+ * crawler nothing and a visitor less. The four dedicated routes are the real
+ * targets; the hub keeps its own link at the end.
+ *
+ * Derived from src/data/servicePages.js rather than retyped, so this column
+ * cannot drift out of sync with the routes that actually exist. `eyebrow` is
+ * used as the label because it is the short form ("Mobile Apps") where `h1` is
+ * the full keyword phrase, which would wrap badly in a footer column.
+ */
 const SERVICE_LINKS = [
-  'Custom Websites',
-  'AI Automation',
-  'SEO',
-  'UI / UX',
-  'Performance Optimization',
-  'Brand Identity',
+  ...getServiceSummaries().map((s) => ({ label: s.eyebrow, href: s.href })),
+  { label: 'All services', href: '/services' },
 ];
 
 const CONNECT_LINKS = [
@@ -211,6 +221,44 @@ export function FooterPremium() {
             for ambitious brands.
           </p>
 
+          {/*
+            NAP — Name, Address, Phone. The three facts a local search index
+            cross-references between a website, a Google Business Profile and
+            every directory listing; they have to be byte-identical everywhere
+            they appear, which is why all three are read from client.config.js
+            rather than typed here.
+
+            <address> is the correct element and is NOT italic here because
+            globals.css does not restyle it — the utility classes govern.
+
+            Locality-level only: there is no street address in config, and
+            inventing one to look more established is exactly the inconsistency
+            that breaks a local listing later. `country` is stored as the ISO
+            code 'PK' for schema.org, so it is spelled out for humans here.
+
+            The phone is guarded: NEXT_PUBLIC_CONTACT_PHONE can be absent in a
+            deploy, and an empty `tel:` link is worse than no link.
+          */}
+          <address className="mt-6 flex flex-col gap-2 not-italic text-body-sm text-muted">
+            <span className="font-mono text-caption uppercase tracking-[0.16em] text-faint">
+              {siteConfig.brand.legalName}
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
+              {siteConfig.contact.address.locality}, {siteConfig.contact.address.region},
+              Pakistan
+            </span>
+            {siteConfig.contact.phone && (
+              <a
+                href={`tel:${siteConfig.contact.phone.replace(/\s+/g, '')}`}
+                className="inline-flex w-fit items-center gap-2 transition-colors hover:text-text-strong"
+              >
+                <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+                {siteConfig.contact.phone}
+              </a>
+            )}
+          </address>
+
           <ul className="mt-6 flex flex-col gap-2 font-mono text-caption uppercase tracking-[0.16em] text-faint">
             <li>Available Worldwide</li>
             <li>Remote First</li>
@@ -239,8 +287,8 @@ export function FooterPremium() {
         <motion.div variants={itemV} className={columnHover}>
           <FooterHeading>Services</FooterHeading>
           {SERVICE_LINKS.map((s) => (
-            <FooterLink key={s} href="/services">
-              {s}
+            <FooterLink key={s.href} href={s.href}>
+              {s.label}
             </FooterLink>
           ))}
         </motion.div>

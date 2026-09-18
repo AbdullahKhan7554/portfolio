@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Services } from '@/components/sections/Services';
 import { FAQ } from '@/components/sections/FAQ';
@@ -6,15 +8,22 @@ import { RevealGroup, RevealItem } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { engagementSteps } from '@/content/process';
+import { getServiceSummaries } from '@/data/servicePages';
 import { siteConfig } from '@/config/site';
 import { buildMetadata } from '@/lib/seo';
 import { breadcrumbSchema, servicesSchema, jsonLd } from '@/lib/schema';
 import { getPageHero } from '@/content/pageHeroes';
 
+/**
+ * The hub title names the four things people actually search for, because
+ * "Services — Avenix Studio" told a searcher nothing about what is sold here.
+ * `absoluteTitle` for the same reason the four detail routes use it: the
+ * services have to come before the brand, not after it.
+ */
 export const metadata = buildMetadata({
-  title: 'Services',
+  absoluteTitle: 'Software, AI, Mobile App & SEO Services | Avenix Studio',
   description:
-    'Transparent web development packages from Avenix Studio — from high-converting landing pages to full-stack MERN applications. Fixed quotes, clear timelines.',
+    'Avenix Studio services — custom software development, AI automation, mobile app development and SEO, delivered by one accountable team from Lahore, Pakistan.',
   path: '/services',
 });
 
@@ -49,6 +58,51 @@ export default function ServicesPage() {
       />
 
       <Services />
+
+      {/*
+        THE HUB LINK GRID. /services previously described the catalogue and then
+        dead-ended — every "service" on it was a card with nowhere to go, so the
+        page had to rank for eight different intents by itself and ranked for
+        none of them. These four links are the routes that each own one intent.
+
+        Anchor text is the page's own H1, not "learn more": the anchor is the
+        strongest internal signal about what the target page is for, and four
+        identical "learn more" links describe nothing.
+
+        Rendered from getServiceSummaries() rather than a literal list, so a new
+        entry in src/data/servicePages.js appears here, in the sitemap and in
+        the footer without three separate edits.
+      */}
+      <Section
+        alt
+        eyebrow="Explore in detail"
+        title="Four services, four dedicated pages."
+        intro="Each one covers what we do, how we work, the stack we build on, and the questions clients ask before they start."
+      >
+        <RevealGroup className="grid gap-5 sm:grid-cols-2" stagger={0.08}>
+          {getServiceSummaries().map((s) => (
+            <RevealItem key={s.slug}>
+              <Link
+                href={s.href}
+                className="card-premium group flex h-full flex-col p-6 transition-transform duration-base ease-out-quad hover:-translate-y-1"
+              >
+                <span className="font-mono text-eyebrow uppercase tracking-[0.14em] text-accent">
+                  {s.eyebrow}
+                </span>
+                <h3 className="mt-3 font-display text-h3 text-text-strong">{s.title}</h3>
+                <p className="mt-2 text-body-sm text-muted">{s.intro}</p>
+                <span className="mt-4 inline-flex items-center gap-2 text-body-sm text-text-strong">
+                  Explore {s.eyebrow.toLowerCase()}
+                  <ArrowRight
+                    className="h-4 w-4 transition-transform duration-base ease-out-quad group-hover:translate-x-1"
+                    aria-hidden="true"
+                  />
+                </span>
+              </Link>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      </Section>
 
       <Section
         eyebrow="How we'll work together"

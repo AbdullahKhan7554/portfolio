@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { Hero } from '@/components/sections/Hero';
 import { Services } from '@/components/sections/Services';
 import { WhyMe } from '@/components/sections/WhyMe';
@@ -7,6 +9,9 @@ import { TechStack } from '@/components/sections/TechStack';
 import { PricingTeaser } from '@/components/sections/PricingTeaser';
 import { FAQ } from '@/components/sections/FAQ';
 import { Contact } from '@/components/sections/Contact';
+import { Section } from '@/components/ui/Section';
+import { RevealGroup, RevealItem } from '@/components/ui/Reveal';
+import { getServiceSummaries } from '@/data/servicePages';
 import { buildMetadata } from '@/lib/seo';
 import { professionalServiceSchema, jsonLd } from '@/lib/schema';
 
@@ -35,6 +40,42 @@ export default function HomePage() {
       />
       <Hero />
       <Services />
+
+      {/*
+        SERVICE LINK ROW — DELIBERATELY UN-NUMBERED.
+        Section eyebrows on this page are hardcoded and numbered ("01 — Services",
+        "02 — ..."), and that numbering is a locked part of the design system. So
+        this block passes NO eyebrow: it carries a title only, which means it
+        adds no number, consumes no number, and leaves every existing eyebrow
+        exactly where it was. Reordering rules are untouched.
+
+        It exists because the homepage is the site's strongest page and, before
+        this, it linked to no service page at all — <Services /> is a scroll
+        story with no outbound links. Four descriptive anchors here is the
+        cheapest real internal-linking improvement available.
+      */}
+      <Section title="Explore each service in detail.">
+        <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
+          {getServiceSummaries().map((service) => (
+            <RevealItem key={service.slug}>
+              <Link
+                href={service.href}
+                className="card-premium group flex h-full flex-col justify-between gap-4 p-5 transition-transform duration-base ease-out-quad hover:-translate-y-1"
+              >
+                <span className="font-display text-h4 text-text-strong">{service.title}</span>
+                <span className="inline-flex items-center gap-2 text-body-sm text-accent">
+                  Learn more
+                  <ArrowRight
+                    className="h-4 w-4 transition-transform duration-base ease-out-quad group-hover:translate-x-1"
+                    aria-hidden="true"
+                  />
+                </span>
+              </Link>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      </Section>
+
       <WhyMe />
       <Process />
       <ClientLogoStrip />

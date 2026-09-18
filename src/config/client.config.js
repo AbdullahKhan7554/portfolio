@@ -12,7 +12,29 @@
  * ============================================================================
  */
 
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
+/**
+ * Canonical deploy URL, normalised.
+ *
+ * THE https UPGRADE IS NOT COSMETIC. This one string feeds `siteConfig.url`,
+ * which feeds `metadataBase`, every `alternates.canonical`, every OG/Twitter
+ * `url`, every sitemap entry and every JSON-LD `url` on the site. A deploy env
+ * carrying `http://` therefore makes the site self-declare http canonicals on
+ * every page while serving https — so the scheme is forced here rather than
+ * trusted from the environment.
+ *
+ * localhost and 127.0.0.1 are exempt: the dev server is genuinely http, and
+ * upgrading it would break local OG/canonical resolution.
+ *
+ * This is a guard, not a fix. The env var itself should still be corrected in
+ * the deploy platform — a value that is wrong here is also wrong everywhere
+ * else it is read.
+ */
+const RAW_SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(
+  /\/$/,
+  '',
+);
+const IS_LOCAL = /^https?:\/\/(localhost|127\.0\.0\.1)(:|$|\/)/.test(RAW_SITE_URL);
+const SITE_URL = IS_LOCAL ? RAW_SITE_URL : RAW_SITE_URL.replace(/^http:\/\//, 'https://');
 
 export const clientConfig = {
   // --- Identity ------------------------------------------------------------
@@ -93,7 +115,16 @@ export const clientConfig = {
 
   // --- SEO defaults --------------------------------------------------------
   seo: {
-    defaultTitle: 'Avenix Studio — Premium Full-Stack Web Development',
+    /**
+     * THE HOMEPAGE TITLE (and the fallback for any route that passes no title).
+     * Deliberately NOT brand-led: the brand already ranks for its own name, and
+     * a title that only says "Avenix Studio" gives a searcher looking for a
+     * supplier nothing to match on. Leads with what is sold, then the market,
+     * then the brand. Uses a pipe rather than the em dash `titleTemplate` uses,
+     * because this string bypasses that template entirely.
+     */
+    defaultTitle:
+      'Software Development & AI Automation Company in Pakistan | Avenix Studio',
     titleTemplate: '%s — Avenix Studio',
     /**
      * THE EFFECTIVE SITE DESCRIPTION. Two consumers, both verified:
@@ -107,7 +138,7 @@ export const clientConfig = {
      * entity. Length kept near 155 chars so it is not truncated in results.
      */
     description:
-      'Avenix Studio is a digital product studio building premium websites, web applications and AI systems for ambitious brands — strategy, design and engineering in one practice.',
+      'Avenix Studio is a software development and AI automation company in Lahore, Pakistan — custom software, mobile apps, AI agents and SEO for growing businesses.',
     /**
      * Ordered by positioning, not volume: the brand and what it is come first.
      * "Abdullah Khan" is retained because the founder is a real, searched entity
