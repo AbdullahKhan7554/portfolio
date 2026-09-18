@@ -1,11 +1,12 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import { posts, getPost, formatDate } from '@/content/blog';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { PostCover } from '@/components/ui/PostCover';
 import { Reveal } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
 import { buildMetadata } from '@/lib/seo';
-import { breadcrumbSchema, jsonLd } from '@/lib/schema';
+import { breadcrumbSchema, faqSchema, jsonLd } from '@/lib/schema';
 import { siteConfig } from '@/config/site';
 
 export function generateStaticParams() {
@@ -57,6 +58,35 @@ function articleSchema(post) {
 }
 
 function Block({ block }) {
+  /*
+   * 'p-link' — a paragraph carrying exactly one internal link.
+   *
+   * WHY A BLOCK TYPE AND NOT MARKDOWN-IN-TEXT. The other three block types hold
+   * plain strings that are rendered as text, which is what keeps this content
+   * source safe: nothing here is ever passed to dangerouslySetInnerHTML. Adding
+   * inline markup would mean either parsing a mini-syntax or opening that door.
+   * Splitting the sentence into before / anchor / after keeps every value a
+   * plain string and still produces a real <Link>, so client-side navigation
+   * and prefetching work exactly as they do everywhere else on the site.
+   *
+   * Deliberately ONE link per block and one such block per post — the anchor
+   * text is the signal, and a post that links its service page five times is
+   * doing something other than helping the reader.
+   */
+  if (block.type === 'p-link') {
+    return (
+      <p className="mt-4 text-body text-muted">
+        {block.before}
+        <Link
+          href={block.href}
+          className="text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent"
+        >
+          {block.anchor}
+        </Link>
+        {block.after}
+      </p>
+    );
+  }
   if (block.type === 'h2') {
     return <h2 className="mt-10 font-display text-h3 text-text-strong">{block.text}</h2>;
   }
@@ -93,6 +123,17 @@ export default async function BlogPostPage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(articleSchema(post))}
       />
+      {/*
+        FAQPage — emitted ONLY for posts that define `faqs`. The three posts
+        that predate this field define none, so nothing is added to their markup
+        and they render byte-identical to before.
+      */}
+      {post.faqs?.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(faqSchema(post.faqs))}
+        />
+      )}
       <PostCover cover={post.cover} />
 
       {/* With a cover above it the header is no longer the first thing in
@@ -119,6 +160,41 @@ export default async function BlogPostPage({ params }) {
             <Block key={i} block={block} />
           ))}
         </Reveal>
+
+        {/*
+          FAQ — native <details>, not ui/Accordion.
+          Accordion renders `{isOpen && <panel>}`, so only ONE answer is ever in
+          the DOM and the rest never reach the server HTML. These FAQs exist to
+          be quoted by answer engines, so every answer has to be in the served
+          markup. Same decision, same reason, as the service pages.
+
+          Collapsed by default so the post's own copy stays the focus; the
+          content is present either way, which is the part that matters here.
+        */}
+        {post.faqs?.length > 0 && (
+          <Reveal className="measure mt-14">
+            <h2 className="font-display text-h3 text-text-strong">
+              Frequently asked questions
+            </h2>
+            <div className="mt-6 divide-y divide-border border-y border-border">
+              {post.faqs.map((faq) => (
+                <details key={faq.question} className="group py-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-h4 text-text transition-colors duration-fast hover:text-text-strong">
+                    <h3 className="m-0 font-display text-h4">{faq.question}</h3>
+                    <span
+                      aria-hidden="true"
+                      className="relative h-5 w-5 shrink-0 text-accent transition-transform duration-base ease-out-quad group-open:rotate-45"
+                    >
+                      <span className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-current" />
+                      <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-current" />
+                    </span>
+                  </summary>
+                  <p className="mt-3 text-body text-muted">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </Reveal>
+        )}
 
         <div className="mt-12 flex flex-col items-start gap-4 border-t border-border pt-8">
           <p className="font-display text-h4 text-text-strong">

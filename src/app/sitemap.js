@@ -43,12 +43,22 @@ export default function sitemap() {
   }));
 
   // Blog posts auto-included from content/blog — adding a new post adds its URL.
-  const blogRoutes = posts.map((p) => ({
-    url: `${siteConfig.url}/blog/${p.slug}`,
-    lastModified: p.date ? new Date(p.date) : now,
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  }));
+  //
+  // `!p.href` IS LOAD-BEARING, NOT A TIDY-UP. A post carrying `href` is a
+  // LISTING STUB: it appears on /blog but its body lives at its own top-level
+  // route, and app/blog/[slug]/page.js calls notFound() for exactly those
+  // entries. Mapping them here submitted /blog/website-development-pakistan to
+  // search engines as a canonical URL that has always returned a 404 — the
+  // real page is /website-development-pakistan, which this sitemap already
+  // lists separately in staticRoutes.
+  const blogRoutes = posts
+    .filter((p) => !p.href)
+    .map((p) => ({
+      url: `${siteConfig.url}/blog/${p.slug}`,
+      lastModified: p.date ? new Date(p.date) : now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    }));
 
   return [...staticRoutes, ...workRoutes, ...blogRoutes];
 }
