@@ -31,7 +31,7 @@ export const disciplines = [
   {
     id: 'design',
     name: 'Design',
-    clause: 'Making the decision legible — hierarchy, rhythm, restraint.',
+    clause: 'Making the decision legible through hierarchy, rhythm and restraint.',
   },
   {
     id: 'engineering',
@@ -46,7 +46,7 @@ export const disciplines = [
   {
     id: 'growth',
     name: 'Growth',
-    clause: 'Launch is the midpoint. What happens after it decides the value.',
+    clause: 'The work after launch is where the value actually shows up.',
   },
 ];
 
@@ -55,12 +55,12 @@ export const missionVision = {
   mission: {
     label: 'Today',
     title: 'Build technology people actually use.',
-    body: 'Useful outlasts impressive. Every project starts from what the business needs to happen, and ends with something its customers can move through without thinking about it. Purposeful design, engineering that holds up, and AI applied only where it earns its place.',
+    body: 'Useful outlasts impressive. Every project starts from what the business needs to happen and ends with something its customers can move through without thinking about it. That takes design with a reason behind it, engineering that holds up, and AI used only where it earns its place.',
   },
   vision: {
     label: 'Tomorrow',
     title: 'Business, design, engineering and AI as one system.',
-    body: 'Most teams still treat these as four separate hand-offs, and the seams are where products lose their edge. Avenix is building toward a studio where they operate as a single practice — so what we deliver becomes durable infrastructure for a business, not another redesign in two years.',
+    body: 'Most teams still treat these as four separate hand-offs, and the seams are where products lose their edge. Avenix is building toward a studio where they operate as a single practice, so what we deliver becomes durable infrastructure for a business instead of another redesign in two years.',
   },
 };
 
@@ -75,7 +75,7 @@ export const clientPhilosophy = [
     id: 'understand',
     title: 'Understand',
     description:
-      'We start with the business, not the brief — what the goal is, who it serves, and what genuinely constrains it. The awkward questions belong at the start, where they are still cheap to answer.',
+      'We start with the business, not the brief: what the goal is, who it serves, what genuinely constrains it. The awkward questions belong at the start, while they are still cheap to answer.',
   },
   {
     id: 'align',
@@ -87,13 +87,13 @@ export const clientPhilosophy = [
     id: 'build',
     title: 'Build',
     description:
-      'Design and engineering move as one motion rather than a relay, with milestones you can see and respond to while there is still time to change direction.',
+      'Design and engineering move together instead of as a relay, with milestones you can see and respond to while there is still time to change direction.',
   },
   {
     id: 'communicate',
     title: 'Communicate',
     description:
-      'Progress, decisions, and the reasoning behind them — including what we chose not to build and why. You should never have to ask where a project stands.',
+      'Progress, decisions, and the reasoning behind them, including what we chose not to build and why. You should never have to ask where a project stands.',
   },
   {
     id: 'improve',
@@ -139,7 +139,7 @@ export const principles = [
     id: 'longterm',
     title: 'Long-Term Thinking',
     description:
-      'We build for the version of the business that exists in three years, not just the one signing off today.',
+      'The business signing off today will not be the business in three years. We build for that one too.',
   },
 ];
 
@@ -155,6 +155,6 @@ export const trackRecord = [
 /** 04 — Founder. Philosophy behind the studio; no biography, no CV. */
 export const founderParagraphs = [
   'Avenix Studio was founded in 2023 on a straightforward objection: the industry keeps asking businesses to choose between work that looks considered and work that is built properly. Those are not opposing skills. Treating them as one practice is the entire premise of the studio.',
-  'Every technical decision here starts somewhere non-technical — what the business actually needs to happen, who it serves, and what it can realistically maintain once we are gone. A stack chosen before that is understood is a guess wearing confidence.',
-  'AI has made execution dramatically faster, and Avenix uses it throughout. What it has not changed is who is accountable. Judgment about what should be built, and responsibility for the result once it ships, stays human — that is not a limitation of the tools, it is the point.',
+  'Every technical decision here starts somewhere non-technical: what the business actually needs to happen, who it serves, and what it can realistically maintain once we are gone. Pick a stack before you know that and you are guessing.',
+  'AI has made execution dramatically faster, and Avenix uses it throughout. What it has not changed is who is accountable. Judgment about what should be built, and responsibility for the result once it ships, stays human. The tools did not change that, and they were never going to.',
 ];

@@ -50,7 +50,7 @@ export function Testimonials() {
       id="testimonials"
       eyebrow="09 — Social Proof"
       title="Trusted With Real Businesses."
-      intro="The numbers below are real and documented. Client words are being collected — what's shown gives a feel for the partnership."
+      intro="The numbers below are real and documented. Client words are still being collected, so what's shown here only gives a feel for the partnership."
     >
       <FloatingShapes />
       {/* Real aggregate proof */}

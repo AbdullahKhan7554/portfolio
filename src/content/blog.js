@@ -83,25 +83,25 @@ export const posts = [
     content: [
       {
         type: 'p',
-        text: 'Most business owners think of their website as a brochure. The better mental model is a storefront on the busiest street in the world — where the rent is your ad spend, and the door takes three seconds to open. Every second of delay is customers turning around before they ever see what you offer.',
+        text: 'Most business owners think of their website as a brochure. A storefront is the better mental model: one on the busiest street in the world, where the rent is your ad spend and the door takes three seconds to open. Every second of that delay is customers turning around before they see what you offer.',
       },
       { type: 'h2', text: 'Slow sites leak money everywhere' },
       {
         type: 'p',
-        text: 'A slow site does not just frustrate visitors. It lowers your search ranking, raises the cost of every paid click, and erodes trust before a word of your copy is read. The damage is invisible because it happens off-screen — in the people who never stayed long enough to convert.',
+        text: 'A slow site frustrates visitors, and that is the least of it. It lowers your search ranking, raises the cost of every paid click, and erodes trust before a word of your copy is read. The damage stays invisible because it happens off-screen, in the people who never stayed long enough to convert.',
       },
       { type: 'h2', text: 'What "fast" actually means' },
       {
         type: 'ul',
         items: [
-          'Largest Contentful Paint under 2 seconds — your main content appears almost instantly.',
-          'No layout shift — nothing jumps around as the page loads.',
-          'Instant interactions — taps and clicks respond within 200 milliseconds.',
+          'Largest Contentful Paint under 2 seconds, so your main content appears almost instantly.',
+          'No layout shift. Nothing jumps around as the page loads.',
+          'Instant interactions: taps and clicks respond within 200 milliseconds.',
         ],
       },
       {
         type: 'p',
-        text: 'These are the Core Web Vitals Google measures, and they are exactly what I build to on every project. The result is a site that feels premium, ranks better, and quietly converts more of the traffic you already have.',
+        text: 'These are the Core Web Vitals Google measures, and they are what we build to on every project. The result is a site that feels premium, ranks better, and quietly converts more of the traffic you already have.',
       },
     ],
   },
@@ -120,13 +120,13 @@ export const posts = [
     content: [
       {
         type: 'p',
-        text: 'Long contact forms assume a patient, desktop visitor. Real customers are on their phone, between tasks, deciding in seconds whether to reach out at all. The lower the friction, the more leads you capture — and almost nothing is lower-friction than a prefilled WhatsApp message.',
+        text: 'Long contact forms assume a patient visitor at a desk. Real customers are on their phone, between tasks, deciding in seconds whether to reach out at all. The lower the friction, the more leads you capture, and almost nothing is lower-friction than a prefilled WhatsApp message.',
       },
       { type: 'h2', text: 'Why it works' },
       {
         type: 'ul',
         items: [
-          'It is the channel people already use every day — no new app, no account.',
+          'It is the channel people already use every day. No new app, no account.',
           'A prefilled message removes the blank-page hesitation.',
           'Conversations feel personal, which builds trust faster than a form receipt.',
         ],
@@ -134,7 +134,7 @@ export const posts = [
       { type: 'h2', text: 'Designing it well' },
       {
         type: 'p',
-        text: 'A good implementation keeps a contact form for those who prefer it, but makes WhatsApp the obvious, repeated call-to-action — in the hero, after proof, and in a persistent button on mobile. Every tap is tracked, so you know which sections actually drive conversations.',
+        text: 'A good implementation keeps a contact form for the people who prefer it, then makes WhatsApp the obvious call to action and repeats it: in the hero, after the proof, and in a persistent button on mobile. Every tap is tracked, so you know which sections actually start conversations.',
       },
       {
         type: 'p',
@@ -154,7 +154,7 @@ export const posts = [
     content: [
       {
         type: 'p',
-        text: 'There is no single price for a mobile app in Pakistan, and any studio quoting one before asking what the app does is guessing. Cost is driven almost entirely by scope — how many screens, how much custom backend, whether payments are involved, and how much has to be maintained after launch — which is why two quotes for "an app" can differ by a factor of ten and both be honest.',
+        text: 'There is no single price for a mobile app in Pakistan, and any studio quoting one before asking what the app does is guessing. Scope drives almost all of it: how many screens, how much custom backend, whether payments are involved, how much has to be maintained after launch. That is why two quotes for "an app" can differ by a factor of ten and both be honest.',
       },
       {
         type: 'p',
@@ -165,13 +165,13 @@ export const posts = [
         type: 'ul',
         items: [
           'Number of distinct screens and flows. A catalogue app with eight screens and a contact button is a different build from one with onboarding, search, a cart, a profile and an order history. Screens are the crudest proxy for scope, but it is the one most clients can estimate themselves.',
-          'Whether it needs a custom backend. An app that only displays content can often run on a hosted service. An app with accounts, roles, orders or inventory needs a real API and database designed for it — frequently a larger job than the app itself.',
+          'Whether it needs a custom backend. An app that only displays content can often run on a hosted service. An app with accounts, roles, orders or inventory needs a real API and database designed for it, frequently a larger job than the app itself.',
           'Payments and third-party integrations. Every integration is a separate contract with someone else’s system: their rules, their edge cases, their failure modes. Payments in particular bring compliance, testing and error handling that a display-only app never touches.',
-          'One platform or two. Cross-platform frameworks mean one codebase serves iOS and Android, so the second platform is far from a second full build — but it is not free either. Store review, device testing and platform-specific behaviour still cost real time.',
-          'What happens after launch. An app is not a one-off purchase. Operating systems update annually, stores change their requirements, and libraries need patching. A quote with no maintenance line is not cheaper; it is incomplete.',
+          'One platform or two. Cross-platform frameworks mean one codebase serves iOS and Android, so the second platform is nowhere near a second full build. It is not free either. Store review, device testing and platform-specific behaviour still cost real time.',
+          'What happens after launch. An app is not a one-off purchase. Operating systems update annually, stores change their requirements, libraries need patching. A quote with no maintenance line is not cheaper. It is incomplete.',
         ],
       },
-      { type: 'h2', text: 'Four scope tiers, described rather than priced' },
+      { type: 'h2', text: 'Four scope tiers, described instead of priced' },
       {
         type: 'p',
         text: 'Most projects land in one of four bands. Thinking in bands is more useful than thinking in figures, because it tells you which conversation you are actually in.',
@@ -182,7 +182,7 @@ export const posts = [
           'Informational app. Content, a directory or a catalogue, no accounts. Closest to a mobile website in a native shell. The cheapest real option, and often the wrong one — if this is all you need, a fast mobile site may serve you better for less.',
           'Transactional app. Accounts, a database, some workflow: bookings, orders, memberships, submissions. This is where most small-business apps genuinely sit, and where a custom backend becomes unavoidable.',
           'Platform app. Multiple user roles, payments, notifications, an admin panel, possibly a web counterpart sharing the same API. Cost steps up sharply here because you are commissioning a system, not a screen set.',
-          'Ongoing product. A team, a roadmap, continuous releases. Priced as sustained capacity rather than as a project, because that is what it is.',
+          'Ongoing product. A team, a roadmap, continuous releases. Priced as sustained capacity, because that is what you are actually buying.',
         ],
       },
       { type: 'h2', text: 'Why two quotes for the same brief differ so much' },
@@ -205,9 +205,9 @@ export const posts = [
         type: 'ul',
         items: [
           'Developer accounts. Apple and Google both charge to publish, one annually. Small, but it surprises people.',
-          'Backend hosting and database. Ongoing, and it scales with usage rather than staying flat.',
+          'Backend hosting and database. Ongoing, and the bill grows with usage.',
           'Third-party services. Payment processing, SMS, push notifications and mapping all bill per use.',
-          'Maintenance. Budget for it deliberately rather than discovering it when an OS update breaks something.',
+          'Maintenance. Budget for it deliberately, or discover it when an OS update breaks something.',
           'Content. Someone has to write the copy and produce the images. It is almost always the client, and it is almost always the thing that delays launch.',
         ],
       },
@@ -218,7 +218,7 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'Be wary of a quote that is dramatically below the others. It usually means the backend is excluded, the testing is nominal, or the relationship ends at handover — and an app you cannot maintain is an expense, not an asset.',
+        text: 'Be wary of a quote that is dramatically below the others. It usually means the backend is excluded, the testing is nominal, or the relationship ends at handover. An app nobody can maintain costs you money every year it exists.',
       },
       { type: 'h2', text: 'Why we do not publish an app price list' },
       {
@@ -242,12 +242,12 @@ export const posts = [
       {
         question: 'Does building for both iOS and Android double the cost?',
         answer:
-          'No. With a cross-platform framework such as React Native or Flutter, a single codebase serves both, so the second platform adds a fraction rather than a multiple. That fraction is not zero — device testing, store review and platform-specific behaviour still take time — but doubling is the wrong mental model unless you are commissioning two separate native builds.',
+          'No. With a cross-platform framework such as React Native or Flutter, a single codebase serves both, so the second platform adds a fraction of the cost, not a multiple of it. That fraction is not zero. Device testing, store review and platform-specific behaviour all take time. But doubling is the wrong mental model unless you are commissioning two separate native builds.',
       },
       {
         question: 'Should I build an app or a mobile website first?',
         answer:
-          'If what you need is for people to find you, read about you and get in touch, a fast mobile website is almost always the better first investment: it is cheaper, it appears in search results, and nobody has to install anything. An app earns its cost when you need repeat usage, offline access, push notifications or device features — in other words, when people come back regularly.',
+          'If what you need is for people to find you, read about you and get in touch, a fast mobile website is almost always the better first investment. It is cheaper, it appears in search results, and nobody has to install anything. An app earns its cost when you need repeat usage, offline access, push notifications or device features. In other words, when people come back regularly.',
       },
       {
         question: 'What ongoing costs should I expect after the app launches?',
@@ -277,12 +277,12 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'Both are mature, both are used by large companies in production, and for most business apps either will work. Anyone telling you one is objectively dead or objectively superior is arguing about tools rather than about your project. What follows is the honest comparison, and the small number of cases where the decision is genuinely clear-cut.',
+        text: 'Both are mature, both are used by large companies in production, and for most business apps either will work. Anyone telling you one is objectively dead or objectively superior is arguing about tools, not about your project. What follows is the honest comparison, and the small number of cases where the decision is genuinely clear-cut.',
       },
       { type: 'h2', text: 'What they actually are' },
       {
         type: 'p',
-        text: 'React Native is Meta’s framework. You write JavaScript or TypeScript using React, and it renders real native platform components. Flutter is Google’s framework. You write Dart, and it paints every pixel itself with its own rendering engine rather than delegating to native controls.',
+        text: 'React Native is Meta’s framework. You write JavaScript or TypeScript using React, and it renders real native platform components. Flutter is Google’s framework. You write Dart, and it paints every pixel itself with its own rendering engine instead of delegating to native controls.',
       },
       {
         type: 'p',
@@ -293,7 +293,7 @@ export const posts = [
         type: 'ul',
         items: [
           'You already have JavaScript or React in the business. Shared language, shared tooling, shared mental model, and developers who can move between the web app and the mobile app. This is by far the most common deciding factor.',
-          'You want to share real code with a web product. Validation rules, API clients, formatting and business logic can live in one place rather than being reimplemented in Dart.',
+          'You want to share real code with a web product. Validation rules, API clients, formatting and business logic live in one place instead of being written twice, once in Dart.',
           'Hiring. There are simply more JavaScript developers than Dart developers, in Pakistan and everywhere else. That matters for the day we are no longer the ones maintaining it.',
           'The app should feel like the platform. Because it uses native components, standard controls behave the way users expect on each OS without extra work.',
         ],
@@ -302,9 +302,9 @@ export const posts = [
       {
         type: 'ul',
         items: [
-          'The design is heavily custom. If the brief is an interface that looks like nothing else and must be identical on both platforms, Flutter’s own rendering is an advantage rather than something to fight.',
+          'The design is heavily custom. If the brief is an interface that looks like nothing else and must be identical on both platforms, Flutter’s own rendering stops being a quirk and starts being the reason to pick it.',
           'Animation-heavy interfaces. Rich, continuous motion tends to be smoother to build and to run, because the framework controls the whole rendering pipeline.',
-          'Consistency on older devices. Painting its own widgets means fewer surprises from platform version differences — useful in markets where a wide spread of older Android handsets is normal.',
+          'Consistency on older devices. Painting its own widgets means fewer surprises from platform version differences. That matters in markets where a wide spread of older Android handsets is normal.',
           'You want one toolkit for more surfaces. Flutter also targets desktop and embedded, which occasionally matters.',
         ],
       },
@@ -312,7 +312,7 @@ export const posts = [
       {
         type: 'ul',
         items: [
-          'Performance. For the overwhelming majority of business apps — lists, forms, media, navigation — both are fast enough that users cannot tell. Performance problems in real apps are almost always caused by unoptimised images, chatty network calls and bad list rendering, not by the framework.',
+          'Performance. For the overwhelming majority of business apps, meaning lists, forms, media and navigation, both are fast enough that users cannot tell. Performance problems in real apps are almost always caused by unoptimised images, chatty network calls and bad list rendering, not by the framework.',
           'App size. Flutter binaries have historically been larger, but the gap is smaller than it was and rarely decides anything.',
           'Maturity. Both have been production-ready for years. This argument is out of date.',
           'Which is more popular. They are both large, well-funded ecosystems. Neither is going away on a timeline that should affect your decision.',
@@ -321,7 +321,7 @@ export const posts = [
       { type: 'h2', text: 'Ecosystem, libraries and the long tail' },
       {
         type: 'p',
-        text: 'Both frameworks cover the common requirements well — navigation, storage, camera, maps, push notifications, payments. The difference shows up at the edges, and the edge you hit depends on what you are integrating.',
+        text: 'Both frameworks cover the common requirements well: navigation, storage, camera, maps, push notifications, payments. The difference shows up at the edges, and the edge you hit depends on what you are integrating.',
       },
       {
         type: 'p',
@@ -333,7 +333,7 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'One practical note for either choice: every native dependency you add is a thing that can break when the platforms release their annual updates. A build with forty dependencies is not twice the maintenance of one with twenty — it is worse than that, because they interact. Keeping the dependency list deliberately short is one of the few decisions that pays back every single year.',
+        text: 'One practical note for either choice: every native dependency you add is a thing that can break when the platforms release their annual updates. A build with forty dependencies is worse than twice the maintenance of one with twenty, because they interact. Keeping the dependency list short is one of the few decisions that pays back every year.',
       },
       { type: 'h2', text: 'The questions that actually decide it' },
       {
@@ -352,7 +352,7 @@ export const posts = [
       { type: 'h2', text: 'When neither is the right answer' },
       {
         type: 'p',
-        text: 'Two honest exceptions. If your app’s core value depends on the newest platform-specific hardware or OS features the day they ship, fully native development is still the safer route. And if what you actually need is for people to find you, read about you and contact you, a fast mobile website will serve you better than either framework — it costs less, it appears in search results, and nobody has to install anything.',
+        text: 'Two honest exceptions. If your app’s core value depends on the newest platform-specific hardware or OS features the day they ship, fully native development is still the safer route. And if what you actually need is for people to find you, read about you and contact you, a fast mobile website will serve you better than either framework. It costs less, it appears in search results, and nobody has to install anything.',
       },
       {
         type: 'p',
@@ -360,7 +360,7 @@ export const posts = [
       },
       {
         type: 'p-link',
-        before: 'We build in both and pick per project rather than by habit, which is why the recommendation comes during scoping with the trade-off explained rather than as a house preference. Our ',
+        before: 'We build in both and pick per project, not by habit, so the recommendation comes during scoping with the trade-off explained. Our ',
         href: '/services/mobile-app-development',
         anchor: 'mobile app development service',
         after: ' covers how that decision gets made alongside the rest of the build.',
@@ -370,7 +370,7 @@ export const posts = [
       {
         question: 'Is React Native or Flutter faster?',
         answer:
-          'For typical business apps the difference is not perceptible to users. Flutter can have an edge in animation-heavy interfaces because it controls the entire rendering pipeline, but real-world slowness is almost always caused by unoptimised images, inefficient network calls or poorly built lists — problems that occur identically in both frameworks and are fixed the same way.',
+          'For typical business apps the difference is not perceptible to users. Flutter can have an edge in animation-heavy interfaces because it controls the entire rendering pipeline, but real-world slowness is almost always caused by unoptimised images, inefficient network calls or poorly built lists. Those problems occur identically in both frameworks and are fixed the same way.',
       },
       {
         question: 'Which is cheaper to build with?',
@@ -380,7 +380,7 @@ export const posts = [
       {
         question: 'Can I switch from one to the other later?',
         answer:
-          'Not cheaply. The application code does not transfer — a switch is effectively a rewrite of the front end. Your backend, API and database are unaffected, which is one good reason to keep business logic on the server rather than embedded in the app. Treat the choice as a multi-year commitment.',
+          'Not cheaply. The application code does not transfer, so a switch is effectively a rewrite of the front end. Your backend, API and database are unaffected, which is one good reason to keep business logic on the server instead of embedded in the app. Treat the choice as a multi-year commitment.',
       },
       {
         question: 'Do both publish to the App Store and Google Play?',
@@ -411,10 +411,10 @@ export const posts = [
       {
         type: 'ul',
         items: [
-          'Number of distinct workflows. Not features — workflows. "Staff submit a leave request, a manager approves it, payroll sees the result" is one workflow with three steps. Counting workflows rather than features is the fastest way to size a project honestly, because features multiply while workflows stay countable.',
-          'Integrations. Every external system — accounting software, a payment gateway, a courier API, WhatsApp, an existing database — is a separate contract with someone else’s rules and failure modes. Integrations are consistently the most underestimated line in any quote.',
+          'Number of distinct workflows. Workflows, not features. "Staff submit a leave request, a manager approves it, payroll sees the result" is one workflow with three steps. Counting workflows is the fastest way to size a project honestly, because features multiply while workflows stay countable.',
+          'Integrations. Every external system is a separate contract with someone else’s rules and failure modes: accounting software, a payment gateway, a courier API, WhatsApp, an existing database. Integrations are consistently the most underestimated line in any quote.',
           'User roles and permissions. One kind of user is straightforward. Admin, manager, staff and customer, each seeing different data with different rights, is a different class of problem. Permissions touch every screen and every query.',
-          'Expected lifespan. Software meant to run for five years is built differently from a tool for one campaign: more tests, clearer structure, better documentation. Both are legitimate; they cost different amounts and you should say which you want.',
+          'Expected lifespan. Software meant to run for five years is built differently from a tool for one campaign: more tests, clearer structure, better documentation. Both are legitimate. They cost different amounts, and you should say up front which one you want.',
         ],
       },
       { type: 'h2', text: 'The tiers most business projects fall into' },
@@ -424,7 +424,7 @@ export const posts = [
           'Internal tool. One team, one workflow, replacing a spreadsheet or a manual process. Small scope and often the highest return per rupee spent, because it removes work someone is currently doing by hand every day.',
           'Business system. Several connected workflows, a few user roles, an admin view and reporting. Inventory, bookings, job tracking, client management. This is where most small and mid-sized business projects genuinely sit.',
           'Customer-facing platform. Your customers use it directly. Accounts, payments, notifications, support for people who did not read a manual and never will. The step up in cost is mostly about the edge cases and the polish that external users require.',
-          'Multi-tenant product. You are selling the software itself to multiple organisations. A different business model, and effectively product development rather than a project.',
+          'Multi-tenant product. You are selling the software itself to multiple organisations. That is a different business model, and it is product development, not a project.',
         ],
       },
       { type: 'h2', text: 'Why proposals for the same brief vary so widely' },
@@ -465,7 +465,7 @@ export const posts = [
       { type: 'h2', text: 'Why we do not publish a price list' },
       {
         type: 'p',
-        text: 'Any figure broad enough to be true for every project would be too broad to help you budget, and a narrower one would simply be wrong for most readers. Worse, a published number steers the conversation toward fitting a build to a price rather than scoping the software the business actually needs. We quote per project after understanding the workflows, and the figure is fixed in writing before work begins.',
+        text: 'Any figure broad enough to be true for every project would be too broad to help you budget, and a narrower one would simply be wrong for most readers. Worse, a published number steers the conversation toward fitting a build to a price instead of scoping the software the business actually needs. We quote per project after understanding the workflows, and the figure is fixed in writing before work begins.',
       },
       {
         type: 'p-link',
@@ -479,17 +479,17 @@ export const posts = [
       {
         question: 'Is custom software cheaper than a monthly SaaS subscription?',
         answer:
-          'Not initially — custom software is a capital cost where SaaS is an operating cost. It becomes cheaper over time when subscription fees scale with your headcount or usage, or when the tool nearly fits but forces expensive manual workarounds. The crossover often arrives sooner than people expect once per-seat pricing grows, but it depends entirely on your numbers.',
+          'Not initially. Custom software is a capital cost where SaaS is an operating cost. It becomes cheaper over time when subscription fees scale with your headcount or usage, or when the tool nearly fits but forces expensive manual workarounds. The crossover often arrives sooner than people expect once per-seat pricing grows, but it depends entirely on your numbers.',
       },
       {
         question: 'How long does a custom software project take?',
         answer:
-          'A focused internal tool is usually a matter of weeks. A business system with several workflows and roles runs longer and should be broken into milestones so something usable ships early rather than everything arriving at the end. Any credible proposal commits to a milestone timeline before work begins.',
+          'A focused internal tool is usually a matter of weeks. A business system with several workflows and roles runs longer and should be broken into milestones, so something usable ships early instead of everything landing at the end. Any credible proposal commits to a milestone timeline before work begins.',
       },
       {
         question: 'What is a discovery phase and do I have to pay for it?',
         answer:
-          'Discovery is the work of mapping your actual workflows, data and integrations, and turning them into a specification that can be quoted accurately. It is normally paid, because it is real work that produces a real deliverable — and the specification is yours to take to other studios if you want competing quotes against it.',
+          'Discovery is the work of mapping your actual workflows, data and integrations, and turning them into a specification that can be quoted accurately. It is normally paid, because it is real work that produces a real deliverable. The specification is yours, too, so you can take it to other studios and get competing quotes against it.',
       },
       {
         question: 'What if my requirements change halfway through?',
@@ -515,17 +515,17 @@ export const posts = [
     content: [
       {
         type: 'p',
-        text: 'Start with off-the-shelf, and only build custom when you can name the specific thing it cannot do. Existing software is cheaper, available immediately, maintained by someone else and improved without you paying for it — which means the burden of proof sits with the custom option, every time.',
+        text: 'Start with off-the-shelf, and only build custom when you can name the specific thing it cannot do. Existing software is cheaper, available immediately, maintained by someone else and improved without you paying for it. The burden of proof sits with the custom option, every time.',
       },
       {
         type: 'p',
-        text: 'That said, "just use a SaaS tool" becomes bad advice at a predictable point: when the workarounds stop being minor, when per-seat pricing outgrows the value, or when the process the software is bending is the thing your business actually competes on. This post is about recognising that point rather than guessing at it.',
+        text: 'That said, "just use a SaaS tool" becomes bad advice at a predictable point: when the workarounds stop being minor, when per-seat pricing outgrows the value, or when the process the software is bending is the thing your business actually competes on. This post is about recognising that point instead of guessing at it.',
       },
       { type: 'h2', text: 'What off-the-shelf actually gives you' },
       {
         type: 'ul',
         items: [
-          'It exists today. You can trial it this afternoon rather than waiting for a build.',
+          'It exists today. You can trial it this afternoon instead of waiting months for a build.',
           'Someone else carries maintenance, security patching and compatibility with everything it integrates with.',
           'The cost is predictable and spread out, which is easier on cash flow than a capital project.',
           'It improves without you commissioning anything, because the vendor is selling to thousands of businesses with overlapping needs.',
@@ -545,7 +545,7 @@ export const posts = [
         type: 'ul',
         items: [
           'The process is your differentiator. If how you quote, schedule or fulfil is a real competitive advantage, software that forces you into a generic version of it erodes exactly the thing you are good at.',
-          'You are paying for workarounds. Count the hours your team spends exporting, re-keying, reconciling between two systems or maintaining a spreadsheet that shadows the real tool. That is a recurring cost, and it is usually invisible because it is spread across people rather than showing up on an invoice.',
+          'You are paying for workarounds. Count the hours your team spends exporting, re-keying, reconciling between two systems or maintaining a spreadsheet that shadows the real tool. That is a recurring cost, and it stays invisible because it is spread across people instead of arriving on an invoice.',
           'Per-seat pricing has outgrown the value. Subscription costs scale with headcount whether or not the extra users need the full product. At a certain team size the arithmetic changes.',
           'You need two systems to talk and they will not. If the integration you need does not exist and the vendors have no interest in building it, you are stuck paying people to be the integration.',
           'You cannot get your data out. A tool that holds your operating history hostage is a strategic risk regardless of how well it works day to day.',
@@ -554,7 +554,7 @@ export const posts = [
       { type: 'h2', text: 'The middle option most people miss' },
       {
         type: 'p',
-        text: 'The choice is rarely binary. The most cost-effective answer is often to keep the off-the-shelf tools that work — accounting, email, payroll, document storage — and build only the one workflow that is genuinely yours, wiring it into the rest through their APIs.',
+        text: 'The choice is rarely binary. The most cost-effective answer is often to keep the off-the-shelf tools that already work, accounting and email and payroll and document storage, then build only the one workflow that is genuinely yours and wire it into the rest through their APIs.',
       },
       {
         type: 'p',
@@ -571,11 +571,11 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'If the gap is spread thinly — a field you do not use, a report formatted differently, a screen with clutter on it — adapt and move on. Habit is not a requirement, and a great deal of "the tool cannot do it" turns out to mean "the tool does not do it the way we did it before".',
+        text: 'If the gap is spread thinly, a field you do not use or a report formatted differently or a screen with clutter on it, adapt and move on. Habit is not a requirement, and a great deal of "the tool cannot do it" turns out to mean "the tool does not do it the way we did it before".',
       },
       {
         type: 'p',
-        text: 'If the gap is concentrated in one step that runs many times a day, the arithmetic is completely different. A missing capability in a workflow your team performs fifty times a week is not 20% of the problem; it is most of the cost, because every one of those runs now needs a human to bridge it. The question is never what percentage fits. It is how often you touch the part that does not.',
+        text: 'If the gap is concentrated in one step that runs many times a day, the arithmetic is completely different. A missing capability in a workflow your team performs fifty times a week is most of the cost, not 20% of it, because every one of those runs needs a human to bridge the gap. So the useful question is not what percentage fits. It is how often you touch the part that does not.',
       },
       { type: 'h2', text: 'The honest costs of building' },
       {
@@ -590,7 +590,7 @@ export const posts = [
       { type: 'h2', text: 'A decision you can actually run' },
       {
         type: 'p',
-        text: 'Write down the workflow end to end. Trial the two or three best-known tools against it for a fortnight — properly, with real data. List precisely where each one fails. If the failures are cosmetic or a matter of habit, buy and adapt. If the failures are structural, and you can estimate the hours the workarounds cost every month, you have both the justification for a build and the scope for it.',
+        text: 'Write down the workflow end to end. Trial the two or three best-known tools against it for a fortnight, properly, with real data. List precisely where each one fails. If the failures are cosmetic or a matter of habit, buy and adapt. If the failures are structural, and you can estimate the hours the workarounds cost every month, you have both the justification for a build and the scope for it.',
       },
       {
         type: 'p',
@@ -601,29 +601,29 @@ export const posts = [
         before: 'If you have reached that point and want the workflow mapped before anyone writes code, our ',
         href: '/services/software-development',
         anchor: 'custom software development service',
-        after: ' starts with exactly that scoping step — and it is a step that occasionally ends with us telling you to buy something instead.',
+        after: ' starts with exactly that scoping step. It is a step that occasionally ends with us telling you to buy something instead.',
       },
     ],
     faqs: [
       {
         question: 'When is off-the-shelf software definitely the right choice?',
         answer:
-          'When the process is standard rather than distinctive. Accounting, payroll, email, document storage, basic CRM and helpdesk are all solved problems with mature products behind them. Building your own version of any of these is almost always a poor use of money, because you will spend heavily to end up behind what you could have subscribed to.',
+          'When the process is standard, not distinctive. Accounting, payroll, email, document storage, basic CRM and helpdesk are all solved problems with mature products behind them. Building your own version of any of these is almost always a poor use of money, because you will spend heavily to end up behind what you could have subscribed to.',
       },
       {
         question: 'How do I calculate whether custom software is worth it?',
         answer:
-          'Estimate the recurring cost of the current situation: hours per week spent on manual workarounds multiplied by a loaded hourly rate, plus subscription fees you would stop paying, plus any revenue lost to the limitation. Compare that annual figure against the build cost plus its ongoing maintenance. If the payback period is under about two years the case is usually strong; beyond three it rarely is.',
+          'Estimate the recurring cost of the current situation: hours per week spent on manual workarounds multiplied by a loaded hourly rate, plus subscription fees you would stop paying, plus any revenue lost to the limitation. Compare that annual figure against the build cost plus its ongoing maintenance. If the payback period is under about two years the case is usually strong. Beyond three, it rarely is.',
       },
       {
         question: 'Can I start with off-the-shelf and move to custom later?',
         answer:
-          'Yes, and it is often the smartest sequence. Using an existing tool teaches you what you actually need, which makes a later build far better specified and cheaper. The one thing to check at the outset is data export — confirm you can get your records out in a usable format before you commit years of operating history to any platform.',
+          'Yes, and it is often the smartest sequence. Using an existing tool teaches you what you actually need, which makes a later build far better specified and cheaper. The one thing to check at the outset is data export. Confirm you can get your records out in a usable format before you commit years of operating history to any platform.',
       },
       {
         question: 'Is a no-code tool a good middle ground?',
         answer:
-          'For internal tools with modest complexity, frequently yes — they are fast to build and easy to change. The limits show up with complex permissions, high data volumes, heavy customisation or per-user pricing at scale. They are an excellent way to prototype a workflow and prove it is worth building properly.',
+          'For internal tools with modest complexity, frequently yes. They are fast to build and easy to change. The limits show up with complex permissions, high data volumes, heavy customisation or per-user pricing at scale. They are an excellent way to prototype a workflow and prove it is worth building properly.',
       },
     ],
   },
@@ -639,7 +639,7 @@ export const posts = [
     content: [
       {
         type: 'p',
-        text: 'AI automation is software carrying out a repeatable business task from start to finish without a person doing it by hand — reading an enquiry, deciding what it is, putting it in the right place and triggering the next step. It differs from ordinary automation in one respect: the steps that need judgement, like understanding what a customer actually wrote, are handled by an AI model rather than by a rigid rule.',
+        text: 'AI automation is software carrying out a repeatable business task from start to finish without a person doing it by hand: reading an enquiry, deciding what it is, putting it in the right place and triggering the next step. It differs from ordinary automation in one respect. The steps that need judgement, like understanding what a customer actually wrote, are handled by an AI model instead of a rigid rule.',
       },
       {
         type: 'p',
@@ -652,7 +652,7 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'Automated, the system reads each message, classifies it, extracts the useful details — name, service wanted, location, urgency — creates or updates the record in your CRM, and notifies the right person with the context attached. Ambiguous ones are flagged for a human instead of being guessed at. The gain is not only time; it is that nothing sits unread over a weekend.',
+        text: 'Automated, the system reads each message, classifies it, extracts the useful details (name, service wanted, location, urgency), creates or updates the record in your CRM, and notifies the right person with the context attached. Ambiguous ones get flagged for a human instead of guessed at. The gain is partly time. Mostly it is that nothing sits unread over a weekend.',
       },
       { type: 'h2', text: 'Example two: follow-up that actually happens' },
       {
@@ -661,14 +661,14 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'A follow-up automation watches for quotes with no reply after an agreed interval, drafts a message referencing the specific job rather than a generic template, and either sends it or queues it for approval. It stops the moment the customer replies. This is frequently the highest-return automation a small business can run, because it recovers revenue that already exists in the pipeline.',
+        text: 'A follow-up automation watches for quotes with no reply after an agreed interval, drafts a message referencing the specific job instead of a generic template, and either sends it or queues it for approval. It stops the moment the customer replies. This is frequently the highest-return automation a small business can run, because it recovers revenue that already exists in the pipeline.',
       },
       { type: 'h2', text: 'Example three: paperwork into records' },
       {
         type: 'ul',
         items: [
           'Supplier invoices arriving as PDFs or phone photographs, read and entered into accounting software with the totals and dates extracted.',
-          'Delivery notes and receipts matched against purchase orders, with mismatches flagged rather than silently accepted.',
+          'Delivery notes and receipts matched against purchase orders, with mismatches flagged instead of quietly accepted.',
           'Job sheets filled in by hand on site, photographed, and turned into structured records.',
         ],
       },
@@ -688,16 +688,16 @@ export const posts = [
       { type: 'h2', text: 'Example five: appointments and no-shows' },
       {
         type: 'p',
-        text: 'For any business running a diary — clinics, salons, workshops, consultants — the recurring costs are no-shows and the phone time spent rescheduling. Both are highly automatable because the logic is simple and the volume is high.',
+        text: 'For any business running a diary, meaning clinics, salons, workshops and consultants, the recurring costs are no-shows and the phone time spent rescheduling. Both are highly automatable because the logic is simple and the volume is high.',
       },
       {
         type: 'p',
-        text: 'A reminder sent at a sensible interval on the channel the customer actually reads, with a one-tap way to confirm or move the booking, removes most of the phone calls and a meaningful share of the no-shows. When someone cancels, the freed slot can be offered automatically to anyone on a waiting list. None of this needs a model at all for the reminders themselves; the AI component is useful for reading free-text replies like "can we do Thursday instead, after 4" and turning them into an actual reschedule.',
+        text: 'A reminder sent at a sensible interval on the channel the customer actually reads, with a one-tap way to confirm or move the booking, removes most of the phone calls and a meaningful share of the no-shows. When someone cancels, the freed slot can be offered automatically to anyone on a waiting list. The reminders themselves need no model at all. The AI part earns its place reading free-text replies like "can we do Thursday instead, after 4" and turning them into an actual reschedule.',
       },
       { type: 'h2', text: 'What it costs to run' },
       {
         type: 'p',
-        text: 'Two costs, and they behave differently. The build is one-off, scoped like any small software project. Running it is ongoing and usage-based: the automation platform, and per-use charges for model calls and any messaging channel. For the volumes a typical small business generates, the running cost is usually modest — but it scales with usage rather than staying flat, so it is worth estimating against your real monthly volume before committing rather than after.',
+        text: 'Two costs, and they behave differently. The build is one-off, scoped like any small software project. Running it is ongoing and usage-based: the automation platform, and per-use charges for model calls and any messaging channel. For the volumes a typical small business generates, the running cost is usually modest. It does grow with usage, though, so estimate it against your real monthly volume before you commit.',
       },
       { type: 'h2', text: 'What AI automation cannot do' },
       {
@@ -705,7 +705,7 @@ export const posts = [
         items: [
           'Fix a process nobody has mapped. Automating a confused workflow produces a faster confused workflow. The mapping is most of the work and it cannot be skipped.',
           'Make judgement calls you would not delegate to a new employee. If you would not let someone in their first week decide it unsupervised, it needs a human checkpoint.',
-          'Be right every time. Models make mistakes. The design question is not whether errors happen but what happens when they do — which is why anything expensive to get wrong gets an approval step and a log.',
+          'Be right every time. Models make mistakes. The design question is what happens when they do, which is why anything expensive to get wrong gets an approval step and a log.',
           'Replace the relationship. The parts of your business customers value are rarely the parts worth automating. Automate the retyping, not the conversation.',
         ],
       },
@@ -720,7 +720,7 @@ export const posts = [
       },
       {
         type: 'p-link',
-        before: 'If you want help identifying which task is worth automating first rather than buying a tool and hoping, our ',
+        before: 'If you want help working out which task is worth automating first, instead of buying a tool and hoping, our ',
         href: '/services/ai-automation',
         anchor: 'AI automation service',
         after: ' starts by mapping how the work is done manually today, including the exceptions that usually break automations later.',
@@ -730,7 +730,7 @@ export const posts = [
       {
         question: 'What is the difference between AI automation and normal automation?',
         answer:
-          'Normal automation follows fixed rules and needs inputs in a predictable format — if this form field says X, do Y. AI automation adds a model that can interpret messy input: free-text messages, scanned documents, varied phrasing. In practice most useful systems combine both, using rules where the logic is certain and a model only where interpretation is genuinely needed.',
+          'Normal automation follows fixed rules and needs inputs in a predictable format. If this form field says X, do Y. AI automation adds a model that can interpret messy input: free-text messages, scanned documents, varied phrasing. In practice most useful systems combine both, using rules where the logic is certain and a model only where interpretation is genuinely needed.',
       },
       {
         question: 'Is AI automation worth it for a small business?',
@@ -740,17 +740,17 @@ export const posts = [
       {
         question: 'Do I need to replace my current software to use AI automation?',
         answer:
-          'No, and you generally should not. Automations connect the tools you already use through their APIs — your CRM, inbox, spreadsheets, accounting software and WhatsApp. Replacing working systems in order to automate is usually a sign the scope has grown beyond the problem.',
+          'No, and you generally should not. Automations connect the tools you already use through their APIs: your CRM, inbox, spreadsheets, accounting software and WhatsApp. Replacing working systems in order to automate is usually a sign the scope has grown beyond the problem.',
       },
       {
         question: 'What happens when the automation makes a mistake?',
         answer:
-          'A well-designed system assumes it will. Anywhere an error would be expensive there is a human approval step, every run is logged so a failure can be traced rather than guessed at, and there is a defined fallback — usually routing to a person. Ask about error handling before you ask about capability; it tells you more about how the system was built.',
+          'A well-designed system assumes it will. Anywhere an error would be expensive there is a human approval step, every run is logged so a failure can be traced instead of guessed at, and there is a defined fallback, usually routing to a person. Ask about error handling before you ask about capability. It tells you more about how the system was built.',
       },
       {
         question: 'How long does it take to set up an automation?',
         answer:
-          'A single well-defined workflow is usually a short engagement rather than a long project, because mapping the process accurately is most of the effort and the building is comparatively quick. Larger agent systems are staged, so the first automation is live and returning time while the next is being built.',
+          'A single well-defined workflow is usually a short engagement, not a long project, because mapping the process accurately is most of the effort and the building is comparatively quick. Larger agent systems are staged, so the first automation is live and returning time while the next is being built.',
       },
     ],
   },
@@ -775,29 +775,29 @@ export const posts = [
       { type: 'h2', text: 'Zapier: the default for a reason' },
       {
         type: 'p',
-        text: 'Zapier has the largest catalogue of supported applications by a wide margin, and if you are connecting two well-known SaaS tools it almost certainly supports both. Setup is deliberately linear and approachable — most people build a working automation without documentation.',
+        text: 'Zapier has the largest catalogue of supported applications by a wide margin, and if you are connecting two well-known SaaS tools it almost certainly supports both. Setup is deliberately linear and approachable. Most people build a working automation without opening the documentation.',
       },
       {
         type: 'p',
-        text: 'The trade-offs are cost and ceiling. Pricing is task-based, so a workflow firing thousands of times a month gets expensive quickly, and every step in a multi-step automation typically counts. Complex branching is possible but awkward; past a certain intricacy you are fighting the interface. It is the right tool when the automation is simple, the volume is low and your time matters more than the subscription.',
+        text: 'The trade-offs are cost and ceiling. Pricing is task-based, so a workflow firing thousands of times a month gets expensive quickly, and every step in a multi-step automation typically counts. Complex branching is possible but awkward. Past a certain intricacy you are fighting the interface. It is the right tool when the automation is simple, the volume is low and your time matters more than the subscription.',
       },
       { type: 'h2', text: 'Make: visual logic for complex workflows' },
       {
         type: 'p',
-        text: 'Make lays a workflow out as a diagram rather than a list, which sounds cosmetic and is not. When a process branches by condition, loops over a list of line items, retries a failed call and merges paths back together, seeing it as a map is genuinely easier to build and far easier to debug months later.',
+        text: 'Make lays a workflow out as a diagram instead of a list, which sounds cosmetic and is not. When a process branches by condition, loops over a list of line items, retries a failed call and merges paths back together, seeing it as a map is genuinely easier to build and far easier to debug months later.',
       },
       {
         type: 'p',
-        text: 'It also tends to be more economical per operation than Zapier at comparable volume, and it handles data transformation more comfortably. The cost is a steeper learning curve and a smaller app catalogue — still large, but you are more likely to hit something unsupported and need a generic HTTP call. Make is the sensible default when the logic is real logic rather than a straight line.',
+        text: 'It also tends to be more economical per operation than Zapier at comparable volume, and it handles data transformation more comfortably. The cost is a steeper learning curve and a smaller app catalogue. Still large, but you are more likely to hit something unsupported and need a generic HTTP call. Make is the sensible default when the logic is real logic and not a straight line.',
       },
       { type: 'h2', text: 'n8n: control, and no per-task meter' },
       {
         type: 'p',
-        text: 'n8n can be self-hosted on your own server, which changes two things. Your data does not pass through a third party you do not control, which matters for client records, health information or anything under a contractual confidentiality obligation. And you are paying for a server rather than per task, so a high-volume workflow costs roughly the same as a quiet one.',
+        text: 'n8n can be self-hosted on your own server, which changes two things. Your data does not pass through a third party you do not control, which matters for client records, health information or anything under a contractual confidentiality obligation. And you are paying for a server, not per task, so a high-volume workflow costs roughly the same as a quiet one.',
       },
       {
         type: 'p',
-        text: 'It is also the most extensible of the three: you can drop into JavaScript wherever the built-in nodes run out, which means almost nothing is impossible. The honest cost is that self-hosting is real operational work — updates, backups, monitoring, uptime. If nobody owns that, the automation that runs your business is quietly sitting on an unpatched server. There is a managed cloud version that removes this burden, at which point the main remaining advantage is the pricing model and the extensibility.',
+        text: 'It is also the most extensible of the three: you can drop into JavaScript wherever the built-in nodes run out, which means almost nothing is impossible. The honest cost is that self-hosting is real operational work: updates, backups, monitoring, uptime. If nobody owns that, the automation that runs your business is quietly sitting on an unpatched server. There is a managed cloud version that removes this burden, at which point the main remaining advantage is the pricing model and the extensibility.',
       },
       { type: 'h2', text: 'Where all three will disappoint you' },
       {
@@ -809,12 +809,12 @@ export const posts = [
         items: [
           'Silent failures. A workflow stops firing because an API token expired or a service changed its response, and nobody notices for a fortnight because nothing errors visibly. Build a notification for failures on day one, not after the first incident.',
           'Rate limits. The service you are calling will throttle you, usually at the worst moment. Retries with sensible backoff are not optional on anything running at volume.',
-          'Version drift. Connectors get updated and behaviour shifts underneath a workflow you have not touched in months. Anything business-critical needs to be tested periodically rather than assumed to be running.',
+          'Version drift. Connectors get updated and behaviour shifts underneath a workflow you have not touched in months. Anything business-critical needs testing on a schedule. Assuming it is still running is how you find out it is not.',
         ],
       },
       {
         type: 'p',
-        text: 'This is the honest argument for having someone technical involved in anything load-bearing. Building the happy path takes an afternoon on any of these tools. Making it fail safely, log usefully and recover on its own is the actual engineering, and it is what separates an automation you can depend on from one that quietly stops working.',
+        text: 'This is the honest argument for having someone technical involved in anything load-bearing. Building the happy path takes an afternoon on any of these tools. Making it fail safely, log usefully and recover on its own is the actual engineering. That is what separates an automation you can depend on from one that quietly stops working.',
       },
       { type: 'h2', text: 'The questions that actually decide it' },
       {
@@ -834,7 +834,7 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'The one exception is data sensitivity. If the information genuinely cannot pass through a third-party service, that constraint is not something to revisit later — it decides the platform on day one.',
+        text: 'The one exception is data sensitivity. If the information genuinely cannot pass through a third-party service, that constraint decides the platform on day one. It is not something to revisit later.',
       },
       {
         type: 'p',
@@ -842,7 +842,7 @@ export const posts = [
       },
       {
         type: 'p-link',
-        before: 'We build on n8n and Make depending on what the workflow and the data actually require, and the reasoning is explained rather than presented as a house preference. Our ',
+        before: 'We build on n8n and Make depending on what the workflow and the data actually require, and we explain the reasoning instead of presenting it as a house preference. Our ',
         href: '/services/ai-automation',
         anchor: 'AI automation service',
         after: ' covers how that choice gets made, and who holds the credentials afterwards.',
@@ -852,22 +852,22 @@ export const posts = [
       {
         question: 'Is n8n free?',
         answer:
-          'n8n is fair-code licensed and the self-hosted version can be run without a licence fee, but "free" overstates it — you pay for the server it runs on and for whoever maintains, updates and backs it up. There is also a paid cloud version. Compare total cost including that operational time, not just the licence.',
+          'n8n is fair-code licensed and the self-hosted version can be run without a licence fee, but "free" overstates it. You pay for the server it runs on and for whoever maintains, updates and backs it up. There is also a paid cloud version. Compare total cost including that operational time, not just the licence.',
       },
       {
         question: 'Which is cheapest for high-volume automation?',
         answer:
-          'Generally self-hosted n8n, because you pay for server capacity rather than per task, so cost stays roughly flat as volume grows. Make is usually more economical per operation than Zapier. The crossover point depends on your execution count, which is why estimating real monthly volume before choosing is worth the effort.',
+          'Generally self-hosted n8n, because you pay for server capacity instead of per task, so cost stays roughly flat as volume grows. Make is usually more economical per operation than Zapier. The crossover point depends on your execution count, which is why estimating real monthly volume before choosing is worth the effort.',
       },
       {
         question: 'Can I move my automations between these platforms later?',
         answer:
-          'Not automatically — there is no reliable converter, so a migration means rebuilding the workflows. The good news is that the hard part, understanding and mapping the process, transfers completely. Rebuilding a well-documented workflow on a new platform is a much smaller job than designing it was.',
+          'Not automatically. There is no reliable converter, so a migration means rebuilding the workflows. The good news is that the hard part, understanding and mapping the process, transfers completely. Rebuilding a well-documented workflow on a new platform is a much smaller job than designing it was.',
       },
       {
         question: 'Do I need a developer to use these tools?',
         answer:
-          'Not for simple automations — all three are designed for non-developers and Zapier especially so. You start needing technical help when workflows involve complex data transformation, error handling that has to be reliable, API authentication beyond the built-in connectors, or self-hosting. The build is often the easy part; making it fail safely is not.',
+          'Not for simple automations. All three are designed for non-developers, Zapier especially. You start needing technical help when workflows involve complex data transformation, error handling that has to be reliable, API authentication beyond the built-in connectors, or self-hosting. The build is often the easy part. Making it fail safely is not.',
       },
     ],
   },
@@ -883,7 +883,7 @@ export const posts = [
     content: [
       {
         type: 'p',
-        text: 'Most businesses do not need an AI chatbot. You need one if you are losing enquiries because nobody answers outside working hours, or if your team spends a meaningful part of every day typing the same dozen answers — and if neither is true, a clear contact page and a visible phone number will serve you better.',
+        text: 'Most businesses do not need an AI chatbot. You need one if you are losing enquiries because nobody answers outside working hours, or if your team spends a meaningful part of every day typing the same dozen answers. If neither is true, a clear contact page and a visible phone number will serve you better.',
       },
       {
         type: 'p',
@@ -894,7 +894,7 @@ export const posts = [
         type: 'ul',
         items: [
           'Enquiries arrive outside your hours. If a serious share of your traffic comes in the evening or at weekends and those people leave without a reply, you are losing leads to silence. Capturing and qualifying them is worth real money.',
-          'The same questions, every day. Opening hours, location, coverage area, what to bring, whether you handle a particular case. High volume, low judgement, identical answers — exactly what a bot handles well.',
+          'The same questions, every day. Opening hours, location, coverage area, what to bring, whether you handle a particular case. High volume, low judgement, identical answers. That is exactly what a bot handles well.',
           'Qualification takes time. If your team spends the first five minutes of every conversation establishing basics before knowing whether the enquiry is even relevant, collecting that up front is a genuine saving.',
           'You have real documentation. Service pages, an FAQ, a price structure, policies. A bot is only as good as what it can draw on, and a business with thin content has nothing to build one from.',
         ],
@@ -916,7 +916,7 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'If both numbers are small, you have your answer and you have saved yourself a project. If either is large, you now know exactly what the bot needs to handle — which is also the specification for building one properly.',
+        text: 'If both numbers are small, you have your answer and you have saved yourself a project. If either is large, you now know exactly what the bot needs to handle, which is most of the specification for building one properly.',
       },
       { type: 'h2', text: 'What separates a useful bot from an irritating one' },
       {
@@ -927,7 +927,7 @@ export const posts = [
         type: 'ul',
         items: [
           'It answers from your information, not from general knowledge. A bot that invents an answer about your pricing or your coverage area is worse than no bot, because a confident wrong answer costs you a customer and your credibility.',
-          'It hands over cleanly. The moment a question exceeds what it knows, it should pass to a human with the full conversation attached — not loop, not apologise repeatedly, not pretend.',
+          'It hands over cleanly. The moment a question exceeds what it knows, it should pass to a human with the full conversation attached. Not loop, not apologise repeatedly, not pretend.',
           'It is escapable. A visitor who wants a phone number should be able to get one in one click. Trapping people in a chat window is the fastest way to lose them.',
           'It knows what it must not discuss. Firm quotes, contractual commitments, medical or legal specifics. Those get routed to a person, deliberately, by design.',
         ],
@@ -935,7 +935,7 @@ export const posts = [
       { type: 'h2', text: 'What it should collect, and what it should not' },
       {
         type: 'p',
-        text: 'A chatbot that only answers questions is a help page with extra steps. The value is in what it captures on the way through — but there is a line, and crossing it costs you the conversation.',
+        text: 'A chatbot that only answers questions is a help page with extra steps. The value is in what it captures on the way through. There is a line, though, and crossing it costs you the conversation.',
       },
       {
         type: 'p',
@@ -943,7 +943,7 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'What it should not collect is anything sensitive that you are not equipped to hold properly — identification numbers, payment details, medical specifics. If a conversation is heading there, that is the signal to hand over to a person on a secure channel, not to keep typing. The same applies to anything you would be uncomfortable seeing quoted back to you later, because a chat transcript is a record.',
+        text: 'What it should not collect is anything sensitive that you are not equipped to hold properly: identification numbers, payment details, medical specifics. If a conversation is heading there, that is the signal to hand over to a person on a secure channel, not to keep typing. The same applies to anything you would be uncomfortable seeing quoted back to you later, because a chat transcript is a record.',
       },
       { type: 'h2', text: 'The channel question' },
       {
@@ -952,12 +952,12 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'If you are going to do this at all, consider putting it where your customers already are rather than where it is easiest to install.',
+        text: 'If you are going to do this at all, put it where your customers already are, not where it is easiest to install.',
       },
       { type: 'h2', text: 'What it costs to run' },
       {
         type: 'p',
-        text: 'Two costs. Setting it up — connecting your content, defining the handover rules, testing against real questions — and running it, which is usage-based across model calls and any messaging channel. For typical small-business volumes the running cost is modest, but it scales with conversations, so estimate against real numbers rather than hoping.',
+        text: 'Two costs. Setting it up means connecting your content, defining the handover rules and testing against real questions. Running it is usage-based across model calls and any messaging channel. For typical small-business volumes that running cost is modest, but it grows with conversations, so estimate it against real numbers.',
       },
       {
         type: 'p',
@@ -980,17 +980,17 @@ export const posts = [
       {
         question: 'Can a chatbot give wrong information about my business?',
         answer:
-          'Yes, if it is built to answer from general knowledge rather than from your own documented content. A properly built one is restricted to your material and is explicitly instructed to route anything outside it to a person. Ask any provider how the bot behaves when it does not know something — the answer tells you whether it was built responsibly.',
+          'Yes, if it is built to answer from general knowledge instead of your own documented content. A properly built one is restricted to your material and explicitly instructed to route anything outside it to a person. Ask any provider how the bot behaves when it does not know something. The answer tells you whether it was built responsibly.',
       },
       {
         question: 'Should I put the chatbot on my website or on WhatsApp?',
         answer:
-          'Often WhatsApp, particularly in markets where messaging is the default way people contact businesses. Customers are already there, it needs no new app, and you end up with a real phone number rather than an anonymous browser session. A website widget still helps for visitors who want an immediate answer without leaving the page — the two work well together.',
+          'Often WhatsApp, particularly in markets where messaging is the default way people contact businesses. Customers are already there, it needs no new app, and you end up with a real phone number instead of an anonymous browser session. A website widget still helps for visitors who want an immediate answer without leaving the page, and the two work well together.',
       },
       {
         question: 'How much content do I need before a chatbot is worth building?',
         answer:
-          'Enough to answer the questions you actually get. In practice that means clear service pages, an FAQ covering your dozen most common questions, and documented policies on scheduling, coverage and process. If that material does not exist, write it first — it improves your search visibility regardless, and without it a bot has nothing reliable to draw on.',
+          'Enough to answer the questions you actually get. In practice that means clear service pages, an FAQ covering your dozen most common questions, and documented policies on scheduling, coverage and process. If that material does not exist, write it first. It improves your search visibility regardless, and without it a bot has nothing reliable to draw on.',
       },
     ],
   },
@@ -1015,7 +1015,7 @@ export const posts = [
       { type: 'h2', text: 'Before you contact anyone' },
       {
         type: 'p',
-        text: 'Write down the three things the software must let someone do, and the one business outcome it exists to produce. Not a feature list — three actions and one outcome. This single page is what makes quotes comparable, and it is the thing most buyers skip.',
+        text: 'Write down the three things the software must let someone do, and the one business outcome it exists to produce. Not a feature list. Three actions and one outcome. This single page is what makes quotes comparable, and it is the thing most buyers skip.',
       },
       {
         type: 'p',
@@ -1025,7 +1025,7 @@ export const posts = [
       {
         type: 'ul',
         items: [
-          'Who exactly will work on this, and what else are they on? You want names and a rough allocation. The pattern to watch for is a senior person in the meeting and juniors on the actual build — not automatically wrong, but you should know.',
+          'Who exactly will work on this, and what else are they on? You want names and a rough allocation. The pattern to watch for is a senior person in the meeting and juniors on the actual build. That is not automatically wrong, but you should know.',
           'What would you cut if my budget were 30% lower? A strong answer shows they understand which parts carry the value. A weak one proposes cutting testing.',
           'What has gone wrong on a recent project and how did you handle it? Everyone has one. A studio claiming otherwise is either new or not being straight with you.',
           'What do you need from me, and when? Projects stall on client-side content and approvals far more often than on engineering. A studio that names this up front has run real projects.',
@@ -1052,7 +1052,7 @@ export const posts = [
         type: 'ul',
         items: [
           'Open their portfolio sites and check they are live and functioning. Sites that are down, parked or obviously rebuilt by someone else are a signal.',
-          'Ask for one reference in a comparable industry and actually call them. Ask what went wrong and how it was handled — not whether they were happy.',
+          'Ask for one reference in a comparable industry and actually call them. Ask what went wrong and how it was handled, not whether they were happy.',
           'Ask to see code, or a repository, or a technical walkthrough of something they built. You do not need to read it. You are checking that a real one exists and that they are comfortable showing it.',
         ],
       },
@@ -1062,7 +1062,7 @@ export const posts = [
         items: [
           'A fixed price quoted before anyone has asked what the software does. That number is a guess, and it will be defended later by reducing what you get.',
           'Reluctance to name the team, or a portfolio that cannot be attributed to identifiable people.',
-          'No written scope — "we will work it out as we go" — which reliably means you will pay for that discovery twice.',
+          'No written scope. "We will work it out as we go" reliably means you will pay for that discovery twice.',
           'Pressure to sign quickly, or a discount that expires. Engineering capacity does not work that way.',
           'Refusing to confirm code ownership. This is disqualifying on its own, whatever else is on offer.',
           'A quote far below every other. Usually the backend, the testing or the post-launch relationship has quietly been excluded.',
@@ -1075,7 +1075,7 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'Compare total delivered cost, including what happens after launch, and treat any quote dramatically below the rest as a question rather than a bargain. Ask what it excludes; there is always an answer.',
+        text: 'Compare total delivered cost, including what happens after launch, and treat any quote dramatically below the rest as a question, not a bargain. Ask what it excludes. There is always an answer.',
       },
       { type: 'h2', text: 'Judging communication before you commit' },
       {
@@ -1093,7 +1093,7 @@ export const posts = [
       { type: 'h2', text: 'How to structure the engagement' },
       {
         type: 'p',
-        text: 'The lowest-risk arrangement is a small paid discovery phase that produces a written specification, followed by a fixed quote against that specification. Discovery is cheap relative to a build, it tells you how the studio thinks and communicates before you are committed, and the specification belongs to you — you can take it to someone else if the working relationship does not convince you.',
+        text: 'The lowest-risk arrangement is a small paid discovery phase that produces a written specification, followed by a fixed quote against that specification. Discovery is cheap relative to a build, and it tells you how the studio thinks and communicates before you are committed. The specification belongs to you, so you can take it elsewhere if the working relationship does not convince you.',
       },
       {
         type: 'p-link',
@@ -1107,7 +1107,7 @@ export const posts = [
       {
         question: 'How much should I pay a software house in Lahore?',
         answer:
-          'There is no single rate — pricing varies widely by team seniority, project complexity and engagement model, and any figure quoted without knowing your scope is a guess. What matters more than the rate is what the quote includes: discovery, design, backend, testing, deployment, training and post-launch support are each a line that can quietly be missing.',
+          'There is no single rate. Pricing varies widely by team seniority, project complexity and engagement model, and any figure quoted without knowing your scope is a guess. What matters more than the rate is what the quote includes: discovery, design, backend, testing, deployment, training and post-launch support are each a line that can quietly be missing.',
       },
       {
         question: 'Should I hire a software house or freelancers?',
@@ -1117,17 +1117,17 @@ export const posts = [
       {
         question: 'How do I check a software house is legitimate?',
         answer:
-          'Verify the registered business details, confirm a physical address and a working phone number, check that portfolio sites are genuinely live, and speak to at least one past client directly. Look for named people with traceable professional profiles rather than anonymous team pages. None of this takes more than an afternoon and it filters out most of the risk.',
+          'Verify the registered business details, confirm a physical address and a working phone number, check that portfolio sites are genuinely live, and speak to at least one past client directly. Look for named people with traceable professional profiles instead of anonymous team pages. None of this takes more than an afternoon, and it filters out most of the risk.',
       },
       {
         question: 'What should be in the contract?',
         answer:
-          'Scope with an explicit exclusions list, milestones with payment tied to delivery, a revision policy, a timeline with defined client responsibilities, confidentiality, and unambiguous ownership of code, data, domain and accounts transferring to you. Also specify what happens if either side terminates early — including that you receive the work completed to that point.',
+          'Scope with an explicit exclusions list, milestones with payment tied to delivery, a revision policy, a timeline with defined client responsibilities, confidentiality, and unambiguous ownership of code, data, domain and accounts transferring to you. Also specify what happens if either side terminates early, including that you receive the work completed to that point.',
       },
       {
         question: 'Can I work with a Lahore studio from outside Pakistan?',
         answer:
-          'Yes, and many do. Practical things to settle early: overlap hours for calls, the payment method and currency, which jurisdiction the contract sits under, and how intellectual property transfers. Ask for a regular written update rather than relying on meetings, since time-zone gaps make asynchronous reporting more valuable than scheduled calls.',
+          'Yes, and many do. Practical things to settle early: overlap hours for calls, the payment method and currency, which jurisdiction the contract sits under, and how intellectual property transfers. Ask for a regular written update instead of relying on meetings. Time-zone gaps make written reporting more valuable than scheduled calls.',
       },
     ],
   },
@@ -1143,7 +1143,7 @@ export const posts = [
     content: [
       {
         type: 'p',
-        text: 'Local SEO is the work that makes your business appear when someone nearby searches for what you do — "dentist near me", "law firm in Lahore", "AC repair Johar Town". For a business serving a specific city or area, it is usually the highest-return search work available, and it starts with one thing: a verified Google Business Profile with your details identical everywhere they appear.',
+        text: 'Local SEO is the work that makes your business appear when someone nearby searches for what you do: "dentist near me", "law firm in Lahore", "AC repair Johar Town". For a business serving a specific city or area, it is usually the highest-return search work available, and it starts with one thing: a verified Google Business Profile with your details identical everywhere they appear.',
       },
       {
         type: 'p',
@@ -1157,8 +1157,8 @@ export const posts = [
       {
         type: 'ul',
         items: [
-          'Claim the profile and complete verification. Do not abandon this halfway — an unverified profile does nothing.',
-          'Choose the most specific primary category available. "Dental clinic" beats "doctor"; specificity is what matches you to intent.',
+          'Claim the profile and complete verification. Do not abandon it halfway. An unverified profile does nothing.',
+          'Choose the most specific primary category available. "Dental clinic" beats "doctor", because specificity is what matches you to intent.',
           'Fill in hours, service area, services and a real description. Incomplete profiles rank worse than complete ones.',
           'Add genuine photographs of your actual premises, team and work. Stock imagery is obvious and does not help.',
           'Keep it current. Changed hours during Ramadan or public holidays belong on the profile, not only in your head.',
@@ -1171,7 +1171,7 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'Identical means identical — the same business name with the same suffix, the same address formatting, the same phone number format. "Avenix Studio" and "Avenix Studios Pvt Ltd" read as two businesses. Decide on one exact form, write it down, and use it everywhere without variation. Put it in your website footer so it appears on every page.',
+        text: 'Identical means identical: the same business name with the same suffix, the same address formatting, the same phone number format. "Avenix Studio" and "Avenix Studios Pvt Ltd" read as two businesses. Decide on one exact form, write it down, and use it everywhere without variation. Put it in your website footer so it appears on every page.',
       },
       { type: 'h2', text: 'Step three: reviews, and how to ask' },
       {
@@ -1182,7 +1182,7 @@ export const posts = [
         type: 'ul',
         items: [
           'Ask every satisfied customer, at the moment the work is done and they are happy. Later is a worse moment.',
-          'Send a direct link to the review form rather than instructions. Every extra step loses people.',
+          'Send a direct link to the review form, not instructions. Every extra step loses people.',
           'Reply to all of them, including the negative ones. A measured reply to a complaint reassures the next reader far more than an unbroken wall of five stars.',
           'Never buy reviews. They are detectable, they are removable, and the penalty is worse than the problem you were solving.',
         ],
@@ -1194,21 +1194,21 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'That means a genuine page per major service, and per location if you have multiple branches — each with real, specific content. What it does not mean is generating fifty near-identical pages with the city name swapped. Those are recognisable, they are thin, and they can harm the site. If you cannot write something genuinely useful about serving a particular area, you do not need a page for it.',
+        text: 'That means a genuine page per major service, and one per location if you have multiple branches, each with real and specific content. What it does not mean is generating fifty near-identical pages with the city name swapped. Those are recognisable, they are thin, and they can harm the site. If you cannot write something genuinely useful about serving a particular area, you do not need a page for it.',
       },
       { type: 'h2', text: 'Step five: local citations and directories' },
       {
         type: 'p',
-        text: 'Citations are mentions of your NAP on other sites: local directories, industry bodies, chambers of commerce, professional associations. They act as corroboration. Focus on directories a real customer might actually use and on bodies relevant to your industry, rather than on volume — a hundred listings on sites nobody visits is not worth five on ones they do.',
+        text: 'Citations are mentions of your NAP on other sites: local directories, industry bodies, chambers of commerce, professional associations. They act as corroboration. Focus on directories a real customer might actually use and on bodies relevant to your industry. Volume is not the point. A hundred listings on sites nobody visits is not worth five on ones they do.',
       },
       { type: 'h2', text: 'What matters on your own website' },
       {
         type: 'ul',
         items: [
           'Mobile speed. Most local searches happen on a phone, frequently on mobile data. A slow site loses the visit before it starts.',
-          'LocalBusiness structured data, so your details are machine-readable rather than only visible.',
-          'Your city and service area written naturally in the copy — in the context of what you actually do, not stuffed into every heading.',
-          'A tappable phone number and a WhatsApp link. In Pakistan a large share of local enquiries arrive by message rather than through a form.',
+          'LocalBusiness structured data, so your details are machine-readable and not merely visible.',
+          'Your city and service area written naturally in the copy, in the context of what you actually do, not stuffed into every heading.',
+          'A tappable phone number and a WhatsApp link. In Pakistan a large share of local enquiries arrive by message, not through a form.',
           'Embedded directions or a map on your contact page.',
         ],
       },
@@ -1219,13 +1219,13 @@ export const posts = [
           'Keyword-stuffed page titles like "Best Dentist Lahore | Dentist Lahore | Lahore Dental". They read badly, they suppress clicks, and they do not work any more.',
           'Buying links from directories that exist only to sell links.',
           'Creating multiple Business Profiles for one location to appear in more areas. This is against the rules and risks the profile you have.',
-          'Obsessing over ranking position from your own device. Results are personalised and location-dependent — what you see is not what your customers see.',
+          'Obsessing over ranking position from your own device. Results are personalised and location-dependent, so what you see is not what your customers see.',
         ],
       },
       { type: 'h2', text: 'How to know whether it is working' },
       {
         type: 'p',
-        text: 'Ignore where you think you rank. Use the numbers instead: Business Profile views, calls and direction requests, and in Search Console the impressions and clicks on non-branded queries — searches for what you do, rather than for your business name. A rise in non-branded impressions is the earliest reliable sign that the work is landing, and it usually appears well before the phone starts ringing.',
+        text: 'Ignore where you think you rank. Use the numbers instead: Business Profile views, calls and direction requests, and in Search Console the impressions and clicks on non-branded queries. Those are searches for what you do, not for your business name. A rise in non-branded impressions is the earliest reliable sign that the work is landing, and it usually appears well before the phone starts ringing.',
       },
       {
         type: 'p-link',
@@ -1244,7 +1244,7 @@ export const posts = [
       {
         question: 'Do I need a website if I have a Google Business Profile?',
         answer:
-          'You can rank in map results without one, but you will convert worse and cap your reach. The profile shows your details; the website is where someone decides whether to trust you, sees your work, and understands your services. They also reinforce each other — a profile linking to a fast, relevant site performs better than one linking nowhere.',
+          'You can rank in map results without one, but you will convert worse and cap your reach. The profile shows your details. The website is where someone decides whether to trust you, sees your work and understands your services. They also reinforce each other, and a profile linking to a fast, relevant site performs better than one linking nowhere.',
       },
       {
         question: 'What is the difference between local SEO and regular SEO?',
@@ -1254,12 +1254,12 @@ export const posts = [
       {
         question: 'How do I get more Google reviews without breaking the rules?',
         answer:
-          'Ask directly and personally at the moment the customer is happiest, and make it one tap with a direct link. You may ask; you may not incentivise, filter to only happy customers, or buy them. Consistently asking every satisfied customer will, over a few months, put you ahead of nearly every competitor who does it sporadically.',
+          'Ask directly and personally at the moment the customer is happiest, and make it one tap with a direct link. You may ask. You may not incentivise, filter to only happy customers, or buy them. Consistently asking every satisfied customer will, over a few months, put you ahead of nearly every competitor who does it sporadically.',
       },
       {
         question: 'Does my business need a physical address for local SEO?',
         answer:
-          'Not necessarily. Service-area businesses that travel to customers — plumbers, electricians, mobile services — can verify a profile and hide the address while specifying the areas covered. What you cannot do is invent an address or use a virtual office you do not operate from; both risk the profile being suspended.',
+          'Not necessarily. Service-area businesses that travel to customers, like plumbers, electricians and mobile services, can verify a profile and hide the address while specifying the areas covered. What you cannot do is invent an address or use a virtual office you do not operate from. Both risk the profile being suspended.',
       },
     ],
   },
@@ -1275,7 +1275,7 @@ export const posts = [
     content: [
       {
         type: 'p',
-        text: 'If Search Console shows impressions but almost no clicks, there are only two real explanations: you are ranking too low to be seen, or you are being seen and your result is not compelling enough to click. Your average position tells you which — below about ten means visibility, and a good position with a poor click rate means your title and description are the problem.',
+        text: 'If Search Console shows impressions but almost no clicks, there are only two real explanations: you are ranking too low to be seen, or you are being seen and your result is not compelling enough to click. Your average position tells you which. Below about ten means visibility. A good position with a poor click rate means your title and description are the problem.',
       },
       {
         type: 'p',
@@ -1284,7 +1284,7 @@ export const posts = [
       { type: 'h2', text: 'Diagnose it first' },
       {
         type: 'p',
-        text: 'In Search Console, open Performance, enable impressions, clicks, click-through rate and average position, then look at individual pages and queries rather than the site-wide total. The site-wide average hides everything useful.',
+        text: 'In Search Console, open Performance, enable impressions, clicks, click-through rate and average position, then look at individual pages and queries instead of the site-wide total. The site-wide average hides everything useful.',
       },
       {
         type: 'ul',
@@ -1292,7 +1292,7 @@ export const posts = [
           'Average position beyond about ten. You are on page two or worse. Almost nobody scrolls there, so a low click rate is expected and the work is ranking, not wording.',
           'Good position, poor click rate. You are visible and being passed over. This is a titles-and-descriptions problem and it is the fastest thing on this list to fix.',
           'Impressions on queries that do not match the page. You are surfacing for the wrong searches, which means the page is not clearly about anything specific.',
-          'Impressions concentrated on your business name. You are only found by people who already know you. That is a coverage problem — the pages that would rank for what you sell do not exist yet.',
+          'Impressions concentrated on your business name. You are only found by people who already know you. That is a coverage problem. The pages that would rank for what you sell do not exist yet.',
         ],
       },
       { type: 'h2', text: 'If the problem is your title and description' },
@@ -1305,7 +1305,7 @@ export const posts = [
         items: [
           'Lead with what the page is about, then the brand. "SEO Services in Pakistan | Your Business" beats "Your Business | Home" every time.',
           'Keep titles roughly under sixty characters so they are not truncated mid-phrase.',
-          'Write a description that gives a reason to choose you rather than restating the title. It does not directly affect ranking, but it heavily affects whether anyone clicks.',
+          'Write a description that gives a reason to choose you, not one that restates the title. It does not directly affect ranking, but it heavily affects whether anyone clicks.',
           'Make every title and description unique. Duplicates across pages mean those pages compete with each other and none of them reads as the definitive answer.',
           'Match the wording of the query where it is honest to do so. A searcher scanning results is pattern-matching against their own words.',
         ],
@@ -1323,14 +1323,14 @@ export const posts = [
         type: 'ul',
         items: [
           'The page is not specifically about the query. One page covering eight services will lose to eight pages each covering one. Search engines match a query to a page, so the page has to exist and has to be about that one thing.',
-          'The content is thinner than what is ranking above you. Open the top three results and look honestly at what they cover that you do not. Length is not the point; completeness is.',
+          'The content is thinner than what is ranking above you. Open the top three results and look honestly at what they cover that you do not. Length is not the point. Completeness is.',
           'The site has little authority. This is the slow one. It is earned through genuinely useful content and through other sites referencing you, and there is no shortcut worth taking.',
         ],
       },
       { type: 'h2', text: 'If you only rank for your own name' },
       {
         type: 'p',
-        text: 'This is the most common pattern for small business sites and the most misdiagnosed. Branded impressions look like traffic in a dashboard, but they come from people who already knew you existed. The site is not winning new customers; it is confirming details for people who were already coming.',
+        text: 'This is the most common pattern for small business sites and the most misdiagnosed. Branded impressions look like traffic in a dashboard, but they come from people who already knew you existed. The site is not winning new customers. It is confirming details for people who were already coming.',
       },
       {
         type: 'p',
@@ -1343,7 +1343,7 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'You cannot opt out of that, but you can respond to it. Structure content so your answer is the one being quoted — direct question-and-answer formatting, clear headings, valid structured data. And prioritise queries with commercial intent, where someone searching for a service in their city still has to click through to decide who to contact.',
+        text: 'You cannot opt out of that, but you can respond to it. Structure content so your answer is the one being quoted: direct question-and-answer formatting, clear headings, valid structured data. And prioritise queries with commercial intent, where someone searching for a service in their city still has to click through to decide who to contact.',
       },
       { type: 'h2', text: 'A realistic order to work in' },
       {
@@ -1361,10 +1361,10 @@ export const posts = [
       },
       {
         type: 'p-link',
-        before: 'If you want the diagnosis done against your own Search Console data rather than guessed at, our ',
+        before: 'If you want the diagnosis done against your own Search Console data instead of guessed at, our ',
         href: '/services/seo',
         anchor: 'SEO services',
-        after: ' start with exactly that audit — what is indexed, what is ranking for nothing, and which fixes are worth doing first.',
+        after: ' start with exactly that audit: what is indexed, what is ranking for nothing, and which fixes are worth doing first.',
       },
     ],
     faqs: [
@@ -1376,7 +1376,7 @@ export const posts = [
       {
         question: 'How long after changing a title will I see results?',
         answer:
-          'The page needs recrawling first, which typically takes days to a few weeks, and you can request indexing in Search Console to speed it up. After that, allow a few weeks of data before judging — comparing a handful of days against the previous period will mostly show noise.',
+          'The page needs recrawling first, which typically takes days to a few weeks, and you can request indexing in Search Console to speed it up. After that, allow a few weeks of data before judging. Comparing a handful of days against the previous period will mostly show noise.',
       },
       {
         question: 'Why does Google show a different title than the one I set?',
@@ -1386,7 +1386,7 @@ export const posts = [
       {
         question: 'Are impressions without clicks bad for my rankings?',
         answer:
-          'A poor click-through rate is not a straightforward penalty, and the relationship is more complicated than the "CTR is a ranking factor" claim suggests. The practical reason to care is simpler: impressions you are not converting into visits are free visibility you are wasting, and that is worth fixing on its own terms.',
+          'A poor click-through rate is not a straightforward penalty, and the relationship is more complicated than the "CTR is a ranking factor" claim suggests. The practical reason to care is simpler. Impressions you are not converting into visits are free visibility going to waste, and that is worth fixing on its own terms.',
       },
     ],
   },

@@ -197,7 +197,7 @@ export function ServiceDetail({ slug }) {
         id="faq"
         eyebrow="Questions"
         title="Straight answers."
-        intro="The questions we are asked most about this service — answered directly, so you can decide before you call."
+        intro="The questions we are asked most about this service, answered directly so you can decide before you call."
       >
         <div className="max-w-3xl divide-y divide-border border-y border-border">
           {page.faqs.map((faq) => (

@@ -45,7 +45,7 @@ export function Services() {
       id="services"
       eyebrow="01 — Services"
       title="Everything Your Brand Needs, Under One Roof."
-      intro="Eight disciplines, one accountable team — so strategy, build, and growth never get lost in the hand-off between vendors."
+      intro="Eight disciplines, one accountable team. Nothing gets dropped in the hand-off between vendors, because there is no hand-off."
       items={STORY_ITEMS}
       // Services stays on the light palette; How We Work keeps
       // the dark cinematic panel.

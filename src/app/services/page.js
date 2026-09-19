@@ -50,7 +50,7 @@ export default function ServicesPage() {
         hero={getPageHero('/services')}
         eyebrow="Services"
         title="Web that works as hard as you do."
-        intro="Every engagement is scoped around a real business outcome — with a transparent process and a fixed quote before any work begins."
+        intro="Every engagement is scoped around a real business outcome. You see the process and a fixed quote before any work begins."
         breadcrumbs={[
           { name: 'Home', path: '/' },
           { name: 'Services', path: '/services' },

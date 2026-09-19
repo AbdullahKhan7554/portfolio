@@ -35,7 +35,7 @@ export default function FreeAuditPage() {
       <PageHeader
         eyebrow="Free Audit"
         title="A free 5-point review of your website."
-        intro="No obligation. Just a clear, honest look at what's working, what's costing you customers, and exactly how to fix it."
+        intro="No obligation. A straight look at what's working, what's costing you customers, and how to fix it."
         breadcrumbs={[
           { name: 'Home', path: '/' },
           { name: 'Free Audit', path: '/free-audit' },

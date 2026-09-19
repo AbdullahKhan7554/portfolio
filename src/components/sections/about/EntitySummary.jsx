@@ -49,8 +49,8 @@ export function EntitySummary() {
         </p>
         <p className="text-body text-muted">
           The studio works across software development, AI automation and AI agents, mobile
-          app development, and search — strategy, design, engineering and growth handled by
-          one accountable team rather than split between vendors. It was founded by{' '}
+          app development, and search. Strategy, design, engineering and growth are handled
+          by one accountable team instead of split between vendors. It was founded by{' '}
           {brand.founder} and works remotely with clients in Pakistan and abroad. Clients own
           the code, content and accounts for everything the studio delivers.
         </p>

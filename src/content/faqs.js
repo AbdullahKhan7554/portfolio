@@ -3,7 +3,7 @@ export const faqs = [
   {
     question: 'How much does a project cost?',
     answer:
-      'Every project is priced to its scope rather than a fixed menu — a focused landing page, a full business website, and a custom web application each carry a different investment. Tell us what you need and you get a fixed, transparent quote before any work begins — no surprises.',
+      'Every project is priced to its scope, not from a fixed menu. A focused landing page, a full business website and a custom web application each carry a different investment. Tell us what you need and you get a fixed, transparent quote before any work begins.',
   },
   {
     question: 'How long does it take?',
@@ -18,16 +18,16 @@ export const faqs = [
   {
     question: 'How many revisions do I get?',
     answer:
-      'Each project includes structured revision rounds at agreed milestones, so feedback is focused and the result is exactly right — rather than endless open-ended changes.',
+      'Each project includes structured revision rounds at agreed milestones. Feedback stays focused, and nobody ends up in an open-ended loop of changes.',
   },
   {
     question: 'How do we communicate during the project?',
     answer:
-      'Directly with the team building it — no account-manager relay. You get regular updates and a single point of contact over WhatsApp and email, with a predictable cadence so you always know where things stand.',
+      'Directly with the team building it. No account-manager relay. You get regular updates and one point of contact over WhatsApp and email, on a predictable cadence, so you always know where things stand.',
   },
   {
     question: 'What happens after launch?',
     answer:
-      'We provide a post-launch support window to fix anything and make sure everything runs smoothly. Ongoing maintenance, content, and growth work are available on request.',
+      'There is a post-launch support window for fixing anything that surfaces once the site is live. Ongoing maintenance, content and growth work are available on request.',
   },
 ];

@@ -76,7 +76,7 @@ export default function AboutPage() {
         className="theme-dark bg-bg"
         eyebrow="01 — About Avenix Studio"
         title="We build digital products with intent."
-        intro="Avenix Studio is a digital product studio combining strategy, design, engineering, AI and growth — turning ideas into products that earn their place in a business."
+        intro="Avenix Studio is a digital product studio. Strategy, design, engineering, AI and growth sit in one place, aimed at products that earn their keep in a business."
         breadcrumbs={[
           { name: 'Home', path: '/' },
           { name: 'About', path: '/about' },

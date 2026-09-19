@@ -4,7 +4,7 @@ export const processSteps = [
     id: 'discovery',
     title: 'Discovery',
     description:
-      'We learn your business, your customers, and the one outcome that matters most — so every decision is aimed at it.',
+      'We learn your business, your customers, and the one outcome that matters most. Every decision after that is aimed at it.',
     deliverables: ['Goals', 'Scope', 'Sitemap'],
   },
   {
@@ -18,21 +18,21 @@ export const processSteps = [
     id: 'development',
     title: 'Development',
     description:
-      'Clean, component-driven engineering on Next.js — fast, accessible, and built to scale.',
+      'Clean, component-driven engineering on Next.js that stays fast and accessible as it grows.',
     deliverables: ['Next.js', 'Components', 'CMS'],
   },
   {
     id: 'testing',
     title: 'Testing',
     description:
-      'We catch the bugs so your customers never do — cross-device, cross-browser, and accessibility checked.',
+      'We catch the bugs so your customers never do. Cross-device, cross-browser, accessibility checked.',
     deliverables: ['QA', 'A11y', 'Forms'],
   },
   {
     id: 'deployment',
     title: 'Deployment',
     description:
-      'Launched on Vercel with SSL, analytics, and SEO live — plus a support window after go-live.',
+      'Launched on Vercel with SSL, analytics and SEO live, plus a support window after go-live.',
     deliverables: ['Vercel', 'SEO', 'Support'],
   },
 ];

@@ -48,17 +48,17 @@ export const wdpFaqs = [
   {
     question: 'What is the difference between a website and a web application?',
     answer:
-      'A website shows information (your services, contact, gallery), while a web application does something interactive — logins, bookings, dashboards, or online payments. Web apps are more complex and cost more to build.',
+      'A website shows information (your services, contact, gallery), while a web application does something interactive: logins, bookings, dashboards or online payments. Web apps are more complex and cost more to build.',
   },
   {
     question: 'WordPress vs custom — which is better?',
     answer:
-      'WordPress is easier for non-technical teams to update daily and fine for simple content sites. Custom development like Next.js is faster, more secure, and more scalable — the better choice when your website drives real revenue.',
+      'WordPress is easier for non-technical teams to update daily and fine for simple content sites. Custom development like Next.js is faster, more secure and more scalable. It is the better choice when your website drives real revenue.',
   },
   {
     question: 'Do I need a website if I have social media?',
     answer:
-      'Yes. Social media is rented ground you do not control and rarely appears in Google or AI search. A website is an asset you own that builds trust, ranks on Google, and can be recommended by AI tools — working with your social media, not instead of it.',
+      'Yes. Social media is rented ground you do not control and rarely appears in Google or AI search. A website is an asset you own that builds trust, ranks on Google, and can be recommended by AI tools. It works alongside your social media, not instead of it.',
   },
   {
     question: 'What ongoing costs should I expect?',
@@ -73,7 +73,7 @@ export const wdpFaqs = [
   {
     question: 'Is the cheapest developer a good idea?',
     answer:
-      'Usually not. The cheapest option often delivers a generic template with no SEO, poor speed, and no support — leading to a costly rebuild within a year. Focus on value and what is included, not the lowest number.',
+      'Usually not. The cheapest option often delivers a generic template with no SEO, poor speed and no support, which leads to a costly rebuild within a year. Focus on value and what is included, not on the lowest number.',
   },
 ];
 
@@ -81,14 +81,14 @@ export const wdpBlocks = [
   {
     type: 'tldr',
     text:
-      'Website development in Pakistan in 2026 costs between PKR 20,000 and PKR 3,000,000+, depending on the type of site and who builds it. A simple landing page runs PKR 20,000–100,000, a professional business website PKR 80,000–300,000, an e-commerce store PKR 150,000–800,000, and a custom web application PKR 500,000 and up. Beyond the build, budget PKR 8,000–56,000 per year for a domain and hosting. The biggest factor in your result is not your budget — it is what you spend it on. A fast, mobile-first, SEO-ready website built around how customers actually buy (in Pakistan, usually WhatsApp) outperforms a flashier, slower one every time.',
+      'Website development in Pakistan in 2026 costs between PKR 20,000 and PKR 3,000,000+, depending on the type of site and who builds it. A simple landing page runs PKR 20,000–100,000, a professional business website PKR 80,000–300,000, an e-commerce store PKR 150,000–800,000, and a custom web application PKR 500,000 and up. Beyond the build, budget PKR 8,000–56,000 per year for a domain and hosting. The biggest factor in your result is not your budget. It is what you spend it on. A fast, mobile-first, SEO-ready website built around how customers actually buy, which in Pakistan usually means WhatsApp, outperforms a flashier and slower one every time.',
   },
 
   { type: 'h2', text: 'Executive Summary' },
   {
     type: 'p',
     text:
-      'If you run a business in Pakistan and you are trying to decide what kind of website to build, who should build it, and how much you should reasonably pay, this guide is written for you — not for developers, and not for a foreign audience reading prices in dollars that do not reflect the Lahore or Karachi market.',
+      'If you run a business in Pakistan and you are trying to decide what kind of website to build, who should build it, and how much you should reasonably pay, this guide is written for you. Not for developers, and not for a foreign audience reading prices in dollars that have nothing to do with the Lahore or Karachi market.',
   },
   {
     type: 'p',
@@ -99,10 +99,10 @@ export const wdpBlocks = [
     type: 'ul',
     items: [
       'A "website" can mean five very different things, and the type you need determines almost everything about your cost and timeline.',
-      'Prices vary enormously for honest reasons — mostly who builds it and what is actually included.',
+      'Prices vary enormously for honest reasons, mostly who builds it and what is actually included.',
       'The cheapest option is usually the most expensive, because a site that does not load fast, rank, or convert has to be redone.',
       'Your industry changes the brief. A dental clinic, a law firm, and a restaurant each need a different website.',
-      'In 2026, being found means more than Google — customers now ask ChatGPT, Gemini, and AI Overviews for recommendations.',
+      'In 2026, being found means more than Google. Customers now ask ChatGPT, Gemini and AI Overviews for recommendations.',
     ],
   },
 
@@ -110,59 +110,59 @@ export const wdpBlocks = [
   {
     type: 'p',
     text:
-      'Website development is the work of designing, building, and launching a website so it works correctly on every device, loads quickly, and helps a business achieve a goal — usually getting more customers. It covers everything from the visual design and the words on the page to the code that makes it function and the setup that lets Google find it.',
+      'Website development is the work of designing, building, and launching a website so it works correctly on every device, loads quickly, and helps a business achieve a goal, which is usually getting more customers. It covers everything from the visual design and the words on the page to the code that makes it function and the setup that lets Google find it.',
   },
   { type: 'h3', text: 'Website Development vs Web Design vs Web Application' },
   {
     type: 'ul',
     items: [
-      'Web design is what the site looks like — the layout, colours, fonts, and visual feel. It is the architect’s drawing.',
-      'Web development is building the thing — turning that design into a working, responsive website using code. It is the actual construction.',
-      'A web application is a website that does something interactive — logins, dashboards, bookings, payments, a customer portal.',
+      'Web design is what the site looks like: the layout, colours, fonts and visual feel. It is the architect’s drawing.',
+      'Web development is building the thing, turning that design into a working responsive website using code. It is the actual construction.',
+      'A web application is a website that does something interactive: logins, dashboards, bookings, payments, a customer portal.',
     ],
   },
   {
     type: 'p',
     text:
-      'Most businesses asking for "a website" want web design and development together. Some — startups, clinics with booking systems, online stores — actually need a web application, which is a bigger and more expensive piece of work. Knowing which one you are buying is the first step to not overpaying or under-scoping.',
+      'Most businesses asking for "a website" want web design and development together. Some, like startups and clinics with booking systems and online stores, actually need a web application, which is a bigger and more expensive piece of work. Knowing which one you are buying is the first step to not overpaying or under-scoping.',
   },
   { type: 'h3', text: 'What Is Actually Included in Building a Website' },
   {
     type: 'p',
     text:
-      'When you pay for a website, you are paying for a bundle of separate skills, each of which takes real time: planning, design, front-end development, back-end development (if needed), content, testing and launch, and SEO and analytics setup. When a website is suspiciously cheap, it is almost always because one or more of these was skipped — usually design quality, content, testing, and SEO, which are the exact things that decide whether your website earns its keep.',
+      'When you pay for a website, you are paying for a bundle of separate skills, each of which takes real time: planning, design, front-end development, back-end development (if needed), content, testing and launch, and SEO and analytics setup. When a website is suspiciously cheap, it is almost always because one or more of these was skipped: usually design quality, content, testing and SEO, which are the exact things that decide whether your website earns its keep.',
   },
 
   { type: 'h2', text: 'Why Your Pakistani Business Needs a Website in 2026' },
   {
     type: 'p',
     text:
-      'Because your customers are searching for what you offer right now — and without a website, they find your competitor instead. A website is the one marketing asset you fully own, that works 24 hours a day, and that turns a stranger’s search into a paying customer. Social media is rented ground; your website is property.',
+      'Because your customers are searching for what you offer right now, and without a website they find your competitor instead. A website is the one marketing asset you fully own, that works 24 hours a day, and that turns a stranger’s search into a paying customer. Social media is rented ground; your website is property.',
   },
   {
     type: 'p',
     text:
-      'That matters more than ever because Pakistan’s online audience has reached real scale. According to DataReportal’s Digital 2025 report on Pakistan, the country has well over 100 million internet users, and the clear majority access the web primarily through mobile phones. Your customers are already online and already on their phones — the only question is whether your business shows up when they look.',
+      'That matters more than ever because Pakistan’s online audience has reached real scale. According to DataReportal’s Digital 2025 report on Pakistan, the country has well over 100 million internet users, and the clear majority access the web primarily through mobile phones. Your customers are already online and already on their phones. The only question is whether your business shows up when they look.',
   },
   { type: 'h3', text: 'The Shift to Mobile and WhatsApp-First Buyers' },
   {
     type: 'p',
     text:
-      'Because most of your audience browses on a mid-range phone over mobile data, two things follow. First, a slow or awkward mobile experience loses a large share of visitors before they read a word — and the data backs this up: Google’s research found that as a page’s load time grows from one second to three seconds, the probability that a visitor bounces increases by 32%. Second — the part foreign templates always miss — Pakistani customers do not fill in forms and wait for email. They tap WhatsApp.',
+      'Because most of your audience browses on a mid-range phone over mobile data, two things follow. First, a slow or awkward mobile experience loses a large share of visitors before they read a word. The data backs this up: Google’s research found that as a page’s load time grows from one second to three seconds, the probability that a visitor bounces increases by 32%. Second, and this is the part foreign templates always miss, Pakistani customers do not fill in forms and wait for email. They tap WhatsApp.',
   },
   {
     type: 'p',
     text:
-      'A website built for this market makes click-to-WhatsApp the primary action, so an interested visitor is one tap from a conversation. It is a small technical detail with an outsized effect on the enquiries you actually receive — I have seen the same traffic produce two to three times the leads simply by making WhatsApp the main call to action instead of a buried "Submit" button.',
+      'A website built for this market makes click-to-WhatsApp the primary action, so an interested visitor is one tap from a conversation. It is a small technical detail with an outsized effect on the enquiries you actually receive. I have seen the same traffic produce two to three times the leads simply by making WhatsApp the main call to action instead of a buried "Submit" button.',
   },
   { type: 'h3', text: 'What Happens to Businesses Without a Website' },
   {
     type: 'ul',
     items: [
-      'You are invisible to searchers — social profiles rarely show up for "dentist near me in Lahore"; websites do.',
-      'You look smaller than you are — a clean website signals a real, established business.',
-      'You are at the mercy of an algorithm — a platform can cut your reach or suspend your account overnight.',
-      'You cannot be recommended by AI — ChatGPT and AI Overviews pull from websites they can read and trust, not Instagram stories.',
+      'You are invisible to searchers. Social profiles rarely show up for "dentist near me in Lahore". Websites do.',
+      'You look smaller than you are. A clean website signals a real, established business.',
+      'You are at the mercy of an algorithm. A platform can cut your reach or suspend your account overnight.',
+      'You cannot be recommended by AI. ChatGPT and AI Overviews pull from websites they can read and trust, not from Instagram stories.',
     ],
   },
 
@@ -170,15 +170,15 @@ export const wdpBlocks = [
   {
     type: 'p',
     text:
-      'There are four main types of websites, and the one you need depends on what you want visitors to do. Picking the wrong type is the most common — and most expensive — early mistake, because it sets your budget and timeline before a single line of code is written.',
+      'There are four main types of websites, and the one you need depends on what you want visitors to do. Picking the wrong type is the most common early mistake, and the most expensive, because it sets your budget and timeline before a single line of code is written.',
   },
   {
     type: 'ul',
     items: [
-      'Landing page — a single focused page to capture a lead or promote one offer. Cheapest and fastest; ideal for campaigns and freelancers.',
-      'Business website — the standard 5–7 page site (home, about, services, gallery, contact) most companies actually need.',
-      'E-commerce store — a site built to sell products online with a catalogue, cart, checkout, and payments.',
-      'Custom web application — software, not a brochure: logins, bookings, dashboards, portals. The most powerful and most expensive.',
+      'Landing page. A single focused page to capture a lead or promote one offer. Cheapest and fastest, ideal for campaigns and freelancers.',
+      'Business website: the standard 5–7 page site (home, about, services, gallery, contact) most companies actually need.',
+      'E-commerce store. A site built to sell products online with a catalogue, cart, checkout and payments.',
+      'Custom web application: software, not a brochure. Logins, bookings, dashboards, portals. The most powerful and the most expensive.',
     ],
   },
   {
@@ -196,7 +196,7 @@ export const wdpBlocks = [
   {
     type: 'p',
     text:
-      'In 2026, a website in Pakistan costs anywhere from PKR 20,000 for a basic landing page to PKR 3,000,000 or more for a custom web application. A professional business website — the kind most companies need — typically falls between PKR 80,000 and PKR 300,000. The wide range is real and reasonable: it reflects genuine differences in scope, quality, and who is doing the work.',
+      'In 2026, a website in Pakistan costs anywhere from PKR 20,000 for a basic landing page to PKR 3,000,000 or more for a custom web application. A professional business website, the kind most companies need, typically falls between PKR 80,000 and PKR 300,000. The wide range is real and reasonable: it reflects genuine differences in scope, quality, and who is doing the work.',
   },
   {
     type: 'table',
@@ -211,19 +211,19 @@ export const wdpBlocks = [
   {
     type: 'p',
     text:
-      '*USD at an approximate 2026 rate of ~PKR 278/USD; rates fluctuate, so treat conversions as indicative. If a quote sits far below the bottom of a range, that is not a bargain — it is a signal that something on the "what is included" list is being left out.',
+      '*USD at an approximate 2026 rate of ~PKR 278/USD; rates fluctuate, so treat conversions as indicative. If a quote sits far below the bottom of a range, that is not a bargain. It is a signal that something on the "what is included" list is being left out.',
   },
   { type: 'h3', text: 'What Affects the Price' },
   {
     type: 'ul',
     items: [
-      'The type and number of pages — a 5-page site versus a 30-page platform.',
-      'Custom design versus a template — bespoke design takes far longer.',
-      'Functionality — bookings, logins, payments, and dashboards each add engineering work.',
-      'The technology — a basic template versus a custom-coded site built for speed and SEO.',
-      'Content and copywriting — whether the words and on-page SEO are included.',
-      'Who builds it — a student freelancer and a senior specialist quote very differently.',
-      'Ongoing support — a one-time build versus a maintained, evolving website.',
+      'The type and number of pages: a 5-page site versus a 30-page platform.',
+      'Custom design versus a template. Designing from scratch takes far longer.',
+      'Functionality. Bookings, logins, payments and dashboards each add engineering work.',
+      'The technology: a basic template versus a custom-coded site built for speed and SEO.',
+      'Content and copywriting, and whether the words and on-page SEO are included.',
+      'Who builds it. A student freelancer and a senior specialist quote very differently.',
+      'Ongoing support: a one-time build versus a maintained, evolving website.',
     ],
   },
   {
@@ -246,14 +246,14 @@ export const wdpBlocks = [
   {
     type: 'p',
     text:
-      'One thing worth knowing: cheap shared hosting (the basic cPanel kind) is frequently slow and insecure. Modern serverless hosting — the kind we use for fast, custom sites — often costs less to run and delivers dramatically better speed, because you pay for the traffic you actually get rather than a fixed monthly slab. On the domain question, a .com costs roughly PKR 3,000–6,000 a year; a .pk or .com.pk (registered through PKNIC) is comparable and signals a clearly Pakistani business. Both work fine for SEO.',
+      'One thing worth knowing: cheap shared hosting (the basic cPanel kind) is frequently slow and insecure. Modern serverless hosting, the kind we use for fast custom sites, often costs less to run and delivers dramatically better speed, because you pay for the traffic you actually get instead of a fixed monthly slab. On domains, a .com costs roughly PKR 3,000–6,000 a year. A .pk or .com.pk (registered through PKNIC) is comparable and signals a clearly Pakistani business. Both work fine for SEO.',
   },
 
   { type: 'h2', text: 'Freelancer vs Agency vs Studio vs DIY' },
   {
     type: 'p',
     text:
-      'Two developers can build the exact same website and charge a 10x difference — because you are not just paying for the site, you are paying for the skill, reliability, and accountability behind it. You have four real options in Pakistan, and each suits a different stage of business.',
+      'Two developers can build the exact same website and charge a 10x difference. What separates the quotes is the skill, the reliability and the accountability behind the work, not the site itself. You have four real options in Pakistan, and each suits a different stage of business.',
   },
   {
     type: 'table',
@@ -269,24 +269,24 @@ export const wdpBlocks = [
   {
     type: 'p',
     text:
-      'DIY is fine for a brand-new venture testing an idea with zero budget, but it stops being fine the moment your website needs to generate leads. Cheap freelancers are a gamble — the PKR 20,000 website I keep getting hired to replace almost always came from there. Agencies give you a team but you pay for overhead, and the senior who pitched you rarely builds your site. A specialist studio gives you senior-level quality and modern technology without the bloated overhead, with the person building your site as your direct point of contact — the value sweet spot for most serious businesses, and the lane Avenix Studio is built for.',
+      'DIY is fine for a brand-new venture testing an idea with zero budget, but it stops being fine the moment your website needs to generate leads. Cheap freelancers are a gamble. The PKR 20,000 website I keep getting hired to replace almost always came from there. Agencies give you a team but you pay for overhead, and the senior who pitched you rarely builds your site. A specialist studio gives you senior-level quality and modern technology without the bloated overhead, with the person building your site as your direct point of contact. That is the value sweet spot for most serious businesses, and the lane Avenix Studio is built for.',
   },
   {
     type: 'callout',
     text:
-      'Expert tip: Whoever you choose, ask one question that filters out most bad outcomes — "Can I see two or three live websites you have built, so I can open them on my phone right now?" Speed and polish on a real device tell you more than any portfolio screenshot.',
+      'Expert tip: Whoever you choose, ask one question that filters out most bad outcomes. "Can I see two or three live websites you have built, so I can open them on my phone right now?" Speed and polish on a real device tell you more than any portfolio screenshot.',
   },
 
   { type: 'h2', text: 'Platforms & Technology: WordPress vs Custom' },
   {
     type: 'p',
     text:
-      'The platform your website is built on decides how fast it loads, how well it ranks, how secure it is, and how much it costs to run — so it matters far more than most business owners realise. Broadly, you have two roads: a ready-made platform like WordPress, or a custom-coded site built on modern technology.',
+      'The platform your website is built on decides how fast it loads, how well it ranks, how secure it is and how much it costs to run. It matters far more than most business owners realise. Broadly, you have two roads: a ready-made platform like WordPress, or a custom-coded site built on modern technology.',
   },
   {
     type: 'p',
     text:
-      'WordPress, Shopify, and Wix let you get online without building everything from scratch, and WordPress is excellent for content-heavy sites a non-technical team updates daily. But these platforms lean heavily on plugins — each one is another thing that can slow your site, break after an update, or open a security hole. Custom development (for us, Next.js and the MERN stack) builds exactly what you need and nothing you do not, so the speed, security, and scalability are far better. The trade-off is a higher upfront cost and the need for a developer to make changes.',
+      'WordPress, Shopify, and Wix let you get online without building everything from scratch, and WordPress is excellent for content-heavy sites a non-technical team updates daily. But these platforms lean heavily on plugins, and each one is another thing that can slow your site, break after an update or open a security hole. Custom development (for us, Next.js and the MERN stack) builds exactly what you need and nothing you do not, so the speed, security, and scalability are far better. The trade-off is a higher upfront cost and the need for a developer to make changes.',
   },
   {
     type: 'table',
@@ -303,32 +303,32 @@ export const wdpBlocks = [
   {
     type: 'p',
     text:
-      'Here is the part that surprises people: a custom site built on modern technology is often cheaper to own than a cheap WordPress site, even though it costs more to build. With no bloated plugins and efficient serverless hosting, it loads faster, breaks less, needs fewer fixes, and costs less per month to keep online. You pay more once and less forever — the opposite of the cheap-template trap.',
+      'Here is the part that surprises people: a custom site built on modern technology is often cheaper to own than a cheap WordPress site, even though it costs more to build. With no bloated plugins and efficient serverless hosting, it loads faster, breaks less, needs fewer fixes, and costs less per month to keep online. You pay more once and less forever. It is the opposite of the cheap-template trap.',
   },
 
   { type: 'h2', text: 'Website Development for Your Industry' },
   {
     type: 'p',
     text:
-      'The right website depends on your industry, because a dental clinic, a law firm, and a restaurant each need a different brief — even though most local agencies build them all the same way. That sameness is one of the biggest weaknesses in the Pakistani market.',
+      'The right website depends on your industry, because a dental clinic, a law firm and a restaurant each need a different brief, even though most local agencies build them all the same way. That sameness is one of the biggest weaknesses in the Pakistani market.',
   },
   { type: 'h3', text: 'Medical & Dental Clinics' },
   {
     type: 'p',
     text:
-      'For clinics, trust and easy booking are everything. The site must look credible, load fast, and make it effortless to ask a question or book — ideally over WhatsApp. Clear service pages, real photos, visible reviews, location and Maps, and prominent contact options do the heavy lifting.',
+      'For clinics, trust and easy booking are everything. The site must look credible, load fast, and make it effortless to ask a question or book, ideally over WhatsApp. Clear service pages, real photos, visible reviews, location and Maps, and prominent contact options do the heavy lifting.',
   },
   { type: 'h3', text: 'Aesthetic & Cosmetic Clinics' },
   {
     type: 'p',
     text:
-      'Aesthetic clinics live and die by perceived premium-ness — a cheap-looking site silently tells clients you cannot be trusted with their face. The brief is visual polish, beautiful before/after galleries, a calm confident tone, and a booking path that feels as upmarket as the clinic itself.',
+      'Aesthetic clinics live and die by how premium they look. A cheap-looking site quietly tells clients you cannot be trusted with their face. The brief is visual polish, beautiful before/after galleries, a calm confident tone, and a booking path that feels as upmarket as the clinic itself.',
   },
   { type: 'h3', text: 'Gyms & Fitness Studios' },
   {
     type: 'p',
     text:
-      'Gyms get leads through Instagram DMs that then vanish, because there is no system to capture and follow up. A gym website turns that interest into organised, trackable enquiries — class schedules, membership options, strong social proof, and instant WhatsApp capture.',
+      'Gyms get leads through Instagram DMs that then vanish, because there is no system to capture and follow up. A gym website turns that interest into organised, trackable enquiries: class schedules, membership options, social proof, and instant WhatsApp capture.',
   },
   { type: 'h3', text: 'Law Firms' },
   {
@@ -346,7 +346,7 @@ export const wdpBlocks = [
   {
     type: 'p',
     text:
-      'Real estate sites must handle listings, and most cheap ones do it badly with slow pages and clunky search. The brief is fast, searchable, well-organised listings with good photos, clear filtering, and instant enquiry buttons — because buyers move fast and lose patience faster.',
+      'Real estate sites must handle listings, and most cheap ones do it badly with slow pages and clunky search. The brief is fast, searchable, well-organised listings with good photos, clear filtering and instant enquiry buttons, because buyers move fast and lose patience faster.',
   },
   { type: 'h3', text: 'Startups & Small Businesses' },
   {
@@ -364,11 +364,11 @@ export const wdpBlocks = [
   {
     type: 'ul',
     items: [
-      '1. Discovery & Fixed Quote — understand the business and goals, then give a fixed quote and timeline before any work begins.',
-      '2. Design — a mobile-first layout you see and approve before development starts.',
-      '3. Development — turn the approved design into a working, responsive site with SEO baked in.',
-      '4. Testing, SEO & Launch — test across devices, tune speed, configure indexing and analytics, then deploy.',
-      '5. Support & Growth — ongoing fixes, updates, and improvements so the site keeps earning.',
+      '1. Discovery & Fixed Quote. Understand the business and goals, then give a fixed quote and timeline before any work begins.',
+      '2. Design: a mobile-first layout you see and approve before development starts.',
+      '3. Development. Turn the approved design into a working, responsive site with SEO baked in.',
+      '4. Testing, SEO & Launch: test across devices, tune speed, configure indexing and analytics, then deploy.',
+      '5. Support & Growth. Ongoing fixes, updates and improvements so the site keeps earning.',
     ],
   },
 
@@ -376,31 +376,31 @@ export const wdpBlocks = [
   {
     type: 'p',
     text:
-      'A website ranks and converts when it loads fast, works flawlessly on mobile, and is structured to guide visitors toward a clear action — not when it has the most animations. Business owners often get this backwards, spending on flashy effects and skimping on the three things that actually drive results.',
+      'A website ranks and converts when it loads fast, works flawlessly on mobile, and is structured to guide visitors toward a clear action. Animations do none of that. Business owners often get this backwards, spending on flashy effects and skimping on the three things that actually drive results.',
   },
   { type: 'h3', text: 'Speed & Core Web Vitals' },
   {
     type: 'p',
     text:
-      'A faster website ranks higher and sells more — speed is the rare factor that improves both your Google position and your conversion rate at the same time. This is documented by Google itself: through a set of signals called Core Web Vitals, which measure real-world loading speed, interactivity, and visual stability, Google uses page experience as a ranking factor. The business case is just as direct — Google and Deloitte’s "Milliseconds Make Millions" study found that even a tenth-of-a-second improvement in mobile site speed measurably increased conversions and engagement. Paired with the bounce data above, the conclusion is unavoidable: every extra second your site takes to load costs you both rankings and customers. It is the strongest argument for building on modern, efficient technology, and why we build on Next.js where speed is engineered in from the first line of code.',
+      'A faster website ranks higher and sells more. Speed is the rare factor that improves your Google position and your conversion rate at the same time. This is documented by Google itself: through a set of signals called Core Web Vitals, which measure real-world loading speed, interactivity, and visual stability, Google uses page experience as a ranking factor. The business case is just as direct. Google and Deloitte’s "Milliseconds Make Millions" study found that even a tenth-of-a-second improvement in mobile site speed measurably increased conversions and engagement. Paired with the bounce data above, the conclusion is unavoidable: every extra second your site takes to load costs you both rankings and customers. It is the strongest argument for building on modern, efficient technology, and why we build on Next.js where speed is engineered in from the first line of code.',
   },
   { type: 'h3', text: 'Mobile-First Design & WhatsApp Conversion' },
   {
     type: 'p',
     text:
-      'Since most of your Pakistani audience is on a phone, your website must be designed for mobile first and desktop second, with tap targets that are easy to hit and text readable without zooming. And because traffic is worthless if it does not convert, every important page should have one obvious next step — in Pakistan that almost always means a prominent WhatsApp button alongside a simple form, so an interested visitor can start a conversation in one tap.',
+      'Since most of your Pakistani audience is on a phone, your website must be designed for mobile first and desktop second, with tap targets that are easy to hit and text readable without zooming. And because traffic is worthless if it does not convert, every important page should have one obvious next step. In Pakistan that almost always means a prominent WhatsApp button alongside a simple form, so an interested visitor can start a conversation in one tap.',
   },
 
   { type: 'h2', text: 'Website + AI Search in 2026 (SEO, AEO & GEO)' },
   {
     type: 'p',
     text:
-      'In 2026, being findable means being visible in three places: traditional Google search, AI answers like ChatGPT and Google’s AI Overviews, and voice search — and most Pakistani websites are optimised for none of them. This is the freshest and most overlooked opportunity in the market.',
+      'In 2026, being findable means being visible in three places: traditional Google search, AI answers like ChatGPT and Google’s AI Overviews, and voice search. Most Pakistani websites are optimised for none of them. This is the freshest and most overlooked opportunity in the market.',
   },
   {
     type: 'p',
     text:
-      'Search engine optimisation is still the foundation: building your site so Google can crawl, understand, and rank it. But a growing number of people no longer scroll ten blue links — they ask ChatGPT, Gemini, Claude, or Perplexity for a recommendation, or read the AI answer at the top of Google. These systems pull from websites they can read clearly and trust, which means clean structure, clear factual statements, marked-up data, and genuinely helpful content an AI can quote. This is Answer Engine Optimisation (AEO) and Generative Engine Optimisation (GEO), and almost none of your competitors are doing it yet.',
+      'Search engine optimisation is still the foundation: building your site so Google can crawl, understand, and rank it. But a growing number of people no longer scroll ten blue links. They ask ChatGPT, Gemini, Claude or Perplexity for a recommendation, or read the AI answer at the top of Google. These systems pull from websites they can read clearly and trust, which means clean structure, clear factual statements, marked-up data, and genuinely helpful content an AI can quote. This is Answer Engine Optimisation (AEO) and Generative Engine Optimisation (GEO), and almost none of your competitors are doing it yet.',
   },
 
   { type: 'h2', text: 'Common Website Mistakes to Avoid' },
@@ -412,13 +412,13 @@ export const wdpBlocks = [
   {
     type: 'ul',
     items: [
-      '"I will do it in two days for PKR 15,000" — a template with your logo dropped on top.',
-      'No discovery questions — if they do not ask about your business, they are not building for it.',
-      'No mention of mobile, speed, or SEO — these decide whether the site works at all.',
-      '"You provide all the content" — often means the site launches with placeholder text.',
-      'They vanish after launch — no support means you are stranded at the first fix.',
-      'Vague pricing with surprise add-ons — professionals give a clear, fixed quote.',
-      'No live examples — always open their real, recent work on your own phone.',
+      '"I will do it in two days for PKR 15,000." That is a template with your logo dropped on top.',
+      'No discovery questions. If they do not ask about your business, they are not building for it.',
+      'No mention of mobile, speed or SEO. These decide whether the site works at all.',
+      '"You provide all the content" usually means the site launches with placeholder text still in it.',
+      'They vanish after launch. No support means you are stranded at the first fix.',
+      'Vague pricing with surprise add-ons. Professionals give a clear, fixed quote.',
+      'No live examples. Always open their real, recent work on your own phone.',
     ],
   },
 
@@ -426,13 +426,13 @@ export const wdpBlocks = [
   {
     type: 'p',
     text:
-      'Choose a web development company based on what is included, who does the work, and the live quality of their past sites — not on the lowest price. Use this checklist before you hire.',
+      'Choose a web development company based on what is included, who does the work, and the live quality of their past sites. Not on the lowest price. Use this checklist before you hire.',
   },
   {
     type: 'ul',
     items: [
       'Do they ask about your business and goals before quoting?',
-      'Can you see live, recent websites — and do they load fast on your phone?',
+      'Can you see live, recent websites, and do they load fast on your phone?',
       'Is the pricing clear, fixed, and transparent?',
       'Do they design mobile-first and include basic SEO?',
       'Do they integrate WhatsApp and clear contact options?',
@@ -446,7 +446,7 @@ export const wdpBlocks = [
   {
     type: 'p',
     text:
-      'Building a website in Pakistan in 2026 is not really a question of "how cheap can I get it?" It is a question of what you need the website to do and the smartest way to spend so it actually does it. A website is the hardest-working, lowest-paid employee your business will ever hire — working around the clock, turning searches into customers, and quietly building trust while you sleep. The businesses winning online here are not the ones who spent the most; they are the ones who spent on the right things: speed, mobile-first design, clear conversion paths, real SEO, and visibility in AI search.',
+      'Building a website in Pakistan in 2026 is not really a question of "how cheap can I get it?" It is a question of what you need the website to do and the smartest way to spend so it actually does it. Your website works around the clock, turning searches into customers while nobody is watching it. The businesses winning online here are not the ones who spent the most. They are the ones who spent on the right things: speed, mobile-first design, clear conversion paths, real SEO, and visibility in AI search.',
   },
 
   { type: 'h2', text: 'Sources & References' },

@@ -170,10 +170,10 @@ export const clientConfig = {
   widget: {
     tagline: 'AI Concierge',
     welcomeMessage:
-      "Hi, I'm Nova 👋 — your guide here. Ask about recent work, services, or how a project comes together, and I'll point you in the right direction.",
+      "Hi, I'm Nova 👋 Ask me about recent work, what Avenix does, or how a project actually runs. I'll get you to the right place.",
     inputPlaceholder: 'Ask Nova anything…',
     errorMessage:
-      "Sorry — I couldn't respond just now. Please try again in a moment, or reach out directly.",
+      "Sorry, I couldn't respond just now. Try again in a moment, or reach out directly.",
     quickReplies: ['Explore recent work', 'Services & packages', 'Start a project', 'How you work'],
     launcher: {
       ariaLabel: 'Chat with Nova',

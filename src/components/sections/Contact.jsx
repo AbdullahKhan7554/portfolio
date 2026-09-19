@@ -10,7 +10,7 @@ export function Contact({ defaultPackage = '' }) {
       id="contact"
       eyebrow="07 — Let's Talk"
       title="Start Your Project."
-      intro="Tell us what you're building. We'll reply within one business day with next steps — or reach us on WhatsApp for a faster response."
+      intro="Tell us what you're building. We reply within one business day with next steps. For something faster, message us on WhatsApp."
     >
       <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
         <Reveal className="flex flex-col gap-6">

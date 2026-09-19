@@ -19,9 +19,9 @@ export function LeadMagnet() {
                 A free 5-point audit of your current website.
               </h2>
               <p className="measure mt-4 text-lead text-muted">
-                Get a clear, no-obligation review of your site&rsquo;s speed, SEO,
-                mobile experience, and conversion potential — with specific,
-                actionable fixes.
+                A no-obligation review of your site&rsquo;s speed, SEO, mobile
+                experience and conversion potential, with specific fixes you can
+                actually action.
               </p>
             </div>
             <div>

@@ -16,7 +16,7 @@ export const services = [
     name: 'Web Development',
     tagline: 'Production-grade Next.js & React builds',
     description:
-      'Websites and web apps engineered on Next.js and React — fast, accessible, and built to scale with the business behind them.',
+      'Websites and web apps engineered on Next.js and React, fast and accessible, built to scale with the business behind them.',
     chips: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'CMS'],
   },
   {
@@ -25,7 +25,7 @@ export const services = [
     name: 'Mobile App Development',
     tagline: 'Cross-platform apps, concept to store',
     description:
-      'Cross-platform mobile apps taken from concept through to store listing — one codebase, a native feel on both iOS and Android.',
+      'Cross-platform mobile apps taken from concept through to store listing. One codebase, a native feel on both iOS and Android.',
     // Avenix offers BOTH frameworks — the choice is made per project, driven by
     // the client's requirements (confirmed by Abdullah, design system §6 query).
     chips: ['Cross-platform', 'React Native', 'Flutter', 'App Store', 'Google Play'],
@@ -36,7 +36,7 @@ export const services = [
     name: 'AI Automation & AI Agents',
     tagline: 'Workflow automation and agent pipelines',
     description:
-      'Automate the repetitive work that eats your team’s week — from lead routing to multi-step agent pipelines wired into the tools you already run.',
+      'Automate the repetitive work that eats your team’s week, from lead routing through to multi-step agent pipelines wired into the tools you already run.',
     chips: ['n8n', 'WhatsApp Business API', 'Custom Agents', 'Integrations'],
   },
   {
@@ -54,7 +54,7 @@ export const services = [
     name: 'Digital Marketing',
     tagline: 'Search, paid, and the numbers behind them',
     description:
-      'Paid search and social campaigns that put you in front of the right people — with the analytics to show which channel is actually earning its budget.',
+      'Paid search and social campaigns that put you in front of the right people, plus the analytics to show which channel is actually earning its budget.',
     chips: ['Google Ads', 'Meta Ads', 'Social Ads', 'Analytics'],
   },
   {
@@ -63,7 +63,7 @@ export const services = [
     name: 'Graphic Design & Branding',
     tagline: 'Identity systems that travel',
     description:
-      'Identity that holds up everywhere your brand shows up — logo and type through to a documented, reusable brand system.',
+      'Identity that holds up everywhere your brand shows up: logo and type through to a documented, reusable brand system.',
     chips: ['Identity', 'Logo', 'Guidelines', 'Brand Systems'],
   },
   {
@@ -72,7 +72,7 @@ export const services = [
     name: 'SEO',
     tagline: 'Technical, on-page, and off-page search',
     description:
-      'Get found by the people already searching for what you do — technical foundations, on-page structure, and the authority signals that move you up the results page.',
+      'Get found by the people already searching for what you do. Technical foundations, on-page structure, and the authority signals that move you up the results page.',
     chips: ['Technical SEO', 'On-Page', 'Off-Page', 'AEO / GEO', 'Analytics'],
   },
   {
@@ -81,7 +81,7 @@ export const services = [
     name: 'Video Editing',
     tagline: 'Edits cut for retention',
     description:
-      'Short-form and long-form edits built to hold attention — hooks, pacing, and captions tuned to each platform.',
+      'Short-form and long-form edits built to hold attention, with hooks, pacing and captions tuned to each platform.',
     chips: ['Reels', 'YouTube', 'Shorts', 'Promos'],
   },
 ];

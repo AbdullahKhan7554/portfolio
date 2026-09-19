@@ -284,8 +284,8 @@ export function Hero() {
             className="hero-in measure mt-5 text-lead max-[399px]:mt-4"
             style={{ animationDelay: '0.5s' }}
           >
-            Web, mobile, and AI products for ambitious brands — designed,
-            engineered, and marketed end to end.
+            Web, mobile, and AI products for ambitious brands. Designed,
+            engineered and marketed end to end.
           </p>
 
           {/* mt-6 (32px), not mt-9: 9 is not remapped either and resolved to

@@ -32,7 +32,7 @@ export default function BlogPage() {
         hero={getPageHero('/blog')}
         eyebrow="Insights"
         title="Notes on building better web."
-        intro="Practical thinking on performance, conversion, SEO, and the craft of shipping web products that perform."
+        intro="Practical notes on performance, conversion, SEO, and what it takes to ship a web product that actually works."
         breadcrumbs={[
           { name: 'Home', path: '/' },
           { name: 'Blog', path: '/blog' },

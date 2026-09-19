@@ -68,7 +68,7 @@ export function TechStack() {
       id="tech-stack"
       eyebrow="05 — Toolkit"
       title="A Modern Stack, Used With Intent."
-      intro="The right tools, chosen for performance, scalability, and maintainability — not novelty."
+      intro="We choose tools that perform, scale and stay maintainable. Novelty is not a reason."
     >
       <Reveal className="mt-8">
         <div className="card-premium overflow-hidden p-0 lg:grid lg:grid-cols-[15rem_1fr]">

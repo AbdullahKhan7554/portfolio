@@ -9,7 +9,7 @@ export function PerfSEO() {
       id="performance"
       eyebrow="07 — Performance & SEO"
       title="The luxury is backed by numbers."
-      intro="Speed and discoverability aren't add-ons — they're guarantees. Here's the standard every project is held to."
+      intro="Speed and discoverability are not extras you pay more for. Here is the standard every project is held to."
       headerAlign="center"
     >
       <RevealGroup

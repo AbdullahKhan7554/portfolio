@@ -9,7 +9,7 @@ export function FAQ() {
       id="faq"
       eyebrow="06 — Questions"
       title="Everything You Might Ask."
-      intro="Straight answers to the questions clients ask most — so the call can focus on your project."
+      intro="Straight answers to the questions clients ask most, so the call can focus on your project."
     >
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(faqSchema(faqs))} />
       <div className="mt-6 max-w-3xl">

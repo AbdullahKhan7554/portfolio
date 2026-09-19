@@ -29,7 +29,7 @@
 /** Shared closing CTA copy — identical intent on all four pages, one definition. */
 export const SERVICE_CTA = {
   title: 'Tell us what you are building.',
-  body: 'Send us the problem in a sentence or two. You will get a scoped proposal with a fixed quote and a timeline before any work starts — not a sales sequence.',
+  body: 'Send us the problem in a sentence or two. What comes back is a scoped proposal with a fixed quote and a timeline, before any work starts. Not a sales sequence.',
 };
 
 export const servicePages = [
@@ -54,7 +54,7 @@ export const servicePages = [
     eyebrow: 'Software Development',
     h1: 'Software Development Company in Pakistan',
     intro:
-      'We build custom software for businesses that have outgrown off-the-shelf tools — web applications, commerce platforms and internal systems, engineered to be maintained rather than rewritten.',
+      'We build custom software for businesses that have outgrown off-the-shelf tools: web applications, commerce platforms, internal systems. Built to be maintained, not rewritten.',
     /**
      * ANSWER-FIRST PARAGRAPH (AEO). Leads with the direct answer to "what is
      * this and who is it for", in one self-contained block that can be quoted
@@ -65,17 +65,17 @@ export const servicePages = [
       {
         title: 'Custom web applications',
         description:
-          'Dashboards, booking systems, portals and internal tools built around how your business actually runs — not bent to fit a template.',
+          'Dashboards, booking systems, portals and internal tools, built around how your business actually runs instead of bent to fit a template.',
       },
       {
         title: 'Commerce and ordering platforms',
         description:
-          'Storefronts, checkout and order-routing flows backed by a real API and database, built to handle catalogue and fulfilment logic rather than a plugin stack.',
+          'Storefronts, checkout and order-routing flows on a real API and database. Catalogue and fulfilment logic your own code handles, not a stack of plugins.',
       },
       {
         title: 'Business websites on a real framework',
         description:
-          'Marketing sites engineered on Next.js and React — fast, accessible, and structured so search engines and AI assistants can read them.',
+          'Marketing sites engineered on Next.js and React. They load fast, they meet accessibility standards, and they are structured so search engines and AI assistants can read them properly.',
       },
       {
         title: 'APIs and integrations',
@@ -85,19 +85,19 @@ export const servicePages = [
       {
         title: 'Rebuilds and rescues',
         description:
-          'Taking over a slow, fragile or abandoned codebase — auditing what exists, then rebuilding what has to change without stopping the business.',
+          'Taking over a slow, fragile or abandoned codebase. We audit what exists, then rebuild what has to change without stopping the business.',
       },
     ],
     process: [
       {
         title: 'Scope',
         description:
-          'We map the workflow the software has to support and agree what is in and out of version one, so the quote is fixed rather than open-ended.',
+          'We map the workflow the software has to support and agree what is in and out of version one. That is what makes the quote fixed instead of open-ended.',
       },
       {
         title: 'Architecture',
         description:
-          'Data model, integrations and hosting decided up front and written down — the decisions that are expensive to reverse are made before any code is written.',
+          'Data model, integrations and hosting decided up front and written down. The decisions that are expensive to reverse get made before any code is.',
       },
       {
         title: 'Build',
@@ -112,7 +112,7 @@ export const servicePages = [
       {
         title: 'Handover',
         description:
-          'You receive the repository, the accounts and the documentation. Every project is handed over clean — nothing is locked to us.',
+          'You receive the repository, the accounts and the documentation. Nothing is locked to us.',
       },
     ],
     stack: [
@@ -129,17 +129,17 @@ export const servicePages = [
       {
         question: 'What does a software development company actually do?',
         answer:
-          'A software development company designs, builds, tests and maintains custom software for a client. At Avenix Studio that means scoping the workflow the software has to support, choosing the architecture, building the application, testing it across devices, deploying it, and handing over the code and accounts to the client.',
+          'A software development company designs, builds, tests and maintains custom software for a client. At Avenix Studio that means scoping the workflow, choosing the architecture, building and testing the application, deploying it, then handing the code and accounts to the client.',
       },
       {
         question: 'How much does custom software cost in Pakistan?',
         answer:
-          'Cost depends on scope, so we quote per project rather than from a price list. A focused internal tool, a commerce platform and a multi-role web application are very different builds. You get a fixed, written quote and a timeline before any work begins, and the figure does not move unless the scope does.',
+          'Cost depends on scope, so we quote per project instead of working from a price list. A focused internal tool, a commerce platform and a multi-role web application are very different builds. You get a fixed written quote and a timeline before any work begins, and the figure does not move unless the scope does.',
       },
       {
         question: 'How long does a custom software project take?',
         answer:
-          'A focused application typically runs in weeks rather than months, and larger platforms are broken into milestones so something usable ships early. We commit to a milestone timeline in the proposal, before the project starts.',
+          'A focused application typically runs in weeks, not months. Larger platforms get broken into milestones so something usable ships early, and we commit to that timeline in the proposal before the project starts.',
       },
       {
         question: 'Do we own the source code?',
@@ -182,13 +182,13 @@ export const servicePages = [
     eyebrow: 'AI Automation',
     h1: 'AI Automation Services',
     intro:
-      'We automate the repetitive work that quietly eats your team’s week — lead routing, follow-up, data entry and hand-offs — using AI agents wired into the tools you already run.',
+      'We automate the repetitive work that quietly eats your team’s week: lead routing, follow-up, data entry, hand-offs. We build AI agents that plug into the tools you already run.',
     lede: 'AI automation is the use of AI models and workflow tools to carry out repeatable business tasks without a person doing them by hand. Avenix Studio builds these systems for businesses in Pakistan and internationally: we map the workflow, connect the tools, build and test the automation, then hand over a system the client controls.',
     offerings: [
       {
         title: 'Workflow automation',
         description:
-          'The repeatable steps between your tools — a form becoming a CRM record, a message becoming a task — connected so nobody retypes anything.',
+          'The repeatable steps between your tools, connected so nobody retypes anything. A form becomes a CRM record. A message becomes a task.',
       },
       {
         title: 'AI agents',
@@ -208,7 +208,7 @@ export const servicePages = [
       {
         title: 'Integrations',
         description:
-          'Connecting the tools you already pay for — CRM, inbox, sheets, WhatsApp Business API — rather than adding another system for your team to learn.',
+          'Connecting the tools you already pay for: CRM, inbox, sheets, WhatsApp Business API. No extra system for your team to learn.',
       },
     ],
     process: [
@@ -225,7 +225,7 @@ export const servicePages = [
       {
         title: 'Build and connect',
         description:
-          'The automation is built and wired into your existing tools, with credentials held in your accounts — not ours.',
+          'The automation is built and wired into your existing tools, with credentials held in your accounts, not ours.',
       },
       {
         title: 'Test against real cases',
@@ -235,7 +235,7 @@ export const servicePages = [
       {
         title: 'Hand over and monitor',
         description:
-          'You get the documented workflow and the access. We stay on to watch the first live cycles and adjust what reality disagrees with.',
+          'You get the documented workflow and the access. We stay on to watch the first live cycles and fix whatever the real inputs break.',
       },
     ],
     stack: [
@@ -250,7 +250,7 @@ export const servicePages = [
        * caseStudies.js, so none is implied. The linked builds are real platform
        * work by the same team, labelled as exactly that.
        */
-      note: 'We have not published an AI automation case study yet. These are recent platform builds by the same team — the kind of systems these automations get wired into.',
+      note: 'We have not published an AI automation case study yet. These are recent platform builds by the same team, and the kind of systems these automations get wired into.',
       slugs: ['seven-guys', 'electronics-store'],
     },
     faqs: [
@@ -262,27 +262,27 @@ export const servicePages = [
       {
         question: 'What can realistically be automated in my business?',
         answer:
-          'The best candidates are tasks that happen often, follow a rule, and do not need judgement — enquiry routing, data entry between tools, first-line question answering, appointment and follow-up reminders, and report assembly. Anything needing real judgement is better designed as an agent that prepares the work and a person who approves it.',
+          'The best candidates are tasks that happen often, follow a rule, and do not need judgement: enquiry routing, data entry between tools, first-line question answering, appointment and follow-up reminders, report assembly. Anything that does need judgement is better designed as an agent that prepares the work and a person who approves it.',
       },
       {
         question: 'Will AI automation replace my staff?',
         answer:
-          'That is not how we scope it. The work we automate is the repetitive portion of a role — the retyping, the chasing, the copying between tabs — so the people doing it spend their time on the parts that need a person. We design the hand-off points deliberately, including where a human has to approve.',
+          'That is not how we scope it. We automate the repetitive portion of a role: the retyping, the chasing, the copying between tabs. The people doing it get that time back for the parts that need a person, and we set the hand-off points deliberately, including where a human has to approve.',
       },
       {
         question: 'Do you use our existing tools or replace them?',
         answer:
-          'We build on the tools you already pay for wherever possible. Automations connect to your CRM, inbox, spreadsheets and WhatsApp rather than asking your team to adopt another system, and credentials stay in your accounts.',
+          'We build on the tools you already pay for wherever possible. Automations connect to your CRM, inbox, spreadsheets and WhatsApp instead of asking your team to adopt another system, and credentials stay in your accounts.',
       },
       {
         question: 'How long does an automation take to build?',
         answer:
-          'A single well-defined workflow is usually a short engagement rather than a long project, because the mapping is most of the work. Larger agent systems are staged, so the first automation is live and earning time back while the next is being built.',
+          'A single well-defined workflow is usually a short engagement, not a long project, because the mapping is most of the work. Larger agent systems are staged, so the first automation is live and earning time back while the next one is being built.',
       },
       {
         question: 'What happens when the automation gets something wrong?',
         answer:
-          'We design for it up front. Anywhere a wrong decision would be expensive there is a human checkpoint, and every run is logged so a failure can be traced rather than guessed at. After launch we watch the first live cycles and adjust the rules against what actually comes through.',
+          'We design for it up front. Anywhere a wrong decision would be expensive there is a human checkpoint, and every run is logged, so a failure can be traced instead of guessed at. After launch we watch the first live cycles and adjust the rules against what actually comes through.',
       },
     ],
     related: ['software-development', 'mobile-app-development', 'seo'],
@@ -310,13 +310,13 @@ export const servicePages = [
     eyebrow: 'Mobile Apps',
     h1: 'Mobile App Development in Pakistan',
     intro:
-      'Cross-platform apps taken from concept through to store listing — one codebase that feels native on both iOS and Android, built by the team that will still be there after launch.',
+      'Cross-platform apps taken from concept through to store listing. One codebase that feels native on both iOS and Android, built by the team that will still be there after launch.',
     lede: 'Avenix Studio builds cross-platform mobile applications from its base in Lahore, Pakistan, for clients locally and internationally. We use React Native and Flutter so a single codebase serves both iOS and Android, and we handle the work through to submission on the App Store and Google Play.',
     offerings: [
       {
         title: 'Cross-platform apps',
         description:
-          'One codebase running on both iOS and Android, chosen per project between React Native and Flutter rather than fixed in advance.',
+          'One codebase running on both iOS and Android. We pick between React Native and Flutter per project, not in advance.',
       },
       {
         title: 'App and API together',
@@ -331,12 +331,12 @@ export const servicePages = [
       {
         title: 'Companion apps for existing platforms',
         description:
-          'A mobile front end for a business that already runs on the web, sharing the same API rather than forking the logic.',
+          'A mobile front end for a business that already runs on the web, sharing the same API instead of forking the logic.',
       },
       {
         title: 'Post-launch iteration',
         description:
-          'Releases after version one — the fixes and additions that only become obvious once real users are in the app.',
+          'Releases after version one: the fixes and additions that only become obvious once real users are in the app.',
       },
     ],
     process: [
@@ -348,17 +348,17 @@ export const servicePages = [
       {
         title: 'Choose the framework',
         description:
-          'React Native or Flutter, decided against your requirements — existing codebase, device features needed, and who will maintain it — not by habit.',
+          'React Native or Flutter, decided against your requirements: any existing codebase, the device features you need, and who will maintain it afterwards. Not by habit.',
       },
       {
         title: 'Design for the device',
         description:
-          'Screens designed mobile-first against real platform conventions, so the app reads as native on each platform rather than as a website in a frame.',
+          'Screens designed mobile-first against real platform conventions, so the app reads as native on each platform and not as a website in a frame.',
       },
       {
         title: 'Build and test on hardware',
         description:
-          'Development with milestone builds you can install and use, tested on real devices on both platforms rather than only in a simulator.',
+          'Development with milestone builds you can install and use, tested on real devices on both platforms. Not just in a simulator.',
       },
       {
         title: 'Submit and support',
@@ -374,7 +374,7 @@ export const servicePages = [
     ],
     caseStudies: {
       /** Same disclosure rule as AI automation — see the note there. */
-      note: 'Our published case studies are web platforms; we have not published a mobile app case study yet. These are the closest recent builds — the same team, the same product engineering behind the interface.',
+      note: 'Our published case studies are web platforms. We have not published a mobile app case study yet, so these are the closest recent builds: same team, same product engineering behind the interface.',
       slugs: ['seven-guys', 'electronics-store'],
     },
     faqs: [
@@ -391,7 +391,7 @@ export const servicePages = [
       {
         question: 'How much does it cost to build an app in Pakistan?',
         answer:
-          'We quote per project rather than from a price list, because the range is wide: a focused single-purpose app and a multi-role app with payments and a custom backend are different builds. You receive a fixed written quote and a milestone timeline before any work starts.',
+          'We quote per project instead of from a price list, because the range is wide. A focused single-purpose app and a multi-role app with payments and a custom backend are different builds. You receive a fixed written quote and a milestone timeline before any work starts.',
       },
       {
         question: 'Do you handle publishing to the App Store and Google Play?',
@@ -406,7 +406,7 @@ export const servicePages = [
       {
         question: 'What happens after the app is launched?',
         answer:
-          'There is a support window after go-live for anything that surfaces in real usage. Beyond that, ongoing releases and feature work are available on request — apps need maintenance as the platforms themselves update.',
+          'There is a support window after go-live for anything that surfaces in real usage. Beyond that, ongoing releases and feature work are available on request. Apps need maintenance as the platforms themselves keep updating.',
       },
     ],
     related: ['software-development', 'ai-automation', 'seo'],
@@ -434,13 +434,13 @@ export const servicePages = [
     eyebrow: 'SEO',
     h1: 'SEO Services in Pakistan',
     intro:
-      'Get found by the people already searching for what you do — technical foundations, on-page structure, local search, and the answer-engine work that decides whether AI assistants can quote you.',
+      'Get found by the people already searching for what you do. That means technical foundations, on-page structure, local search, and the answer-engine work that decides whether AI assistants can quote you.',
     lede: 'SEO is the work of making a website findable and understandable to search engines and, increasingly, to AI assistants. Avenix Studio provides technical SEO, on-page optimisation, local SEO and answer-engine optimisation from Lahore, Pakistan. We are engineers first, so technical fixes are implemented in the codebase rather than handed over as a list.',
     offerings: [
       {
         title: 'Technical SEO',
         description:
-          'Crawlability, indexing, site architecture, canonicals, structured data and Core Web Vitals — the foundations everything else depends on.',
+          'Crawlability, indexing, site architecture, canonicals, structured data and Core Web Vitals. These are the foundations everything else depends on.',
       },
       {
         title: 'On-page optimisation',
@@ -450,12 +450,12 @@ export const servicePages = [
       {
         title: 'Local SEO',
         description:
-          'The work that makes a business findable in its own city — consistent name, address and phone details, local business structured data, and location-relevant pages.',
+          'The work that makes a business findable in its own city: consistent name, address and phone details, local business structured data, and pages tied to real locations.',
       },
       {
         title: 'AEO and GEO',
         description:
-          'Structuring content so answer engines and AI assistants can quote it — direct question-and-answer formatting, clean entity information and valid schema.',
+          'Structuring content so answer engines and AI assistants can quote it. Direct question-and-answer formatting, clean entity information, valid schema.',
       },
       {
         title: 'Content and keyword mapping',
@@ -465,14 +465,14 @@ export const servicePages = [
       {
         title: 'Measurement',
         description:
-          'Search Console and analytics configured and read properly, so decisions come from your own data rather than a generic dashboard.',
+          'Search Console and analytics configured and read properly, so decisions come from your own data and not a generic dashboard.',
       },
     ],
     process: [
       {
         title: 'Audit',
         description:
-          'A full technical and on-page audit against your live site and your own Search Console data — what is indexed, what is not, and what is ranking for nothing.',
+          'A full technical and on-page audit against your live site and your own Search Console data. What is indexed, what is not, and what is ranking for nothing.',
       },
       {
         title: 'Map intent to pages',
@@ -482,7 +482,7 @@ export const servicePages = [
       {
         title: 'Fix the foundations',
         description:
-          'Technical issues implemented in the codebase — metadata, structured data, internal links, performance — rather than delivered as recommendations for someone else to action.',
+          'Technical issues fixed in the codebase: metadata, structured data, internal links, performance. Not delivered as recommendations for someone else to action.',
       },
       {
         title: 'Build and structure content',
@@ -513,7 +513,7 @@ export const servicePages = [
       {
         question: 'What is the difference between SEO, AEO and GEO?',
         answer:
-          'SEO optimises for ranking in a list of search results. AEO, answer engine optimisation, structures content so an engine can lift a direct answer out of it — for featured snippets and voice results. GEO, generative engine optimisation, aims at being cited by AI assistants such as ChatGPT and Google AI Overviews. They overlap heavily: clean structure, valid schema and directly answered questions serve all three.',
+          'SEO optimises for ranking in a list of search results. AEO, answer engine optimisation, structures content so an engine can lift a direct answer out of it, for featured snippets and voice results. GEO, generative engine optimisation, aims at being cited by AI assistants such as ChatGPT and Google AI Overviews. They overlap heavily: clean structure, valid schema and directly answered questions serve all three.',
       },
       {
         question: 'Can you guarantee a number one ranking?',
@@ -523,17 +523,17 @@ export const servicePages = [
       {
         question: 'What is local SEO and does my business need it?',
         answer:
-          'Local SEO is the work that makes a business findable in searches tied to a place — "near me" queries, city-name queries and map results. It matters if you serve customers in a specific city or region. The core of it is a verified Google Business Profile, consistent name, address and phone details everywhere they appear, and local business structured data on your site.',
+          'Local SEO is the work that makes a business findable in searches tied to a place: "near me" queries, city-name queries and map results. It matters if you serve customers in a specific city or region. The core of it is a verified Google Business Profile, consistent name, address and phone details everywhere they appear, and local business structured data on your site.',
       },
       {
         question: 'Do I need to rebuild my website to do SEO properly?',
         answer:
-          'Usually not. Most sites can be fixed in place, and we start with an audit that says plainly what can be repaired and what cannot. A rebuild is only worth recommending when the platform itself blocks the fundamentals — for example if pages cannot be server-rendered or metadata cannot be set per page.',
+          'Usually not. Most sites can be fixed in place, and we start with an audit that says plainly what can be repaired and what cannot. A rebuild is only worth recommending when the platform itself blocks the fundamentals, for example if pages cannot be server-rendered or metadata cannot be set per page.',
       },
       {
         question: 'Do you do the technical work or only advise?',
         answer:
-          'We implement. The studio builds software, so technical SEO findings are fixed in the codebase as part of the engagement rather than written into a report and handed to someone else. Where a site is on a platform we do not control, we supply exact, actionable changes.',
+          'We implement. The studio builds software, so technical SEO findings are fixed in the codebase as part of the engagement, not written into a report and handed to someone else. Where a site is on a platform we do not control, we supply exact, actionable changes.',
       },
     ],
     related: ['software-development', 'ai-automation', 'mobile-app-development'],

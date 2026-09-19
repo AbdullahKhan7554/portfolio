@@ -52,9 +52,9 @@ export const caseStudies = [
     featured: false,
     image: '/images/work/smile-heaven.png',
     summary:
-      'A booking-first website that turns local search into seated appointments — transparent pricing, proof, and one-tap WhatsApp.',
+      'A booking-first website that turns local search into seated appointments. Pricing is transparent, the proof is on the page, and booking is one WhatsApp tap.',
     problem:
-      'The clinic relied on word of mouth and had no credible web presence. Prospective patients could not see pricing, real results, or an easy way to book — so trust and bookings leaked to competitors.',
+      'The clinic relied on word of mouth and had no credible web presence. Prospective patients could not see pricing, could not see real results, and had no easy way to book, so trust and bookings leaked to competitors.',
     solution: [
       'A fast Next.js site with a transparent treatment-and-pricing menu',
       'Before/after gallery and review surfacing to build instant trust',
@@ -82,9 +82,9 @@ export const caseStudies = [
     featured: false,
     image: '/images/work/voila.png',
     summary:
-      'A premium multi-page presence for a luxury clinic — treatment storytelling, a bridal journey, and SEO-ready depth.',
+      'A premium multi-page presence for a luxury clinic, with room for treatment storytelling, a bridal journey, and the depth search needs.',
     problem:
-      'A luxury skincare brand needed a digital presence that matched its in-clinic experience: editorial, multi-treatment, and discoverable — not a one-page template.',
+      'A luxury skincare brand needed a digital presence that matched its in-clinic experience: editorial, multi-treatment, discoverable. A one-page template was never going to do it.',
     solution: [
       'Multi-page Next.js architecture with dedicated treatment pages',
       'Bridal section and results gallery for high-intent visitors',
@@ -142,7 +142,7 @@ export const caseStudies = [
     featured: false,
     image: '/images/work/gym.png',
     summary:
-      'A repeatable, lead-focused gym layout — proof that the conversion structure scales across fitness clients.',
+      'A repeatable, lead-focused gym layout. The same conversion structure, proven to carry across fitness clients.',
     problem:
       'A fitness business needed a clean, conversion-oriented layout covering programs and memberships without bespoke overhead.',
     solution: [
@@ -170,9 +170,9 @@ export const caseStudies = [
     featured: true,
     image: '/images/work/builtu.png',
     summary:
-      'A production gym website running live on a custom domain for a paying client — real-world proof of delivery.',
+      'A production gym website running live on a custom domain for a paying client. Proof of delivery, not a demo.',
     problem:
-      'A paying gym client needed a production website on their own domain — reliable, fast, and ready to represent the brand publicly.',
+      'A paying gym client needed a production website on their own domain. Reliable, fast, and ready to carry the brand in public.',
     solution: [
       'Production Next.js build deployed on a custom domain with SSL',
       'Conversion-oriented structure for memberships and enquiries',
@@ -198,7 +198,7 @@ export const caseStudies = [
     featured: false,
     image: '/images/work/scissors.png',
     summary:
-      'A production salon website live on a custom domain — premium presentation for a real paying client.',
+      'A production salon website live on a custom domain, for a real paying client.',
     problem:
       'A salon needed a polished, trustworthy online presence on its own domain to attract and reassure new clients.',
     solution: [
@@ -228,7 +228,7 @@ export const caseStudies = [
     isLive: true,
     featured: false,
     image: '/images/work/pet.png',
-    summary: 'A clean, conversion-focused website for a pet care business, built with Next.js.',
+    summary: 'Services laid out plainly and enquiries one tap away, on a fast Next.js build for a pet care business.',
     problem:
       'A pet care business needed a fast, trustworthy online presence to present its services and capture enquiries.',
     solution: [
@@ -258,9 +258,9 @@ export const caseStudies = [
     isLive: true,
     featured: false,
     image: '/images/work/account.png',
-    summary: 'A professional website for an accountancy firm, built with Next.js.',
+    summary: 'An accountancy firm that needed to look as credible online as it is in practice. Built on Next.js.',
     problem:
-      'An accountancy firm needed a credible, professional web presence to present its services and win client trust.',
+      'Accountancy is sold on trust, and the firm had nothing online that conveyed any. It needed a professional presence for its services.',
     solution: [
       'Fast Next.js build with a clear services structure',
       'Mobile-first, brand-aligned presentation',
@@ -288,7 +288,7 @@ export const caseStudies = [
     isLive: true,
     featured: false,
     image: '/images/work/solar.png',
-    summary: 'A modern website for a solar energy company, built with Next.js.',
+    summary: 'A solar energy company’s offering, presented fast and clearly enough to bring in leads. Built on Next.js.',
     problem:
       'A solar energy company needed a fast, credible website to present its offering and generate leads.',
     solution: [
@@ -318,9 +318,9 @@ export const caseStudies = [
     isLive: true,
     featured: false,
     image: '/images/work/event.png',
-    summary: 'A polished website for an events business, built with Next.js.',
+    summary: 'Show the work, take the enquiry. An events business site on Next.js.',
     problem:
-      'An events business needed an attractive, fast website to showcase its work and capture enquiries.',
+      'The work is the selling point here, so it had to be shown properly and load fast. Enquiries needed to be simple from there.',
     solution: [
       'Fast Next.js build with a clear services structure',
       'Mobile-first, brand-aligned presentation',
@@ -348,7 +348,7 @@ export const caseStudies = [
     isLive: true,
     featured: false,
     image: '/images/work/law.png',
-    summary: 'A professional website for a law firm, built with Next.js.',
+    summary: 'Practice areas presented clearly enough to earn trust before the first call. A Next.js build for a law firm.',
     problem:
       'A law firm needed a credible, authoritative web presence to present its practice areas and win client trust.',
     solution: [
@@ -378,9 +378,9 @@ export const caseStudies = [
     isLive: true,
     featured: false,
     image: '/images/work/real estate (1).png',
-    summary: 'A modern website for a real estate business, built with Next.js.',
+    summary: 'Listings up front, enquiries easy. A fast Next.js site for a real estate business.',
     problem:
-      'A real estate business needed a fast, attractive website to present listings and capture enquiries.',
+      'Listings are the product here. The business needed somewhere fast and attractive to present them and take enquiries.',
     solution: [
       'Fast Next.js build with a clear listings structure',
       'Mobile-first, brand-aligned presentation',
@@ -408,9 +408,9 @@ export const caseStudies = [
     isLive: true,
     featured: false,
     image: '/images/work/service.png',
-    summary: 'A clean website for a home services business, built with Next.js.',
+    summary: 'A home services business that needed jobs booked, not just a brochure. Built on Next.js.',
     problem:
-      'A home services business needed a fast, trustworthy website to present its services and book jobs.',
+      'A home services business needed a fast, trustworthy site. The goal was never traffic. It was booked jobs.',
     solution: [
       'Fast Next.js build with a clear services structure',
       'Mobile-first, brand-aligned presentation',
@@ -436,9 +436,9 @@ export const caseStudies = [
     featured: true,
     image: '/images/work/New Multi Electronics.png',
     summary:
-      'A full-stack e-commerce website for an electronics store — a React storefront backed by a Node.js/Express API, SQL database, Supabase, and Cloudinary media.',
+      'A full-stack e-commerce build for an electronics store: a React storefront on a Node.js/Express API, with a SQL database, Supabase, and Cloudinary handling media.',
     problem:
-      'An electronics business needed a complete e-commerce platform — not just a storefront, but a real backend to manage products, orders, and media.',
+      'An electronics business needed a complete e-commerce platform. A storefront on its own was not enough; products, orders and media all had to be managed from a real backend.',
     solution: [
       'React storefront with product browsing and cart',
       'Node.js + Express.js REST API with a SQL database',
@@ -470,7 +470,7 @@ export const caseStudies = [
     isLive: true,
     featured: true,
     image: '/images/work/agriprom.png',
-    summary: 'A modern website for a business solutions company, built with Next.js.',
+    summary: 'A business solutions company with a fast, credible site behind its offering. Built on Next.js.',
     problem:
       'A business solutions company needed a fast, credible website to present its offering and generate enquiries.',
     solution: [
@@ -500,7 +500,7 @@ export const caseStudies = [
     summary:
       'An online ordering platform that puts all three Seven Guys branches behind a single checkout. Customers choose delivery or pickup up front, the order routes to the right kitchen, and they can follow it from confirmation through to arrival.',
     problem:
-      'Seven Guys was taking orders by phone across three Gujranwala branches. Every order meant a call, a menu recited down the line, and a manual hand-off to whichever kitchen was nearest — with no way for a customer to browse the full menu, confirm what they had ordered, or see where it had got to.',
+      'Seven Guys was taking orders by phone across three Gujranwala branches. Every order meant a call, a menu recited down the line, and a manual hand-off to whichever kitchen was nearest. Customers could not browse the full menu, confirm what they had ordered, or see where it had got to.',
     solution: [
       'Full online menu with cart and checkout, replacing verbal phone ordering',
       'Delivery or pickup selected up front, with the order routed to the chosen branch',
