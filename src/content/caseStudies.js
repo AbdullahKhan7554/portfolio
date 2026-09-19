@@ -101,7 +101,7 @@ export const caseStudies = [
   {
     slug: 'xtreme-fitness',
     /** Which /services/<slug> page this build belongs under. */
-    service: 'software-development',
+    service: 'web-development',
     title: 'XTREME Fitness',
     client: 'XTREME Fitness',
     type: 'fitness',
@@ -131,7 +131,7 @@ export const caseStudies = [
   {
     slug: 'gym-website',
     /** Which /services/<slug> page this build belongs under. */
-    service: 'software-development',
+    service: 'web-development',
     title: 'Gym Website',
     client: 'Fitness Business',
     type: 'fitness',
@@ -159,7 +159,7 @@ export const caseStudies = [
   {
     slug: 'builtu-gym',
     /** Which /services/<slug> page this build belongs under. */
-    service: 'software-development',
+    service: 'web-development',
     title: 'Builtu Gym',
     client: 'Builtu Gym',
     type: 'fitness',
@@ -187,7 +187,7 @@ export const caseStudies = [
   {
     slug: 'scissors-vip-salon',
     /** Which /services/<slug> page this build belongs under. */
-    service: 'software-development',
+    service: 'web-development',
     title: 'Scissors VIP Salon',
     client: 'Scissors VIP Salon',
     type: 'salon',
@@ -215,7 +215,7 @@ export const caseStudies = [
   {
     slug: 'pet-care',
     /** Which /services/<slug> page this build belongs under. */
-    service: 'software-development',
+    service: 'web-development',
     seoTitle: 'Pet Care Website Design & Development — Case Study',
     seoDescription:
       'How we built a fast, trustworthy website for a pet care business to present its services and capture enquiries, engineered on Next.js by Avenix Studio.',
@@ -245,7 +245,7 @@ export const caseStudies = [
   {
     slug: 'accountancy-firm',
     /** Which /services/<slug> page this build belongs under. */
-    service: 'software-development',
+    service: 'web-development',
     seoTitle: 'Accountancy Firm Website Design & Development — Case Study',
     seoDescription:
       'How we built a credible, professional web presence for an accountancy firm to present its services and win client trust, engineered on Next.js.',
@@ -275,7 +275,7 @@ export const caseStudies = [
   {
     slug: 'solar-company',
     /** Which /services/<slug> page this build belongs under. */
-    service: 'software-development',
+    service: 'web-development',
     seoTitle: 'Solar Company Website Design & Development — Case Study',
     seoDescription:
       'How we built a fast, credible website for a solar energy company to present its offering and generate leads, engineered on Next.js by Avenix Studio.',
@@ -305,7 +305,7 @@ export const caseStudies = [
   {
     slug: 'events',
     /** Which /services/<slug> page this build belongs under. */
-    service: 'software-development',
+    service: 'web-development',
     seoTitle: 'Events Business Website Design & Development — Case Study',
     seoDescription:
       'How we built an attractive, fast website for an events business to showcase its work and capture enquiries, engineered on Next.js by Avenix Studio.',
@@ -335,7 +335,7 @@ export const caseStudies = [
   {
     slug: 'law-firm',
     /** Which /services/<slug> page this build belongs under. */
-    service: 'software-development',
+    service: 'web-development',
     seoTitle: 'Law Firm Website Design & Development — Case Study',
     seoDescription:
       'How we built a credible, authoritative web presence for a law firm to present its practice areas and win client trust, engineered on Next.js.',
@@ -365,7 +365,7 @@ export const caseStudies = [
   {
     slug: 'real-estate',
     /** Which /services/<slug> page this build belongs under. */
-    service: 'software-development',
+    service: 'web-development',
     seoTitle: 'Real Estate Website Design & Development — Case Study',
     seoDescription:
       'How we built a fast, attractive website for a real estate business to present listings and capture enquiries, engineered on Next.js by Avenix Studio.',
@@ -395,7 +395,7 @@ export const caseStudies = [
   {
     slug: 'home-services',
     /** Which /services/<slug> page this build belongs under. */
-    service: 'software-development',
+    service: 'web-development',
     seoTitle: 'Home Services Website Design & Development — Case Study',
     seoDescription:
       'How we built a fast, trustworthy website for a home services business to present its services and book jobs, engineered on Next.js by Avenix Studio.',
@@ -457,7 +457,7 @@ export const caseStudies = [
     // resolving — changing it would break any live link to this case study.
     slug: 'forward-solution',
     /** Which /services/<slug> page this build belongs under. */
-    service: 'software-development',
+    service: 'web-development',
     seoTitle: 'Agriprom — Business Solutions Website Case Study',
     seoDescription:
       'How we built a fast, credible website for Agriprom, a business solutions company, to present its offering and generate enquiries — engineered on Next.js.',

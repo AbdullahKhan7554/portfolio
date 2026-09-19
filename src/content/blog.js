@@ -103,6 +103,13 @@ export const posts = [
         type: 'p',
         text: 'These are the Core Web Vitals Google measures, and they are what we build to on every project. The result is a site that feels premium, ranks better, and quietly converts more of the traffic you already have.',
       },
+      {
+        type: 'p-link',
+        before: 'Speed is decided while a site is being built, not bolted on after it launches, which is why it sits inside the scope of our ',
+        href: '/services/web-development',
+        anchor: 'web development service',
+        after: ' rather than being sold separately.',
+      },
     ],
   },
   {

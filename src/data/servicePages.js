@@ -35,12 +35,150 @@ export const SERVICE_CTA = {
 export const servicePages = [
   // ==========================================================================
   {
+    slug: 'web-development',
+    metaTitle: 'Web Development Company in Lahore & Pakistan | Avenix Studio',
+    metaDescription:
+      'Web development company in Lahore, Pakistan. Custom websites and web apps built on Next.js and React, engineered for speed, search visibility and conversion.',
+    keywords: [
+      'web development company Lahore',
+      'web development company Pakistan',
+      'website development company Lahore',
+      'custom website development',
+      'Next.js web development Pakistan',
+    ],
+    serviceType: [
+      'Web Development',
+      'Website Development',
+      'Custom Website Design and Development',
+      'Web Application Development',
+    ],
+    eyebrow: 'Web Development',
+    h1: 'Web Development Company in Lahore & Pakistan',
+    intro:
+      'We build custom websites and web apps on Next.js and React. Not templates, and not page builders. Every build is engineered for speed, for search, and for the one action the page exists to produce.',
+    /**
+     * ANSWER-FIRST PARAGRAPH (AEO). Self-contained: what this is, who provides
+     * it, where, and what the engagement covers.
+     */
+    lede: 'Avenix Studio is a web development company based in Lahore, Pakistan, building custom websites and web applications for businesses in Pakistan and internationally. We handle design, front-end and back-end development, performance, technical SEO and launch, and hand over a codebase the client owns outright.',
+    offerings: [
+      {
+        title: 'Business and marketing websites',
+        description:
+          'The site your customers judge you by. Designed around how people actually decide, built on Next.js so it loads fast and search engines can read every page.',
+      },
+      {
+        title: 'Custom web applications',
+        description:
+          'Booking flows, client portals, dashboards and internal tools that live in the browser, backed by a real API and database.',
+      },
+      {
+        title: 'E-commerce and ordering',
+        description:
+          'Catalogue, checkout and order routing built as code, so the logic follows your business instead of whatever a plugin allows.',
+      },
+      {
+        title: 'Performance engineering',
+        description:
+          'Core Web Vitals treated as a build requirement. Image handling, font loading, bundle size and layout stability get decided during development, not patched afterwards.',
+      },
+      {
+        title: 'SEO-ready front ends',
+        description:
+          'Server-rendered pages, per-route metadata, clean heading structure and valid structured data, so both search engines and AI assistants can read the page.',
+      },
+      {
+        title: 'Redesigns and rebuilds',
+        description:
+          'Taking over a slow or dated site. We audit what is there, keep what works, and rebuild the rest without taking the business offline.',
+      },
+    ],
+    process: [
+      {
+        title: 'Scope',
+        description:
+          'We agree what the site has to do and for whom, then fix the page inventory. The quote is written against that, so it does not move unless the scope does.',
+      },
+      {
+        title: 'Design',
+        description:
+          'Mobile-first layouts you approve before anything is built. Every page gets one clear next step instead of four competing ones.',
+      },
+      {
+        title: 'Build',
+        description:
+          'Component-driven development on Next.js and React, with milestone builds you can open on your own phone as the work progresses.',
+      },
+      {
+        title: 'Performance and SEO',
+        description:
+          'Speed tuning, metadata, structured data and analytics configured before launch. Part of the build, never an upsell afterwards.',
+      },
+      {
+        title: 'Launch and handover',
+        description:
+          'Deployed with SSL and search fundamentals live. You receive the repository, the accounts and the documentation.',
+      },
+    ],
+    stack: [
+      { label: 'Framework', items: ['Next.js', 'React', 'JavaScript', 'Tailwind'] },
+      { label: 'Backend', items: ['Node.js', 'REST APIs', 'Supabase'] },
+      { label: 'Data', items: ['PostgreSQL', 'MongoDB'] },
+      { label: 'Delivery', items: ['Vercel', 'Cloudflare', 'GitHub', 'CI/CD'] },
+    ],
+    caseStudies: {
+      note: 'Live client websites, running on their own domains.',
+      slugs: ['builtu-gym', 'scissors-vip-salon', 'forward-solution'],
+    },
+    faqs: [
+      {
+        question: 'What does a web development company do?',
+        answer:
+          'A web development company designs, builds, tests and launches websites and web applications. At Avenix Studio that means agreeing the scope and page inventory, designing mobile-first layouts, building them on Next.js and React, tuning performance and technical SEO, deploying, then handing over the code and accounts.',
+      },
+      {
+        question: 'Do you build websites for clients in Lahore specifically?',
+        answer:
+          'Yes. The studio is based in Lahore and works with businesses across the city and the rest of Pakistan, as well as clients abroad. Projects run remotely over email and WhatsApp with a single point of contact, and meetings in Lahore can be arranged when a project warrants one.',
+      },
+      {
+        question: 'WordPress or custom development?',
+        answer:
+          'WordPress is a reasonable choice for a content-heavy site a non-technical team updates daily. Custom development on Next.js is the better choice when the website drives revenue, because you get faster pages, fewer moving parts to break, and no plugin stack to maintain. We say plainly which one your project needs during scoping.',
+      },
+      {
+        question: 'How long does a website take to build?',
+        answer:
+          'A focused landing page is usually about a week. A full business website typically runs two to three weeks. Anything with accounts, bookings or payments depends on scope and is broken into milestones, with the timeline committed to in the proposal before work begins.',
+      },
+      {
+        question: 'How much does web development cost in Pakistan?',
+        answer:
+          'We quote per project instead of from a price list, because a landing page, a business website and a custom web application are very different builds. You receive a fixed written quote and a timeline before any work starts.',
+      },
+      {
+        question: 'Will my website work properly on mobile?',
+        answer:
+          'Every build is designed mobile-first and tested on real devices, not only in a browser simulator. Most traffic in Pakistan arrives on a mid-range phone over mobile data, so that is the case we design for and the one we measure against.',
+      },
+      {
+        question: 'Do I own the website and the code?',
+        answer:
+          'Yes. You own the code, the content, the domain and the hosting accounts. Everything is handed over at the end of the project and nothing is locked to a proprietary platform or to us.',
+      },
+    ],
+    related: ['software-development', 'seo', 'mobile-app-development'],
+  },
+
+  // ==========================================================================
+  {
     slug: 'software-development',
-    metaTitle: 'Software Development Company in Pakistan | Avenix Studio',
+    metaTitle: 'Software Development Company in Lahore | Avenix Studio',
     metaDescription:
       'Custom software development company in Lahore, Pakistan — web applications, internal tools and commerce platforms built on Next.js, React and Node.js.',
     keywords: [
-      'software development company in Pakistan',
+      'software development company Lahore',
+      'software development company Pakistan',
       'custom software development',
       'software house in Lahore',
       'web application development',
@@ -52,7 +190,7 @@ export const servicePages = [
       'Web Application Development',
     ],
     eyebrow: 'Software Development',
-    h1: 'Software Development Company in Pakistan',
+    h1: 'Software Development Company in Lahore & Pakistan',
     intro:
       'We build custom software for businesses that have outgrown off-the-shelf tools: web applications, commerce platforms, internal systems. Built to be maintained, not rewritten.',
     /**
@@ -123,7 +261,7 @@ export const servicePages = [
     ],
     caseStudies: {
       note: 'Recent builds where the engineering, not the page count, was the work.',
-      slugs: ['electronics-store', 'seven-guys', 'builtu-gym'],
+      slugs: ['electronics-store', 'seven-guys'],
     },
     faqs: [
       {
@@ -157,18 +295,19 @@ export const servicePages = [
           'Yes. We start with an audit of what already exists, report what is worth keeping and what has to be rebuilt, then work in stages so the business keeps running while the software is repaired or replaced.',
       },
     ],
-    related: ['ai-automation', 'mobile-app-development', 'seo'],
+    related: ['web-development', 'ai-automation', 'seo'],
   },
 
   // ==========================================================================
   {
     slug: 'ai-automation',
-    metaTitle: 'AI Automation Services & AI Agents | Avenix Studio',
+    metaTitle: 'AI Automation Services in Pakistan & AI Agents | Avenix Studio',
     metaDescription:
       'AI automation services for growing businesses — workflow automation, AI agents and chatbots wired into the tools you already run. Avenix Studio, Lahore.',
     keywords: [
-      'AI automation services',
-      'AI automation agency',
+      'AI automation services Pakistan',
+      'AI automation agency Lahore',
+      'AI agent development Pakistan',
       'AI agents for business',
       'workflow automation',
       'AI chatbot development',
@@ -180,7 +319,7 @@ export const servicePages = [
       'AI Chatbot Development',
     ],
     eyebrow: 'AI Automation',
-    h1: 'AI Automation Services',
+    h1: 'AI Automation Services in Pakistan',
     intro:
       'We automate the repetitive work that quietly eats your team’s week: lead routing, follow-up, data entry, hand-offs. We build AI agents that plug into the tools you already run.',
     lede: 'AI automation is the use of AI models and workflow tools to carry out repeatable business tasks without a person doing them by hand. Avenix Studio builds these systems for businesses in Pakistan and internationally: we map the workflow, connect the tools, build and test the automation, then hand over a system the client controls.',
@@ -285,18 +424,18 @@ export const servicePages = [
           'We design for it up front. Anywhere a wrong decision would be expensive there is a human checkpoint, and every run is logged, so a failure can be traced instead of guessed at. After launch we watch the first live cycles and adjust the rules against what actually comes through.',
       },
     ],
-    related: ['software-development', 'mobile-app-development', 'seo'],
+    related: ['software-development', 'web-development', 'mobile-app-development'],
   },
 
   // ==========================================================================
   {
     slug: 'mobile-app-development',
-    metaTitle: 'Mobile App Development Company in Pakistan | Avenix Studio',
+    metaTitle: 'Mobile App Development Company in Lahore | Avenix Studio',
     metaDescription:
       'Mobile app development in Lahore, Pakistan. Cross-platform iOS and Android apps in React Native and Flutter — one codebase, concept to store listing.',
     keywords: [
-      'mobile app development company in Pakistan',
       'mobile app development Lahore',
+      'mobile app development company in Pakistan',
       'React Native app development',
       'Flutter app development',
       'cross-platform app development',
@@ -308,7 +447,7 @@ export const servicePages = [
       'Android App Development',
     ],
     eyebrow: 'Mobile Apps',
-    h1: 'Mobile App Development in Pakistan',
+    h1: 'Mobile App Development in Lahore & Pakistan',
     intro:
       'Cross-platform apps taken from concept through to store listing. One codebase that feels native on both iOS and Android, built by the team that will still be there after launch.',
     lede: 'Avenix Studio builds cross-platform mobile applications from its base in Lahore, Pakistan, for clients locally and internationally. We use React Native and Flutter so a single codebase serves both iOS and Android, and we handle the work through to submission on the App Store and Google Play.',
@@ -409,16 +548,17 @@ export const servicePages = [
           'There is a support window after go-live for anything that surfaces in real usage. Beyond that, ongoing releases and feature work are available on request. Apps need maintenance as the platforms themselves keep updating.',
       },
     ],
-    related: ['software-development', 'ai-automation', 'seo'],
+    related: ['web-development', 'software-development', 'ai-automation'],
   },
 
   // ==========================================================================
   {
     slug: 'seo',
-    metaTitle: 'SEO Services in Pakistan | Avenix Studio',
+    metaTitle: 'SEO Services in Lahore, Pakistan | Avenix Studio',
     metaDescription:
       'SEO services from Avenix Studio, Lahore — technical SEO, on-page structure, local search and AEO, so your business is found by people already searching for it.',
     keywords: [
+      'SEO services Lahore',
       'SEO services in Pakistan',
       'SEO agency Lahore',
       'technical SEO services',
@@ -432,7 +572,7 @@ export const servicePages = [
       'Answer Engine Optimization',
     ],
     eyebrow: 'SEO',
-    h1: 'SEO Services in Pakistan',
+    h1: 'SEO Services in Lahore & Pakistan',
     intro:
       'Get found by the people already searching for what you do. That means technical foundations, on-page structure, local search, and the answer-engine work that decides whether AI assistants can quote you.',
     lede: 'SEO is the work of making a website findable and understandable to search engines and, increasingly, to AI assistants. Avenix Studio provides technical SEO, on-page optimisation, local SEO and answer-engine optimisation from Lahore, Pakistan. We are engineers first, so technical fixes are implemented in the codebase rather than handed over as a list.',
@@ -536,7 +676,7 @@ export const servicePages = [
           'We implement. The studio builds software, so technical SEO findings are fixed in the codebase as part of the engagement, not written into a report and handed to someone else. Where a site is on a platform we do not control, we supply exact, actionable changes.',
       },
     ],
-    related: ['software-development', 'ai-automation', 'mobile-app-development'],
+    related: ['web-development', 'software-development', 'ai-automation'],
   },
 ];
 

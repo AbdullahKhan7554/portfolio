@@ -51,11 +51,15 @@ export default function HomePage() {
 
         It exists because the homepage is the site's strongest page and, before
         this, it linked to no service page at all — <Services /> is a scroll
-        story with no outbound links. Four descriptive anchors here is the
+        story with no outbound links. A row of descriptive anchors here is the
         cheapest real internal-linking improvement available.
+
+        THREE COLUMNS, NOT FOUR. There are five service routes now, and five
+        cards in a four-column grid leave one orphan on its own row. Three gives
+        a 3+2 layout and wider cards, which the longer H1 anchors need.
       */}
       <Section title="Explore each service in detail.">
-        <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
+        <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
           {getServiceSummaries().map((service) => (
             <RevealItem key={service.slug}>
               <Link

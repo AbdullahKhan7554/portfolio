@@ -63,11 +63,11 @@ export default function ServicesPage() {
         THE HUB LINK GRID. /services previously described the catalogue and then
         dead-ended — every "service" on it was a card with nowhere to go, so the
         page had to rank for eight different intents by itself and ranked for
-        none of them. These four links are the routes that each own one intent.
+        none of them. These links are the routes that each own one intent.
 
         Anchor text is the page's own H1, not "learn more": the anchor is the
-        strongest internal signal about what the target page is for, and four
-        identical "learn more" links describe nothing.
+        strongest internal signal about what the target page is for, and a row of
+        identical "learn more" links describes nothing.
 
         Rendered from getServiceSummaries() rather than a literal list, so a new
         entry in src/data/servicePages.js appears here, in the sitemap and in
@@ -76,7 +76,7 @@ export default function ServicesPage() {
       <Section
         alt
         eyebrow="Explore in detail"
-        title="Four services, four dedicated pages."
+        title="Five services, five dedicated pages."
         intro="Each one covers what we do, how we work, the stack we build on, and the questions clients ask before they start."
       >
         <RevealGroup className="grid gap-5 sm:grid-cols-2" stagger={0.08}>

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { PostCover } from '@/components/ui/PostCover';
 import { Section } from '@/components/ui/Section';
@@ -233,6 +234,21 @@ export default function WebsiteDevelopmentPakistanPage() {
           <p className="measure text-lead text-muted">
             Fast, mobile-first, SEO-ready websites engineered around real business
             outcomes. Get a fixed, transparent quote before any work begins.
+          </p>
+          {/* THE ONE LINK OUT OF THE GUIDE, and it is deliberate. This page is
+              informational and answers "what does a website cost / who should
+              build it". The commercial intent belongs to /services/web-development,
+              and without a link saying so the two pages compete for the same
+              queries. Descriptive anchor, not "click here". */}
+          <p className="measure text-body text-muted">
+            If you would rather see the engagement itself, our{' '}
+            <Link
+              href="/services/web-development"
+              className="text-text-strong underline underline-offset-4 transition-colors hover:text-accent"
+            >
+              web development service in Lahore
+            </Link>{' '}
+            sets out the scope, the process and what you own at handover.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button href="/contact" size="lg" magnetic>

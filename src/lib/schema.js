@@ -155,9 +155,17 @@ export function serviceSchema({ name, description, path, serviceType, areaServed
         addressCountry: siteConfig.contact.address.country,
       },
     },
+    /*
+     * City first, then country, then Worldwide. The city is NOT an invented
+     * local signal: it is the same `contact.address.locality` that
+     * professionalServiceSchema() already declares and that the PostalAddress
+     * on `provider` above carries, so Service and ProfessionalService agree
+     * instead of one claiming a narrower service area than the other.
+     */
     areaServed: areaServed?.length
       ? areaServed
       : [
+          { '@type': 'City', name: siteConfig.contact.address.locality },
           { '@type': 'Country', name: 'Pakistan' },
           'Worldwide',
         ],
