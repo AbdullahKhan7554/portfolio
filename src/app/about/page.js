@@ -18,8 +18,18 @@ import { breadcrumbSchema, jsonLd } from '@/lib/schema';
  */
 export const metadata = buildMetadata({
   absoluteTitle: 'About Avenix Studio — Software & AI Studio in Lahore, Pakistan',
+  /*
+   * GSC 90d: 216 impressions at position 6.19 for ONE click (0.46%), against
+   * 11.44% on / at position 6.44. Ranking is not the problem; the snippet was a
+   * third restatement of the same four-service list carried by / and /services,
+   * so nothing distinguished it in the result set. An /about searcher is asking
+   * who this is and whether to trust it, not what is sold — so the list gives
+   * way to what the page actually contains (WhoWeAre, Principles, TrustStandard,
+   * Founder). Entity anchors the title already carries — name, Lahore, Pakistan
+   * — are retained; only the trailing service list is replaced.
+   */
   description:
-    'Avenix Studio is a digital product studio in Lahore, Pakistan, founded in 2023 — custom software, AI automation, mobile apps and SEO, built by one accountable team.',
+    'Avenix Studio is a software and AI studio in Lahore, Pakistan, building since 2023 — how we work, the standards we hold, and who is accountable for the work.',
   path: '/about',
 });
 

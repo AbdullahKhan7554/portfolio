@@ -22,8 +22,18 @@ import { getPageHero } from '@/content/pageHeroes';
  */
 export const metadata = buildMetadata({
   absoluteTitle: 'Software, AI, Mobile App & SEO Services | Avenix Studio',
+  /*
+   * GSC 90d: /services took 157 impressions at position 7.50 and ZERO clicks,
+   * while / converted 11.44% at a near-identical position 6.44. The snippet was
+   * the difference: this description restated the homepage's ("the same four
+   * services + Lahore, Pakistan"), so a searcher seeing both got no reason to
+   * pick this one. It now leads with the scoping promise the page already makes
+   * in its own PageHeader intro — a fixed quote before work begins — which is
+   * the one thing the homepage snippet does not say. Title is untouched on
+   * purpose: position 7.50 is working, and only CTR is broken.
+   */
   description:
-    'Avenix Studio services — custom software development, AI automation, mobile app development and SEO, delivered by one accountable team from Lahore, Pakistan.',
+    'Custom software, AI automation, mobile app and SEO services from Avenix Studio, Lahore. Every engagement is scoped to an outcome, with a fixed quote up front.',
   path: '/services',
 });
 
