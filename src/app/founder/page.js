@@ -7,6 +7,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
 import { siteConfig } from '@/config/site';
 import { getServiceSummaries } from '@/data/servicePages';
+import { founderBio, founderFacts, founderProfiles } from '@/content/founder';
 import { buildMetadata } from '@/lib/seo';
 import {
   breadcrumbSchema,
@@ -21,7 +22,7 @@ const STUDIO = siteConfig.brand.name;
 
 export const metadata = buildMetadata({
   absoluteTitle: `${NAME} — ${FOUNDER_ROLE}, ${STUDIO}`,
-  description: `${NAME} is the founder of ${STUDIO}, a software and AI studio in Lahore, Pakistan, building with Next.js and the MERN stack since ${siteConfig.brand.foundingYear}.`,
+  description: `${NAME}, founder of ${STUDIO} in Lahore, Pakistan: a full-stack developer building websites, web apps and AI automation with Next.js and React.`,
   path: '/founder',
 });
 
@@ -34,18 +35,15 @@ const crumbs = [
 /**
  * /founder — the founder profile (ProfilePage).
  *
- * EVERY FACT HERE IS SOURCED, nothing is new: name, role and founding year from
- * client.config.js and the About founder section; the stack from
- * `identity.role` and knowledge/avenix/company.md; the build types from
- * caseStudies.js; the services from servicePages.js. There is no published CV
- * (public/abdullah-khan-cv.pdf is a placeholder), so there is no career history,
- * education or credential list — add one only from a real source.
+ * Every founder fact on this page comes from src/content/founder.js, which is
+ * also what the Person JSON-LD reads — so nothing in the schema is invisible
+ * here. Add facts there, not inline.
  *
  * Distinct from /about by design: /about carries the studio's thinking and links
  * here for the person; this page carries who the founder is and links back.
  *
- * Profiles: GitHub is the founder's own. LinkedIn is the STUDIO's company page
- * and is labelled as such — it is not presented as a personal profile.
+ * The services list is the STUDIO's offer, labelled as such — it is not a claim
+ * about which of them the founder personally delivers.
  */
 export default function FounderPage() {
   const services = getServiceSummaries();
@@ -86,35 +84,29 @@ export default function FounderPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="measure flex flex-col gap-4 text-body text-text-muted">
-              <p>
-                {NAME} founded {STUDIO} in Lahore in {siteConfig.brand.foundingYear} and still
-                works on the code. The title is {FOUNDER_ROLE}, and both halves are literal:
-                running the studio, and building what it ships.
-              </p>
-              <p>
-                The engineering background is full-stack JavaScript: Next.js and the MERN
-                stack, which is what most Avenix builds run on, from live client websites on
-                their own domains to e-commerce and multi-branch online ordering platforms.
-              </p>
-              <p>
-                The studio started from one objection: that businesses are asked to choose
-                between work that looks considered and work that is built properly. Avenix
-                treats those as one practice, and Abdullah stays accountable for the result
-                after it ships.{' '}
-                <Link
-                  href="/about"
-                  className="text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent"
-                >
-                  More on how the studio works
-                </Link>
-                .
-              </p>
-            </div>
+            <p className="measure text-lead text-text-muted">{founderBio}</p>
 
-            <h2 className="mt-10 font-display text-h4 text-text-strong">
-              What Abdullah works on at {STUDIO}
-            </h2>
+            <dl className="mt-8 divide-y divide-border border-y border-border">
+              {founderFacts.map((f) => (
+                <div key={f.label} className="grid gap-1 py-3 sm:grid-cols-[8rem_1fr] sm:gap-4">
+                  <dt className="font-mono text-caption uppercase tracking-[0.14em] text-accent">
+                    {f.label}
+                  </dt>
+                  <dd className="text-body text-text-strong">{f.value}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <p className="mt-6 text-body text-text-muted">
+              <Link
+                href="/about"
+                className="text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent"
+              >
+                More on how {STUDIO} works
+              </Link>
+            </p>
+
+            <h2 className="mt-10 font-display text-h4 text-text-strong">{STUDIO} services</h2>
             <ul className="mt-4 divide-y divide-border border-y border-border">
               {services.map((s) => (
                 <li key={s.href}>
@@ -133,18 +125,18 @@ export default function FounderPage() {
             </ul>
 
             <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-caption uppercase tracking-[0.14em]">
-              {siteConfig.social.github && (
-                <li>
+              {founderProfiles.map((p) => (
+                <li key={p.href}>
                   <a
-                    href={siteConfig.social.github}
+                    href={p.href}
                     rel="me noopener noreferrer"
                     target="_blank"
                     className="text-accent hover:underline"
                   >
-                    GitHub
+                    {p.label}
                   </a>
                 </li>
-              )}
+              ))}
               {siteConfig.social.linkedin && (
                 <li>
                   <a

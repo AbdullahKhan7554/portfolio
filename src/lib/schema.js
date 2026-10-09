@@ -1,5 +1,11 @@
 import { siteConfig, organizationSchemaData } from '@/config/site';
 import { services } from '@/data/services';
+import {
+  founderBio,
+  founderEducation,
+  founderKnowsAbout,
+  founderProfiles,
+} from '@/content/founder';
 
 /**
  * Stable entity ids. The Organization and its founder reference each other by
@@ -60,9 +66,12 @@ export function organizationSchema() {
  * ProfilePage.mainEntity on /founder AND emitted site-wide — same @id, same
  * fields, so consumers merge the two into one entity.
  *
- * Only properties visible on /founder. `sameAs` is the founder's PERSONAL
- * GitHub only: the LinkedIn, Instagram and Facebook in client.config.js are the
- * studio's company profiles and belong on the Organization, not the Person.
+ * Every value comes from src/content/founder.js and is visible on /founder.
+ * `sameAs` is PERSONAL profiles only: the LinkedIn, Instagram and Facebook in
+ * client.config.js are the studio's company profiles and belong on the
+ * Organization, not the Person.
+ *
+ * `affiliation`, not `alumniOf`: the founder is a current student.
  */
 function founderNode() {
   return {
@@ -70,11 +79,18 @@ function founderNode() {
     '@id': FOUNDER_ID,
     name: siteConfig.brand.founder,
     jobTitle: FOUNDER_ROLE,
-    description: `${FOUNDER_ROLE} at ${siteConfig.brand.name}, the software and AI studio in Lahore, Pakistan that Abdullah founded in ${siteConfig.brand.foundingYear}.`,
+    description: founderBio,
     image: `${siteConfig.url}${FOUNDER_IMAGE}`,
     url: `${siteConfig.url}/founder`,
     worksFor: { '@type': 'Organization', '@id': ORGANIZATION_ID, name: siteConfig.brand.name },
-    sameAs: [siteConfig.social.github].filter(Boolean),
+    affiliation: {
+      '@type': 'CollegeOrUniversity',
+      name: founderEducation.institution,
+      alternateName: founderEducation.institutionFullName,
+    },
+    knowsAbout: founderKnowsAbout,
+    address: { '@type': 'PostalAddress', addressLocality: 'Lahore', addressCountry: 'PK' },
+    sameAs: founderProfiles.map((p) => p.href),
   };
 }
 

@@ -6,6 +6,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Parallax } from '@/components/ui/Parallax';
 import { siteConfig } from '@/config/site';
 import { founderParagraphs } from '@/content/about';
+import { founderBio } from '@/content/founder';
 
 /**
  * 04 — The Founder. The page's visual anchor.
@@ -79,6 +80,7 @@ export function Founder() {
             <p className="mt-1 font-mono text-caption uppercase tracking-[0.18em] text-accent">
               {FOUNDER_ROLE}, {siteConfig.brand.name}
             </p>
+            <p className="measure mt-4 text-body-sm text-text-muted">{founderBio}</p>
             <Link
               href="/founder"
               className="group mt-4 inline-flex items-center gap-2 text-body-sm text-text-strong"
