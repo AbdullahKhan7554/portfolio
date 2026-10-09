@@ -1,6 +1,6 @@
 import { siteConfig } from '@/config/site';
-import { getShowcaseCaseStudies } from '@/content/caseStudies';
-import { getServicePagePaths } from '@/data/servicePages';
+import { getShowcaseCaseStudies, getCaseStudy } from '@/content/caseStudies';
+import { getServicePagePaths, servicePages } from '@/data/servicePages';
 import { posts } from '@/content/blog';
 
 export default function sitemap() {
@@ -32,11 +32,15 @@ export default function sitemap() {
     priority: r.priority,
   }));
 
-  // Only the showcase set is advertised. The other case studies still build and
-  // resolve by direct URL, but listing pages that nothing links to would submit
-  // orphaned URLs to search engines.
-  const workRoutes = getShowcaseCaseStudies().map((c) => ({
-    url: `${siteConfig.url}/work/${c.slug}`,
+  // Only LINKED case studies are advertised: the /work showcase plus any that a
+  // /services/<slug> page links to. The rest still build and resolve by direct
+  // URL, but listing pages that nothing links to would submit orphaned URLs.
+  const workSlugs = new Set([
+    ...getShowcaseCaseStudies().map((c) => c.slug),
+    ...servicePages.flatMap((s) => s.caseStudies.slugs).filter(getCaseStudy),
+  ]);
+  const workRoutes = [...workSlugs].map((slug) => ({
+    url: `${siteConfig.url}/work/${slug}`,
     lastModified: now,
     changeFrequency: 'yearly',
     priority: 0.8,

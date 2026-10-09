@@ -105,7 +105,10 @@ export function professionalServiceSchema() {
     // Mirrors the four dedicated service routes plus the existing build
     // capabilities. Every entry maps to a real service in src/data/services.js
     // — nothing is listed here that the studio does not sell.
-    serviceType: [
+    // Expressed as `makesOffer` → Service, not `serviceType`: schema.org defines
+    // `serviceType` on Service only, so on ProfessionalService it failed
+    // validation.
+    makesOffer: [
       'Software Development',
       'Web Development',
       'Next.js Development',
@@ -114,7 +117,7 @@ export function professionalServiceSchema() {
       'AI Agents',
       'Search Engine Optimization',
       'Technical SEO',
-    ],
+    ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
   };
 }
 
@@ -179,9 +182,10 @@ export function servicesSchema() {
     '@type': 'OfferCatalog',
     name: `${siteConfig.brand.name} Services`,
     url: `${siteConfig.url}/services`,
-    itemListElement: services.map((s, i) => ({
+    // No `position`: it is not an Offer property (schema.org defines it on
+    // ListItem/CreativeWork), and array order already carries the sequence.
+    itemListElement: services.map((s) => ({
       '@type': 'Offer',
-      position: i + 1,
       itemOffered: {
         '@type': 'Service',
         name: s.name,

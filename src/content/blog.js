@@ -72,7 +72,7 @@ export const posts = [
     slug: 'why-your-business-website-needs-to-be-fast',
     title: 'Why a fast website is the cheapest marketing you can buy',
     excerpt:
-      'Speed is not a technical vanity metric. It is the quiet difference between a visitor who books and one who bounces — and it compounds across every channel you pay for.',
+      'Website speed is not a vanity metric. It is the difference between a visitor who books and one who bounces, and it compounds across every paid channel.',
     category: 'Performance',
     date: '2026-06-10',
     readingTime: '4 min read',

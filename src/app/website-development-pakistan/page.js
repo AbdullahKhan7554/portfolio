@@ -41,7 +41,7 @@ export const metadata = buildMetadata({
 
 const crumbs = [
   { name: 'Home', path: '/' },
-  { name: 'Website Development', path: '/website-development' },
+  { name: 'Website Development', path: '/services/web-development' },
   { name: 'Website Development in Pakistan (2026)', path: wdpMeta.path },
 ];
 

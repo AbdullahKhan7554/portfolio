@@ -197,6 +197,8 @@ export const caseStudies = [
     isLive: true,
     featured: false,
     image: '/images/work/scissors.png',
+    seoDescription:
+      'A production salon website for Scissors VIP Salon, live on its own domain: a polished Next.js build with services and contact paths set up for enquiries.',
     summary:
       'A production salon website live on a custom domain, for a real paying client.',
     problem:
@@ -435,6 +437,8 @@ export const caseStudies = [
     isLive: true,
     featured: true,
     image: '/images/work/New Multi Electronics.png',
+    seoDescription:
+      'A full-stack e-commerce build for an electronics store: a React storefront on a Node.js/Express API, with SQL, Supabase and Cloudinary for media.',
     summary:
       'A full-stack e-commerce build for an electronics store: a React storefront on a Node.js/Express API, with a SQL database, Supabase, and Cloudinary handling media.',
     problem:
@@ -497,6 +501,8 @@ export const caseStudies = [
     isLive: true,
     featured: false,
     image: '/images/work/seven-guys.png',
+    seoDescription:
+      'An online ordering platform for Seven Guys: three branches behind one checkout, delivery or pickup routed to the right kitchen, and live order tracking.',
     summary:
       'An online ordering platform that puts all three Seven Guys branches behind a single checkout. Customers choose delivery or pickup up front, the order routes to the right kitchen, and they can follow it from confirmation through to arrival.',
     problem:
