@@ -22,6 +22,7 @@ export default function sitemap() {
     })),
     { path: '/website-development-pakistan', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/about', priority: 0.7, changeFrequency: 'yearly' },
+    { path: '/founder', priority: 0.6, changeFrequency: 'yearly' },
     { path: '/blog', priority: 0.7, changeFrequency: 'weekly' },
     { path: '/contact', priority: 0.8, changeFrequency: 'yearly' },
     { path: '/free-audit', priority: 0.6, changeFrequency: 'yearly' },

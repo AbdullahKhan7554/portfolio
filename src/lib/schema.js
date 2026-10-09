@@ -1,12 +1,28 @@
 import { siteConfig, organizationSchemaData } from '@/config/site';
 import { services } from '@/data/services';
 
+/**
+ * Stable entity ids. The Organization and its founder reference each other by
+ * these instead of restating each other inline, so every block on every page
+ * resolves to ONE studio and ONE founder rather than near-duplicates with
+ * drifting fields (the inline founder used to say "Founder & Lead Developer"
+ * while the Person node said "Founder & Full-Stack Developer").
+ */
+export const ORGANIZATION_ID = `${siteConfig.url}/#organization`;
+export const FOUNDER_ID = `${siteConfig.url}/founder#person`;
+export const FOUNDER_ROLE = 'Founder & Full-Stack Developer';
+export const FOUNDER_IMAGE = '/images/abdullah-khan.webp';
+
 /** JSON-LD: Organization (the Avenix Studio brand). Injected site-wide. */
 export function organizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': ORGANIZATION_ID,
     name: organizationSchemaData.name,
+    // The domain is avenixstudios.com, so the plural is how the brand is
+    // commonly typed. Declared as an alias, not used as the name.
+    alternateName: 'Avenix Studios',
     legalName: organizationSchemaData.legalName,
     url: organizationSchemaData.url,
     logo: {
@@ -18,11 +34,7 @@ export function organizationSchema() {
     email: organizationSchemaData.email,
     telephone: siteConfig.contact.phone,
     foundingDate: organizationSchemaData.foundingDate,
-    founder: {
-      '@type': 'Person',
-      name: organizationSchemaData.founder.name,
-      jobTitle: organizationSchemaData.founder.jobTitle,
-    },
+    founder: { '@type': 'Person', '@id': FOUNDER_ID, name: siteConfig.brand.founder },
     // sameAs: official social profiles (Instagram, Facebook, LinkedIn, GitHub, X).
     sameAs: organizationSchemaData.sameAs,
     areaServed: organizationSchemaData.areaServed,
@@ -43,18 +55,42 @@ export function organizationSchema() {
   };
 }
 
-/** JSON-LD: Person (Abdullah Khan, the founder/developer). */
+/**
+ * The founder Person node, without @context so it can be embedded as
+ * ProfilePage.mainEntity on /founder AND emitted site-wide — same @id, same
+ * fields, so consumers merge the two into one entity.
+ *
+ * Only properties visible on /founder. `sameAs` is the founder's PERSONAL
+ * GitHub only: the LinkedIn, Instagram and Facebook in client.config.js are the
+ * studio's company profiles and belong on the Organization, not the Person.
+ */
+function founderNode() {
+  return {
+    '@type': 'Person',
+    '@id': FOUNDER_ID,
+    name: siteConfig.brand.founder,
+    jobTitle: FOUNDER_ROLE,
+    description: `${FOUNDER_ROLE} at ${siteConfig.brand.name}, the software and AI studio in Lahore, Pakistan that Abdullah founded in ${siteConfig.brand.foundingYear}.`,
+    image: `${siteConfig.url}${FOUNDER_IMAGE}`,
+    url: `${siteConfig.url}/founder`,
+    worksFor: { '@type': 'Organization', '@id': ORGANIZATION_ID, name: siteConfig.brand.name },
+    sameAs: [siteConfig.social.github].filter(Boolean),
+  };
+}
+
+/** JSON-LD: Person (Abdullah Khan, the founder). Injected site-wide. */
 export function personSchema() {
+  return { '@context': 'https://schema.org', ...founderNode() };
+}
+
+/** JSON-LD: ProfilePage (for /founder), with the founder as its main entity. */
+export function profilePageSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: siteConfig.brand.founder,
-    jobTitle: 'Founder & Full-Stack Developer',
-    worksFor: { '@type': 'Organization', name: siteConfig.brand.name },
-    url: siteConfig.url,
-    email: siteConfig.contact.email,
-    sameAs: Object.values(siteConfig.social).filter(Boolean),
-    knowsAbout: siteConfig.seo.keywords,
+    '@type': 'ProfilePage',
+    url: `${siteConfig.url}/founder`,
+    name: `${siteConfig.brand.founder} — ${FOUNDER_ROLE}, ${siteConfig.brand.name}`,
+    mainEntity: founderNode(),
   };
 }
 
@@ -93,7 +129,7 @@ export function professionalServiceSchema() {
       { '@type': 'Country', name: 'Pakistan' },
       'Worldwide',
     ],
-    founder: { '@type': 'Person', name: siteConfig.brand.founder },
+    founder: { '@type': 'Person', '@id': FOUNDER_ID, name: siteConfig.brand.founder },
     address: {
       '@type': 'PostalAddress',
       addressLocality: siteConfig.contact.address.locality,

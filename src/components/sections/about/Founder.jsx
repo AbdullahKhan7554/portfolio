@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Parallax } from '@/components/ui/Parallax';
@@ -75,8 +77,18 @@ export function Founder() {
               {siteConfig.brand.founder}
             </p>
             <p className="mt-1 font-mono text-caption uppercase tracking-[0.18em] text-accent">
-              {FOUNDER_ROLE}
+              {FOUNDER_ROLE}, {siteConfig.brand.name}
             </p>
+            <Link
+              href="/founder"
+              className="group mt-4 inline-flex items-center gap-2 text-body-sm text-text-strong"
+            >
+              Founder profile
+              <ArrowRight
+                className="h-4 w-4 text-accent transition-transform duration-base ease-out-quad group-hover:translate-x-1"
+                aria-hidden="true"
+              />
+            </Link>
           </div>
         </Reveal>
       </div>

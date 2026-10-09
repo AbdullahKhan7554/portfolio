@@ -57,7 +57,7 @@ export const viewport = { themeColor: '#0A0A0B' };
  *
  * STRUCTURED DATA: only the breadcrumb is emitted here. Organization and Person
  * are already injected site-wide from app/layout.js, so adding either would
- * duplicate them.
+ * duplicate them. The founder's own page (ProfilePage) is /founder.
  */
 export default function AboutPage() {
   return (

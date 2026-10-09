@@ -19,6 +19,9 @@
  *    rather than implying work that does not exist.
  *  - Stack items come from src/content/techStack.js and the `chips` in
  *    src/data/services.js — no tool is claimed that the studio has not listed.
+ *  - `reading` are REAL post slugs from src/content/blog.js, rendered as the
+ *    "Further reading" block. Only posts written about THIS service — each one
+ *    already links back here, so the pair is reciprocal. Unknown slugs drop out.
  *
  * `metaTitle` is consumed as `absoluteTitle` (verbatim, bypassing the
  * `%s — Avenix Studio` template) because these titles must lead with the
@@ -168,6 +171,11 @@ export const servicePages = [
       },
     ],
     related: ['software-development', 'seo', 'mobile-app-development'],
+    reading: [
+      'website-development-pakistan',
+      'why-your-business-website-needs-to-be-fast',
+      'whatsapp-first-lead-capture-for-local-business',
+    ],
   },
 
   // ==========================================================================
@@ -296,6 +304,11 @@ export const servicePages = [
       },
     ],
     related: ['web-development', 'ai-automation', 'seo'],
+    reading: [
+      'custom-software-vs-off-the-shelf',
+      'custom-software-cost-pakistan',
+      'how-to-hire-a-software-house-in-lahore',
+    ],
   },
 
   // ==========================================================================
@@ -425,6 +438,11 @@ export const servicePages = [
       },
     ],
     related: ['software-development', 'web-development', 'mobile-app-development'],
+    reading: [
+      'what-is-ai-automation-small-business-examples',
+      'n8n-vs-make-vs-zapier',
+      'do-you-need-an-ai-chatbot',
+    ],
   },
 
   // ==========================================================================
@@ -549,6 +567,7 @@ export const servicePages = [
       },
     ],
     related: ['web-development', 'software-development', 'ai-automation'],
+    reading: ['mobile-app-development-cost-pakistan', 'react-native-vs-flutter'],
   },
 
   // ==========================================================================
@@ -677,6 +696,11 @@ export const servicePages = [
       },
     ],
     related: ['web-development', 'software-development', 'ai-automation'],
+    reading: [
+      'local-seo-for-pakistani-businesses',
+      'impressions-but-no-clicks',
+      'why-your-business-website-needs-to-be-fast',
+    ],
   },
 ];
 

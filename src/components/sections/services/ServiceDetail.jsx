@@ -8,6 +8,7 @@ import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { Tag } from '@/components/ui/Badge';
 import { siteConfig } from '@/config/site';
 import { getCaseStudy } from '@/content/caseStudies';
+import { getPost } from '@/content/blog';
 import { getServicePage, SERVICE_CTA } from '@/data/servicePages';
 import {
   serviceSchema,
@@ -71,6 +72,11 @@ export function ServiceDetail({ slug }) {
     .map((s) => getServicePage(s))
     .filter(Boolean)
     .map((s) => ({ href: `/services/${s.slug}`, label: s.h1, eyebrow: s.eyebrow }));
+  // A listing stub (post with `href`) lives at its own route, not /blog/<slug>.
+  const reading = (page.reading ?? [])
+    .map(getPost)
+    .filter(Boolean)
+    .map((p) => ({ href: p.href ?? `/blog/${p.slug}`, label: p.title, eyebrow: p.category }));
 
   return (
     <main id="main">
@@ -218,6 +224,35 @@ export function ServiceDetail({ slug }) {
           ))}
         </div>
       </Section>
+
+      {/* ---- Further reading (internal linking) ------------------------------
+          Posts written about this service. Each already links back here from
+          its body, so service ↔ post is reciprocal. */}
+      {reading.length > 0 && (
+        <Section eyebrow="Further reading" title="Guides on this topic." className="pb-0">
+          <RevealGroup className="grid gap-4 sm:grid-cols-3" stagger={0.06}>
+            {reading.map((r) => (
+              <RevealItem key={r.href}>
+                <Link
+                  href={r.href}
+                  className="card-premium group flex h-full flex-col justify-between gap-4 p-5"
+                >
+                  <span className="font-mono text-eyebrow uppercase tracking-[0.14em] text-accent">
+                    {r.eyebrow}
+                  </span>
+                  <span className="flex items-end justify-between gap-4">
+                    <span className="font-display text-h4 text-text-strong">{r.label}</span>
+                    <ArrowRight
+                      className="h-4 w-4 shrink-0 text-accent transition-transform duration-base ease-out-quad group-hover:translate-x-1"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </Link>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </Section>
+      )}
 
       {/* ---- Related services (internal linking) ----------------------------- */}
       {related.length > 0 && (

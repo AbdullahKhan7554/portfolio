@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { buildMetadata } from '@/lib/seo';
 import { breadcrumbSchema, faqSchema, jsonLd } from '@/lib/schema';
 import { siteConfig } from '@/config/site';
+import { getCaseStudy } from '@/content/caseStudies';
 
 export function generateStaticParams() {
   return posts.filter((p) => !p.href).map((p) => ({ slug: p.slug }));
@@ -102,10 +103,31 @@ function Block({ block }) {
   return <p className="mt-4 text-body text-muted">{block.text}</p>;
 }
 
+/**
+ * Resolve one `related` ref from content/blog.js to a link. Refs are a post
+ * slug, `work/<case-study-slug>`, or `free-audit`. Labels come from the target's
+ * own data, so a ref can never claim something its page does not say; a ref
+ * that no longer resolves drops out instead of rendering a 404 link.
+ */
+function resolveRelated(ref) {
+  if (ref === 'free-audit') {
+    // Mirrors the H1 in app/free-audit/page.js.
+    return { href: '/free-audit', eyebrow: 'Free audit', title: 'A free 5-point review of your website' };
+  }
+  if (ref.startsWith('work/')) {
+    const study = getCaseStudy(ref.slice(5));
+    return study && { href: `/${ref}`, eyebrow: `Case study · ${study.niche}`, title: study.title };
+  }
+  const p = getPost(ref);
+  return p && { href: p.href ?? `/blog/${p.slug}`, eyebrow: p.category, title: p.title };
+}
+
 export default async function BlogPostPage({ params }) {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post || post.href) notFound();
+
+  const related = (post.related ?? []).map(resolveRelated).filter(Boolean);
 
   const crumbs = [
     { name: 'Home', path: '/' },
@@ -193,6 +215,26 @@ export default async function BlogPostPage({ params }) {
                 </details>
               ))}
             </div>
+          </Reveal>
+        )}
+
+        {related.length > 0 && (
+          <Reveal className="measure mt-12">
+            <h2 className="font-display text-h3 text-text-strong">Keep reading</h2>
+            <ul className="mt-6 flex flex-col divide-y divide-border border-y border-border">
+              {related.map((r) => (
+                <li key={r.href}>
+                  <Link href={r.href} className="group flex flex-col gap-1 py-4">
+                    <span className="font-mono text-eyebrow uppercase tracking-[0.14em] text-accent">
+                      {r.eyebrow}
+                    </span>
+                    <span className="font-display text-h4 text-text-strong underline decoration-transparent underline-offset-4 transition-colors group-hover:decoration-accent">
+                      {r.title}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </Reveal>
         )}
 

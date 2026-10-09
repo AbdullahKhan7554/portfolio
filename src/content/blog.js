@@ -46,6 +46,11 @@
  *   string — no markup is ever parsed or injected. ONE per post: the anchor
  *   text is the signal, and repeating it is how a helpful link becomes spam.
  *
+ * `related: ['<post-slug>' | 'work/<case-study-slug>' | 'free-audit']`
+ *   The "Keep reading" list under the post, 1–3 entries. Labels are read from
+ *   the target's own data in app/blog/[slug]/page.js, so nothing is restated
+ *   here. Only list a page the post's topic genuinely leads to.
+ *
  * ON NUMBERS IN THESE POSTS
  * Two of them answer cost questions. This repo holds no verified Pakistani
  * price data and `policy.quotePricesAllowed` is false, so they explain what
@@ -70,6 +75,7 @@ export const posts = [
   },
   {
     slug: 'why-your-business-website-needs-to-be-fast',
+    related: ['website-development-pakistan', 'free-audit'],
     title: 'Why a fast website is the cheapest marketing you can buy',
     excerpt:
       'Website speed is not a vanity metric. It is the difference between a visitor who books and one who bounces, and it compounds across every paid channel.',
@@ -114,6 +120,7 @@ export const posts = [
   },
   {
     slug: 'whatsapp-first-lead-capture-for-local-business',
+    related: ['work/smile-heaven-dental', 'do-you-need-an-ai-chatbot'],
     title: 'WhatsApp-first lead capture: meet customers where they already are',
     excerpt:
       'For most local businesses, the highest-converting "contact form" is a one-tap WhatsApp message. Here is how to design for the way clients actually reach out.',
@@ -144,6 +151,13 @@ export const posts = [
         text: 'A good implementation keeps a contact form for the people who prefer it, then makes WhatsApp the obvious call to action and repeats it: in the hero, after the proof, and in a persistent button on mobile. Every tap is tracked, so you know which sections actually start conversations.',
       },
       {
+        type: 'p-link',
+        before: 'You can see the pattern on the ',
+        href: '/work/xtreme-fitness',
+        anchor: 'XTREME Fitness gym website',
+        after: ' we built, which pairs a lead form with a WhatsApp button that stays on screen.',
+      },
+      {
         type: 'p',
         text: 'It is a small detail. It is also, repeatedly, the single change that moves a local business site from "nice" to "booked".',
       },
@@ -151,6 +165,7 @@ export const posts = [
   },
   {
     slug: 'mobile-app-development-cost-pakistan',
+    related: ['react-native-vs-flutter', 'how-to-hire-a-software-house-in-lahore'],
     title: 'How much does it cost to build a mobile app in Pakistan?',
     excerpt:
       'App quotes in Pakistan vary hugely because "an app" covers everything from a catalogue to a payment platform. What drives the cost, and how to read a quote.',
@@ -270,6 +285,7 @@ export const posts = [
   },
   {
     slug: 'react-native-vs-flutter',
+    related: ['mobile-app-development-cost-pakistan'],
     title: 'React Native vs Flutter: which should you choose in 2026?',
     excerpt:
       'Both ship one codebase to iOS and Android and both are production-ready. The decision comes down to your existing stack and who maintains the app afterwards.',
@@ -398,6 +414,7 @@ export const posts = [
   },
   {
     slug: 'custom-software-cost-pakistan',
+    related: ['custom-software-vs-off-the-shelf', 'how-to-hire-a-software-house-in-lahore'],
     title: 'How much does custom software cost for a business in Pakistan?',
     excerpt:
       'Custom software is priced by scope, not from a menu. The factors that move a quote, the tiers most projects fall into, and how to compare proposals fairly.',
@@ -512,6 +529,7 @@ export const posts = [
   },
   {
     slug: 'custom-software-vs-off-the-shelf',
+    related: ['custom-software-cost-pakistan'],
     title: 'Custom software vs off-the-shelf: how to decide',
     excerpt:
       'Off-the-shelf wins by default. Custom earns its cost only when the process is genuinely yours, or the workarounds already cost more than a build would.',
@@ -636,6 +654,7 @@ export const posts = [
   },
   {
     slug: 'what-is-ai-automation-small-business-examples',
+    related: ['n8n-vs-make-vs-zapier', 'do-you-need-an-ai-chatbot'],
     title: 'What is AI automation? Real examples for small businesses',
     excerpt:
       'AI automation means software doing a repeatable task end to end without a person. Here is what that looks like in a real small business, and what it cannot do.',
@@ -763,6 +782,7 @@ export const posts = [
   },
   {
     slug: 'n8n-vs-make-vs-zapier',
+    related: ['what-is-ai-automation-small-business-examples'],
     title: 'n8n vs Make vs Zapier: which should a small business use?',
     excerpt:
       'Zapier for simple connections and speed, Make for complex branching visually, n8n when you need self-hosting or volume without per-task pricing. How to choose.',
@@ -880,6 +900,10 @@ export const posts = [
   },
   {
     slug: 'do-you-need-an-ai-chatbot',
+    related: [
+      'what-is-ai-automation-small-business-examples',
+      'whatsapp-first-lead-capture-for-local-business',
+    ],
     title: 'Do you actually need an AI chatbot for your business?',
     excerpt:
       'Probably not, unless you are losing enquiries outside working hours or answering the same questions daily. The honest test, and what a good one must do.',
@@ -1003,6 +1027,7 @@ export const posts = [
   },
   {
     slug: 'how-to-hire-a-software-house-in-lahore',
+    related: ['custom-software-cost-pakistan', 'custom-software-vs-off-the-shelf'],
     title: 'How to hire a software house in Lahore: a checklist',
     excerpt:
       'Ask for a named team, a written scope, code ownership in the contract and a reference you can call. The questions that separate a studio from a sales pitch.',
@@ -1140,6 +1165,11 @@ export const posts = [
   },
   {
     slug: 'local-seo-for-pakistani-businesses',
+    related: [
+      'work/smile-heaven-dental',
+      'work/voila-luxury-skincare',
+      'impressions-but-no-clicks',
+    ],
     title: 'Local SEO for Pakistani businesses: a practical guide',
     excerpt:
       'Local SEO starts with a verified Google Business Profile and identical name, address and phone details everywhere. The order to do things in, and what to skip.',
@@ -1272,6 +1302,7 @@ export const posts = [
   },
   {
     slug: 'impressions-but-no-clicks',
+    related: ['local-seo-for-pakistani-businesses', 'free-audit'],
     title: 'Why your website gets impressions but no clicks (and how to fix it)',
     excerpt:
       'Impressions with no clicks usually means one of two things: you are ranking on page two, or your title and description give nobody a reason to choose you.',
