@@ -62,9 +62,10 @@ export function organizationSchema() {
 }
 
 /**
- * The founder Person node, without @context so it can be embedded as
- * ProfilePage.mainEntity on /founder AND emitted site-wide — same @id, same
- * fields, so consumers merge the two into one entity.
+ * The founder Person node. Emitted in full exactly ONCE per page — site-wide,
+ * via personSchema() in layout.js. Everything else (ProfilePage.mainEntity,
+ * Organization.founder) points at it by @id rather than repeating its fields,
+ * so /founder does not carry two copies of affiliation, sameAs, etc.
  *
  * Every value comes from src/content/founder.js and is visible on /founder.
  * `sameAs` is PERSONAL profiles only: the LinkedIn, Instagram and Facebook in
@@ -106,7 +107,8 @@ export function profilePageSchema() {
     '@type': 'ProfilePage',
     url: `${siteConfig.url}/founder`,
     name: `${siteConfig.brand.founder} — ${FOUNDER_ROLE}, ${siteConfig.brand.name}`,
-    mainEntity: founderNode(),
+    // Reference only — the full Person is already on this page from layout.js.
+    mainEntity: { '@type': 'Person', '@id': FOUNDER_ID },
   };
 }
 
