@@ -50,7 +50,6 @@ export const siteConfig = {
   },
 
   social: {
-    github: c.social.github,
     linkedin: c.social.linkedin,
     instagram: c.social.instagram,
     facebook: c.social.facebook,

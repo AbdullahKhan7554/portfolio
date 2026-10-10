@@ -11,9 +11,19 @@ import {
   useTransform,
   useReducedMotion,
 } from 'framer-motion';
-import { Github, Linkedin, Instagram, Facebook, Mail, MapPin, Phone } from 'lucide-react';
+import {
+  Briefcase,
+  Github,
+  Linkedin,
+  Instagram,
+  Facebook,
+  Mail,
+  MapPin,
+  Phone,
+} from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { getServiceSummaries } from '@/data/servicePages';
+import { founderProfiles } from '@/content/founder';
 
 const EASE_OUT = [0.16, 1, 0.3, 1];
 
@@ -44,12 +54,17 @@ const SERVICE_LINKS = [
   { label: 'All services', href: '/services' },
 ];
 
+// GitHub and Upwork are the founder's personal profiles, so they come from
+// content/founder.js rather than siteConfig.social (which is company-only).
+const founderHref = (label) => founderProfiles.find((p) => p.label === label)?.href;
+
 const CONNECT_LINKS = [
   { label: 'LinkedIn', href: siteConfig.social.linkedin, Icon: Linkedin },
-  { label: 'GitHub', href: siteConfig.social.github, Icon: Github },
+  { label: 'GitHub', href: founderHref('GitHub'), Icon: Github },
+  { label: 'Upwork', href: founderHref('Upwork'), Icon: Briefcase },
   { label: 'Instagram', href: siteConfig.social.instagram, Icon: Instagram },
   { label: 'Facebook', href: siteConfig.social.facebook, Icon: Facebook },
-];
+].filter((l) => l.href);
 
 const containerV = {
   hidden: {},

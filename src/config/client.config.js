@@ -76,7 +76,7 @@ export const clientConfig = {
     website: 'https://www.avenixstudios.com',
     logo: '/logo.png',
     ogImage: `${SITE_URL}/og-image.png`,
-    founderPhoto: '/images/abdullah-khan.png',
+    founderPhoto: '/images/abdullah-khan.webp',
     cvPath: '/abdullah-khan-cv.pdf',
     cvUpdated: 'June 2026',
   },
@@ -101,8 +101,10 @@ export const clientConfig = {
   },
 
   // --- Social + analytics --------------------------------------------------
+  // Company profiles only — these become the Organization's `sameAs`. The
+  // founder's personal profiles (GitHub, LinkedIn, Upwork) live in
+  // src/content/founder.js and feed the Person's `sameAs` instead.
   social: {
-    github: 'https://github.com/AbdullahKhan7554',
     linkedin: 'https://www.linkedin.com/company/avenix-studio/',
     instagram: 'https://www.instagram.com/avenix_studios/',
     facebook: 'https://www.facebook.com/profile.php?id=61591556996767',

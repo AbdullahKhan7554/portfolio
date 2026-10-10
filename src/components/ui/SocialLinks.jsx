@@ -1,10 +1,9 @@
-import { Github, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { Linkedin, Instagram, Facebook } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 
 const LINKS = [
   { label: 'LinkedIn', href: siteConfig.social.linkedin, Icon: Linkedin },
-  { label: 'GitHub', href: siteConfig.social.github, Icon: Github },
   { label: 'Instagram', href: siteConfig.social.instagram, Icon: Instagram },
   { label: 'Facebook', href: siteConfig.social.facebook, Icon: Facebook },
 ];

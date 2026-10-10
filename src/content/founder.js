@@ -5,10 +5,6 @@
  *
  * Do not add to this file from anywhere else. Anything not listed here is not
  * a confirmed fact about the founder.
- *
- * LinkedIn is deliberately absent from `profiles`: the URL supplied was
- * https://www.linkedin.com/feed/ — LinkedIn's generic home feed, not a profile
- * — so it identifies nobody. Add the /in/<handle> URL when it is available.
  */
 
 export const founderBio =
@@ -38,6 +34,7 @@ export const founderFacts = [
 
 /** Personal profiles — the Person's `sameAs` and the links on /founder. */
 export const founderProfiles = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/abdullah-khan-8baa97362/' },
   { label: 'GitHub', href: 'https://github.com/AbdullahKhan7554' },
   { label: 'Upwork', href: 'https://www.upwork.com/freelancers/~01e4f3e9f4eb63c276' },
 ];
