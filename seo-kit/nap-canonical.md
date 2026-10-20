@@ -37,7 +37,7 @@ That is the canonical form. Not "Avenix Studios". Not "Avenix Studio Pvt Ltd". N
 | Phone | `+92 302 6234429` | `NEXT_PUBLIC_CONTACT_PHONE` |
 | WhatsApp | `+92 302 6234429` | `NEXT_PUBLIC_WHATSAPP_NUMBER` (`923026234429` — same number) |
 | Website | `https://www.avenixstudios.com` | `urls.website` |
-| Email | `abdullahqayyum1041@gmail.com` | `NEXT_PUBLIC_CONTACT_EMAIL` — **read the warning below** |
+| Email | `contact@avenixstudios.com` | `NEXT_PUBLIC_CONTACT_EMAIL` — **read the warning below** |
 | Founded | `2023` | `identity.foundingYear` |
 | Founder | `Abdullah Khan` | `identity.founder` |
 | Hours | `[USER TO FILL]` | Not in config. `contact.timezone` is `PKT (GMT+5)` |
@@ -93,7 +93,7 @@ because changing an email across a dozen live listings later is genuinely tediou
 
 ```
 Email to submit: [USER TO FILL — recommended: hello@avenixstudios.com]
-Fallback if not set up yet: abdullahqayyum1041@gmail.com
+Fallback if not set up yet: contact@avenixstudios.com
 ```
 
 ---
