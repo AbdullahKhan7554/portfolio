@@ -1,4 +1,4 @@
-import { siteConfig } from '@/config/site';
+import { siteConfig, DISPLAY_EMAIL } from '@/config/site';
 import { Button } from '@/components/ui/Button';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { AvailabilityPill } from '@/components/ui/AvailabilityPill';
@@ -23,7 +23,7 @@ export function Footer() {
             </p>
             <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
               <Button
-                href={`mailto:${siteConfig.contact.email}?subject=Book%20a%20call`}
+                href={`mailto:${DISPLAY_EMAIL}?subject=Book%20a%20call`}
                 size="lg"
                 magnetic
               >

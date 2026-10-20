@@ -2,7 +2,7 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { ContactForm } from '@/components/forms/ContactForm';
-import { siteConfig } from '@/config/site';
+import { siteConfig, DISPLAY_EMAIL } from '@/config/site';
 
 export function Contact({ defaultPackage = '' }) {
   return (
@@ -20,10 +20,10 @@ export function Contact({ defaultPackage = '' }) {
                 <Mail className="h-4 w-4" aria-hidden="true" />
               </span>
               <a
-                href={`mailto:${siteConfig.contact.email}`}
+                href={`mailto:${DISPLAY_EMAIL}`}
                 className="text-body text-muted transition-colors hover:text-text-strong"
               >
-                {siteConfig.contact.email}
+                {DISPLAY_EMAIL}
               </a>
             </li>
             <li className="flex items-center gap-3">

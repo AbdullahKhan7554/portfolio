@@ -106,4 +106,7 @@ export const organizationSchemaData = {
   address: siteConfig.contact.address,
 };
 
+/** Public-facing email shown on Contact, Footer and the homepage contact section. Display only — form routing still uses env. */
+export const DISPLAY_EMAIL = 'contact@avenixstudios.com';
+
 export default siteConfig;

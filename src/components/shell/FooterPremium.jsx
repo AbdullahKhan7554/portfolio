@@ -21,7 +21,7 @@ import {
   MapPin,
   Phone,
 } from 'lucide-react';
-import { siteConfig } from '@/config/site';
+import { siteConfig, DISPLAY_EMAIL } from '@/config/site';
 import { getServiceSummaries } from '@/data/servicePages';
 import { founderProfiles } from '@/content/founder';
 
@@ -317,11 +317,11 @@ export function FooterPremium() {
             </FooterLink>
           ))}
           <FooterLink
-            href={`mailto:${siteConfig.contact.email}`}
+            href={`mailto:${DISPLAY_EMAIL}`}
             external
             icon={Mail}
           >
-            {siteConfig.contact.email}
+            {DISPLAY_EMAIL}
           </FooterLink>
         </motion.div>
       </motion.div>

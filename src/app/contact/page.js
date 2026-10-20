@@ -3,7 +3,7 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { Reveal } from '@/components/ui/Reveal';
 import { ContactForm } from '@/components/forms/ContactForm';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
-import { siteConfig } from '@/config/site';
+import { siteConfig, DISPLAY_EMAIL } from '@/config/site';
 import { buildMetadata } from '@/lib/seo';
 import { breadcrumbSchema, contactPageSchema, jsonLd } from '@/lib/schema';
 
@@ -31,8 +31,8 @@ const channels = [
   {
     id: 'email',
     Icon: Mail,
-    label: siteConfig.contact.email,
-    href: siteConfig.contact.email ? `mailto:${siteConfig.contact.email}` : undefined,
+    label: DISPLAY_EMAIL,
+    href: `mailto:${DISPLAY_EMAIL}`,
   },
   {
     id: 'phone',
