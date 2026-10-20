@@ -26,5 +26,5 @@ numbers that matter: speed, search visibility, and conversions.
 ## Contact
 
 - Website: https://www.avenixstudios.com
-- Email: abdullahqayyum1041@gmail.com
+- Email: contact@avenixstudios.com
 - Preferred channel: WhatsApp for a fast reply
