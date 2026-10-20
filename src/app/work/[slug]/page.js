@@ -12,7 +12,7 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { Reveal } from '@/components/ui/Reveal';
 import { buildMetadata } from '@/lib/seo';
 import { breadcrumbSchema, jsonLd } from '@/lib/schema';
-import { siteConfig } from '@/config/site';
+import { siteConfig, DISPLAY_EMAIL } from '@/config/site';
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -214,7 +214,7 @@ export default async function CaseStudyPage({ params }) {
           </div>
           <div className="flex flex-wrap gap-3">
             <Button
-              href={`mailto:${siteConfig.contact.email}?subject=Book%20a%20call`}
+              href={`mailto:${DISPLAY_EMAIL}?subject=Book%20a%20call`}
               magnetic
             >
               Book a call

@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { engagementSteps } from '@/content/process';
 import { getServiceSummaries } from '@/data/servicePages';
-import { siteConfig } from '@/config/site';
+import { DISPLAY_EMAIL } from '@/config/site';
 import { buildMetadata } from '@/lib/seo';
 import { breadcrumbSchema, servicesSchema, jsonLd } from '@/lib/schema';
 import { getPageHero } from '@/content/pageHeroes';
@@ -146,7 +146,7 @@ export default function ServicesPage() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button
-              href={`mailto:${siteConfig.contact.email}?subject=Book%20a%20call`}
+              href={`mailto:${DISPLAY_EMAIL}?subject=Book%20a%20call`}
               size="lg"
               magnetic
             >

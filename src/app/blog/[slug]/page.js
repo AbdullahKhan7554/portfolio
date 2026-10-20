@@ -7,7 +7,7 @@ import { Reveal } from '@/components/ui/Reveal';
 import { Button } from '@/components/ui/Button';
 import { buildMetadata } from '@/lib/seo';
 import { breadcrumbSchema, faqSchema, jsonLd } from '@/lib/schema';
-import { siteConfig } from '@/config/site';
+import { siteConfig, DISPLAY_EMAIL } from '@/config/site';
 import { getCaseStudy } from '@/content/caseStudies';
 
 export function generateStaticParams() {
@@ -243,7 +243,7 @@ export default async function BlogPostPage({ params }) {
             Want a site that puts this into practice?
           </p>
           <Button
-            href={`mailto:${siteConfig.contact.email}?subject=Book%20a%20call`}
+            href={`mailto:${DISPLAY_EMAIL}?subject=Book%20a%20call`}
             magnetic
           >
             Book a call
