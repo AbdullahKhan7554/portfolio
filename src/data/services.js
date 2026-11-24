@@ -31,42 +31,6 @@ export const services = [
     chips: ['Cross-platform', 'React Native', 'Flutter', 'App Store', 'Google Play'],
   },
   {
-    id: 'ai-automation',
-    icon: 'Workflow',
-    name: 'AI Automation & AI Agents',
-    tagline: 'Workflow automation and agent pipelines',
-    description:
-      'Automate the repetitive work that eats your team’s week, from lead routing through to multi-step agent pipelines wired into the tools you already run.',
-    chips: ['n8n', 'WhatsApp Business API', 'Custom Agents', 'Integrations'],
-  },
-  {
-    id: 'ai-chatbots',
-    icon: 'Bot',
-    name: 'AI Chatbots',
-    tagline: 'LLM chat that qualifies and hands off',
-    description:
-      'Assistants that answer and qualify on your website and WhatsApp, then pass the conversation to your CRM with the full context attached.',
-    chips: ['LLM', 'Groq', 'Lead Capture', 'CRM Handoff'],
-  },
-  {
-    id: 'digital-marketing',
-    icon: 'TrendingUp',
-    name: 'Digital Marketing',
-    tagline: 'Search, paid, and the numbers behind them',
-    description:
-      'Paid search and social campaigns that put you in front of the right people, plus the analytics to show which channel is actually earning its budget.',
-    chips: ['Google Ads', 'Meta Ads', 'Social Ads', 'Analytics'],
-  },
-  {
-    id: 'branding',
-    icon: 'Palette',
-    name: 'Graphic Design & Branding',
-    tagline: 'Identity systems that travel',
-    description:
-      'Identity that holds up everywhere your brand shows up: logo and type through to a documented, reusable brand system.',
-    chips: ['Identity', 'Logo', 'Guidelines', 'Brand Systems'],
-  },
-  {
     id: 'seo',
     icon: 'Search',
     name: 'SEO',
@@ -76,12 +40,21 @@ export const services = [
     chips: ['Technical SEO', 'On-Page', 'Off-Page', 'AEO / GEO', 'Analytics'],
   },
   {
-    id: 'video-editing',
-    icon: 'Clapperboard',
-    name: 'Video Editing',
-    tagline: 'Edits cut for retention',
+    id: 'meta-ads',
+    icon: 'TrendingUp',
+    name: 'Meta Ads (Facebook & Instagram)',
+    tagline: 'Facebook & Instagram campaigns that bring leads',
     description:
-      'Short-form and long-form edits built to hold attention, with hooks, pacing and captions tuned to each platform.',
-    chips: ['Reels', 'YouTube', 'Shorts', 'Promos'],
+      'Facebook and Instagram ad campaigns built to bring in leads and sales, with the targeting, testing and tracking to show what your budget returns.',
+    chips: ['Facebook Ads', 'Instagram Ads', 'Lead Campaigns', 'Retargeting', 'Analytics'],
+  },
+  {
+    id: 'ai-automation',
+    icon: 'Workflow',
+    name: 'AI Automation & AI Agents',
+    tagline: 'Workflow automation and agent pipelines',
+    description:
+      'AI agents and chatbots that take repetitive work off your team, from answering and qualifying leads to multi-step workflows wired into the tools you already run.',
+    chips: ['n8n', 'WhatsApp Business API', 'Custom Agents', 'Integrations'],
   },
 ];

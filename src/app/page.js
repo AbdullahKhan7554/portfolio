@@ -17,7 +17,9 @@ import { homepageGraphSchema, jsonLd } from '@/lib/schema';
 
 export const metadata = buildMetadata({
   path: '/',
-  absoluteTitle: 'Software & AI Automation Company in Lahore | Avenix Studio',
+  absoluteTitle: 'Web & App Development, SEO & Ads in Lahore | Avenix Studio',
+  description:
+    'Avenix Studio is a web and app development, SEO, Meta ads and AI automation agency in Lahore. We build, rank and grow businesses online.',
 });
 
 /**

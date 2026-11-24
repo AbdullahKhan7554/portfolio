@@ -16,14 +16,11 @@ const SERVICE_IMAGES = {
   'web-development': 'web.png',
   'mobile-app-development': 'mobileapp.png',
   'ai-automation': 'automation.png',
-  'ai-chatbots': 'chatbot.png',
-  'digital-marketing': 'digital.webp',
-  branding: 'graphic.png',
+  'meta-ads': 'digital.webp',
   // seo.webp is 1792x1024 (7:4), not the 3:2 every other asset uses — the 3:2
   // frame crops ~14% off the sides. The monitor is centred so nothing essential
   // is lost, but it is the only asset not natively matching the frame.
   seo: 'seo.webp',
-  'video-editing': 'video.png',
 };
 
 const STORY_ITEMS = services.map((service) => {
@@ -45,7 +42,7 @@ export function Services() {
       id="services"
       eyebrow="01 — Services"
       title="Everything Your Brand Needs, Under One Roof."
-      intro="Eight disciplines, one accountable team. Nothing gets dropped in the hand-off between vendors, because there is no hand-off."
+      intro="Five disciplines, one accountable team. Nothing gets dropped in the hand-off between vendors, because there is no hand-off."
       items={STORY_ITEMS}
       // Services stays on the light palette; How We Work keeps
       // the dark cinematic panel.

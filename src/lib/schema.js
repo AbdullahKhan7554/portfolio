@@ -16,6 +16,14 @@ import {
  */
 export const ORGANIZATION_ID = `${siteConfig.url}/#organization`;
 export const WEBSITE_ID = `${siteConfig.url}/#website`;
+
+/**
+ * Entity description for Organization + ProfessionalService. Schema-only on
+ * purpose: `siteConfig.seo.description` is also the site-wide default META
+ * description, so changing it there would rewrite every page that has none.
+ */
+const ORG_DESCRIPTION =
+  'Avenix Studio is a web and app development, SEO, Meta ads and AI automation agency in Lahore, Pakistan, helping businesses build, rank and grow online.';
 export const FOUNDER_ID = `${siteConfig.url}/founder#person`;
 export const FOUNDER_ROLE = 'Founder & Full-Stack Developer';
 export const FOUNDER_IMAGE = '/images/abdullah-khan.webp';
@@ -37,7 +45,7 @@ export function organizationSchema() {
       url: organizationSchemaData.logo,
     },
     image: organizationSchemaData.logo,
-    description: siteConfig.seo.description,
+    description: ORG_DESCRIPTION,
     email: DISPLAY_EMAIL,
     telephone: siteConfig.contact.phone,
     foundingDate: organizationSchemaData.foundingDate,
@@ -125,7 +133,7 @@ export function professionalServiceSchema() {
     url: siteConfig.url,
     image: siteConfig.seo.ogImage.url,
     logo: `${siteConfig.url}/logo.png`,
-    description: siteConfig.seo.description,
+    description: ORG_DESCRIPTION,
     email: DISPLAY_EMAIL,
     telephone: '+92 302 6234429',
     priceRange: '$$',
@@ -179,13 +187,14 @@ export function professionalServiceSchema() {
     // `serviceType` on Service only, so on ProfessionalService it failed
     // validation.
     makesOffer: [
-      'Software Development',
       'Web Development',
-      'Next.js Development',
       'Mobile App Development',
-      'AI Automation',
-      'AI Agents',
       'Search Engine Optimization',
+      'Meta Ads Management',
+      'AI Automation',
+      'Software Development',
+      'Next.js Development',
+      'AI Agents',
       'Technical SEO',
     ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
   };

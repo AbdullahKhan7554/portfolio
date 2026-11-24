@@ -702,6 +702,134 @@ export const servicePages = [
       'why-your-business-website-needs-to-be-fast',
     ],
   },
+
+  // ==========================================================================
+  // Meta Ads. No published case study and no blog post on this service yet, so
+  // `caseStudies.slugs` and `reading` are empty — ServiceDetail hides both
+  // blocks rather than borrowing unrelated work. No spend figures, ROAS or
+  // lead counts are stated anywhere below.
+  {
+    slug: 'meta-ads',
+    metaTitle: 'Meta Ads Agency in Lahore | Facebook & Instagram Ads | Avenix Studio',
+    metaDescription:
+      'Facebook and Instagram ad campaigns from Avenix Studio, Lahore. Targeting, creative testing and conversion tracking set up to bring in leads and sales.',
+    keywords: [
+      'Meta ads agency Lahore',
+      'Facebook ads agency Pakistan',
+      'Instagram ads services',
+      'Facebook advertising Lahore',
+      'social media advertising Pakistan',
+      'lead generation ads',
+    ],
+    serviceType: [
+      'Meta Ads Management',
+      'Facebook Advertising',
+      'Instagram Advertising',
+      'Social Media Advertising',
+    ],
+    eyebrow: 'Meta Ads',
+    h1: 'Meta Ads Agency in Lahore: Facebook & Instagram Ads',
+    intro:
+      'Facebook and Instagram campaigns built to bring in leads and sales, not just reach. Targeting, creative, landing pages and tracking handled by one team.',
+    lede: 'Meta ads are paid campaigns run on Facebook and Instagram through Meta Ads Manager. Avenix Studio plans, builds and manages these campaigns for businesses in Pakistan and internationally from Lahore. Because we also build websites, the tracking and the landing pages are set up properly, so every campaign is judged on the leads and sales it brings in.',
+    offerings: [
+      {
+        title: 'Campaign strategy',
+        description:
+          'Objective, audience, budget split and offer decided before anything is launched, based on what the business actually needs: leads, sales or messages.',
+      },
+      {
+        title: 'Audience targeting',
+        description:
+          'Interest, location and lookalike audiences, plus retargeting of people who already visited your site or engaged with your pages.',
+      },
+      {
+        title: 'Ad creative and testing',
+        description:
+          'Image, video and carousel ads written and tested against each other, so budget moves towards what performs rather than what was guessed.',
+      },
+      {
+        title: 'Lead generation campaigns',
+        description:
+          'Instant forms, WhatsApp and Messenger click-to-chat, or traffic to a landing page, chosen by how your team actually follows up on enquiries.',
+      },
+      {
+        title: 'Tracking and conversions',
+        description:
+          'Meta Pixel and Conversions API set up correctly, so the platform optimises for real leads and sales instead of clicks.',
+      },
+      {
+        title: 'Landing pages',
+        description:
+          'Fast, focused pages built for the campaign when your existing site is not the right destination for paid traffic.',
+      },
+    ],
+    process: [
+      {
+        title: 'Audit and goals',
+        description:
+          'We review any existing ad account, pixel and landing pages, then agree what a result means for your business and what it is worth.',
+      },
+      {
+        title: 'Tracking first',
+        description:
+          'Pixel, conversion events and analytics are fixed before spend starts. Without them there is no honest way to judge a campaign.',
+      },
+      {
+        title: 'Build and launch',
+        description:
+          'Campaigns, audiences and creative built in Ads Manager and launched with a defined testing plan, not a single ad left to run.',
+      },
+      {
+        title: 'Optimise',
+        description:
+          'Weak ads and audiences are cut, budget shifts to what is working, and new creative is tested on a regular cycle.',
+      },
+      {
+        title: 'Report',
+        description:
+          'Plain reporting on spend, leads, cost per lead and sales where they can be tracked, read from your own ad account.',
+      },
+    ],
+    stack: [
+      { label: 'Platforms', items: ['Facebook Ads', 'Instagram Ads', 'Meta Ads Manager'] },
+      { label: 'Tracking', items: ['Meta Pixel', 'Conversions API', 'GA4'] },
+      { label: 'Scope', items: ['Lead Campaigns', 'Retargeting', 'Landing Pages', 'Analytics'] },
+    ],
+    caseStudies: {
+      note: '',
+      slugs: [],
+    },
+    faqs: [
+      {
+        question: 'How much should I spend on Facebook and Instagram ads?',
+        answer:
+          'It depends on your market, your offer and what a lead or sale is worth to you. We agree a test budget first, read the results from your own ad account, and scale only what is working. Ad spend is paid to Meta directly from your account; our management is quoted separately and fixed before work starts.',
+      },
+      {
+        question: 'How soon will Meta ads bring results?',
+        answer:
+          'Campaigns start delivering as soon as they are approved, but the first weeks are a learning and testing period while Meta finds the right audience and weak ads are cut. Nobody can honestly guarantee a number of leads or sales, and we do not.',
+      },
+      {
+        question: 'Do I need a website to run Meta ads?',
+        answer:
+          'Not always. Lead forms and WhatsApp or Messenger campaigns work without one. A fast landing page usually gives better control and better tracking, and we can build one if you need it.',
+      },
+      {
+        question: 'Who owns the ad account?',
+        answer:
+          'You do. Campaigns run in your own Business Manager and ad account, with us added as a partner, so the data, audiences and pixel history stay with your business.',
+      },
+      {
+        question: 'What is the difference between Meta ads and boosting a post?',
+        answer:
+          'Boosting is a simplified option inside Facebook or Instagram with limited targeting and objectives. Campaigns built in Ads Manager give full control over audiences, placements, objectives, testing and conversion tracking, which is what lead and sales campaigns need.',
+      },
+    ],
+    related: ['seo', 'web-development', 'ai-automation'],
+    reading: [],
+  },
 ];
 
 /** Safe lookup by slug. */

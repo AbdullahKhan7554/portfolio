@@ -16,8 +16,8 @@ import { siteConfig } from '@/config/site';
 const HEADLINE_OPTIONS = [
   {
     id: 'impact',
-    lines: ['Software Development & AI Automation'],
-    tail: 'Company in',
+    lines: ['Web & App Development, SEO '],
+    tail: '& Marketing Agency in',
     tailAccent: 'Lahore',
   },
   {
