@@ -6,7 +6,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/Button';
 import { siteConfig } from '@/config/site';
-import { heroFontVariables } from '@/lib/heroFonts';
 
 /**
  * ============================================================================
@@ -16,8 +15,6 @@ import { heroFontVariables } from '@/lib/heroFonts';
  * system, scoped to THIS section only:
  *   • GSAP + ScrollTrigger for motion (the rest of the site stays on Framer
  *     Motion + Lenis).
- *   • General Sans / DM Sans / IBM Plex Mono (lib/heroFonts.js) in place of
- *     Satoshi / Inter / Geist Mono.
  *
  * Layers, back to front:
  *   bg (photo, mouse parallax + scroll zoom) → scrim → floor veil → grain →
@@ -318,7 +315,6 @@ export function Hero() {
     // `theme-dark`: the hero is an intentional dark contrast block (§2).
     // `isolate`: makes #hero its own stacking context so the negative-z layers
     //   paint above the section's background but below the copy.
-    // `hx` + font variables: hero-only typefaces (lib/heroFonts.js).
     // `id="hero"` is load-bearing: Header.jsx observes it to gate the navbar.
     // Top padding = navbar clearance below `lg` (the pill overlaps the hero on
     // phones/tablets; floors sit ~8px under its bottom edge), restored to the
@@ -328,7 +324,7 @@ export function Hero() {
     <section
       id="hero"
       ref={rootRef}
-      className={`hx ${heroFontVariables} theme-dark relative isolate flex min-h-[100svh] flex-col overflow-hidden pt-[clamp(5.5rem,12svh,6.5rem)] md:pt-[clamp(7rem,14svh,8rem)] lg:pt-8`}
+      className={`hx theme-dark relative isolate flex min-h-[100svh] flex-col overflow-hidden pt-[clamp(5.5rem,12svh,6.5rem)] md:pt-[clamp(7rem,14svh,8rem)] lg:pt-8`}
     >
       {/* Fallback backdrop — mounted only if the photograph fails to load. */}
       {!bgOk && (

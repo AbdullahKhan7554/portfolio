@@ -29,11 +29,11 @@ Dark survives only as an **intentional contrast block** (hero, CTA band, footer)
 - Borders `--border` #E7E5E0, 1px hairline
 - Shadows are soft/diffused/low-opacity — no dark-mode glow. Nothing exceeds 0.10 alpha on light.
 
-**Typography (§3)** — **Satoshi** (display/headings) + **Inter** (body/UI) + **Geist Mono** (eyebrows, labels, metrics). All self-hosted via `next/font/local` from `src/fonts` — no build-time network call to any font service, ever. Satoshi ships as **static** weights 400/500/700/900 (`Satoshi-Variable.woff2` is not present), so:
-- `--weight-semibold` is **700**, not 600 — Satoshi's statics have no 600 and the browser would otherwise synthesise it.
-- Display and body are **both grotesks**. Hierarchy comes from weight, scale, and Geist Mono's textural contrast — *not* from a serif/sans pairing. The earlier Fraunces rationale no longer applies.
-- No `font-optical-sizing`: that existed for Fraunces' `opsz` axis and is a no-op for Satoshi.
-- **Approved exception (2026-11-25): the homepage hero only** uses General Sans / DM Sans / IBM Plex Mono (`src/lib/heroFonts.js`, files in `src/fonts`). `.hx` in `globals.css` re-points `--font-display/--font-sans/--font-mono` inside the hero; nothing outside it changes.
+**Typography (§3)** — changed 2026-11-25: **Plus Jakarta Sans** 600/700 (headings, `--font-heading`) + **Inter** 400/500 (body/UI, `--font-body`) via `next/font/google` in `src/lib/fonts.js`, plus **Geist Mono** (eyebrows, labels, metrics; `geist` package). This applies site-wide, hero included.
+- `next/font/google` self-hosts the files at build time, so visitors never hit Google. **But the build itself now needs network access** to fonts.googleapis.com (this replaced the earlier "no build-time font network call" rule).
+- Only those weights load. Other requested weights snap to the nearest: 500 headings render at 600, 900 at 700; body text set to 600/700 gets synthetic bold.
+- Tokens: `--font-display` → `--font-heading`, `--font-sans` → `--font-body` (`tokens.css`). Tailwind: `font-display` / `font-heading` = Jakarta, `font-sans` = Inter, `font-mono` = Geist Mono.
+- The old Satoshi `.otf` files and `Inter-Variable-latin.woff2` are still in `src/fonts` but referenced by nothing.
 
 **Contrast (§12)** — AA minimum. `--amber-700` and `--obsidian-400` are contrast-tuned; re-check ratios before changing any semantic colour.
 

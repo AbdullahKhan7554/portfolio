@@ -45,6 +45,10 @@ const config = {
       },
       fontFamily: {
         display: ['var(--font-display)'],
+        // Plus Jakarta Sans — same stack as `font-display`, under the name the
+        // headings use.
+        heading: ['var(--font-display)'],
+        // Inter (via --font-body, see tokens.css).
         sans: ['var(--font-sans)'],
         mono: ['var(--font-mono)'],
       },

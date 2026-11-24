@@ -79,8 +79,8 @@
   /* ============ PRIMITIVE: TYPOGRAPHY ============ */
   /* The --font-* loader variables are injected onto <html> by next/font
      (see src/lib/fonts.js). These tokens add the documented fallback stacks. */
-  --font-display: var(--font-satoshi), 'Inter', system-ui, 'Segoe UI', sans-serif;
-  --font-sans: var(--font-inter), system-ui, 'Segoe UI', sans-serif;
+  --font-display: var(--font-heading), system-ui, 'Segoe UI', sans-serif;
+  --font-sans: var(--font-body), system-ui, 'Segoe UI', sans-serif;
   --font-mono: var(--font-geist-mono), 'SF Mono', 'JetBrains Mono', monospace;
 
   --fs-display: clamp(3.25rem, 8vw + 1rem, 8.5rem);
