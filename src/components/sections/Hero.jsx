@@ -1,162 +1,336 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { ArrowDown } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/Button';
-import { Tag } from '@/components/ui/Badge';
 import { siteConfig } from '@/config/site';
+import { heroFontVariables } from '@/lib/heroFonts';
 
 /**
- * ⚠️ HEADLINE — PENDING SELECTION. Three agency-positioning options are defined
- * below; ACTIVE_HEADLINE renders option 0 as a TEMPORARY default so the page is
- * not broken while Abdullah picks. Change the index (or delete the losers) once
- * the choice is made. Design system §8: agency statement, not "I build websites".
+ * ============================================================================
+ * HOMEPAGE HERO — v2 (2026-11-25)
+ * ----------------------------------------------------------------------------
+ * Cinematic, GSAP-driven hero. Approved deviations from the locked design
+ * system, scoped to THIS section only:
+ *   • GSAP + ScrollTrigger for motion (the rest of the site stays on Framer
+ *     Motion + Lenis).
+ *   • General Sans / DM Sans / IBM Plex Mono (lib/heroFonts.js) in place of
+ *     Satoshi / Inter / Geist Mono.
+ *
+ * Layers, back to front:
+ *   bg (photo, mouse parallax + scroll zoom) → scrim → floor veil → grain →
+ *   spotlight (follows cursor) → gold orbital → copy → stats bar → scroll veil
+ *
+ * Motion contract:
+ *   • Reduced motion → no GSAP at all. The SSR markup is the final state.
+ *   • Homepage first load → CSS (globals.css `.hx-*` under `html.intro-active`)
+ *     holds the start positions beneath the cinematic intro; the timeline plays
+ *     the moment CinematicIntro removes `intro-active`.
+ *   • Client-side navigation back to `/` → no gate, the timeline plays on mount
+ *     (layout effect, so the start state is applied before first paint).
+ *   • Pointer effects (parallax, spotlight, orbital tilt) only on fine pointers.
+ * ============================================================================
  */
-const HEADLINE_OPTIONS = [
-  {
-    id: 'impact',
-    lines: ['Web & App Development, SEO '],
-    tail: '& Marketing Agency in',
-    tailAccent: 'Lahore',
-  },
-  {
-    id: 'capability',
-    lines: ['We Build The Web, Mobile', 'And AI Products Ambitious'],
-    tail: 'Brands',
-    tailAccent: 'Run On',
-  },
-  {
-    id: 'outcome',
-    lines: ['Engineering And Marketing', 'That Turn Ambitious Brands'],
-    tail: 'Into',
-    tailAccent: 'Category Leaders',
-  },
-  {
-    id: 'partnership',
-    lines: ['One Studio For Everything', 'Your Brand Ships'],
-    tail: '',
-    tailAccent: 'Online',
-  },
-];
-const ACTIVE_HEADLINE = 0;
+
+// SSR-safe layout effect: runs before paint on the client, silent on the server.
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
+/**
+ * Headline — SEO-approved H1 copy. `accent` renders in champagne gold. Kept as
+ * data so the word-reveal markup below stays generic.
+ */
+const HEADLINE = {
+  lead: 'Web & App Development, SEO & Marketing Agency in',
+  accent: 'Lahore',
+};
+
+/** Tagline directly under the H1 (moved out of the H1 in the SEO pass). */
+const TAGLINE = 'We Build Digital Products That Drive Real Impact.';
+
+const SUPPORT =
+  'Web, mobile, and AI products for ambitious brands. Designed, engineered and marketed end to end.';
 
 /**
  * Three stats, per Abdullah's figures. "16+" matches the entry count in
  * content/caseStudies.js. "100% Client Satisfaction" is Abdullah's own claim —
- * it is not derived from any data in this repo (the case studies carry no
- * ratings, and the Seven Guys site still shows "No reviews yet").
+ * it is not derived from any data in this repo. Rendered at their FINAL values
+ * on the server (crawlers, no-JS, reduced motion); GSAP counts up from zero.
  */
-const TRUST = ['16+ Projects Shipped', '7+ Live Clients', '100% Client Satisfaction'];
+const STATS = [
+  { value: 16, suffix: '+', label: 'Projects shipped' },
+  { value: 7, suffix: '+', label: 'Live clients' },
+  { value: 100, suffix: '%', label: 'Client satisfaction' },
+];
 
 /**
- * Hero background — final.webp, 1536x1024 (3:2). If the file is ever missing
- * the `onError` handler hides the image and the aurora backdrop shows through,
- * so the hero never renders broken.
- *
- * WEBP, NOT THE PNG MASTER. The source was a 1.74 MB PNG — a lossless format
- * carrying a photographic render, which is the worst pairing available. Re-
- * encoded at q92 it is 115 KB (93.4% smaller) and measures 42.0 dB PSNR over
- * the region that actually ships on mobile, i.e. visually lossless.
- *
- * This is the OPTIMIZER'S INPUT, not what ships: next/image re-encodes to
- * AVIF/WebP per the Accept header (see `images.formats` in next.config.mjs).
- * Shrinking the source therefore does not shrink the delivered bytes much —
- * what it buys is a far cheaper decode on every cache miss, and 1.6 MB off the
- * repo. q92 was chosen over q82 (58 KB) specifically to keep generation loss
- * negligible when the optimizer re-encodes lossy-on-lossy.
- *
- * `sizes` is set on the element itself — see the note there; it is not 100vw.
+ * Hero background — final.webp, 1536x1024 (3:2), q92 re-encode of the PNG
+ * master (115 KB vs 1.74 MB). next/image re-encodes to AVIF/WebP per request.
+ * If the file is ever missing, `onError` swaps in the aurora fallback.
  */
 const HERO_BG = '/images/final.webp';
 
 export function Hero() {
   const [bgOk, setBgOk] = useState(true);
+  const rootRef = useRef(null);
+
+  useIsomorphicLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const html = document.documentElement;
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    let gateObserver;
+    let removePointer = () => {};
+
+    const ctx = gsap.context(() => {
+      const q = gsap.utils.selector(root);
+      const words = q('.hx-word');
+      const fades = q('[data-hx-fade]');
+      const counters = q('[data-hx-count]');
+      const bg = q('.hx-bg')[0];
+      const orbit = q('.hx-orbit')[0];
+      const orbitTilt = q('.hx-orbit-tilt')[0];
+
+      // ---- Start state (inline; supersedes the CSS gate once applied) -----
+      // `y: 0` is load-bearing. While `intro-active` is on <html>, the CSS gate
+      // holds each word at translateY(110%); GSAP would read that as a PIXEL
+      // offset and keep it after the yPercent tween ends, leaving the headline
+      // parked below its clip. Zeroing y hands the whole offset to yPercent.
+      gsap.set(words, { y: 0, yPercent: 110 });
+      gsap.set(fades, { autoAlpha: 0, y: 22 });
+      gsap.set(q('.hx-rule'), { scaleX: 0 });
+      if (bg) gsap.set(bg, { scale: 1.1 });
+      if (orbit) gsap.set(orbit, { autoAlpha: 0, scale: 0.86 });
+      counters.forEach((el) => {
+        el.textContent = '0';
+      });
+
+      // ---- Entrance -------------------------------------------------------
+      // expo.out everywhere: fast start, long settle, no overshoot.
+      const intro = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
+      if (bg) intro.to(bg, { scale: 1, duration: 2.6, ease: 'power3.out' }, 0);
+      intro
+        .to(q('.hx-rule'), { scaleX: 1, duration: 1 }, 0.1)
+        .to(q('[data-hx-fade="eyebrow"]'), { autoAlpha: 1, y: 0, duration: 0.9 }, 0.15)
+        .to(words, { yPercent: 0, duration: 1.15, stagger: 0.055 }, 0.22)
+        .to(
+          q('[data-hx-fade="body"]'),
+          { autoAlpha: 1, y: 0, duration: 1, stagger: 0.09 },
+          0.7,
+        )
+        .to(q('[data-hx-fade="bar"]'), { autoAlpha: 1, y: 0, duration: 1 }, 1.0);
+      if (orbit) {
+        intro.to(
+          orbit,
+          { autoAlpha: 1, scale: 1, duration: 2, ease: 'power3.out' },
+          0.45,
+        );
+      }
+      counters.forEach((el, i) => {
+        const end = Number(el.dataset.hxCount);
+        const state = { v: 0 };
+        intro.to(
+          state,
+          {
+            v: end,
+            duration: 1.8,
+            ease: 'power2.out',
+            onUpdate: () => {
+              el.textContent = String(Math.round(state.v));
+            },
+          },
+          1.1 + i * 0.12,
+        );
+      });
+
+      if (html.classList.contains('intro-active')) {
+        gateObserver = new MutationObserver(() => {
+          if (!html.classList.contains('intro-active')) {
+            gateObserver.disconnect();
+            intro.play();
+          }
+        });
+        gateObserver.observe(html, { attributes: true, attributeFilter: ['class'] });
+      } else {
+        intro.play();
+      }
+
+      // ---- Orbital: slow continuous orbit ----------------------------------
+      const spin = gsap.to(q('.hx-orbit-spin'), {
+        rotation: 360,
+        duration: 36,
+        ease: 'none',
+        repeat: -1,
+        svgOrigin: '300 300',
+      });
+      const counterSpin = gsap.to(q('.hx-orbit-spin-rev'), {
+        rotation: -360,
+        duration: 64,
+        ease: 'none',
+        repeat: -1,
+        svgOrigin: '300 300',
+      });
+
+      // ---- Cinematic scroll-out into the next section ----------------------
+      // Copy lifts and dissolves, the photograph keeps zooming and sinks into
+      // the section's own ground. Scrubbed, so it is tied to the scrollbar,
+      // not a timer.
+      const scrollOut = {
+        trigger: root,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 0.6,
+      };
+      gsap.to(q('.hx-content'), {
+        yPercent: -14,
+        autoAlpha: 0,
+        ease: 'none',
+        scrollTrigger: scrollOut,
+      });
+      gsap.to(q('.hx-bar'), {
+        yPercent: -30,
+        autoAlpha: 0,
+        ease: 'none',
+        scrollTrigger: scrollOut,
+      });
+      gsap.to(q('.hx-bg-scroll'), {
+        scale: 1.14,
+        yPercent: 7,
+        ease: 'none',
+        scrollTrigger: scrollOut,
+      });
+      gsap.to(q('.hx-veil'), { opacity: 0.9, ease: 'none', scrollTrigger: scrollOut });
+      if (orbit) {
+        gsap.to(q('.hx-orbit-scroll'), {
+          yPercent: -18,
+          rotate: 24,
+          ease: 'none',
+          scrollTrigger: scrollOut,
+        });
+      }
+
+      // ---- Pointer: parallax, spotlight, orbital tilt + speed --------------
+      if (finePointer) {
+        const spot = q('.hx-spotlight')[0];
+        const bgX = bg
+          ? gsap.quickTo(bg, 'x', { duration: 1.4, ease: 'power3.out' })
+          : null;
+        const bgY = bg
+          ? gsap.quickTo(bg, 'y', { duration: 1.4, ease: 'power3.out' })
+          : null;
+        const spotX = gsap.quickTo(spot, 'x', { duration: 0.7, ease: 'power3.out' });
+        const spotY = gsap.quickTo(spot, 'y', { duration: 0.7, ease: 'power3.out' });
+        const tiltY = orbitTilt
+          ? gsap.quickTo(orbitTilt, 'rotationY', { duration: 1.2, ease: 'power3.out' })
+          : null;
+        const tiltX = orbitTilt
+          ? gsap.quickTo(orbitTilt, 'rotationX', { duration: 1.2, ease: 'power3.out' })
+          : null;
+        if (orbitTilt)
+          gsap.set(orbitTilt, { rotationX: 64, rotationZ: -14, rotationY: 0 });
+
+        let spotOn = false;
+        let fast = false;
+
+        const onMove = (e) => {
+          const r = root.getBoundingClientRect();
+          const px = e.clientX - r.left;
+          const py = e.clientY - r.top;
+          const nx = px / r.width - 0.5; // -0.5 … 0.5
+          const ny = py / r.height - 0.5;
+
+          bgX?.(-nx * 26);
+          bgY?.(-ny * 18);
+          spotX(px);
+          spotY(py);
+          tiltY?.(nx * 18);
+          tiltX?.(64 - ny * 12);
+
+          if (!spotOn) {
+            spotOn = true;
+            gsap.to(spot, { opacity: 1, duration: 0.8, ease: 'power2.out' });
+          }
+
+          // Near the orbital → it quickens; away → it settles back.
+          if (orbit) {
+            const o = orbit.getBoundingClientRect();
+            const dx = e.clientX - (o.left + o.width / 2);
+            const dy = e.clientY - (o.top + o.height / 2);
+            const near = Math.hypot(dx, dy) < o.width * 0.5;
+            if (near !== fast) {
+              fast = near;
+              gsap.to([spin, counterSpin], {
+                timeScale: near ? 5 : 1,
+                duration: near ? 0.9 : 1.6,
+                ease: 'power2.out',
+              });
+              gsap.to(q('.hx-orbit-glow'), {
+                opacity: near ? 1 : 0.55,
+                duration: 0.9,
+                ease: 'power2.out',
+              });
+            }
+          }
+        };
+
+        const onLeave = () => {
+          spotOn = false;
+          gsap.to(spot, { opacity: 0, duration: 0.9, ease: 'power2.out' });
+          bgX?.(0);
+          bgY?.(0);
+          tiltY?.(0);
+          tiltX?.(64);
+          if (fast) {
+            fast = false;
+            gsap.to([spin, counterSpin], {
+              timeScale: 1,
+              duration: 1.6,
+              ease: 'power2.out',
+            });
+          }
+        };
+
+        root.addEventListener('pointermove', onMove, { passive: true });
+        root.addEventListener('pointerleave', onLeave);
+        removePointer = () => {
+          root.removeEventListener('pointermove', onMove);
+          root.removeEventListener('pointerleave', onLeave);
+        };
+      }
+    }, root);
+
+    return () => {
+      gateObserver?.disconnect();
+      removePointer();
+      ctx.revert();
+    };
+  }, []);
+
+  const words = HEADLINE.lead.split(' ');
 
   return (
-    // `theme-dark` scopes the semantic tokens to their dark values (§2: the hero
-    // is an intentional dark contrast block). Without it the light-theme ink
-    // would render near-black over the dark background image.
+    // `theme-dark`: the hero is an intentional dark contrast block (§2).
+    // `isolate`: makes #hero its own stacking context so the negative-z layers
+    //   paint above the section's background but below the copy.
+    // `hx` + font variables: hero-only typefaces (lib/heroFonts.js).
+    // `id="hero"` is load-bearing: Header.jsx observes it to gate the navbar.
+    // Top padding = navbar clearance below `lg` (the pill overlaps the hero on
+    // phones/tablets; floors sit ~8px under its bottom edge), restored to the
+    // plain value from `lg`, where the navbar is hidden until the hero passes.
+    // min-h, never h: overflow is hidden, so a fixed height would clip the copy
+    // on short viewports instead of letting the section grow.
     <section
       id="hero"
-      // No top padding: the navbar is hero-gated and never overlays this
-      // section, so reserving header height here would only push the content
-      // off-centre.
-      // 88svh, not 100: leaving ~12vh of the next section showing signals there
-      // is more below, which is what stops a full-bleed hero feeling indulgent.
-      // `svh` (not `vh`) so mobile browser chrome doesn't overshoot.
-      // 78svh below `md`, measured rather than guessed. The copy block is
-      // ~600-680px on a phone (the headline wraps to 4-5 lines and BOTH CTAs
-      // wrap to their own row), so 88svh only bites on tall handsets — at
-      // 430x932 it reserved 820px for 600px of copy and left ~220px of dead
-      // ground. 78svh tracks the content instead of overshooting it: tall
-      // phones keep a ~60px optical margin, and short ones (320x568) were
-      // always content-driven, so nothing there regresses.
-      // py-6/py-8 (32/48px in this project's scale, NOT Tailwind's 24/32px):
-      // the desktop value is unchanged; trimming 32px on mobile is what buys
-      // back the "next section peeking" cue at 375x667, where the content
-      // block is otherwise exactly one viewport tall.
-      // `isolate` is load-bearing, not decorative. The background image, aurora
-      // and scrim are all negative-z children. Without a stacking context on
-      // this section they paint against the nearest ancestor one — i.e. BEHIND
-      // this section's own background-color, which `.theme-dark` sets to
-      // var(--bg). Result: a flat black slab with the image invisible.
-      // `isolation: isolate` makes #hero its own stacking context, so negative-z
-      // children paint above its background but still below the copy.
-      // TOP PADDING IS NAVBAR CLEARANCE, MEASURED — not a nudge.
-      // Since Phase 2c the pill is always visible below `lg`, so it overlaps the
-      // hero on every phone and tablet. Its bottom edge is top + height:
-      // below md  -> 16 + 64  =  80px
-      // md to lg  -> 32 + 72  = 104px
-      // lg and up -> gated hidden at hero start -> no clearance needed, so the
-      //              original 48px (py-8) is restored rather than inherited.
-      //
-      // The clamp is height-aware because a FIXED clearance is wrong at both
-      // ends: 104px is comfortable on a 390x844 handset but pure waste on a
-      // 375x667 one, where the copy block already measures ~723px and every
-      // padding pixel pushes the trust chips further past the fold. The floors
-      // (88px / 112px) are the real constraint — each sits ~8px below its pill's
-      // bottom edge, so clearance is guaranteed at any viewport height, while
-      // 12svh/14svh lets tall phones breathe up to the original values.
-      // Padding on a centre-aligned flex is the right lever here: short content
-      // still centres, tall content is simply guaranteed to start below the
-      // pill. Nothing is pushed down by a fixed offset.
-      //
-      // FULL VIEWPORT AT EVERY WIDTH — one `min-h-[100svh]`, no md override.
-      // The hero was 78svh (mobile, Phase 2e) then 88svh from `md` up, both
-      // deliberate: the exposed sliver of the next section acted as a scroll
-      // cue. Phase 2e took mobile to 100svh; this takes the rest, so the whole
-      // ladder is gone and the first viewport is only ever the hero.
-      // Losing the peek costs nothing on `md` and up — the "Scroll" affordance
-      // below is `hidden md:inline-flex`, and at 100svh it now sits at the true
-      // bottom of the viewport instead of 12svh above it, which is where a
-      // scroll cue actually belongs.
-      //
-      // svh, not dvh or vh. On first paint mobile chrome is shown, so the
-      // visible viewport IS the small viewport and 100svh fills it exactly. dvh
-      // would match on load but then resize the hero as chrome retracts mid
-      // scroll — continuous reflow for no gain. vh equals lvh, which overshoots
-      // and hides content behind the chrome. Desktop has no dynamic chrome, so
-      // all four units are identical there.
-      //
-      // min-height, never height: this section is `overflow-hidden`, so a fixed
-      // height would CLIP the copy on short viewports (the block measures ~683px
-      // against a 667px iPhone SE) rather than letting the section grow past the
-      // fold. The growth is the safety valve.
-      className="theme-dark isolate relative flex min-h-[100svh] items-center overflow-hidden pb-6 pt-[clamp(5.5rem,12svh,6.5rem)] md:pb-8 md:pt-[clamp(7rem,14svh,8rem)] lg:pt-8"
+      ref={rootRef}
+      className={`hx ${heroFontVariables} theme-dark relative isolate flex min-h-[100svh] flex-col overflow-hidden pt-[clamp(5.5rem,12svh,6.5rem)] md:pt-[clamp(7rem,14svh,8rem)] lg:pt-8`}
     >
-      {/* Layer 0 — aurora backdrop. This is the FALLBACK for a missing image,
-          not decoration layered under a working one.
-          Rendered only when the image has failed. It sits at -z-30 beneath a
-          full-bleed -z-20 image, so whenever the photograph loads — which is
-          every normal page view — none of it was ever visible: three 50vw+
-          blurred layers and a rotating conic gradient animated forever behind
-          an opaque cover image. That is continuous compositor work on the
-          phones this section was just rebuilt for, for zero visual output.
-          Mounting it on `!bgOk` keeps the graceful degradation (onError flips
-          the flag and React swaps this in) and costs nothing the rest of the
-          time. While the image is still decoding the section shows its own
-          .theme-dark ground, which is the same near-black the aurora sits on. */}
+      {/* Fallback backdrop — mounted only if the photograph fails to load. */}
       {!bgOk && (
         <div aria-hidden="true" className="hero-aurora -z-30">
           <span className="hero-orb hero-orb--1" />
@@ -166,145 +340,200 @@ export function Hero() {
         </div>
       )}
 
-      {/* Layer 1 — background image. `fill` takes it out of flow entirely, so it
-          reserves no layout box and cannot cause CLS. Priority-loaded: this is
-          the LCP element. Hides itself if the asset is absent. */}
+      {/* Photograph. Two wrappers so the scroll zoom (outer) and the pointer
+          parallax + entrance settle (inner .hx-bg) never fight over the same
+          transform. `fill` keeps it out of flow: no reserved box, no CLS. */}
       {bgOk && (
-        <Image
-          src={HERO_BG}
-          alt="Glowing doorway in a dark monolith on a rocky island at dusk, symbolising Avenix Studio software and AI automation"
+        <div
           aria-hidden="true"
-          fill
-          priority
-          // NOT 100vw. `object-cover` on a portrait viewport scales the image
-          // to fill the HEIGHT, so it renders ~1.5x the hero height wide —
-          // roughly 2.5x the viewport width on a phone. Declaring 100vw made
-          // the browser fetch a 1200px source for a slot rendering at ~990 CSS
-          // px on a DPR-3 screen (≈2970 device px), i.e. a ~2.9x upscale, which
-          // is the softness. 150vw lands on the 1920 entry in `deviceSizes`
-          // and roughly halves that to ~1.5x. 200vw would be more correct still
-          // but skips 2048 and jumps straight to the 3840 variant, which is not
-          // a trade worth making on a mobile LCP image.
-          sizes="(max-width: 639px) 150vw, (max-width: 1023px) 130vw, 100vw"
-          quality={82}
-          // Subject (the lit monolith) sits at ~60-84% across a 3:2 frame while
-          // the copy sits left. A portrait viewport only shows ~33% of the
-          // image width, so the default 50% centre crop framed the empty sky
-          // between the copy and the subject — the tower was cropped out
-          // entirely. 78% re-centres that window on the subject: verified to
-          // contain the full 60-84% span at 320/375/390/412/430. From `lg` the
-          // viewport is wide enough that the crop is vertical, not horizontal,
-          // so the original centred composition is restored.
-          className="-z-20 object-cover object-[78%_50%] lg:object-center"
-          onError={() => setBgOk(false)}
-        />
+          className="hx-bg-scroll pointer-events-none absolute inset-0 -z-20"
+        >
+          <div className="hx-bg">
+            <Image
+              src={HERO_BG}
+              alt="Glowing doorway in a dark monolith on a rocky island at dusk, symbolising Avenix Studio software and AI automation"
+              aria-hidden="true"
+              fill
+              priority
+              // NOT 100vw: object-cover on a portrait viewport renders the image
+              // ~2.5x the viewport width, so 150vw/130vw request a source that
+              // is not upscaled into softness on high-DPR phones.
+              sizes="(max-width: 639px) 150vw, (max-width: 1023px) 130vw, 100vw"
+              quality={82}
+              // The lit monolith sits at ~60–84% across the frame. 78% keeps it
+              // in a portrait crop; from `lg` the crop is vertical, so centre.
+              className="object-cover object-[78%_50%] lg:object-center"
+              onError={() => setBgOk(false)}
+            />
+          </div>
+        </div>
       )}
 
-      {/* Layer 2 — contrast scrim. Moved from an inline style to `.hero-scrim`
-          in globals.css purely so it can carry a media query: the desktop
-          gradient is weighted to the LEFT (copy left, photo right), but the
-          mobile crop puts the subject directly behind full-width copy, so the
-          same gradient leaves the lead paragraph over the lit doorway. The
-          mobile variant re-weights it vertically instead. Values and the
-          desktop appearance are unchanged. */}
-      <div aria-hidden="true" className="hero-scrim pointer-events-none absolute inset-0 -z-10" />
+      {/* Contrast scrim (globals.css) — left-weighted on desktop, vertical on
+          mobile; tuned so the copy holds AA over the brightest ground. */}
+      <div
+        aria-hidden="true"
+        className="hero-scrim pointer-events-none absolute inset-0 -z-10"
+      />
+      <div
+        aria-hidden="true"
+        className="hx-floor pointer-events-none absolute inset-0 -z-10"
+      />
+      <div
+        aria-hidden="true"
+        className="hx-grain pointer-events-none absolute inset-0 -z-10"
+      />
+      <div aria-hidden="true" className="hx-spotlight -z-10" />
 
-      <div className="container-page w-full">
-        {/* 5xl, not 4xl: the block was filling only 66% of the 1360px container,
-            leaving the composition weighted hard to the left. */}
-        <div className="max-w-5xl">
-          <div className="hero-in" style={{ animationDelay: '0.05s' }}>
-            <span className="eyebrow normal-case tracking-[0.02em]">
-              Digital Product Studio · Est. {siteConfig.brand.foundingYear}
-            </span>
+      {/* Gold orbital — sits over the monolith, `lg` and up only: below that the
+          copy spans the full width and the rings would run through it. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[4vw] top-1/2 -z-10 hidden w-[min(40vw,40rem)] -translate-y-1/2 lg:block"
+      >
+        <div className="hx-orbit-scroll">
+          <div className="hx-orbit aspect-square w-full">
+            <div className="hx-orbit-tilt">
+              <svg
+                viewBox="0 0 600 600"
+                className="h-full w-full overflow-visible"
+                fill="none"
+              >
+                <defs>
+                  <linearGradient
+                    id="hx-ring"
+                    x1="0"
+                    y1="0"
+                    x2="600"
+                    y2="600"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop
+                      offset="0"
+                      style={{ stopColor: 'var(--amber-300)', stopOpacity: 0.9 }}
+                    />
+                    <stop
+                      offset="0.5"
+                      style={{ stopColor: 'var(--amber-500)', stopOpacity: 0.25 }}
+                    />
+                    <stop
+                      offset="1"
+                      style={{ stopColor: 'var(--amber-400)', stopOpacity: 0.85 }}
+                    />
+                  </linearGradient>
+                  <radialGradient id="hx-orb">
+                    <stop offset="0" stopColor="#fff6e6" />
+                    <stop offset="0.35" style={{ stopColor: 'var(--amber-300)' }} />
+                    <stop
+                      offset="1"
+                      style={{ stopColor: 'var(--amber-500)', stopOpacity: 0 }}
+                    />
+                  </radialGradient>
+                </defs>
+
+                {/* Outer ring + travelling orb */}
+                <g className="hx-orbit-spin">
+                  <circle
+                    cx="300"
+                    cy="300"
+                    r="270"
+                    stroke="url(#hx-ring)"
+                    strokeWidth="1.25"
+                  />
+                  <circle
+                    className="hx-orbit-glow"
+                    cx="570"
+                    cy="300"
+                    r="26"
+                    fill="url(#hx-orb)"
+                    opacity="0.55"
+                  />
+                  <circle cx="570" cy="300" r="4.5" fill="#fff4e0" />
+                </g>
+
+                {/* Inner dashed ring, counter-rotating, with a smaller satellite */}
+                <g className="hx-orbit-spin-rev">
+                  <circle
+                    cx="300"
+                    cy="300"
+                    r="200"
+                    style={{ stroke: 'var(--amber-400)' }}
+                    strokeOpacity="0.35"
+                    strokeWidth="1"
+                    strokeDasharray="2 9"
+                  />
+                  <circle cx="100" cy="300" r="3" style={{ fill: 'var(--amber-300)' }} />
+                </g>
+
+                {/* Fixed hairline — reads as the orbital plane */}
+                <circle
+                  cx="300"
+                  cy="300"
+                  r="135"
+                  style={{ stroke: 'var(--amber-500)' }}
+                  strokeOpacity="0.16"
+                  strokeWidth="1"
+                />
+              </svg>
+            </div>
           </div>
+        </div>
+      </div>
 
-          {/* COMPACT VERTICAL LADDER BELOW 400px.
-              At 375x667 the block measures ~723px against a 667px viewport, so
-              the trust chips fell ~40px past the fold. The four `max-[399px]:`
-              overrides below recover exactly that 40px out of WHITESPACE only —
-              no type scale change, no content removed, no negative margins:
+      {/* Scroll-out veil: fades the whole hero towards the section ground. */}
+      <div
+        aria-hidden="true"
+        className="hx-veil pointer-events-none absolute inset-0 z-[1]"
+      />
 
-                eyebrow -> h1     32 -> 16  (-16)   an eyebrow belongs to its
-                                                     heading; 32px read as a gap
-                h1 -> paragraph   24 -> 16  ( -8)
-                paragraph -> CTA  32 -> 24  ( -8)
-                CTA -> chips      32 -> 24  ( -8)
-                                          = -40px
+      {/* ---- Copy ---------------------------------------------------------- */}
+      <div className="container-page flex w-full flex-1 items-center py-6 md:py-8">
+        <div className="hx-content w-full max-w-5xl">
+          <p
+            data-hx-fade="eyebrow"
+            className="hx-label flex items-center gap-3 text-text-muted"
+          >
+            <span className="hx-rule" aria-hidden="true" />
+            <span>
+              Digital Product Studio <span className="text-accent">·</span>{' '}
+              {/* Dropped below `sm` so the eyebrow holds one line on phones; the
+                  H1 already names the city. */}
+              <span className="hidden sm:inline">
+                Lahore <span className="text-accent">·</span>{' '}
+              </span>
+              Est. {siteConfig.brand.foundingYear}
+            </span>
+          </p>
 
-              `gap-3` (12px) is deliberately NOT touched in either flex row: it
-              separates two 52px full-width tap targets and is already at the
-              floor for comfortable stacked buttons.
-
-              A `max-` variant rather than a new `xs` screen: the breakpoint set
-              in tailwind.config.js is part of the locked design system, and this
-              is a single-section concern. Existing values stay the default and
-              nothing outside 399px-and-below can be affected. */}
-          <h1 className="mt-6 font-display text-h1 font-normal leading-[1.08] tracking-[-0.02em] text-text-strong max-[399px]:mt-4">
-            {HEADLINE_OPTIONS[ACTIVE_HEADLINE].lines.map((line, i) => (
-              <span key={line} className="hero-line-clip">
-                <span
-                  className="hero-line"
-                  style={{ animationDelay: `${0.12 + i * 0.1}s` }}
-                >
-                  {line}
-                </span>
+          <h1 className="hx-title mt-6 max-[399px]:mt-4">
+            {words.map((w, i) => (
+              <span key={`${w}-${i}`}>
+                <span className="hx-word-clip">
+                  <span className="hx-word">{w}</span>
+                </span>{' '}
               </span>
             ))}
-            <span className="hero-line-clip">
-              <span
-                className="hero-line"
-                style={{
-                  animationDelay: `${
-                    0.12 + HEADLINE_OPTIONS[ACTIVE_HEADLINE].lines.length * 0.1
-                  }s`,
-                }}
-              >
-                {HEADLINE_OPTIONS[ACTIVE_HEADLINE].tail}{' '}
-                <span className="text-amber-wipe">
-                  {HEADLINE_OPTIONS[ACTIVE_HEADLINE].tailAccent}
-                </span>
-              </span>
+            <span className="hx-word-clip">
+              <span className="hx-word hx-gold">{HEADLINE.accent}</span>
             </span>
           </h1>
 
-          {/* mt-5 (24px), not mt-7: 7 is NOT remapped in tailwind.config.js, so
-              mt-7 fell through to Tailwind's stock 1.75rem and sat off the
-              --space-* scale this section otherwise runs on.
-              No colour class. `text-muted` was a dead class — the config nests
-              muted under `colors.text`, so the real utility is
-              `text-text-muted` and `text-muted` compiled to nothing. The
-              paragraph has therefore always inherited --text from .theme-dark,
-              and that is the correct value to keep: over the mobile crop, the
-              actual --text-muted (#97949f) measures ~1.7:1 against the lit
-              doorway and would fail AA outright. Stated explicitly so a later
-              repo-wide rename of the dead class cannot silently darken it. */}
           <p
-            className="hero-in measure mt-5 text-lead max-[399px]:mt-4"
-            style={{ animationDelay: '0.5s' }}
+            data-hx-fade="body"
+            className="hx-tagline mt-6 max-w-[34rem] max-[399px]:mt-5"
           >
-            We Build Digital Products That Drive Real Impact.
-          </p>
-          <p
-            className="hero-in measure mt-5 text-lead max-[399px]:mt-4"
-            style={{ animationDelay: '0.5s' }}
-          >
-            Web, mobile, and AI products for ambitious brands. Designed,
-            engineered and marketed end to end.
+            {TAGLINE}
           </p>
 
-          {/* mt-6 (32px), not mt-9: 9 is not remapped either and resolved to
-              Tailwind's stock 2.25rem. */}
+          <p data-hx-fade="body" className="hx-support mt-3">
+            {SUPPORT}
+          </p>
+
           <div
-            className="hero-in mt-6 flex flex-wrap items-center gap-3 max-[399px]:mt-5"
-            style={{ animationDelay: '0.62s' }}
+            data-hx-fade="body"
+            className="mt-8 flex flex-wrap items-center gap-3 max-[399px]:mt-6"
           >
-            {/* Full-width below `sm`. The two labels differ in length, so on a
-                phone they wrapped to separate rows at their own intrinsic
-                widths — a ragged stack with three different edges. Matching
-                their width makes it read as a deliberate stacked pair, and
-                gives both a full-width tap target. Unchanged from `sm` up,
-                where they sit side by side. */}
+            {/* Full-width below `sm` so the stacked pair shares one edge. */}
             <Button href="/contact" size="lg" className="w-full sm:w-auto" magnetic>
               Start a Project
             </Button>
@@ -313,35 +542,44 @@ export function Hero() {
               variant="secondary"
               size="lg"
               className="w-full sm:w-auto"
+              magnetic
             >
               View Our Work
             </Button>
           </div>
-
-          {/* mt-10 IS on the scale (--space-10, 64px) and is kept on desktop.
-              On a phone the trust chips wrap to two rows, so a 64px lead-in was
-              the single largest gap in the block; 32px below `md` keeps the
-              ladder monotonic (32 / 24 / 32 / 32) without touching desktop. */}
-          <div
-            className="hero-in mt-6 flex flex-wrap items-center gap-3 max-[399px]:mt-5 md:mt-10"
-            style={{ animationDelay: '0.74s' }}
-          >
-            {TRUST.map((t) => (
-              <Tag key={t}>{t}</Tag>
-            ))}
-          </div>
         </div>
       </div>
 
-      <a
-        // #case-studies no longer exists — that section was deleted and replaced
-        // by ClientLogoStrip. Services is now the first section below the hero.
-        href="#services"
-        aria-label="Scroll to services"
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 items-center gap-2 font-mono text-caption uppercase tracking-[0.18em] text-faint transition-colors hover:text-accent md:inline-flex"
-      >
-        Scroll <ArrowDown className="h-3.5 w-3.5 animate-bounce" aria-hidden="true" />
-      </a>
+      {/* ---- Stats bar + scroll cue ------------------------------------------
+          In flow (not absolute) so on short screens it pushes the section
+          taller instead of overlapping the copy. */}
+      <div className="hx-bar container-page relative z-[2] w-full pb-6 md:pb-8">
+        <div
+          data-hx-fade="bar"
+          className="flex items-end justify-between gap-6 border-t border-white/[0.12] pt-5 md:pt-6"
+        >
+          <dl className="grid w-full max-w-xl grid-cols-3 gap-4 md:gap-10">
+            {STATS.map((s) => (
+              <div key={s.label} className="flex flex-col-reverse justify-end gap-2">
+                <dt className="hx-label text-text-muted">{s.label}</dt>
+                <dd className="hx-stat">
+                  <span data-hx-count={s.value}>{s.value}</span>
+                  <span className="hx-gold">{s.suffix}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          <a
+            href="#services"
+            aria-label="Scroll to services"
+            className="hx-label group hidden shrink-0 items-center gap-4 text-text-muted transition-colors duration-base hover:text-accent md:inline-flex"
+          >
+            <span>Scroll</span>
+            <span className="hx-scroll-track" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
     </section>
   );
 }

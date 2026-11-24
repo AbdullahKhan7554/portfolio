@@ -615,3 +615,247 @@ html.intro-active .intro-reveal {
   white-space: nowrap;
   border: 0;
 }
+
+/* ===========================================================================
+   HOMEPAGE HERO (v2, 2026-11-25) — `.hx-*`
+   Cinematic hero driven by GSAP (see sections/Hero.jsx). Everything below is
+   STATIC styling plus the pre-paint hidden states; all motion lives in JS so
+   it can be reverted cleanly and skipped entirely under reduced motion.
+   =========================================================================== */
+
+/* Hero-only typefaces (lib/heroFonts.js). Re-pointing the SEMANTIC font tokens
+   — not hard-coding families on each element — means every token-driven child
+   (Button, labels, copy) flips inside the hero and nowhere else. font-family is
+   re-declared because the inherited value from <body> is already resolved. */
+.hx {
+  --font-display: var(--font-hero-display), var(--font-satoshi), system-ui, sans-serif;
+  --font-sans: var(--font-hero-body), var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-hero-mono), var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-sans);
+}
+
+/* ---- Type scale (fluid) ------------------------------------------------- */
+.hx-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.375rem, 1.05rem + 4.35vw, 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--text-strong);
+  max-width: 19ch;
+  text-wrap: balance;
+}
+.hx-tagline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.1875rem, 1.02rem + 0.6vw, 1.625rem);
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+  color: var(--text-strong);
+}
+.hx-support {
+  font-size: clamp(0.9875rem, 0.95rem + 0.18vw, 1.0625rem);
+  line-height: 1.65;
+  color: var(--text);
+  max-width: 33rem;
+}
+.hx-label {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6875rem, 0.66rem + 0.1vw, 0.75rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.hx-stat {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 1.25rem + 1.55vw, 2.875rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Champagne-gold accent: the existing dark-theme amber gradient, a touch
+   lighter at the top so it reads as metal rather than paint. */
+.hx-gold {
+  background: linear-gradient(
+    172deg,
+    var(--amber-300) 0%,
+    var(--amber-400) 38%,
+    var(--amber-500) 72%,
+    var(--amber-600) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---- Word reveal ---------------------------------------------------------
+   Each word sits in its own clip so it can rise from below the baseline. The
+   clip carries a little bottom padding (cancelled by a negative margin) so
+   descenders are never shaved. Spaces live BETWEEN the clips in the DOM, so
+   the heading's text content — what crawlers and screen readers get — is the
+   plain sentence. */
+.hx-word-clip {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.hx-word {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ---- Pre-paint hidden states --------------------------------------------
+   The <head> INTRO_GATE adds `.intro-active` before first paint on the
+   homepage (motion allowed only). While it is present these elements wait in
+   their start positions under the intro overlay; Hero.jsx then takes over with
+   inline GSAP states and plays the entrance when the class is removed. If JS
+   never runs, the gate's own 3s timer removes the class and the hero simply
+   appears — nothing can be left hidden. */
+html.intro-active .hx-word {
+  transform: translateY(110%);
+}
+html.intro-active [data-hx-fade],
+html.intro-active .hx-orbit {
+  opacity: 0;
+}
+html.intro-active .hx-rule {
+  transform: scaleX(0);
+}
+
+/* ---- Layers ------------------------------------------------------------- */
+/* Oversized so mouse parallax and the scroll zoom never expose an edge. */
+.hx-bg {
+  position: absolute;
+  inset: -4%;
+  will-change: transform;
+}
+
+/* Bottom veil: anchors the stats bar and carries the scroll-out darkening. */
+.hx-floor {
+  background: linear-gradient(
+    180deg,
+    transparent 55%,
+    hsl(252 11% 4% / 0.55) 82%,
+    hsl(252 11% 4% / 0.82) 100%
+  );
+}
+.hx-veil {
+  background: var(--bg);
+  opacity: 0;
+}
+
+/* Film grain — a static SVG turbulence tile. One paint, no animation. */
+.hx-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+}
+
+/* Cursor spotlight — positioned by GSAP (x/y), centred on its own box. */
+.hx-spotlight {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 46rem;
+  height: 46rem;
+  margin: -23rem 0 0 -23rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    hsl(var(--accent-hsl) / 0.16) 0%,
+    hsl(var(--accent-hsl) / 0.06) 32%,
+    transparent 62%
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Gold orbital — a 2D ring tilted into an ellipse by a 3D parent, so a plain
+   2D rotation of the inner group sends the orb around an elliptical path. */
+.hx-orbit {
+  perspective: 1100px;
+}
+.hx-orbit-tilt {
+  width: 100%;
+  height: 100%;
+  transform: rotateX(64deg) rotateZ(-14deg);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.hx-orbit-spin {
+  transform-origin: 50% 50%;
+  transform-box: view-box;
+}
+
+/* Eyebrow rule — grows from the left on entrance. */
+.hx-rule {
+  display: inline-block;
+  width: 2.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--amber-500), var(--amber-300));
+  transform-origin: left center;
+}
+
+/* ---- Scroll indicator --------------------------------------------------- */
+.hx-scroll-track {
+  position: relative;
+  width: 1px;
+  height: 3rem;
+  overflow: hidden;
+  background: hsl(0 0% 100% / 0.16);
+}
+.hx-scroll-track::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, var(--amber-400));
+  animation: hx-scroll-cue 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes hx-scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(250%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-scroll-track::after {
+    animation: none;
+    transform: translateY(75%);
+  }
+  .hx-word,
+  .hx-bg,
+  .hx-orbit-tilt {
+    will-change: auto;
+  }
+}
+
+/* Tablet portrait/landscape (md → lg): the copy spans most of the width and the
+   centred-ish crop puts the lit doorway behind the eyebrow and headline, where
+   the desktop left-weighted scrim leaves it bright. A vertical wash, a step
+   heavier than the phone one, keeps the mono eyebrow legible over it. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hx .hero-scrim {
+    background: linear-gradient(
+      180deg,
+      hsl(252 11% 4% / 0.42) 0%,
+      hsl(252 11% 4% / 0.5) 30%,
+      hsl(252 11% 4% / 0.58) 58%,
+      hsl(252 11% 4% / 0.74) 100%
+    );
+  }
+}

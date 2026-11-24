@@ -33,10 +33,11 @@ Dark survives only as an **intentional contrast block** (hero, CTA band, footer)
 - `--weight-semibold` is **700**, not 600 — Satoshi's statics have no 600 and the browser would otherwise synthesise it.
 - Display and body are **both grotesks**. Hierarchy comes from weight, scale, and Geist Mono's textural contrast — *not* from a serif/sans pairing. The earlier Fraunces rationale no longer applies.
 - No `font-optical-sizing`: that existed for Fraunces' `opsz` axis and is a no-op for Satoshi.
+- **Approved exception (2026-11-25): the homepage hero only** uses General Sans / DM Sans / IBM Plex Mono (`src/lib/heroFonts.js`, files in `src/fonts`). `.hx` in `globals.css` re-points `--font-display/--font-sans/--font-mono` inside the hero; nothing outside it changes.
 
 **Contrast (§12)** — AA minimum. `--amber-700` and `--obsidian-400` are contrast-tuned; re-check ratios before changing any semantic colour.
 
-**Motion (§4)** — the motion stack is **Framer Motion + Lenis**. GSAP and ScrollTrigger are *not* installed and never have been; scroll-linked animation uses `useScroll` / `useTransform` / `useInView` (see `Testimonials.jsx`, `Parallax.jsx`, `BrowserMock.jsx`). Reveal-on-scroll, magnetic buttons, card hover = lift + shadow. 400–600ms, no overshoot on large elements. Always respect `prefers-reduced-motion` (motion duration tokens zero out automatically).
+**Motion (§4)** — the motion stack is **Framer Motion + Lenis**. **Exception (approved 2026-11-25): `gsap` is installed for the homepage hero only** (`Hero.jsx` — entrance, parallax, spotlight, orbital, counters, ScrollTrigger scroll-out). Don't spread it to other sections; everywhere else scroll-linked animation uses `useScroll` / `useTransform` / `useInView` (see `Testimonials.jsx`, `Parallax.jsx`, `BrowserMock.jsx`). Reveal-on-scroll, magnetic buttons, card hover = lift + shadow. 400–600ms, no overshoot on large elements. Always respect `prefers-reduced-motion` (motion duration tokens zero out automatically).
 
 **Never ship fabricated content** — no invented prices, metrics, client names, or capability claims. Pricing uses placeholders until real figures are supplied.
 
@@ -56,7 +57,7 @@ Removed from the homepage but still on disk: `About` (used by `/about`), `Testim
 
 - `/services` renders the same `<Services />` section as the homepage — editing it changes both.
 - `src/lib/schema.js` reads `name` + `tagline` off every entry in `src/data/services.js` for JSON-LD `OfferCatalog`. Don't rename those keys.
-- `layout.js` injects an inline `INTRO_GATE` script that pauses `.hero-in` / `.hero-line` animations before first paint. Keep those class names on hero entrance elements.
+- `layout.js` injects an inline `INTRO_GATE` script that adds `intro-active` to `<html>` before first paint. The hero's `.hx-*` CSS holds its start positions under that class and `Hero.jsx` plays the GSAP entrance when `CinematicIntro` removes it. `.hero-in` / `.hero-line` are no longer used by the hero.
 - Env: no `.env.example` is committed. Missing vars degrade gracefully (chat 503s, email falls back to WhatsApp) rather than crashing. See `src/lib/env.js` and `src/lib/nova/providers/providerResolver.js`.
 - `next/image` `quality` values must be listed in `images.qualities` in `next.config.mjs` from Next 16 on.
 - **The Tailwind spacing scale is remapped, and only partially.** `tailwind.config.js` repoints keys `1,2,3,4,5,6,8,10,12,16,20,24` at `--space-*`, so they do **not** mean what stock Tailwind means: `p-6` is 2rem (not 1.5), `p-10` is 4rem (not 2.5), `p-24` is 12rem (not 6). **Every other key — 7, 9, 11, 14, 18, … — falls through to stock Tailwind**, silently mixing two scales: `mt-7` (1.75rem) is *smaller* than `mt-6` (2rem). Stick to mapped keys. If a value genuinely needs to sit off the scale (optical alignment, not rhythm), write it as an arbitrary value like `sm:mt-[1.75rem]` so the intent is explicit — see `LeadMagnetForm.jsx`. Audited clean 2026-08-18; re-check with `grep -rE "\b(m|p)(t|b|l|r|x|y)?-(7|9|11|14|18)\b"`.
