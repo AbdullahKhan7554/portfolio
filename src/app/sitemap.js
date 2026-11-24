@@ -3,8 +3,17 @@ import { getShowcaseCaseStudies, getCaseStudy } from '@/content/caseStudies';
 import { getServicePagePaths, servicePages } from '@/data/servicePages';
 import { posts } from '@/content/blog';
 
+/**
+ * Last-modified date for static pages and case studies. Fixed on purpose: a
+ * build-time `new Date()` told crawlers every page changed on every deploy,
+ * which teaches them to ignore lastmod. Bump this when page content really
+ * changes (or split it per route if pages start changing independently).
+ */
+const STATIC_LAST_MODIFIED = '2026-11-24';
+
 export default function sitemap() {
   const now = new Date();
+  const staticLastModified = new Date(STATIC_LAST_MODIFIED);
   const staticRoutes = [
     { path: '/', priority: 1.0, changeFrequency: 'monthly' },
     { path: '/work', priority: 0.9, changeFrequency: 'monthly' },
@@ -28,7 +37,7 @@ export default function sitemap() {
     { path: '/free-audit', priority: 0.6, changeFrequency: 'yearly' },
   ].map((r) => ({
     url: `${siteConfig.url}${r.path === '/' ? '' : r.path}`,
-    lastModified: now,
+    lastModified: staticLastModified,
     changeFrequency: r.changeFrequency,
     priority: r.priority,
   }));
@@ -42,7 +51,7 @@ export default function sitemap() {
   ]);
   const workRoutes = [...workSlugs].map((slug) => ({
     url: `${siteConfig.url}/work/${slug}`,
-    lastModified: now,
+    lastModified: staticLastModified,
     changeFrequency: 'yearly',
     priority: 0.8,
   }));

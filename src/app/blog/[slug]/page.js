@@ -52,6 +52,7 @@ function articleSchema(post) {
     },
     publisher: {
       '@type': 'Organization',
+      '@id': `${siteConfig.url}/#organization`,
       name: siteConfig.brand.name,
       logo: { '@type': 'ImageObject', url: `${siteConfig.url}/logo.png` },
     },

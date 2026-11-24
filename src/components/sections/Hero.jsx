@@ -16,9 +16,9 @@ import { siteConfig } from '@/config/site';
 const HEADLINE_OPTIONS = [
   {
     id: 'impact',
-    lines: ['We Build Digital Products That'],
-    tail: '',
-    tailAccent: 'Drive Real Impact',
+    lines: ['Software Development & AI Automation'],
+    tail: 'Company in',
+    tailAccent: 'Lahore',
   },
   {
     id: 'capability',
@@ -172,7 +172,7 @@ export function Hero() {
       {bgOk && (
         <Image
           src={HERO_BG}
-          alt=""
+          alt="Glowing doorway in a dark monolith on a rocky island at dusk, symbolising Avenix Studio software and AI automation"
           aria-hidden="true"
           fill
           priority
@@ -264,7 +264,6 @@ export function Hero() {
                 <span className="text-amber-wipe">
                   {HEADLINE_OPTIONS[ACTIVE_HEADLINE].tailAccent}
                 </span>
-                .
               </span>
             </span>
           </h1>
@@ -280,6 +279,12 @@ export function Hero() {
               actual --text-muted (#97949f) measures ~1.7:1 against the lit
               doorway and would fail AA outright. Stated explicitly so a later
               repo-wide rename of the dead class cannot silently darken it. */}
+          <p
+            className="hero-in measure mt-5 text-lead max-[399px]:mt-4"
+            style={{ animationDelay: '0.5s' }}
+          >
+            We Build Digital Products That Drive Real Impact.
+          </p>
           <p
             className="hero-in measure mt-5 text-lead max-[399px]:mt-4"
             style={{ animationDelay: '0.5s' }}

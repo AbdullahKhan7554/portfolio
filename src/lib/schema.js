@@ -1,4 +1,4 @@
-import { siteConfig, organizationSchemaData } from '@/config/site';
+import { siteConfig, organizationSchemaData, DISPLAY_EMAIL } from '@/config/site';
 import { services } from '@/data/services';
 import {
   founderBio,
@@ -15,6 +15,7 @@ import {
  * while the Person node said "Founder & Full-Stack Developer").
  */
 export const ORGANIZATION_ID = `${siteConfig.url}/#organization`;
+export const WEBSITE_ID = `${siteConfig.url}/#website`;
 export const FOUNDER_ID = `${siteConfig.url}/founder#person`;
 export const FOUNDER_ROLE = 'Founder & Full-Stack Developer';
 export const FOUNDER_IMAGE = '/images/abdullah-khan.webp';
@@ -117,13 +118,16 @@ export function professionalServiceSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
+    // Same @id as the site-wide Organization node, so consumers merge the two
+    // into ONE entity instead of reading two different businesses.
+    '@id': ORGANIZATION_ID,
     name: siteConfig.brand.name,
     url: siteConfig.url,
     image: siteConfig.seo.ogImage.url,
     logo: `${siteConfig.url}/logo.png`,
     description: siteConfig.seo.description,
-    email: siteConfig.contact.email,
-    telephone: siteConfig.contact.phone,
+    email: DISPLAY_EMAIL,
+    telephone: '+92 302 6234429',
     priceRange: '$$',
     /**
      * The local signal. `ProfessionalService` is a subtype of `LocalBusiness`,
@@ -154,7 +158,16 @@ export function professionalServiceSchema() {
       addressRegion: siteConfig.contact.address.region,
       addressCountry: siteConfig.contact.address.country,
     },
-    sameAs: Object.values(siteConfig.social).filter(Boolean),
+    // The same five profiles the footer links to (FooterPremium CONNECT_LINKS):
+    // the studio's own LinkedIn/Instagram/Facebook plus the founder's GitHub
+    // and Upwork.
+    sameAs: [
+      siteConfig.social.linkedin,
+      founderProfiles.find((p) => p.label === 'GitHub')?.href,
+      founderProfiles.find((p) => p.label === 'Upwork')?.href,
+      siteConfig.social.instagram,
+      siteConfig.social.facebook,
+    ].filter(Boolean),
     knowsAbout: siteConfig.seo.keywords,
     // Mirrors the four dedicated service routes plus the existing build
     // capabilities. Every entry maps to a real service in src/data/services.js
@@ -203,6 +216,7 @@ export function serviceSchema({ name, description, path, serviceType, areaServed
     url: `${siteConfig.url}${path}`,
     provider: {
       '@type': 'Organization',
+      '@id': ORGANIZATION_ID,
       name: siteConfig.brand.name,
       url: siteConfig.url,
       address: {
@@ -282,9 +296,11 @@ export function websiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': WEBSITE_ID,
     name: siteConfig.brand.name,
     url: siteConfig.url,
     inLanguage: 'en',
+    publisher: { '@id': ORGANIZATION_ID },
   };
 }
 
@@ -312,6 +328,18 @@ export function faqSchema(faqs) {
       name: f.question,
       acceptedAnswer: { '@type': 'Answer', text: f.answer },
     })),
+  };
+}
+
+/**
+ * JSON-LD: the homepage @graph — ProfessionalService + WebSite in one block.
+ * Each node drops its own @context; the graph carries it once.
+ */
+export function homepageGraphSchema() {
+  const strip = ({ '@context': _ctx, ...node }) => node;
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [strip(professionalServiceSchema()), strip(websiteSchema())],
   };
 }
 

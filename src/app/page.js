@@ -13,9 +13,12 @@ import { Section } from '@/components/ui/Section';
 import { RevealGroup, RevealItem } from '@/components/ui/Reveal';
 import { getServiceSummaries } from '@/data/servicePages';
 import { buildMetadata } from '@/lib/seo';
-import { professionalServiceSchema, jsonLd } from '@/lib/schema';
+import { homepageGraphSchema, jsonLd } from '@/lib/schema';
 
-export const metadata = buildMetadata({ path: '/' });
+export const metadata = buildMetadata({
+  path: '/',
+  absoluteTitle: 'Software & AI Automation Company in Lahore | Avenix Studio',
+});
 
 /**
  * Homepage-only chrome. This is the one route that opens on a full-bleed dark
@@ -36,7 +39,7 @@ export default function HomePage() {
     <main id="main">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={jsonLd(professionalServiceSchema())}
+        dangerouslySetInnerHTML={jsonLd(homepageGraphSchema())}
       />
       <Hero />
       <Services />

@@ -220,7 +220,7 @@ export function FooterPremium() {
             <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-xl border border-border-strong bg-black">
               <Image
                 src="/logo.png"
-                alt=""
+                alt="Avenix Studio logo"
                 width={48}
                 height={48}
                 className="h-full w-full scale-[1.18] object-cover object-[center_30%]"

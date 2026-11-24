@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useId } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { EASE_OUT_EXPO } from '@/lib/motion';
@@ -44,24 +44,26 @@ export function Accordion({ items, defaultOpen = 0 }) {
                 />
               </button>
             </h3>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  id={panelId}
-                  role="region"
-                  aria-labelledby={triggerId}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
-                  className="overflow-hidden"
-                >
-                  <p className="measure border-l-2 border-accent pb-6 pl-4 text-body text-muted">
-                    {item.answer}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Always mounted, so every answer is in the server HTML (crawlable),
+                not only the open one. Closed panels collapse to height 0 /
+                opacity 0 — the same values and transition the old
+                mount/unmount animation used — and are aria-hidden so screen
+                readers still only hear the open answer. `initial={false}` renders
+                the resting state on first paint with no animation, as before. */}
+            <motion.div
+              id={panelId}
+              role="region"
+              aria-labelledby={triggerId}
+              aria-hidden={!isOpen}
+              initial={false}
+              animate={isOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+              transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
+              className="overflow-hidden"
+            >
+              <p className="measure border-l-2 border-accent pb-6 pl-4 text-body text-muted">
+                {item.answer}
+              </p>
+            </motion.div>
           </div>
         );
       })}
