@@ -84,7 +84,7 @@ export default async function ContactPage({ searchParams }) {
         fullScreen
         eyebrow="Let's Talk"
         title="Start Your Project."
-        intro="Tell us what you're building and the outcome that matters most. We reply within one business day. WhatsApp is faster."
+        intro="Tell us what you're building and the outcome that matters most. We reply within 24 hours. WhatsApp is faster."
         breadcrumbs={[
           { name: 'Home', path: '/' },
           { name: 'Contact', path: '/contact' },

@@ -67,7 +67,7 @@ export function ContactForm({ defaultPackage = '' }) {
         <CheckCircle2 className="mx-auto h-10 w-10 text-success" aria-hidden="true" />
         <h3 className="mt-4 font-display text-h3 text-text-strong">Message sent.</h3>
         <p className="measure mx-auto mt-2 text-body text-muted">
-          Thank you — we&rsquo;ll get back to you within one business day. Prefer to
+          Thank you — we&rsquo;ll get back to you within 24 hours. Prefer to
           talk now? Reach us directly on WhatsApp.
         </p>
         <div className="mt-6 flex justify-center">

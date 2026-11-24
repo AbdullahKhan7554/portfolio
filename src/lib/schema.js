@@ -38,7 +38,7 @@ export function organizationSchema() {
     },
     image: organizationSchemaData.logo,
     description: siteConfig.seo.description,
-    email: organizationSchemaData.email,
+    email: DISPLAY_EMAIL,
     telephone: siteConfig.contact.phone,
     foundingDate: organizationSchemaData.foundingDate,
     founder: { '@type': 'Person', '@id': FOUNDER_ID, name: siteConfig.brand.founder },
@@ -54,7 +54,7 @@ export function organizationSchema() {
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'sales',
-      email: organizationSchemaData.email,
+      email: DISPLAY_EMAIL,
       telephone: siteConfig.contact.phone,
       areaServed: organizationSchemaData.areaServed,
       availableLanguage: ['English'],
@@ -168,7 +168,10 @@ export function professionalServiceSchema() {
       siteConfig.social.instagram,
       siteConfig.social.facebook,
     ].filter(Boolean),
-    knowsAbout: siteConfig.seo.keywords,
+    // Topics only — the brand and founder names are entities, not expertise.
+    knowsAbout: siteConfig.seo.keywords.filter(
+      (k) => k !== siteConfig.brand.name && k !== siteConfig.brand.founder,
+    ),
     // Mirrors the four dedicated service routes plus the existing build
     // capabilities. Every entry maps to a real service in src/data/services.js
     // — nothing is listed here that the studio does not sell.
@@ -277,12 +280,12 @@ export function contactPageSchema() {
       '@type': 'Organization',
       name: siteConfig.brand.name,
       url: siteConfig.url,
-      email: siteConfig.contact.email,
+      email: DISPLAY_EMAIL,
       telephone: siteConfig.contact.phone,
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'sales',
-        email: siteConfig.contact.email,
+        email: DISPLAY_EMAIL,
         telephone: siteConfig.contact.phone,
         areaServed: 'Worldwide',
         availableLanguage: ['English'],
