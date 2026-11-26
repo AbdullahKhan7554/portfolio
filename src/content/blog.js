@@ -76,38 +76,122 @@ export const posts = [
   {
     slug: 'why-your-business-website-needs-to-be-fast',
     related: ['website-development-pakistan', 'free-audit'],
-    title: 'Why a fast website is the cheapest marketing you can buy',
+    title: 'Why Website Speed Is Important for Business',
     excerpt:
-      'Website speed is not a vanity metric. It is the difference between a visitor who books and one who bounces, and it compounds across every paid channel.',
+      'Why website speed is important for business: slow pages waste ad spend, lose mobile visitors and rank lower. See what to measure and which fixes pay first.',
     category: 'Performance',
     date: '2026-06-10',
-    readingTime: '4 min read',
+    readingTime: '7 min read',
     cover: {
       src: '/blogs/why-your-business-website-needs-to-be-fast.webp',
-      alt: 'A laptop displaying a dark website hero with amber light-trails, surrounded by floating panels reporting a PageSpeed score of 98, a 1.2 second load time and passing Core Web Vitals, next to a speedometer dial reading 1.2s',
+      alt: 'A laptop displaying a dark website hero with amber light-trails, surrounded by floating panels reporting a PageSpeed score of 98, a 1.2 second load time and passing Core Web Vitals, next to a speedometer dial reading 1.2s, illustrating why website speed is important for business',
     },
     content: [
       {
         type: 'p',
-        text: 'Most business owners think of their website as a brochure. A storefront is the better mental model: one on the busiest street in the world, where the rent is your ad spend and the door takes three seconds to open. Every second of that delay is customers turning around before they see what you offer.',
+        text: 'Why is website speed important for business? Because every visitor who waits is a visitor deciding whether to leave. A slow site loses people before they see your offer, your prices or your phone number, and it quietly makes every ad, post and campaign you pay for perform worse.',
+      },
+      {
+        type: 'p',
+        text: 'This guide explains why website speed is important for business owners in Pakistan in particular, what "fast" means in numbers you can actually check, and which fixes are worth paying for first. It is written for owners, not developers, so you can ask better questions of whoever builds or maintains your site.',
+      },
+      { type: 'h2', text: 'Why website speed is important for business in Pakistan' },
+      {
+        type: 'p',
+        text: 'Most business owners think of their website as a brochure. A storefront is the better mental model: a shop on the busiest street in the country, where the rent is your ad spend and the door takes three seconds to open. Every second of delay is a customer turning around before they walk in.',
+      },
+      {
+        type: 'p',
+        text: 'In Pakistan that effect is sharper than in many markets. Most of your visitors arrive on a phone, often a mid-range Android, and frequently on mobile data rather than home broadband. A site that feels fine on the office Wi-Fi in Gulberg can feel very different on 4G in traffic on the Canal Road. Build for the conditions your customers are actually in, not the ones you test in.',
+      },
+      {
+        type: 'p',
+        text: 'It also matters because so many Pakistani enquiries now start from a single tap: an Instagram ad, a Google Maps listing, a link shared on WhatsApp. That tap is a moment of interest, and interest fades fast. If the page is still blank when the visitor is ready to act, the moment is gone.',
       },
       { type: 'h2', text: 'Slow sites leak money everywhere' },
       {
         type: 'p',
-        text: 'A slow site frustrates visitors, and that is the least of it. It lowers your search ranking, raises the cost of every paid click, and erodes trust before a word of your copy is read. The damage stays invisible because it happens off-screen, in the people who never stayed long enough to convert.',
+        text: 'A slow site frustrates visitors, and that is the least of it. The real answer to why website speed is important for business is that the damage stays invisible: it happens off-screen, in the people who never stayed long enough to convert. These are the places it shows up.',
       },
-      { type: 'h2', text: 'What "fast" actually means' },
       {
         type: 'ul',
         items: [
-          'Largest Contentful Paint under 2 seconds, so your main content appears almost instantly.',
-          'No layout shift. Nothing jumps around as the page loads.',
-          'Instant interactions: taps and clicks respond within 200 milliseconds.',
+          'Paid ads. On Google or Meta you pay for the click whether the page loads or not. When visitors leave while the page is still loading, part of every rupee of ad spend buys nothing.',
+          'Search rankings. Google says page experience, including Core Web Vitals, is among the signals its ranking systems consider. Speed will not rescue a weak page, but between two similar pages it can decide which one is shown.',
+          'Trust. A page that stutters, jumps or loads half its images tells a visitor the business behind it may be just as careless. That judgement is made in seconds and is hard to undo.',
+          'Enquiries. Every step between landing and contacting you loses some people, and waiting is a step. It is simply the one most owners never see.',
+        ],
+      },
+      { type: 'h2', text: 'What "fast" actually means: Core Web Vitals' },
+      {
+        type: 'p',
+        text: 'Fast is not a feeling. Google measures it with three Core Web Vitals, and each one has a published threshold for what counts as a good experience.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Largest Contentful Paint (LCP) of 2.5 seconds or less. This is how long your main content, usually the hero image or headline, takes to appear.',
+          'Interaction to Next Paint (INP) of 200 milliseconds or less. Taps and clicks should respond almost instantly, not after a noticeable pause.',
+          'Cumulative Layout Shift (CLS) of 0.1 or less. Nothing should jump around while the page loads, so a visitor never taps the wrong button by accident.',
+        ],
+      },
+      {
+        type: 'p-link',
+        before: 'Google documents these thresholds, and how they are measured on real visits, in its ',
+        href: 'https://web.dev/articles/vitals',
+        anchor: 'Web Vitals guide on web.dev',
+        after: '. They are the targets we build to on every project.',
+      },
+      { type: 'h2', text: 'How to check your own website speed' },
+      {
+        type: 'p',
+        text: 'You do not need a developer to get a first reading. Google provides free tools that show the same numbers it uses itself.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'PageSpeed Insights. Paste in your URL and look at the mobile results first. If it shows data from real Chrome users, trust that over the lab score underneath it.',
+          'Search Console. The Core Web Vitals report groups your pages into good, needs improvement and poor, based on real visits rather than a test run.',
+          'Your own phone, on mobile data. Turn Wi-Fi off and open your site the way a customer would, from a Google search or an Instagram link. Count the seconds before you could actually do something.',
         ],
       },
       {
         type: 'p',
-        text: 'These are the Core Web Vitals Google measures, and they are what we build to on every project. The result is a site that feels premium, ranks better, and quietly converts more of the traffic you already have.',
+        text: 'Do not chase a perfect score of 100. The score is a lab estimate from one simulated device. What matters is whether real visitors on real phones pass the three thresholds above.',
+      },
+      { type: 'h2', text: 'The usual reasons a business website is slow' },
+      {
+        type: 'p',
+        text: 'The same causes come up again and again in the sites we review. Most of them are decisions made while the site was being built, not problems with the hosting company.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Oversized images. A photo uploaded straight from a camera or phone can be many times larger than the space it fills. Modern formats such as WebP, and serving the right size for each screen, fix most of this.',
+          'Too many plugins and scripts. Every chat widget, tracking pixel, slider and page-builder add-on is code the phone has to download and run before the page feels ready.',
+          'Heavy multipurpose themes. They load features for every possible kind of business, most of which your site never shows.',
+          'Hosting far from your customers. It matters, but it is rarely the main problem. Moving a bloated site to better servers gives you a slightly faster bloated site.',
+          'No caching or CDN. Without them, every visitor waits for each page to be put together from scratch.',
+        ],
+      },
+      { type: 'h2', text: 'What to fix first when speed is costing you customers' },
+      {
+        type: 'p',
+        text: 'Work in order of return, not in order of what is easiest to talk about in a meeting.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Fix the pages your ads point to before anything else. That is where slow loading costs you money directly.',
+          'Compress and resize images, starting with the homepage and your highest-traffic landing pages.',
+          'Remove scripts and plugins you do not use. If nobody can say what a script is for, it probably does not need to be there.',
+          'Reserve space for images, videos and embeds so the layout stops shifting as they load.',
+          'Only then look at hosting, caching and a CDN.',
+        ],
+      },
+      {
+        type: 'p',
+        text: 'If your site sits on a page builder and every fix fights the theme, a rebuild can cost less over time than repeated patching. That is a judgement call, and it is worth getting an honest second opinion on before you spend in either direction.',
       },
       {
         type: 'p-link',
@@ -115,6 +199,53 @@ export const posts = [
         href: '/services/web-development',
         anchor: 'web development service',
         after: ' rather than being sold separately.',
+      },
+      { type: 'h2', text: 'Website speed and local search work together' },
+      {
+        type: 'p-link',
+        before: 'Most local searches in Pakistan happen on a phone, so a slow site undermines the rest of your search work too. Our guide to ',
+        href: '/blog/local-seo-for-pakistani-businesses',
+        anchor: 'local SEO for small business in Pakistan',
+        after: ' covers the other half: your Google Business Profile, reviews and consistent contact details.',
+      },
+      { type: 'h2', text: 'The short version' },
+      {
+        type: 'p',
+        text: 'That is why website speed is important for business: it sits underneath everything else you pay for. Ads, SEO, social media and WhatsApp campaigns all send people to the same pages. If those pages are slow, every channel performs worse than it should, and you never meet the customers you lost.',
+      },
+      {
+        type: 'p-link',
+        before: 'Not sure where your site stands? ',
+        href: '/free-audit',
+        anchor: 'Request a free website audit',
+        after: ' and we will check your speed, your Core Web Vitals and the fixes worth doing first.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'How fast should a business website load?',
+        answer:
+          "Aim for your main content to appear within 2.5 seconds on a phone, which is Google's threshold for a good Largest Contentful Paint. Taps should respond within 200 milliseconds and the layout should not shift while loading. Measure on mobile data, not office Wi-Fi, because that is how most Pakistani customers will open your site.",
+      },
+      {
+        question: 'Does website speed affect Google rankings?',
+        answer:
+          'Yes, but modestly. Google says page experience, including Core Web Vitals, is one of many signals its ranking systems consider. Relevant, genuinely helpful content still matters far more. Speed tends to act as a tiebreaker between similar pages, and its bigger effect is on whether visitors stay long enough to contact you.',
+      },
+      {
+        question: 'Is better hosting enough to make my website fast?',
+        answer:
+          'Usually not. Hosting matters, but most slow business sites are slow because of oversized images, unused plugins, heavy themes and third-party scripts. Moving that same site to better servers helps a little. Fixing what the page loads helps far more, so start there and upgrade hosting afterwards only if it is still needed.',
+      },
+      {
+        question: 'Why is my website fast on my computer but slow on my phone?',
+        answer:
+          'A computer usually has a faster processor and a stronger connection than a typical phone on mobile data. Pages heavy with scripts take much longer to run on a mid-range Android. Always test on a real phone with Wi-Fi turned off, and read the mobile results in PageSpeed Insights rather than the desktop ones.',
+      },
+      {
+        question: 'How much does it cost to speed up a website in Pakistan?',
+        answer:
+          "It depends on what is slowing the site down. Compressing images and removing unused plugins can be a small job, while a site built on a heavy multipurpose theme may need partial or full rebuilding. Get an audit first, so any quote you receive in PKR is based on your site's actual problems rather than a guess.",
       },
     ],
   },
@@ -1170,26 +1301,35 @@ export const posts = [
       'work/voila-luxury-skincare',
       'impressions-but-no-clicks',
     ],
-    title: 'Local SEO for Pakistani businesses: a practical guide',
+    title: 'Local SEO for Small Business in Pakistan',
     excerpt:
-      'Local SEO starts with a verified Google Business Profile and identical name, address and phone details everywhere. The order to do things in, and what to skip.',
+      'Local SEO for small business in Pakistan starts with a verified Google Business Profile and matching contact details. The steps, in order, and what to skip.',
     category: 'SEO',
     date: '2026-09-18',
-    readingTime: '5 min read',
+    readingTime: '8 min read',
     service: 'seo',
     content: [
       {
         type: 'p',
-        text: 'Local SEO is the work that makes your business appear when someone nearby searches for what you do: "dentist near me", "law firm in Lahore", "AC repair Johar Town". For a business serving a specific city or area, it is usually the highest-return search work available, and it starts with one thing: a verified Google Business Profile with your details identical everywhere they appear.',
+        text: 'Local SEO is the work that makes your business appear when someone nearby searches for what you do: "dentist near me", "law firm in Lahore", "AC repair Johar Town". For a small business serving one city or area, it is usually the highest-return search work available, and it starts with one thing: a verified Google Business Profile with your details identical everywhere they appear.',
       },
       {
         type: 'p',
-        text: 'Most guides bury that under a list of thirty tactics. In practice the first three items below do most of the work, and a business that does only those will outperform a competitor doing everything else badly.',
+        text: 'Most guides to local SEO for small business in Pakistan bury that under a list of thirty tactics. In practice the first three steps below do most of the work, and a business that does only those well will outperform a competitor doing everything else badly.',
+      },
+      { type: 'h2', text: 'Why local SEO matters for small businesses in Pakistan' },
+      {
+        type: 'p',
+        text: 'When someone in Pakistan searches for a local service, Google usually shows a map with a short list of businesses above the ordinary results. That list is where most local decisions are made. People tap to call, tap for directions, or tap to open WhatsApp, often without visiting a single website.',
+      },
+      {
+        type: 'p',
+        text: 'For a clinic, salon, gym, restaurant, school or repair service, being in that list is worth more than almost any amount of social media posting. Done properly, local SEO for small business in Pakistan reaches people at the moment they are ready to act, and you do not pay per click for it. The catch is that you have to earn the place, and the steps below are how.',
       },
       { type: 'h2', text: 'Step one: claim and verify your Google Business Profile' },
       {
         type: 'p',
-        text: 'This is the single highest-impact action, and it is free. The map results that appear above the ordinary blue links are drawn from Business Profiles, not from your website. Without a verified profile you are not eligible for the most valuable position on the page, no matter how good your site is.',
+        text: 'This is the single highest-impact action, and it is free. The map results are drawn from Business Profiles, not from your website. Without a verified profile you are not eligible for the most valuable position on the page, no matter how good your site is.',
       },
       {
         type: 'ul',
@@ -1198,7 +1338,8 @@ export const posts = [
           'Choose the most specific primary category available. "Dental clinic" beats "doctor", because specificity is what matches you to intent.',
           'Fill in hours, service area, services and a real description. Incomplete profiles rank worse than complete ones.',
           'Add genuine photographs of your actual premises, team and work. Stock imagery is obvious and does not help.',
-          'Keep it current. Changed hours during Ramadan or public holidays belong on the profile, not only in your head.',
+          'Check that the map pin sits on your actual entrance. In housing societies and markets the default pin is often on the wrong street, and customers following directions end up lost.',
+          'Keep it current. Changed hours during Ramadan, Eid or public holidays belong on the profile, not only in your head.',
         ],
       },
       { type: 'h2', text: 'Step two: make your NAP identical everywhere' },
@@ -1208,7 +1349,11 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'Identical means identical: the same business name with the same suffix, the same address formatting, the same phone number format. "Avenix Studio" and "Avenix Studios Pvt Ltd" read as two businesses. Decide on one exact form, write it down, and use it everywhere without variation. Put it in your website footer so it appears on every page.',
+        text: 'Identical means identical: the same business name with the same suffix, the same address format, the same phone number format. "Avenix Studio" and "Avenix Studios Pvt Ltd" read as two businesses. Decide on one exact form, write it down, and use it everywhere without variation. Put it in your website footer so it appears on every page.',
+      },
+      {
+        type: 'p',
+        text: 'Pakistani addresses make this harder than it sounds. The same shop can be written as "Plot 12, Block C, Phase 5, DHA" or "12-C, DHA Phase V", and a phone number as 0300, +92 300 or 92-300. Pick one version of each and stick to it on every platform, including Facebook, Instagram and any directory listing.',
       },
       { type: 'h2', text: 'Step three: reviews, and how to ask' },
       {
@@ -1219,7 +1364,7 @@ export const posts = [
         type: 'ul',
         items: [
           'Ask every satisfied customer, at the moment the work is done and they are happy. Later is a worse moment.',
-          'Send a direct link to the review form, not instructions. Every extra step loses people.',
+          'Send a direct link to the review form, not instructions. A short WhatsApp message with the link works well, because that is where many of your customers already talk to you.',
           'Reply to all of them, including the negative ones. A measured reply to a complaint reassures the next reader far more than an unbroken wall of five stars.',
           'Never buy reviews. They are detectable, they are removable, and the penalty is worse than the problem you were solving.',
         ],
@@ -1238,7 +1383,7 @@ export const posts = [
         type: 'p',
         text: 'Citations are mentions of your NAP on other sites: local directories, industry bodies, chambers of commerce, professional associations. They act as corroboration. Focus on directories a real customer might actually use and on bodies relevant to your industry. Volume is not the point. A hundred listings on sites nobody visits is not worth five on ones they do.',
       },
-      { type: 'h2', text: 'What matters on your own website' },
+      { type: 'h2', text: 'Local SEO on your own website' },
       {
         type: 'ul',
         items: [
@@ -1248,6 +1393,13 @@ export const posts = [
           'A tappable phone number and a WhatsApp link. In Pakistan a large share of local enquiries arrive by message, not through a form.',
           'Embedded directions or a map on your contact page.',
         ],
+      },
+      {
+        type: 'p-link',
+        before: 'For the structured data, Google publishes exactly which fields it reads in its ',
+        href: 'https://developers.google.com/search/docs/appearance/structured-data/local-business',
+        anchor: 'LocalBusiness structured data documentation',
+        after: '. Your developer should be able to add it in an afternoon.',
       },
       { type: 'h2', text: 'What to skip' },
       {
@@ -1259,10 +1411,17 @@ export const posts = [
           'Obsessing over ranking position from your own device. Results are personalised and location-dependent, so what you see is not what your customers see.',
         ],
       },
-      { type: 'h2', text: 'How to know whether it is working' },
+      { type: 'h2', text: 'How to know whether your local SEO is working' },
       {
         type: 'p',
-        text: 'Ignore where you think you rank. Use the numbers instead: Business Profile views, calls and direction requests, and in Search Console the impressions and clicks on non-branded queries. Those are searches for what you do, not for your business name. A rise in non-branded impressions is the earliest reliable sign that the work is landing, and it usually appears well before the phone starts ringing.',
+        text: 'Ignore where you think you rank. The honest test of local SEO for small business in Pakistan is the numbers: Business Profile views, calls and direction requests, and in Search Console the impressions and clicks on non-branded queries. Those are searches for what you do, not for your business name. A rise in non-branded impressions is the earliest reliable sign that the work is landing, and it usually appears well before the phone starts ringing.',
+      },
+      {
+        type: 'p-link',
+        before: 'If those impressions rise but visits do not follow, the problem is usually your titles or your position. Our guide to ',
+        href: '/blog/impressions-but-no-clicks',
+        anchor: 'high impressions but no clicks in Search Console',
+        after: ' walks through how to tell which.',
       },
       {
         type: 'p-link',
@@ -1270,6 +1429,13 @@ export const posts = [
         href: '/services/seo',
         anchor: 'SEO services for businesses in Pakistan',
         after: ' cover technical fixes, local search and the structured data that makes your details readable to search engines and AI assistants.',
+      },
+      {
+        type: 'p-link',
+        before: 'Want to know where your business stands today? ',
+        href: '/free-audit',
+        anchor: 'Request a free audit',
+        after: ' and we will review your website and the basics of your local search setup.',
       },
     ],
     faqs: [
@@ -1281,17 +1447,17 @@ export const posts = [
       {
         question: 'Do I need a website if I have a Google Business Profile?',
         answer:
-          'You can rank in map results without one, but you will convert worse and cap your reach. The profile shows your details. The website is where someone decides whether to trust you, sees your work and understands your services. They also reinforce each other, and a profile linking to a fast, relevant site performs better than one linking nowhere.',
+          'You can rank in map results without one, but you will convert worse and cap your reach. The profile shows your details. The website is where someone decides whether to trust you, sees your work and understands your services. A profile linking to a fast, relevant site performs better than one linking nowhere.',
       },
       {
         question: 'What is the difference between local SEO and regular SEO?',
         answer:
-          'Local SEO targets searches with geographic intent and competes for map results, where the main ranking factors are your Business Profile, proximity to the searcher, NAP consistency and reviews. Regular SEO targets the standard results, where content depth and links matter more. A local business needs both, but the local work usually returns faster.',
+          'Local SEO targets searches with geographic intent and competes for map results, where the main factors are your Business Profile, proximity to the searcher, NAP consistency and reviews. Regular SEO targets the standard results, where content depth and links matter more. A local business needs both, but the local work usually returns faster.',
       },
       {
         question: 'How do I get more Google reviews without breaking the rules?',
         answer:
-          'Ask directly and personally at the moment the customer is happiest, and make it one tap with a direct link. You may ask. You may not incentivise, filter to only happy customers, or buy them. Consistently asking every satisfied customer will, over a few months, put you ahead of nearly every competitor who does it sporadically.',
+          'Ask directly and personally at the moment the customer is happiest, and make it one tap with a direct link. You may ask. You may not incentivise, filter to only happy customers, or buy them. Consistently asking every satisfied customer will, over a few months, put you ahead of most competitors who only ask occasionally.',
       },
       {
         question: 'Does my business need a physical address for local SEO?',
@@ -1303,54 +1469,74 @@ export const posts = [
   {
     slug: 'impressions-but-no-clicks',
     related: ['local-seo-for-pakistani-businesses', 'free-audit'],
-    title: 'Why your website gets impressions but no clicks (and how to fix it)',
+    title: 'High Impressions but No Clicks in Search Console?',
     excerpt:
-      'Impressions with no clicks usually means one of two things: you are ranking on page two, or your title and description give nobody a reason to choose you.',
+      'High impressions but no clicks in Search Console? Learn whether you have a ranking problem or a title problem, how to tell them apart, and what to fix first.',
     category: 'SEO',
     date: '2026-09-18',
-    readingTime: '5 min read',
+    readingTime: '7 min read',
     service: 'seo',
     content: [
       {
         type: 'p',
-        text: 'If Search Console shows impressions but almost no clicks, there are only two real explanations: you are ranking too low to be seen, or you are being seen and your result is not compelling enough to click. Your average position tells you which. Below about ten means visibility. A good position with a poor click rate means your title and description are the problem.',
+        text: 'High impressions but no clicks in Search Console almost always comes down to one of two things: you are ranking too low to be seen, or you are being seen and your result is not compelling enough to click. Your average position tells you which. Below about ten means a visibility problem. A good position with a poor click rate means your title and description are the problem.',
       },
       {
         type: 'p',
-        text: 'The distinction matters because the fixes are completely different, and treating a positioning problem as a copywriting problem wastes months. Here is how to tell them apart and what to do in each case.',
+        text: 'The distinction matters because the fixes are completely different, and treating a ranking problem as a copywriting problem wastes months. This guide shows Pakistani business owners how to tell them apart in their own data and what to do in each case.',
+      },
+      { type: 'h2', text: 'What high impressions but no clicks in Search Console means' },
+      {
+        type: 'p',
+        text: 'An impression is counted when your link appears on a results page someone loaded, even if they never scrolled far enough to see it. A click is counted only when they choose your result. So a page sitting at position nine can collect thousands of impressions from people who read the top three results and stopped there.',
+      },
+      {
+        type: 'p',
+        text: 'That is why the raw impression number on its own is not good news or bad news. It says Google considers your page relevant to some searches. Whether that turns into visits depends on where you appear and what your result says when someone does see it.',
       },
       { type: 'h2', text: 'Diagnose it first' },
       {
         type: 'p',
-        text: 'In Search Console, open Performance, enable impressions, clicks, click-through rate and average position, then look at individual pages and queries instead of the site-wide total. The site-wide average hides everything useful.',
+        text: 'The first job with high impressions but no clicks in Search Console is working out which problem you have. Open the Performance report, switch on impressions, clicks, click-through rate and average position, then look at individual pages and queries instead of the site-wide total. The site-wide average hides everything useful.',
       },
       {
         type: 'ul',
         items: [
           'Average position beyond about ten. You are on page two or worse. Almost nobody scrolls there, so a low click rate is expected and the work is ranking, not wording.',
-          'Good position, poor click rate. You are visible and being passed over. This is a titles-and-descriptions problem and it is the fastest thing on this list to fix.',
-          'Impressions on queries that do not match the page. You are surfacing for the wrong searches, which means the page is not clearly about anything specific.',
-          'Impressions concentrated on your business name. You are only found by people who already know you. That is a coverage problem. The pages that would rank for what you sell do not exist yet.',
+          'Good position, poor click rate. You are visible and being passed over. This is a titles-and-descriptions problem, and it is the fastest thing on this list to fix.',
+          'Impressions on queries that do not match the page. You are surfacing for the wrong searches, which usually means the page is not clearly about anything specific.',
+          'Impressions concentrated on your business name. You are only found by people who already know you. That is a coverage problem: the pages that would rank for what you sell do not exist yet.',
         ],
+      },
+      {
+        type: 'p',
+        text: 'Check the date range too. Compare at least the last three months against the three before, not last week against this week. Short ranges are mostly noise, especially for a small business site with modest traffic.',
       },
       { type: 'h2', text: 'If the problem is your title and description' },
       {
         type: 'p',
-        text: 'The title is the single highest-leverage piece of text on any page, and most sites waste it. A title reading "Services" or "Home" gives a searcher nothing to match against. The result gets skipped in favour of one that names what the searcher wanted.',
+        text: 'The title is the single highest-leverage piece of text on any page, and most sites waste it. A title reading "Services" or "Home" gives a searcher nothing to match against, so the result gets skipped in favour of one that names what they wanted.',
       },
       {
         type: 'ul',
         items: [
           'Lead with what the page is about, then the brand. "SEO Services in Pakistan | Your Business" beats "Your Business | Home" every time.',
-          'Keep titles roughly under sixty characters so they are not truncated mid-phrase.',
-          'Write a description that gives a reason to choose you, not one that restates the title. It does not directly affect ranking, but it heavily affects whether anyone clicks.',
+          'Keep titles roughly under sixty characters so they are not cut off mid-phrase.',
+          'Write a description that gives a reason to choose you, not one that repeats the title. It does not directly affect ranking, but it heavily affects whether anyone clicks.',
           'Make every title and description unique. Duplicates across pages mean those pages compete with each other and none of them reads as the definitive answer.',
-          'Match the wording of the query where it is honest to do so. A searcher scanning results is pattern-matching against their own words.',
+          'Match the wording of the query where it is honest to do so. Someone scanning results is matching against their own words.',
         ],
       },
       {
         type: 'p',
-        text: 'Avoid the older habit of stuffing every variation into the title. "Best SEO Lahore | SEO Company Lahore | SEO Services" reads as spam to a human, which suppresses exactly the clicks you were trying to win.',
+        text: 'Avoid the old habit of stuffing every variation into the title. "Best SEO Lahore | SEO Company Lahore | SEO Services" reads as spam to a human, which suppresses exactly the clicks you were trying to win.',
+      },
+      {
+        type: 'p-link',
+        before: 'Google explains how it chooses the title shown in results, and why it sometimes rewrites yours, in its ',
+        href: 'https://developers.google.com/search/docs/appearance/title-link',
+        anchor: 'Search Central guidance on title links',
+        after: '. It is short and worth reading before you rewrite anything.',
       },
       { type: 'h2', text: 'If the problem is position' },
       {
@@ -1368,34 +1554,50 @@ export const posts = [
       { type: 'h2', text: 'If you only rank for your own name' },
       {
         type: 'p',
-        text: 'This is the most common pattern for small business sites and the most misdiagnosed. Branded impressions look like traffic in a dashboard, but they come from people who already knew you existed. The site is not winning new customers. It is confirming details for people who were already coming.',
+        text: 'This is the most common pattern for small business sites in Pakistan and the most misdiagnosed. Branded impressions look like traffic in a dashboard, but they come from people who already knew you existed. The site is not winning new customers. It is confirming details for people who were already coming.',
       },
       {
         type: 'p',
-        text: 'The fix is not optimisation, it is coverage. If you sell four things and have one page mentioning all four, you have nothing that can rank for any of them. Build a real page per service, each answering that specific query properly, and link them from your homepage and from your related work. Then the non-branded impressions have somewhere to land.',
+        text: 'The fix is not optimisation, it is coverage. If you sell four things and have one page mentioning all four, you have nothing that can rank for any of them. Build a real page per service, each answering that specific query properly, and link to them from your homepage and from related pages. Then the non-branded impressions have somewhere to land.',
+      },
+      { type: 'h2', text: 'When your impressions come from the wrong searches' },
+      {
+        type: 'p',
+        text: 'Open the Queries tab for a single page and read the list properly. You may find a clinic page in Lahore getting impressions for searches in other cities, or a service page showing up for job seekers and students rather than buyers. Those impressions will never turn into customers, however good your title is.',
+      },
+      {
+        type: 'p',
+        text: 'Also look at how people actually phrase things. Pakistani searchers often mix English with Roman Urdu, use local area names such as DHA, Gulberg or Johar Town, or add "near me" and "price". If those words appear in your query list but not on your page, the page is only half matching what your customers type.',
       },
       { type: 'h2', text: 'The other thing eating your clicks' },
       {
         type: 'p',
-        text: 'Search results pages increasingly answer the question directly, through featured snippets and AI-generated summaries. For genuinely informational queries, a share of impressions will never become clicks because the searcher got what they needed on the results page.',
+        text: 'Results pages increasingly answer the question directly, through featured snippets and AI-generated summaries. For genuinely informational queries, some impressions will never become clicks because the searcher got what they needed without leaving Google.',
       },
       {
         type: 'p',
         text: 'You cannot opt out of that, but you can respond to it. Structure content so your answer is the one being quoted: direct question-and-answer formatting, clear headings, valid structured data. And prioritise queries with commercial intent, where someone searching for a service in their city still has to click through to decide who to contact.',
       },
-      { type: 'h2', text: 'A realistic order to work in' },
+      { type: 'h2', text: 'How to fix high impressions and no clicks, in order' },
       {
         type: 'ul',
         items: [
-          'Fix titles and descriptions on your highest-impression pages first. Fastest change, and the results show within weeks.',
+          'Fix titles and descriptions on your highest-impression pages first. It is the fastest change, and the effect shows within weeks.',
           'Build the missing service pages, so non-branded queries have somewhere to land.',
           'Improve the pages sitting at positions five to fifteen, where small gains move you onto page one.',
-          'Then work on authority, which is slow and compounds.',
+          'Then work on authority, which is slow and compounds over time.',
         ],
       },
       {
         type: 'p',
-        text: 'Measure non-branded impressions specifically, by filtering out queries containing your business name. That single filtered number is the honest measure of whether strangers are finding you, and it is the one worth watching month to month.',
+        text: 'Measure non-branded impressions specifically, by filtering out queries that contain your business name. That single filtered number is the honest measure of whether strangers are finding you, and it is the one worth watching month to month.',
+      },
+      {
+        type: 'p-link',
+        before: 'If you run a business that serves one city or area, the same data also tells you whether your local work is landing. Our guide to ',
+        href: '/blog/local-seo-for-pakistani-businesses',
+        anchor: 'local SEO for small business in Pakistan',
+        after: ' covers the map results, which Search Console only partly shows.',
       },
       {
         type: 'p-link',
@@ -1404,27 +1606,39 @@ export const posts = [
         anchor: 'SEO services',
         after: ' start with exactly that audit: what is indexed, what is ranking for nothing, and which fixes are worth doing first.',
       },
+      {
+        type: 'p-link',
+        before: 'Seeing high impressions but no clicks in Search Console right now? ',
+        href: '/free-audit',
+        anchor: 'Get a free audit of your website',
+        after: ' and we will show you which of these problems you actually have.',
+      },
     ],
     faqs: [
       {
         question: 'What is a good click-through rate from search?',
         answer:
-          'It depends heavily on position and query type, so treat any single benchmark with suspicion. The useful comparison is against yourself: look at your own pages at similar positions and find the ones performing notably worse. Those are where a title rewrite will pay off fastest.',
+          'It depends heavily on position and query type, so treat any single benchmark with suspicion. The useful comparison is against yourself: look at your own pages at similar positions and find the ones performing notably worse. Those are the pages where a title and description rewrite will pay off fastest.',
       },
       {
         question: 'How long after changing a title will I see results?',
         answer:
-          'The page needs recrawling first, which typically takes days to a few weeks, and you can request indexing in Search Console to speed it up. After that, allow a few weeks of data before judging. Comparing a handful of days against the previous period will mostly show noise.',
+          'The page needs recrawling first, which typically takes days to a few weeks, and you can request indexing in Search Console to speed it up. After that, allow a few weeks of data before judging. Comparing a handful of days against the previous period will mostly show noise, not a real change.',
       },
       {
         question: 'Why does Google show a different title than the one I set?',
         answer:
-          'Google rewrites titles when it judges its own version a better match for the query, commonly when your title is truncated, keyword-stuffed, or does not reflect the page content. A clear, accurate, appropriately short title is far less likely to be overridden. If yours is being rewritten consistently, treat it as feedback.',
+          'Google rewrites titles when it judges its own version a better match for the query, commonly when yours is truncated, keyword-stuffed, or does not reflect the page content. A clear, accurate, appropriately short title is far less likely to be overridden. If yours is being rewritten consistently, treat that as useful feedback.',
       },
       {
         question: 'Are impressions without clicks bad for my rankings?',
         answer:
-          'A poor click-through rate is not a straightforward penalty, and the relationship is more complicated than the "CTR is a ranking factor" claim suggests. The practical reason to care is simpler. Impressions you are not converting into visits are free visibility going to waste, and that is worth fixing on its own terms.',
+          'A poor click-through rate is not a straightforward penalty, and the relationship is more complicated than the "CTR is a ranking factor" claim suggests. The practical reason to care is simpler. Impressions you are not turning into visits are free visibility going to waste, and that is worth fixing on its own terms.',
+      },
+      {
+        question: 'Why do I have high impressions but no clicks on a new website?',
+        answer:
+          'New pages often start ranking low for many loosely related searches while Google works out what they are about. That produces impressions at positions twenty, forty or lower, where nobody clicks. It is normal. Watch whether average position improves over the following months, and make sure each page is clearly about one specific topic.',
       },
     ],
   },
