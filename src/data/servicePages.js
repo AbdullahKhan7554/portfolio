@@ -708,9 +708,11 @@ export const servicePages = [
   // `caseStudies.slugs` and `reading` are empty — ServiceDetail hides both
   // blocks rather than borrowing unrelated work. No spend figures, ROAS or
   // lead counts are stated anywhere below.
+  // `sections` is optional long-form copy rendered by ServiceDetail only for
+  // entries that define it; this is currently the only one that does.
   {
     slug: 'meta-ads',
-    metaTitle: 'Meta Ads Agency in Lahore | Facebook & Instagram Ads | Avenix Studio',
+    metaTitle: 'Meta Ads Agency in Lahore | Avenix Studio',
     metaDescription:
       'Facebook and Instagram ad campaigns from Avenix Studio, Lahore. Targeting, creative testing and conversion tracking set up to bring in leads and sales.',
     keywords: [
@@ -728,7 +730,7 @@ export const servicePages = [
       'Social Media Advertising',
     ],
     eyebrow: 'Meta Ads',
-    h1: 'Meta Ads Agency in Lahore: Facebook & Instagram Ads',
+    h1: 'Meta Ads Agency in Lahore',
     intro:
       'Facebook and Instagram campaigns built to bring in leads and sales, not just reach. Targeting, creative, landing pages and tracking handled by one team.',
     lede: 'Meta ads are paid campaigns run on Facebook and Instagram through Meta Ads Manager. Avenix Studio plans, builds and manages these campaigns for businesses in Pakistan and internationally from Lahore. Because we also build websites, the tracking and the landing pages are set up properly, so every campaign is judged on the leads and sales it brings in.',
@@ -795,6 +797,147 @@ export const servicePages = [
       { label: 'Platforms', items: ['Facebook Ads', 'Instagram Ads', 'Meta Ads Manager'] },
       { label: 'Tracking', items: ['Meta Pixel', 'Conversions API', 'GA4'] },
       { label: 'Scope', items: ['Lead Campaigns', 'Retargeting', 'Landing Pages', 'Analytics'] },
+    ],
+    sections: [
+      {
+        heading: 'What a Meta ads campaign includes',
+        blocks: [
+          {
+            type: 'p',
+            text: 'A Meta ads campaign is more than an ad and a budget. Each one we run is built from the same parts, and leaving any of them out is usually why a campaign that looked fine in Ads Manager brought in nothing useful.',
+          },
+          {
+            type: 'ul',
+            items: [
+              'A single objective. Meta asks you to choose what the campaign is for, such as leads, sales, traffic or engagement, and it optimises delivery towards exactly that. We choose it based on what your business needs, not on what produces the cheapest clicks.',
+              'An offer worth responding to. A free consultation, a seasonal package, a clear price you already publish, or a reason to message today. Targeting cannot rescue an offer nobody wants.',
+              'Audiences. A mix of broad targeting, interest and location audiences, lookalikes based on your existing customers, and retargeting of people who already visited your site or engaged with your pages.',
+              'Placements. Facebook and Instagram feeds, Stories and Reels each need creative shaped for them. We decide which to use rather than leaving every placement on by default.',
+              'A destination. An instant form, a WhatsApp or Messenger chat, or a landing page, chosen by how your team actually follows up.',
+              'Tracking, so the platform learns from real results instead of clicks.',
+              'A testing plan, so budget moves towards what works on a schedule rather than on a hunch.',
+            ],
+          },
+        ],
+      },
+      // TODO(pricing): `policy.quotePricesAllowed` is false, so this section
+      // states no PKR figures for ad spend or management fees. If an indicative
+      // starting test budget or fee is approved, add it here. Do not estimate it.
+      {
+        heading: 'How Meta ads budgets work for Pakistani businesses',
+        blocks: [
+          {
+            type: 'p',
+            text: 'There are two separate costs. Ad spend is paid directly to Meta from your own ad account, using a payment method attached to it. Our management fee is quoted separately and fixed in writing before work starts. Keeping the two apart means you always see exactly what Meta charged and what you paid us.',
+          },
+          {
+            type: 'ul',
+            items: [
+              'Daily or lifetime budgets. A daily budget spends roughly the same amount each day. A lifetime budget spreads a fixed total across a set period, which suits a sale, an event or a Ramadan or Eid campaign with a clear end date.',
+              'A test budget first. We start with a modest budget across a few audiences and ads, read the results, and only then scale what is working. Spending heavily before you know what works is how budgets disappear.',
+              'Payment and currency. Ad spend is usually paid by debit or credit card enabled for international payments. The ad account’s currency is set when the account is created and is hard to change later, so it should be chosen deliberately.',
+              'Seasonality. Competition for attention rises around Ramadan, Eid, 11.11, Black Friday sales and wedding season, and costs can rise with it. We plan budgets around the dates that matter to your business.',
+              'What a result is worth. The right budget depends on what a lead or a sale is worth to you, not on a standard figure. We agree that value before anything launches, so every report can be judged against it.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Ad creative that earns attention',
+        blocks: [
+          {
+            type: 'p',
+            text: 'On Facebook and Instagram, the creative does most of the targeting. People scroll past anything that looks like an advert, so the first second of a video or the first glance at an image decides whether the rest of the ad is seen at all.',
+          },
+          {
+            type: 'ul',
+            items: [
+              'Real photos and short videos of your premises, team, products and work, which usually outperform polished stock imagery.',
+              'Vertical formats for Stories and Reels, and square or portrait formats for feeds.',
+              'Copy in the language your customers use, whether that is English, Urdu or Roman Urdu, tested rather than assumed.',
+              'Several versions tested against each other, changing one thing at a time, so we learn what made the difference.',
+              'Regular refreshes. Even a strong ad wears out once the same people have seen it many times.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Tracking with the Meta Pixel and Conversions API',
+        blocks: [
+          {
+            type: 'p',
+            text: 'Tracking is what lets Meta find more people like the ones who actually became customers. Without it, the platform optimises for whoever clicks most easily, which is rarely who you want.',
+          },
+          {
+            type: 'ul',
+            items: [
+              'Meta Pixel. A piece of code on your website that reports actions such as a form submission, a WhatsApp tap or a purchase back to your ad account.',
+              'Conversions API. Sends the same events from your server rather than the browser, so results are still recorded when browsers or ad blockers stop the Pixel.',
+              'Events Manager checks. We confirm every event fires once, with the right details, and that the Pixel and Conversions API are not double-counting the same action.',
+              'Domain verification and event setup in Business Manager, so your website is properly connected to your ad account.',
+              'GA4 alongside Meta, so you can compare what Meta reports with what your own analytics records.',
+            ],
+          },
+          {
+            type: 'p-link',
+            before: 'Meta documents how the Pixel, the Conversions API and Events Manager work in its official ',
+            href: 'https://www.facebook.com/business/help',
+            anchor: 'Meta Business Help Center',
+            after: ', which is worth bookmarking if you manage any part of your account yourself.',
+          },
+        ],
+      },
+      {
+        heading: 'Where your ads should send people',
+        blocks: [
+          {
+            type: 'p',
+            text: 'The best ad in the world fails if the next step is confusing or slow. For many Pakistani businesses, the most effective destination is a WhatsApp chat, because that is where customers already prefer to talk. For others, a focused landing page gives better tracking and a clearer offer.',
+          },
+          {
+            type: 'p-link',
+            before: 'If your enquiries already arrive on WhatsApp, read our guide to ',
+            href: '/blog/whatsapp-first-lead-capture-for-local-business',
+            anchor: 'WhatsApp lead generation for small business',
+            after: ' before launching click-to-WhatsApp campaigns. Replying quickly matters as much as the ad itself.',
+          },
+          {
+            type: 'p-link',
+            before: 'If the ad sends people to your website, page speed decides how much of the click you keep. Our post on ',
+            href: '/blog/why-your-business-website-needs-to-be-fast',
+            anchor: 'why website speed is important for business',
+            after: ' explains why a slow landing page wastes ad spend before anyone sees your offer.',
+          },
+        ],
+      },
+      {
+        heading: 'Reporting you can actually read',
+        blocks: [
+          {
+            type: 'p',
+            text: 'Reports should answer one question: is this campaign making the business money? We report on the numbers that answer it and leave out the ones that only look impressive.',
+          },
+          {
+            type: 'ul',
+            items: [
+              'Spend, leads or messages, and cost per result, read directly from your own ad account.',
+              'Sales, where they can be tracked through your website, your CRM or a simple shared sheet your team updates.',
+              'Which audiences and ads are working, which were cut, and why.',
+              'What we will test next, so every report ends with a plan rather than a summary.',
+              'Lead quality notes from your team, because a cheap lead that never answers the phone is not cheap.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Why work with a Meta ads agency in Lahore',
+        blocks: [
+          {
+            type: 'p',
+            text: 'We run campaigns from Lahore for businesses across Pakistan and abroad. Being local means we understand how customers here search, message and decide, which festivals and holidays shift demand, and how a WhatsApp-first sales process actually runs. Because we also build websites, the landing pages, tracking and ads are set up by one team, so nothing is lost between the agency and the developer.',
+          },
+        ],
+      },
     ],
     caseStudies: {
       note: '',

@@ -165,6 +165,57 @@ export function ServiceDetail({ slug }) {
         </RevealGroup>
       </Section>
 
+      {/* ---- Long-form sections (optional) ----------------------------------
+          Only rendered for entries that define `sections`, so every other
+          service page renders exactly as before. Block shapes mirror the blog's
+          ('p' | 'ul' | 'p-link'): every value is a plain string, nothing is
+          parsed as markup, and a p-link carries exactly one link. Each section
+          heading is an H2 under the page's single H1. */}
+      {page.sections?.length > 0 && (
+        <Section>
+          <div className="measure flex flex-col gap-12">
+            {page.sections.map((s) => (
+              <Reveal key={s.heading}>
+                <h2 className="font-display text-h3 text-text-strong">{s.heading}</h2>
+                {s.blocks.map((block, i) => {
+                  if (block.type === 'ul') {
+                    return (
+                      <ul
+                        key={i}
+                        className="mt-4 flex list-disc flex-col gap-2 pl-5 text-body text-text marker:text-accent"
+                      >
+                        {block.items.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    );
+                  }
+                  if (block.type === 'p-link') {
+                    return (
+                      <p key={i} className="mt-4 text-body text-text">
+                        {block.before}
+                        <Link
+                          href={block.href}
+                          className="text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent"
+                        >
+                          {block.anchor}
+                        </Link>
+                        {block.after}
+                      </p>
+                    );
+                  }
+                  return (
+                    <p key={i} className="mt-4 text-body text-text">
+                      {block.text}
+                    </p>
+                  );
+                })}
+              </Reveal>
+            ))}
+          </div>
+        </Section>
+      )}
+
       {/* ---- Related work ----------------------------------------------------
           Real case studies from src/content/caseStudies.js only. `note` is the
           honest framing for the two services with no published case study of
