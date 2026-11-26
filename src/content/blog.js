@@ -252,34 +252,79 @@ export const posts = [
   {
     slug: 'whatsapp-first-lead-capture-for-local-business',
     related: ['work/smile-heaven-dental', 'do-you-need-an-ai-chatbot'],
-    title: 'WhatsApp-first lead capture: meet customers where they already are',
+    title: 'WhatsApp Lead Generation for Small Business',
     excerpt:
-      'For most local businesses, the highest-converting "contact form" is a one-tap WhatsApp message. Here is how to design for the way clients actually reach out.',
+      'WhatsApp lead generation for small business works when one tap starts the chat. Set up buttons, prefilled messages and replies that turn chats into sales.',
     category: 'Conversion',
     date: '2026-05-22',
-    readingTime: '3 min read',
+    readingTime: '7 min read',
     cover: {
       src: '/blogs/whatsapp-first-lead-capture-for-local-business.webp',
-      alt: 'A phone standing on a dark stone ledge showing a contact screen with a green "chat on WhatsApp" button, beside a WhatsApp logo and a chat bubble in which a customer asks to discuss their project',
+      alt: 'A phone standing on a dark stone ledge showing a contact screen with a green "chat on WhatsApp" button, beside a WhatsApp logo and a chat bubble in which a customer asks to discuss their project, illustrating WhatsApp lead generation for small business',
     },
     content: [
       {
         type: 'p',
-        text: 'Long contact forms assume a patient visitor at a desk. Real customers are on their phone, between tasks, deciding in seconds whether to reach out at all. The lower the friction, the more leads you capture, and almost nothing is lower-friction than a prefilled WhatsApp message.',
+        text: 'WhatsApp lead generation for small business works because it removes almost every step between interest and conversation. Instead of filling in a form and waiting, a customer taps one button, sees a message already written for them, and presses send. For most local businesses in Pakistan, that single tap brings in more enquiries than any contact form.',
       },
-      { type: 'h2', text: 'Why it works' },
+      {
+        type: 'p',
+        text: 'This guide covers why it works, how to set it up properly on your website and profiles, how to reply so chats turn into bookings, and the mistakes that quietly waste the leads you do get. It is written for owners of clinics, salons, gyms, shops, schools and service businesses who want more enquiries from the traffic they already have.',
+      },
+      { type: 'h2', text: 'Why WhatsApp lead generation works for small businesses' },
+      {
+        type: 'p',
+        text: 'Long contact forms assume a patient visitor at a desk. Real customers are on their phone, between tasks, deciding in seconds whether to reach out at all. The lower the friction, the more leads you capture, and almost nothing is lower friction than a prefilled WhatsApp message.',
+      },
       {
         type: 'ul',
         items: [
-          'It is the channel people already use every day. No new app, no account.',
-          'A prefilled message removes the blank-page hesitation.',
-          'Conversations feel personal, which builds trust faster than a form receipt.',
+          'It is the channel people already use every day. No new app, no account, no password.',
+          'A prefilled message removes the blank-page hesitation of not knowing what to write.',
+          'Conversations feel personal, which builds trust faster than an automated form receipt.',
+          'You get a phone number you can reply to, not an email address that may never be checked.',
         ],
       },
-      { type: 'h2', text: 'Designing it well' },
       {
         type: 'p',
-        text: 'A good implementation keeps a contact form for the people who prefer it, then makes WhatsApp the obvious call to action and repeats it: in the hero, after the proof, and in a persistent button on mobile. Every tap is tracked, so you know which sections actually start conversations.',
+        text: 'In Pakistan this matters even more. Many customers would rather send a WhatsApp message, often in a mix of English and Roman Urdu, than write a formal email or wait on hold. Meeting them on the channel they already prefer is not a trick. It is simply less work for them.',
+      },
+      { type: 'h2', text: 'Setting up WhatsApp for lead generation' },
+      {
+        type: 'p',
+        text: 'Before you add a single button, get the basics right on the account itself. A customer who taps through to an empty profile has a reason to hesitate.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Use the WhatsApp Business app, not a personal account. It is free and adds a business profile, a catalogue, labels, quick replies, and greeting and away messages.',
+          'Fill in the profile completely: business name exactly as it appears on Google, address, hours, a short description and a link to your website.',
+          'Use a dedicated business number that will not change when a staff member leaves.',
+          'Set an away message for outside working hours that says when you will reply. Silence after hours reads as being ignored.',
+          'Add your main services or products to the catalogue, so a customer can see what you offer without asking.',
+        ],
+      },
+      {
+        type: 'p-link',
+        before: 'Meta explains the difference between the free Business app and the paid Business Platform on the official ',
+        href: 'https://business.whatsapp.com/',
+        anchor: 'WhatsApp Business site',
+        after: '. Most small businesses should start with the app and only move to the platform when volume demands it.',
+      },
+      { type: 'h2', text: 'Designing the WhatsApp button on your website' },
+      {
+        type: 'p',
+        text: 'A good implementation keeps a contact form for the people who prefer it, then makes WhatsApp the obvious call to action and repeats it: in the hero, after the proof, and in a persistent button on mobile. The button should open a chat with a short message already filled in, using a standard wa.me link.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Prefill a message that helps you, such as "Hi, I would like to book a consultation" or "Hi, I am asking about the price of the deep-clean service". It tells you what they want before you reply.',
+          'Use a different prefilled message on each key page, so you can see whether enquiries came from the pricing page, a service page or an ad.',
+          'Track every tap as an event in your analytics, so you know which sections actually start conversations.',
+          'Keep the floating button small enough that it never covers content or the main call to action.',
+          'Write the number in international format in the link, starting with 92 and dropping the leading zero, so it works for customers abroad as well.',
+        ],
       },
       {
         type: 'p-link',
@@ -288,57 +333,154 @@ export const posts = [
         anchor: 'XTREME Fitness gym website',
         after: ' we built, which pairs a lead form with a WhatsApp button that stays on screen.',
       },
+      { type: 'h2', text: 'Other places to start WhatsApp conversations' },
       {
         type: 'p',
-        text: 'It is a small detail. It is also, repeatedly, the single change that moves a local business site from "nice" to "booked".',
+        text: 'Your website is one entry point. The best results come from putting the same one-tap route everywhere a customer might find you.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Your Google Business Profile, so people who find you on Maps can message you directly.',
+          'Instagram and Facebook bios, and the contact button on your business page.',
+          'Click-to-WhatsApp ads on Facebook and Instagram, which open a chat instead of a landing page.',
+          'Printed material such as flyers, menus, receipts and shop signage, using a QR code that opens the chat.',
+          'Your email signature and invoices, so existing customers can rebook in one tap.',
+        ],
+      },
+      { type: 'h2', text: 'Replying so chats turn into customers' },
+      {
+        type: 'p',
+        text: 'Getting the message is half the job. Most WhatsApp leads are lost after they arrive, not before, because nobody replied quickly or the reply did not move things forward.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Reply fast during working hours. Someone who messaged three businesses will often book with whichever answered first.',
+          'Use quick replies for your common answers, such as hours, location and how booking works, then personalise the rest.',
+          'End every reply with a clear next step: a time slot, a price range you have already published, or a request for one detail.',
+          'Label chats as new lead, quoted, booked or follow up, so nothing is forgotten in a busy week.',
+          'Follow up once on quotes with no reply after a few days. A polite reminder often recovers the booking.',
+        ],
+      },
+      {
+        type: 'p-link',
+        before: 'If the same questions arrive all day, an assistant can answer them on WhatsApp and pass the chat to your team. Before building one, read our guide on whether ',
+        href: '/blog/do-you-need-an-ai-chatbot',
+        anchor: 'your business needs an AI chatbot',
+        after: ' at all.',
+      },
+      { type: 'h2', text: 'Common WhatsApp lead generation mistakes' },
+      {
+        type: 'ul',
+        items: [
+          'Removing the contact form completely. Some customers, especially corporate clients, still prefer email.',
+          'Using a staff member’s personal number. When they leave, your enquiry history leaves with them.',
+          'Sending bulk promotional messages to people who never opted in. It gets numbers reported and blocked, and it damages trust.',
+          'Not measuring anything. Without tracking, you cannot tell whether the button, the ad or the Google profile brought the lead.',
+          'Asking for too much in the first reply. Answer the question first, then ask for details.',
+        ],
+      },
+      { type: 'h2', text: 'The short version' },
+      {
+        type: 'p',
+        text: 'WhatsApp lead generation for small business is a small detail with an outsized effect. Make it one tap, prefill the message, put the button where people decide, and reply quickly. It is, repeatedly, the single change that moves a local business site from "nice" to "booked".',
+      },
+      {
+        type: 'p-link',
+        before: 'Designing the route from visitor to conversation is part of how we build every site, which is why it sits inside our ',
+        href: '/services/web-development',
+        anchor: 'web development service',
+        after: ' rather than being an add-on.',
+      },
+      {
+        type: 'p-link',
+        before: 'Want to see where your site is losing enquiries? ',
+        href: '/free-audit',
+        anchor: 'Request a free website audit',
+        after: ' and we will review your contact routes, WhatsApp setup included.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is WhatsApp Business free for small businesses?',
+        answer:
+          'Yes, the WhatsApp Business app is free to download and use, and it includes a business profile, catalogue, labels, quick replies and away messages. The WhatsApp Business Platform, which is used for larger-scale automation and integrations, is a paid service from Meta. For WhatsApp lead generation for small business, the free app is usually enough to start.',
+      },
+      {
+        question: 'How do I add a WhatsApp button to my website?',
+        answer:
+          'Create a link in the format wa.me followed by your number in international format, without the plus sign or spaces, and optionally a prefilled message. Attach that link to a button in your page header, after key sections, and as a floating button on mobile. Track taps in your analytics so you know which button works.',
+      },
+      {
+        question: 'Should I replace my contact form with WhatsApp?',
+        answer:
+          'No. Keep the form and make WhatsApp the main, most visible option. Some customers, particularly businesses and people contacting you from work, still prefer email or a form. Offering both costs nothing, and you capture people who would have left if their preferred option was missing. Just make sure both routes are answered promptly.',
+      },
+      {
+        question: 'Can I send promotional messages to customers on WhatsApp?',
+        answer:
+          'Only to people who have agreed to hear from you. Sending bulk messages to numbers that did not opt in breaks WhatsApp’s policies and often gets your number reported or restricted. Use broadcast lists for customers who have saved your number, and keep messages useful and occasional rather than daily sales pushes.',
+      },
+      {
+        question: 'How quickly should I reply to WhatsApp enquiries?',
+        answer:
+          'As quickly as you reasonably can during working hours, because people often message several businesses at once and book with the first useful reply. Outside hours, an away message saying when you will respond sets expectations. Quick replies for common questions make fast responses realistic even when you are busy with customers.',
       },
     ],
   },
   {
     slug: 'mobile-app-development-cost-pakistan',
     related: ['react-native-vs-flutter', 'how-to-hire-a-software-house-in-lahore'],
-    title: 'How much does it cost to build a mobile app in Pakistan?',
+    title: 'Mobile App Development Cost in Pakistan 2026',
     excerpt:
-      'App quotes in Pakistan vary hugely because "an app" covers everything from a catalogue to a payment platform. What drives the cost, and how to read a quote.',
+      'Mobile app development cost in Pakistan depends on scope, not a price list. See what drives a quote, the four app tiers, and the hidden costs to ask about.',
     category: 'Mobile Apps',
     date: '2026-09-18',
-    readingTime: '5 min read',
+    readingTime: '8 min read',
     service: 'mobile-app-development',
     content: [
       {
         type: 'p',
-        text: 'There is no single price for a mobile app in Pakistan, and any studio quoting one before asking what the app does is guessing. Scope drives almost all of it: how many screens, how much custom backend, whether payments are involved, how much has to be maintained after launch. That is why two quotes for "an app" can differ by a factor of ten and both be honest.',
+        text: 'Mobile app development cost in Pakistan depends almost entirely on scope: how many screens, how much custom backend, whether payments are involved, and how much has to be maintained after launch. There is no single price for "an app", and any studio quoting one before asking what the app does is guessing. That is why two quotes for the same idea can differ by a factor of ten and both be honest.',
       },
       {
         type: 'p',
-        text: 'This post explains what actually moves the number so you can read a quote properly, ask better questions, and tell a serious proposal from a cheap one that will cost more later. We deliberately do not publish a price list, for reasons covered at the end.',
+        text: 'This guide explains what actually moves the number, so you can read a quote in PKR or USD properly, ask better questions, and tell a serious proposal from a cheap one that will cost more later. It is written for business owners in Lahore and across Pakistan who are about to commission their first app or replace one that has not worked out.',
       },
-      { type: 'h2', text: 'The five things that actually drive app cost' },
+      // TODO(pricing): this post deliberately states no PKR figures because
+      // `policy.quotePricesAllowed` is false. If indicative PKR ranges per tier
+      // are approved, add them to the tier list below. Do not estimate them.
+      { type: 'h2', text: 'What drives mobile app development cost in Pakistan' },
+      {
+        type: 'p',
+        text: 'Five things account for nearly all of the difference between a small quote and a large one.',
+      },
       {
         type: 'ul',
         items: [
-          'Number of distinct screens and flows. A catalogue app with eight screens and a contact button is a different build from one with onboarding, search, a cart, a profile and an order history. Screens are the crudest proxy for scope, but it is the one most clients can estimate themselves.',
-          'Whether it needs a custom backend. An app that only displays content can often run on a hosted service. An app with accounts, roles, orders or inventory needs a real API and database designed for it, frequently a larger job than the app itself.',
+          'Number of distinct screens and flows. A catalogue app with eight screens and a contact button is a different build from one with onboarding, search, a cart, a profile and an order history. Screens are a rough measure of scope, but it is the one most clients can estimate themselves.',
+          'Whether it needs a custom backend. An app that only displays content can often run on a hosted service. An app with accounts, roles, orders or inventory needs a real API and database designed for it, which is frequently a larger job than the app itself.',
           'Payments and third-party integrations. Every integration is a separate contract with someone else’s system: their rules, their edge cases, their failure modes. Payments in particular bring compliance, testing and error handling that a display-only app never touches.',
-          'One platform or two. Cross-platform frameworks mean one codebase serves iOS and Android, so the second platform is nowhere near a second full build. It is not free either. Store review, device testing and platform-specific behaviour still cost real time.',
-          'What happens after launch. An app is not a one-off purchase. Operating systems update annually, stores change their requirements, libraries need patching. A quote with no maintenance line is not cheaper. It is incomplete.',
+          'One platform or two. Cross-platform frameworks mean one codebase serves iOS and Android, so the second platform is nowhere near a second full build. It is not free either. Store review, device testing and platform-specific behaviour still take real time.',
+          'What happens after launch. An app is not a one-off purchase. Operating systems update every year, stores change their requirements, and libraries need patching. A quote with no maintenance line is not cheaper. It is incomplete.',
         ],
       },
-      { type: 'h2', text: 'Four scope tiers, described instead of priced' },
+      { type: 'h2', text: 'Four app tiers, described instead of priced' },
       {
         type: 'p',
-        text: 'Most projects land in one of four bands. Thinking in bands is more useful than thinking in figures, because it tells you which conversation you are actually in.',
+        text: 'When it comes to mobile app development cost in Pakistan, most projects land in one of four bands. Thinking in bands is more useful than thinking in figures, because it tells you which conversation you are actually in.',
       },
       {
         type: 'ul',
         items: [
-          'Informational app. Content, a directory or a catalogue, no accounts. Closest to a mobile website in a native shell. The cheapest real option, and often the wrong one — if this is all you need, a fast mobile site may serve you better for less.',
-          'Transactional app. Accounts, a database, some workflow: bookings, orders, memberships, submissions. This is where most small-business apps genuinely sit, and where a custom backend becomes unavoidable.',
-          'Platform app. Multiple user roles, payments, notifications, an admin panel, possibly a web counterpart sharing the same API. Cost steps up sharply here because you are commissioning a system, not a screen set.',
-          'Ongoing product. A team, a roadmap, continuous releases. Priced as sustained capacity, because that is what you are actually buying.',
+          'Informational app. Content, a directory or a catalogue, no accounts. Closest to a mobile website in a native shell. The cheapest real option, and often the wrong one: if this is all you need, a fast mobile site may serve you better for less.',
+          'Transactional app. Accounts, a database and some workflow, such as bookings, orders, memberships or submissions. This is where most small-business apps genuinely sit, and where a custom backend becomes unavoidable.',
+          'Platform app. Multiple user roles, payments, notifications, an admin panel, and possibly a web version sharing the same API. Cost steps up sharply here because you are commissioning a system, not a set of screens.',
+          'Ongoing product. A team, a roadmap and continuous releases. Priced as sustained capacity, because that is what you are actually buying.',
         ],
       },
-      { type: 'h2', text: 'Why two quotes for the same brief differ so much' },
+      { type: 'h2', text: 'Why two app quotes for the same brief differ so much' },
       {
         type: 'p',
         text: 'When quotes diverge wildly, it is rarely because one studio is greedy. Usually they have read the brief differently, and the gap tells you what each has assumed.',
@@ -346,150 +488,209 @@ export const posts = [
       {
         type: 'ul',
         items: [
-          'Design included or not. A quote assuming you supply finished designs is smaller than one that includes designing the app. Both are valid; only one matches what you have.',
+          'Design included or not. A quote assuming you supply finished designs is smaller than one that includes designing the app. Both are valid, but only one matches what you have.',
           'Backend included or not. The single most common reason a quote looks suspiciously low. Ask directly whether the API and database are in scope.',
           'Testing depth. Testing on two real devices is not testing on twenty. Neither is wrong, but they are not the same product.',
-          'Store submission. Preparing listing assets, writing metadata and surviving review is genuine work. Some quotes include it; many do not mention it until afterwards.',
+          'Store submission. Preparing listing assets, writing store descriptions and getting through review is genuine work. Some quotes include it, and many do not mention it until afterwards.',
           'Revisions. Structured rounds at agreed milestones cost less than open-ended changes, because open-ended changes have no end.',
+        ],
+      },
+      { type: 'h2', text: 'Pakistan-specific factors that change the quote' },
+      {
+        type: 'p',
+        text: 'Some cost drivers are particular to building and launching an app for the Pakistani market. They rarely appear in international guides, and they are worth raising before you sign.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Currency. Some studios quote in USD, others in PKR. A USD quote moves with the exchange rate between signing and the final payment, so agree which currency each milestone is paid in.',
+          'Tax. Software services are subject to provincial sales tax, collected in Punjab by the Punjab Revenue Authority. Ask whether a quote includes it, because two otherwise identical quotes can differ on this alone.',
+          'Local payments. If customers will pay inside the app, each method, such as JazzCash, Easypaisa, a bank card gateway or cash on delivery, is its own integration with its own testing.',
+          'Urdu support. An interface that has to work in Urdu as well as English needs right-to-left layouts, tested fonts and translated content. It is very doable, but it is extra design and testing work.',
+          'Device range. Many of your users will be on older or budget Android phones. Testing on those devices, not just on recent flagships, is part of doing the job properly.',
         ],
       },
       { type: 'h2', text: 'The costs people forget to budget for' },
       {
         type: 'ul',
         items: [
-          'Developer accounts. Apple and Google both charge to publish, one annually. Small, but it surprises people.',
+          'Developer accounts. Apple and Google both charge to publish, and Apple’s fee renews every year. Small, but it surprises people.',
           'Backend hosting and database. Ongoing, and the bill grows with usage.',
-          'Third-party services. Payment processing, SMS, push notifications and mapping all bill per use.',
+          'Third-party services. Payment processing, SMS, push notifications and maps all bill per use.',
           'Maintenance. Budget for it deliberately, or discover it when an OS update breaks something.',
           'Content. Someone has to write the copy and produce the images. It is almost always the client, and it is almost always the thing that delays launch.',
         ],
       },
-      { type: 'h2', text: 'How to get a quote you can actually trust' },
+      {
+        type: 'p-link',
+        before: 'Apple lists its current membership options and fees on the ',
+        href: 'https://developer.apple.com/programs/',
+        anchor: 'Apple Developer Program page',
+        after: '. Check it, and the Google Play Console sign-up, when you budget, because fees can change.',
+      },
+      { type: 'h2', text: 'Does React Native or Flutter change the cost?' },
+      {
+        type: 'p-link',
+        before: 'Less than most people expect. Both build iOS and Android from one codebase, and the build price follows scope far more than framework. The choice matters more for who can maintain the app in two years. Our comparison of ',
+        href: '/blog/react-native-vs-flutter',
+        anchor: 'React Native vs Flutter',
+        after: ' covers when each one is the better fit.',
+      },
+      { type: 'h2', text: 'How to get an app development quote you can trust' },
       {
         type: 'p',
-        text: 'Write down the three things the app must let a user do. Not ten — three. Then ask each studio to quote that, listing explicitly what is in and out of scope, what the maintenance arrangement is, and who owns the code and the store accounts at the end. A studio that responds with questions before a number is a better sign than one that responds with a number immediately.',
+        text: 'Write down the three things the app must let a user do. Not ten, three. Then ask each studio to quote that, listing explicitly what is in and out of scope, what the maintenance arrangement is, and who owns the code and the store accounts at the end.',
       },
       {
         type: 'p',
-        text: 'Be wary of a quote that is dramatically below the others. It usually means the backend is excluded, the testing is nominal, or the relationship ends at handover. An app nobody can maintain costs you money every year it exists.',
+        text: 'A studio that responds with questions before a number is a better sign than one that responds with a number immediately. Be wary of a quote that is dramatically below the others. It usually means the backend is excluded, the testing is nominal, or the relationship ends at handover. An app nobody can maintain costs you money every year it exists.',
+      },
+      {
+        type: 'p',
+        text: 'Finally, ask how the payments are staged. A sensible schedule ties each payment to something you can see working, such as approved designs, a test build on your phone, and store approval. That protects both sides far better than a large advance.',
       },
       { type: 'h2', text: 'Why we do not publish an app price list' },
       {
         type: 'p',
-        text: 'A published figure would be either meaninglessly wide or quietly wrong for your project, and it would push the conversation toward hitting a number instead of scoping the right build. We quote per project after understanding what the app has to do, and the figure is fixed in writing before work starts — it does not move unless the scope does.',
+        text: 'Any published figure for mobile app development cost in Pakistan would be either meaninglessly wide or quietly wrong for your project, and it would push the conversation toward hitting a number instead of scoping the right build. We quote per project after understanding what the app has to do, and the figure is fixed in writing before work starts. It does not move unless the scope does.',
       },
       {
         type: 'p-link',
-        before: 'If you are weighing up a build and want the scope pinned down before anyone talks money, our ',
+        before: 'If you want the scope pinned down before anyone talks money, our ',
         href: '/services/mobile-app-development',
         anchor: 'mobile app development service',
-        after: ' page sets out how we take a project from a defined version one through to a store listing, and which framework we would recommend for which situation.',
+        after: ' page sets out how we take a project from a defined first version through to a store listing, and which framework we would recommend for which situation.',
+      },
+      {
+        type: 'p-link',
+        before: 'Have an app idea and want a scoped, written quote? ',
+        href: '/contact',
+        anchor: 'Tell us what the app needs to do',
+        after: ' and we will come back with questions first, then a fixed number.',
       },
     ],
     faqs: [
       {
         question: 'Is it cheaper to build an app in Pakistan than abroad?',
         answer:
-          'Generally yes — rates in Pakistan are lower than in North America, Western Europe or Australia, which is why many international clients build here. But rate is only half the equation. A cheaper team that needs twice the hours, or that delivers something needing a rebuild, is not cheaper. Compare total delivered cost and what happens after launch, not the hourly figure.',
+          'Generally yes. Rates in Pakistan are lower than in North America, Western Europe or Australia, which is why many international clients build here. But rate is only half of it. A cheaper team that needs twice the hours, or delivers something needing a rebuild, is not cheaper. Compare total delivered cost, not the hourly figure.',
       },
       {
         question: 'Does building for both iOS and Android double the cost?',
         answer:
-          'No. With a cross-platform framework such as React Native or Flutter, a single codebase serves both, so the second platform adds a fraction of the cost, not a multiple of it. That fraction is not zero. Device testing, store review and platform-specific behaviour all take time. But doubling is the wrong mental model unless you are commissioning two separate native builds.',
+          'No. With a cross-platform framework such as React Native or Flutter, one codebase serves both, so the second platform adds a fraction of the cost, not a multiple. That fraction is not zero, because device testing, store review and platform-specific behaviour take time. Doubling only applies if you commission two separate native builds.',
       },
       {
         question: 'Should I build an app or a mobile website first?',
         answer:
-          'If what you need is for people to find you, read about you and get in touch, a fast mobile website is almost always the better first investment. It is cheaper, it appears in search results, and nobody has to install anything. An app earns its cost when you need repeat usage, offline access, push notifications or device features. In other words, when people come back regularly.',
+          'If you need people to find you, read about you and get in touch, a fast mobile website is almost always the better first investment. It is cheaper, appears in search results, and nobody has to install anything. An app earns its cost when you need repeat usage, offline access, push notifications or device features.',
       },
       {
         question: 'What ongoing costs should I expect after the app launches?',
         answer:
-          'Plan for four: developer account fees for Apple and Google, backend hosting and database, any per-use third-party services such as payments or SMS, and maintenance to keep the app working as operating systems and store requirements change. Maintenance is the one most often left out of a budget and the one most likely to matter.',
+          'Plan for four: developer account fees for Apple and Google, backend hosting and database, per-use third-party services such as payments or SMS, and maintenance to keep the app working as operating systems and store rules change. Maintenance is the cost most often left out of a budget and the one most likely to matter.',
       },
       {
         question: 'Do I own the app and the source code?',
         answer:
-          'You should, and you should confirm it in writing before starting. At Avenix Studio you own the code, the content and the accounts, and the store listings are registered in your name. If a studio will not commit to that, you are renting your own product.',
+          'You should, and you should confirm it in writing before starting. At Avenix Studio you own the code, the content and the accounts, and the store listings are registered in your name. If a studio will not commit to that in the contract, you are effectively renting your own product from them.',
       },
     ],
   },
   {
     slug: 'react-native-vs-flutter',
     related: ['mobile-app-development-cost-pakistan'],
-    title: 'React Native vs Flutter: which should you choose in 2026?',
+    title: 'React Native vs Flutter: Which Is Better?',
     excerpt:
-      'Both ship one codebase to iOS and Android and both are production-ready. The decision comes down to your existing stack and who maintains the app afterwards.',
+      'React Native vs Flutter, which is better for your business app? Neither wins outright. See the four questions that settle it and when each is the right call.',
     category: 'Mobile Apps',
     date: '2026-09-18',
-    readingTime: '5 min read',
+    readingTime: '8 min read',
     service: 'mobile-app-development',
     content: [
       {
         type: 'p',
-        text: 'Choose React Native if your team or codebase is already JavaScript, or if you want to share logic with a React or Next.js web app. Choose Flutter if the interface is highly custom and has to look pixel-identical on both platforms, or if you want the most consistent rendering across older devices.',
+        text: 'React Native vs Flutter, which is better? Choose React Native if your team or codebase already uses JavaScript, or if you want to share logic with a React or Next.js web app. Choose Flutter if the interface is highly custom and must look identical on both platforms, or if you want the most consistent rendering across older devices.',
       },
       {
         type: 'p',
-        text: 'Both are mature, both are used by large companies in production, and for most business apps either will work. Anyone telling you one is objectively dead or objectively superior is arguing about tools, not about your project. What follows is the honest comparison, and the small number of cases where the decision is genuinely clear-cut.',
+        text: 'Both are mature, both run large production apps, and for most business apps either will work. Anyone telling you one is dead or objectively superior is arguing about tools, not about your project. What follows is an honest comparison for Pakistani business owners and product teams, and the small number of cases where the decision is genuinely clear-cut.',
       },
-      { type: 'h2', text: 'What they actually are' },
+      { type: 'h2', text: 'What React Native and Flutter actually are' },
       {
         type: 'p',
-        text: 'React Native is Meta’s framework. You write JavaScript or TypeScript using React, and it renders real native platform components. Flutter is Google’s framework. You write Dart, and it paints every pixel itself with its own rendering engine instead of delegating to native controls.',
+        text: 'React Native is Meta’s framework. You write JavaScript or TypeScript using React, and it renders real native platform components. Flutter is Google’s framework. You write Dart, and it draws every pixel itself with its own rendering engine instead of handing off to native controls.',
       },
       {
         type: 'p',
         text: 'That single architectural difference explains almost every trade-off between them. React Native inherits the platform’s look and behaviour by default. Flutter inherits nothing and controls everything.',
       },
-      { type: 'h2', text: 'Where React Native wins' },
+      {
+        type: 'p-link',
+        before: 'If you want to go to the source, the official ',
+        href: 'https://reactnative.dev/docs/getting-started',
+        anchor: 'React Native documentation',
+        after: ' explains how it maps React components onto native ones.',
+      },
+      {
+        type: 'p-link',
+        before: 'The ',
+        href: 'https://docs.flutter.dev/',
+        anchor: 'Flutter documentation from Google',
+        after: ' does the same for its widget and rendering model.',
+      },
+      { type: 'h2', text: 'Where React Native is better' },
       {
         type: 'ul',
         items: [
-          'You already have JavaScript or React in the business. Shared language, shared tooling, shared mental model, and developers who can move between the web app and the mobile app. This is by far the most common deciding factor.',
-          'You want to share real code with a web product. Validation rules, API clients, formatting and business logic live in one place instead of being written twice, once in Dart.',
-          'Hiring. There are simply more JavaScript developers than Dart developers, in Pakistan and everywhere else. That matters for the day we are no longer the ones maintaining it.',
-          'The app should feel like the platform. Because it uses native components, standard controls behave the way users expect on each OS without extra work.',
+          'You already have JavaScript or React in the business. Shared language, shared tooling, and developers who can move between the web app and the mobile app. This is by far the most common deciding factor.',
+          'You want to share real code with a web product. Validation rules, API clients, formatting and business logic live in one place instead of being written twice, once of them in Dart.',
+          'Hiring. There are more JavaScript developers than Dart developers, in Pakistan and everywhere else. That matters on the day the original studio is no longer the one maintaining your app.',
+          'The app should feel like the platform. Because it uses native components, standard controls behave the way users expect on each operating system without extra work.',
         ],
       },
-      { type: 'h2', text: 'Where Flutter wins' },
+      { type: 'h2', text: 'Where Flutter is better' },
       {
         type: 'ul',
         items: [
-          'The design is heavily custom. If the brief is an interface that looks like nothing else and must be identical on both platforms, Flutter’s own rendering stops being a quirk and starts being the reason to pick it.',
+          'The design is heavily custom. If the brief is an interface that looks like nothing else and must be identical on both platforms, Flutter’s own rendering stops being a quirk and becomes the reason to pick it.',
           'Animation-heavy interfaces. Rich, continuous motion tends to be smoother to build and to run, because the framework controls the whole rendering pipeline.',
-          'Consistency on older devices. Painting its own widgets means fewer surprises from platform version differences. That matters in markets where a wide spread of older Android handsets is normal.',
-          'You want one toolkit for more surfaces. Flutter also targets desktop and embedded, which occasionally matters.',
+          'Consistency on older devices. Drawing its own widgets means fewer surprises from differences between Android versions. That matters in Pakistan, where a wide spread of older and budget Android handsets is normal.',
+          'One toolkit for more surfaces. Flutter also targets desktop and embedded devices, which occasionally matters.',
         ],
       },
       { type: 'h2', text: 'The differences that are usually overstated' },
       {
         type: 'ul',
         items: [
-          'Performance. For the overwhelming majority of business apps, meaning lists, forms, media and navigation, both are fast enough that users cannot tell. Performance problems in real apps are almost always caused by unoptimised images, chatty network calls and bad list rendering, not by the framework.',
-          'App size. Flutter binaries have historically been larger, but the gap is smaller than it was and rarely decides anything.',
+          'Performance. For most business apps, meaning lists, forms, media and navigation, both are fast enough that users cannot tell. Slowness in real apps is almost always caused by unoptimised images, chatty network calls and badly built lists, not by the framework.',
+          'App size. Flutter apps have historically been larger to download, but the gap is smaller than it was and rarely decides anything.',
           'Maturity. Both have been production-ready for years. This argument is out of date.',
-          'Which is more popular. They are both large, well-funded ecosystems. Neither is going away on a timeline that should affect your decision.',
+          'Popularity. Both are large, well-funded ecosystems. Neither is going away on a timeline that should affect your decision.',
         ],
       },
       { type: 'h2', text: 'Ecosystem, libraries and the long tail' },
       {
         type: 'p',
-        text: 'Both frameworks cover the common requirements well: navigation, storage, camera, maps, push notifications, payments. The difference shows up at the edges, and the edge you hit depends on what you are integrating.',
+        text: 'Both frameworks cover the common requirements well: navigation, storage, camera, maps, push notifications and payments. The difference shows up at the edges, and which edge you hit depends on what you are integrating.',
       },
       {
         type: 'p',
-        text: 'React Native draws on the npm ecosystem, which is enormous. If you need to talk to an obscure third-party service, the odds that a JavaScript client already exists are high. The trade-off is variance in quality: npm contains both excellent, actively maintained packages and abandoned ones that still appear in search results. Vetting dependencies is real work.',
+        text: 'React Native draws on the npm ecosystem, which is enormous. If you need to connect to an obscure third-party service, there is a good chance a JavaScript client already exists. The trade-off is uneven quality: npm holds both excellent, well-maintained packages and abandoned ones that still turn up in search results. Vetting dependencies is real work.',
       },
       {
         type: 'p',
-        text: 'Flutter’s package ecosystem is smaller but noticeably more curated, and a larger share of the critical packages are maintained by Google or by the core community. You are less likely to find a ready-made client for something niche, and more likely to trust the one you do find. Neither situation is strictly better; they fail in different directions.',
+        text: 'Flutter’s package ecosystem is smaller but more curated, and more of the critical packages are maintained by Google or the core community. You are less likely to find a ready-made client for something niche, and more likely to trust the one you do find. Neither is strictly better. They fail in different directions.',
       },
       {
         type: 'p',
-        text: 'One practical note for either choice: every native dependency you add is a thing that can break when the platforms release their annual updates. A build with forty dependencies is worse than twice the maintenance of one with twenty, because they interact. Keeping the dependency list short is one of the few decisions that pays back every year.',
+        text: 'For apps built for Pakistan, check early whether the local services you need, such as a JazzCash or Easypaisa payment flow or an SMS provider, have a maintained package for your chosen framework. If not, budget for building that connection yourself.',
       },
-      { type: 'h2', text: 'The questions that actually decide it' },
+      {
+        type: 'p',
+        text: 'One note for either choice: every native dependency you add can break when the platforms release their annual updates. A build with forty dependencies is more than twice the maintenance of one with twenty, because they interact. Keeping the list short pays back every year.',
+      },
+      { type: 'h2', text: 'React Native vs Flutter: the questions that decide it' },
       {
         type: 'p',
         text: 'Skip the feature comparison tables. Four questions settle it in practice.',
@@ -498,10 +699,22 @@ export const posts = [
         type: 'ul',
         items: [
           'What does your existing codebase use? If there is React or Next.js in the business, React Native starts ahead and the burden of proof is on Flutter.',
-          'Who maintains this in two years? If that is an in-house team, pick the language they can actually hire for and already know.',
+          'Who maintains this in two years? If that is an in-house team, pick the language they already know and can actually hire for.',
           'How custom is the interface? Standard platform patterns favour React Native. A bespoke, brand-led, animation-rich design favours Flutter.',
           'Does anything need to be shared with the web? If yes, a shared language is worth real money over the product’s life.',
         ],
+      },
+      {
+        type: 'p',
+        text: 'If you answer those four honestly, the question of React Native vs Flutter, which is better for you, usually answers itself. When the answers point in different directions, the maintenance question should carry the most weight, because you will live with it the longest.',
+      },
+      { type: 'h2', text: 'Does the framework change what you pay?' },
+      {
+        type: 'p-link',
+        before: 'Not much. Build cost follows scope, integrations and the team’s familiarity with the tool, not the framework itself. Our guide to ',
+        href: '/blog/mobile-app-development-cost-pakistan',
+        anchor: 'mobile app development cost in Pakistan',
+        after: ' explains what actually drives a quote and how to compare two of them fairly.',
       },
       { type: 'h2', text: 'When neither is the right answer' },
       {
@@ -510,7 +723,7 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'The framework question only becomes worth arguing about once you have established that an app is genuinely the right product.',
+        text: 'The question of React Native vs Flutter, which is better, only becomes worth arguing about once you have established that an app is genuinely the right product.',
       },
       {
         type: 'p-link',
@@ -519,70 +732,89 @@ export const posts = [
         anchor: 'mobile app development service',
         after: ' covers how that decision gets made alongside the rest of the build.',
       },
+      {
+        type: 'p-link',
+        before: 'Still unsure which framework fits your app? ',
+        href: '/contact',
+        anchor: 'Send us your brief',
+        after: ' and we will recommend one, with the reasons in writing.',
+      },
     ],
     faqs: [
       {
         question: 'Is React Native or Flutter faster?',
         answer:
-          'For typical business apps the difference is not perceptible to users. Flutter can have an edge in animation-heavy interfaces because it controls the entire rendering pipeline, but real-world slowness is almost always caused by unoptimised images, inefficient network calls or poorly built lists. Those problems occur identically in both frameworks and are fixed the same way.',
+          'For typical business apps the difference is not noticeable to users. Flutter can have an edge in animation-heavy interfaces because it controls the entire rendering pipeline, but real-world slowness usually comes from unoptimised images, inefficient network calls or poorly built lists. Those problems occur in both frameworks and are fixed the same way.',
       },
       {
-        question: 'Which is cheaper to build with?',
+        question: 'Which is cheaper to build with, React Native or Flutter?',
         answer:
-          'Neither framework is inherently cheaper. Cost follows scope and the team’s familiarity. The genuine saving is choosing the one your existing codebase and future maintainers already know, because that removes ramp-up time and makes hiring easier later.',
+          'Neither framework is cheaper by itself. Cost follows scope and how well the team knows the tool. The genuine saving comes from choosing the framework your existing codebase and future maintainers already know, because that removes learning time, reduces mistakes early in the project, and makes it easier to hire developers later.',
       },
       {
         question: 'Can I switch from one to the other later?',
         answer:
-          'Not cheaply. The application code does not transfer, so a switch is effectively a rewrite of the front end. Your backend, API and database are unaffected, which is one good reason to keep business logic on the server instead of embedded in the app. Treat the choice as a multi-year commitment.',
+          'Not cheaply. The app code does not transfer, so switching is effectively a rewrite of the front end. Your backend, API and database are unaffected, which is one good reason to keep business logic on the server instead of inside the app. Treat the framework choice as a commitment of several years.',
       },
       {
         question: 'Do both publish to the App Store and Google Play?',
         answer:
-          'Yes. Both produce genuine native binaries that are submitted through the normal store processes, and both are subject to the same review requirements. Store submission is not a differentiator between them.',
+          'Yes. Both produce genuine native apps that are submitted through the normal Apple and Google store processes, and both face the same review requirements. Store submission, listing approval and update releases work the same way for either framework, so publishing is not a reason to choose one over the other.',
+      },
+      {
+        question: 'Is it easier to hire React Native or Flutter developers in Pakistan?',
+        answer:
+          'JavaScript developers are more common than Dart developers, in Pakistan as elsewhere, so the pool for React Native is larger. Flutter developers are available too, and the community has grown. What matters most is whether the people maintaining your app long term already know the framework, not the national total.',
       },
     ],
   },
   {
     slug: 'custom-software-cost-pakistan',
     related: ['custom-software-vs-off-the-shelf', 'how-to-hire-a-software-house-in-lahore'],
-    title: 'How much does custom software cost for a business in Pakistan?',
+    title: 'Custom Software Development Cost in Pakistan',
     excerpt:
-      'Custom software is priced by scope, not from a menu. The factors that move a quote, the tiers most projects fall into, and how to compare proposals fairly.',
+      'Custom software development cost in Pakistan is set by scope, not a menu. Learn the four factors that move a quote, the tiers, and how to compare proposals.',
     category: 'Software Development',
     date: '2026-09-18',
-    readingTime: '5 min read',
+    readingTime: '8 min read',
     service: 'software-development',
     content: [
       {
         type: 'p',
-        text: 'Custom software is priced by scope, not from a price list, because "custom software" covers everything from a single internal form that replaces a spreadsheet to a multi-role platform handling payments and inventory. The honest answer to what it costs is that it depends on four things: how many distinct workflows it supports, how many systems it has to talk to, how many types of user it serves, and how long it needs to keep running.',
+        text: 'Custom software development cost in Pakistan is set by scope, not by a price list. "Custom software" covers everything from a single internal form that replaces a spreadsheet to a multi-role platform handling payments and inventory. The honest answer depends on four things: how many workflows it supports, how many systems it talks to, how many types of user it serves, and how long it needs to keep running.',
       },
       {
         type: 'p',
-        text: 'This post explains each of those, describes the tiers most business projects fall into, and gives you a way to compare proposals that does not reduce to picking the smallest number. We do not publish figures, and the last section explains why.',
+        text: 'This guide explains each of those, describes the tiers most business projects fall into, and gives you a way to compare proposals that does not come down to picking the smallest number. It is written for owners and managers in Lahore, Karachi, Islamabad and elsewhere in Pakistan who are weighing up a build for the first time.',
       },
-      { type: 'h2', text: 'The four factors that move the number' },
+      // TODO(pricing): this post deliberately states no PKR figures because
+      // `policy.quotePricesAllowed` is false. If indicative PKR ranges per tier
+      // are approved, add them to the tier list below. Do not estimate them.
+      { type: 'h2', text: 'The four factors behind custom software development cost' },
       {
         type: 'ul',
         items: [
           'Number of distinct workflows. Workflows, not features. "Staff submit a leave request, a manager approves it, payroll sees the result" is one workflow with three steps. Counting workflows is the fastest way to size a project honestly, because features multiply while workflows stay countable.',
           'Integrations. Every external system is a separate contract with someone else’s rules and failure modes: accounting software, a payment gateway, a courier API, WhatsApp, an existing database. Integrations are consistently the most underestimated line in any quote.',
           'User roles and permissions. One kind of user is straightforward. Admin, manager, staff and customer, each seeing different data with different rights, is a different class of problem. Permissions touch every screen and every query.',
-          'Expected lifespan. Software meant to run for five years is built differently from a tool for one campaign: more tests, clearer structure, better documentation. Both are legitimate. They cost different amounts, and you should say up front which one you want.',
+          'Expected lifespan. Software meant to run for five years is built differently from a tool for one campaign, with more tests, clearer structure and better documentation. Both are legitimate. They cost different amounts, and you should say up front which one you want.',
         ],
       },
       { type: 'h2', text: 'The tiers most business projects fall into' },
+      {
+        type: 'p',
+        text: 'In practice, custom software development cost in Pakistan clusters around four kinds of project. Knowing which one you are in tells you more than any single figure could.',
+      },
       {
         type: 'ul',
         items: [
           'Internal tool. One team, one workflow, replacing a spreadsheet or a manual process. Small scope and often the highest return per rupee spent, because it removes work someone is currently doing by hand every day.',
           'Business system. Several connected workflows, a few user roles, an admin view and reporting. Inventory, bookings, job tracking, client management. This is where most small and mid-sized business projects genuinely sit.',
-          'Customer-facing platform. Your customers use it directly. Accounts, payments, notifications, support for people who did not read a manual and never will. The step up in cost is mostly about the edge cases and the polish that external users require.',
+          'Customer-facing platform. Your customers use it directly. Accounts, payments, notifications, and support for people who did not read a manual and never will. The step up in cost is mostly about the edge cases and the polish that outside users require.',
           'Multi-tenant product. You are selling the software itself to multiple organisations. That is a different business model, and it is product development, not a project.',
         ],
       },
-      { type: 'h2', text: 'Why proposals for the same brief vary so widely' },
+      { type: 'h2', text: 'Why custom software quotes vary so widely in Pakistan' },
       {
         type: 'p',
         text: 'A wide spread between quotes is usually a spread in assumptions, not in greed. The gaps are almost always in the same five places.',
@@ -591,20 +823,42 @@ export const posts = [
         type: 'ul',
         items: [
           'Discovery. Some quotes include mapping the workflow properly before building. Some assume your brief is already the specification. The second is cheaper right up until the first change request.',
-          'Data migration. Getting years of existing records out of spreadsheets or an old system, cleaned and imported, is frequently as much work as a feature. It is often missing entirely from a low quote.',
-          'Testing. Automated tests cost time up front and save it every month thereafter. A quote without them is smaller and more fragile.',
-          'Hosting and deployment. Who sets up the server, the database, the backups and the monitoring, and who pays for them ongoing.',
+          'Data migration. Getting years of existing records out of spreadsheets or an old system, cleaned and imported, is often as much work as a feature. It is frequently missing entirely from a low quote.',
+          'Testing. Automated tests cost time up front and save it every month after. A quote without them is smaller and more fragile.',
+          'Hosting and deployment. Who sets up the server, the database, the backups and the monitoring, and who pays for them on an ongoing basis.',
           'Training and handover. Software nobody has been taught to use does not get used. This is a real line item and it belongs in the proposal.',
         ],
+      },
+      { type: 'h2', text: 'Local factors that affect the final bill' },
+      {
+        type: 'p',
+        text: 'A few things are specific to commissioning software in Pakistan. None of them are complicated, but each can quietly change what you end up paying.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'PKR or USD. Many software houses quote in dollars. If yours does, the rupee cost moves with the exchange rate across a project that can run for months, so agree the currency of each milestone payment in writing.',
+          'Sales tax on services. Software services attract provincial sales tax. Ask whether the quote is inclusive or exclusive of it, because that alone can make two quotes look further apart than they are.',
+          'Local integrations. Connecting to JazzCash, Easypaisa, a local bank gateway, a courier such as TCS or Leopards, or an SMS provider is an integration like any other, with its own documentation, testing and quirks.',
+          'Language. If staff or customers will use the system in Urdu, right-to-left layouts and translated content add design and testing time.',
+          'Hosting location and connectivity. Decide early where data will be hosted and how the system behaves when an office connection drops, which matters for anything used on a shop floor or in the field.',
+        ],
+      },
+      {
+        type: 'p-link',
+        before: 'In Punjab, sales tax on services is administered by the ',
+        href: 'https://pra.punjab.gov.pk/',
+        anchor: 'Punjab Revenue Authority',
+        after: ', and other provinces have their own revenue authorities. Check the current rules with your accountant rather than relying on a quote’s assumption.',
       },
       { type: 'h2', text: 'Fixed price or time and materials?' },
       {
         type: 'p',
-        text: 'A fixed price transfers risk to the studio, so it includes a buffer and requires the scope to be locked. It suits well-defined projects and clients who need budget certainty. Time and materials is cheaper when scope genuinely cannot be known up front, but it requires trust and active management on your side.',
+        text: 'A fixed price transfers risk to the studio, so it includes a buffer and requires the scope to be locked. It suits well-defined projects and clients who need budget certainty. Time and materials is cheaper when the scope genuinely cannot be known up front, but it needs trust and active management on your side.',
       },
       {
         type: 'p',
-        text: 'For most business software, the sensible arrangement is a paid discovery phase that produces a specification, followed by a fixed quote against that specification. You pay a small amount to remove the uncertainty, then buy the build with a number that can be relied on. We work this way because open-ended budgets tend to end badly for both sides.',
+        text: 'For most business software, the sensible arrangement is a paid discovery phase that produces a specification, followed by a fixed quote against that specification. You pay a small amount to remove the uncertainty, then buy the build with a number you can rely on. We work this way because open-ended budgets tend to end badly for both sides.',
       },
       { type: 'h2', text: 'How to compare two proposals properly' },
       {
@@ -617,67 +871,81 @@ export const posts = [
           'Ask to see something comparable they have built and, ideally, to speak to that client.',
         ],
       },
-      { type: 'h2', text: 'Why we do not publish a price list' },
+      {
+        type: 'p-link',
+        before: 'Before comparing quotes at all, make sure custom software is the right answer. Sometimes an existing product does the job for less. Our guide to ',
+        href: '/blog/custom-software-vs-off-the-shelf',
+        anchor: 'custom software vs off-the-shelf tools',
+        after: ' walks through how to decide.',
+      },
+      { type: 'h2', text: 'Why we do not publish a custom software price list' },
       {
         type: 'p',
-        text: 'Any figure broad enough to be true for every project would be too broad to help you budget, and a narrower one would simply be wrong for most readers. Worse, a published number steers the conversation toward fitting a build to a price instead of scoping the software the business actually needs. We quote per project after understanding the workflows, and the figure is fixed in writing before work begins.',
+        text: 'Any figure for custom software development cost in Pakistan broad enough to be true for every project would be too broad to help you budget, and a narrower one would simply be wrong for most readers. Worse, a published number steers the conversation toward fitting a build to a price instead of scoping the software the business actually needs. We quote per project after understanding the workflows, and the figure is fixed in writing before work begins.',
       },
       {
         type: 'p-link',
-        before: 'If you are trying to work out whether your problem warrants custom software at all, our ',
+        before: 'If you are working out whether your problem warrants custom software at all, our ',
         href: '/services/software-development',
         anchor: 'software development service',
         after: ' sets out how we scope a build, what the architecture stage produces, and what you receive at handover.',
+      },
+      {
+        type: 'p-link',
+        before: 'Ready to get a number you can rely on? ',
+        href: '/contact',
+        anchor: 'Describe the workflow you want to fix',
+        after: ' and we will scope it before we quote it.',
       },
     ],
     faqs: [
       {
         question: 'Is custom software cheaper than a monthly SaaS subscription?',
         answer:
-          'Not initially. Custom software is a capital cost where SaaS is an operating cost. It becomes cheaper over time when subscription fees scale with your headcount or usage, or when the tool nearly fits but forces expensive manual workarounds. The crossover often arrives sooner than people expect once per-seat pricing grows, but it depends entirely on your numbers.',
+          'Not at first. Custom software is a capital cost where SaaS is an operating cost. It becomes cheaper over time when subscription fees scale with your headcount or usage, or when a tool nearly fits but forces expensive manual workarounds. Where the crossover falls depends entirely on your own numbers.',
       },
       {
         question: 'How long does a custom software project take?',
         answer:
-          'A focused internal tool is usually a matter of weeks. A business system with several workflows and roles runs longer and should be broken into milestones, so something usable ships early instead of everything landing at the end. Any credible proposal commits to a milestone timeline before work begins.',
+          'A focused internal tool usually takes a matter of weeks. A business system with several workflows and roles takes longer and should be broken into milestones, so something usable ships early instead of everything landing at the end. Any credible proposal commits to a milestone timeline in writing before work begins.',
       },
       {
         question: 'What is a discovery phase and do I have to pay for it?',
         answer:
-          'Discovery is the work of mapping your actual workflows, data and integrations, and turning them into a specification that can be quoted accurately. It is normally paid, because it is real work that produces a real deliverable. The specification is yours, too, so you can take it to other studios and get competing quotes against it.',
+          'Discovery is the work of mapping your actual workflows, data and integrations, and turning them into a specification that can be quoted accurately. It is normally paid, because it is real work with a real deliverable. The specification is yours, so you can take it to other studios and get competing quotes against it.',
       },
       {
         question: 'What if my requirements change halfway through?',
         answer:
-          'They usually do, and a good process expects it. Changes within the agreed scope are absorbed; changes that add scope are quoted as a variation before they are built, so you decide whether each one is worth its cost. What you should avoid is any arrangement where changes are silently absorbed, because that cost reappears as rushed work or a missed deadline.',
+          'They usually do, and a good process expects it. Changes within the agreed scope are absorbed. Changes that add scope are quoted as a variation before they are built, so you decide whether each is worth its cost. Avoid any arrangement where changes are silently absorbed, because that cost reappears as rushed work.',
       },
       {
         question: 'Who owns the software when it is finished?',
         answer:
-          'You should own the source code, the data and the hosting accounts outright, and it should say so in the contract before work starts. At Avenix Studio the repository, accounts and documentation are handed over at the end of every project, with nothing locked to a proprietary platform or to us.',
+          'You should own the source code, the data and the hosting accounts outright, and the contract should say so before work starts. At Avenix Studio the repository, accounts and documentation are handed over at the end of every project, with nothing locked to a proprietary platform or to us.',
       },
     ],
   },
   {
     slug: 'custom-software-vs-off-the-shelf',
     related: ['custom-software-cost-pakistan'],
-    title: 'Custom software vs off-the-shelf: how to decide',
+    title: 'Custom Software vs Off-the-Shelf Software',
     excerpt:
-      'Off-the-shelf wins by default. Custom earns its cost only when the process is genuinely yours, or the workarounds already cost more than a build would.',
+      'Custom software vs off-the-shelf software: start with off-the-shelf and build only when you hit one of five clear signals. Here is how to decide well.',
     category: 'Software Development',
     date: '2026-09-18',
-    readingTime: '5 min read',
+    readingTime: '7 min read',
     service: 'software-development',
     content: [
       {
         type: 'p',
-        text: 'Start with off-the-shelf, and only build custom when you can name the specific thing it cannot do. Existing software is cheaper, available immediately, maintained by someone else and improved without you paying for it. The burden of proof sits with the custom option, every time.',
+        text: 'When you weigh custom software vs off-the-shelf software, start with off-the-shelf, and only build custom when you can name the specific thing it cannot do. Existing software is cheaper, available immediately, maintained by someone else and improved without you paying for it. The burden of proof sits with the custom option, every time.',
       },
       {
         type: 'p',
         text: 'That said, "just use a SaaS tool" becomes bad advice at a predictable point: when the workarounds stop being minor, when per-seat pricing outgrows the value, or when the process the software is bending is the thing your business actually competes on. This post is about recognising that point instead of guessing at it.',
       },
-      { type: 'h2', text: 'What off-the-shelf actually gives you' },
+      { type: 'h2', text: 'What off-the-shelf software actually gives you' },
       {
         type: 'ul',
         items: [
@@ -692,7 +960,7 @@ export const posts = [
         type: 'p',
         text: 'None of that is trivial. A great many custom builds exist because nobody seriously evaluated the alternatives first, and they are a permanent tax on the business that commissioned them.',
       },
-      { type: 'h2', text: 'The five signals that custom is justified' },
+      { type: 'h2', text: 'Five signals that custom software is justified' },
       {
         type: 'p',
         text: 'These are the situations where building genuinely beats buying. If none of them applies to you, buy.',
@@ -710,7 +978,7 @@ export const posts = [
       { type: 'h2', text: 'The middle option most people miss' },
       {
         type: 'p',
-        text: 'The choice is rarely binary. The most cost-effective answer is often to keep the off-the-shelf tools that already work, accounting and email and payroll and document storage, then build only the one workflow that is genuinely yours and wire it into the rest through their APIs.',
+        text: 'The custom software vs off-the-shelf software choice is rarely binary. The most cost-effective answer is often to keep the off-the-shelf tools that already work, accounting and email and payroll and document storage, then build only the one workflow that is genuinely yours and wire it into the rest through their APIs.',
       },
       {
         type: 'p',
@@ -743,7 +1011,33 @@ export const posts = [
           'Time to value. Buying is instant; building is not. If the pain is acute right now, a stopgap tool while a build happens is often the right call.',
         ],
       },
-      { type: 'h2', text: 'A decision you can actually run' },
+      { type: 'h2', text: 'What changes for businesses in Pakistan' },
+      {
+        type: 'p',
+        text: 'Most well-known software products are built for American and European businesses. They often work well here, but a few local factors change the arithmetic, and they rarely appear in a vendor’s comparison table.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Pricing in dollars. Most international subscriptions are billed in USD, so the rupee cost rises whenever the exchange rate moves. A tool that looked affordable at signing can cost noticeably more a year later.',
+          'Card payments abroad. Subscriptions need a card that works for international payments. Check your bank’s limits on foreign-currency transactions before you build a process around a tool.',
+          'Local integrations. International products often do not connect out of the box to JazzCash, Easypaisa, local bank gateways or couriers such as TCS and Leopards. If those connections are central to your workflow, the gap may be structural rather than cosmetic.',
+          'Local reporting rules. Some sectors have Pakistani compliance requirements, such as point-of-sale integration with FBR for certain retailers. Confirm that any tool you choose can meet them, or can be connected to something that does.',
+          'Language and formats. Urdu interfaces, local address formats and PKR on invoices are easy in custom software and sometimes awkward in generic tools.',
+        ],
+      },
+      {
+        type: 'p-link',
+        before: 'For tax and invoicing requirements, check the current rules on the ',
+        href: 'https://www.fbr.gov.pk/',
+        anchor: 'Federal Board of Revenue website',
+        after: ' or with your accountant, rather than relying on a vendor’s claim of support.',
+      },
+      {
+        type: 'p',
+        text: 'None of these automatically means you should build. They mean you should test the specific local requirement during a trial, not discover it after you have migrated.',
+      },
+      { type: 'h2', text: 'Custom vs off-the-shelf software: a decision you can run' },
       {
         type: 'p',
         text: 'Write down the workflow end to end. Trial the two or three best-known tools against it for a fortnight, properly, with real data. List precisely where each one fails. If the failures are cosmetic or a matter of habit, buy and adapt. If the failures are structural, and you can estimate the hours the workarounds cost every month, you have both the justification for a build and the scope for it.',
@@ -754,10 +1048,24 @@ export const posts = [
       },
       {
         type: 'p-link',
+        before: 'If the signals point towards building, the next question is budget. Our guide to ',
+        href: '/blog/custom-software-cost-pakistan',
+        anchor: 'custom software development cost in Pakistan',
+        after: ' explains what drives a quote and how to compare proposals fairly.',
+      },
+      {
+        type: 'p-link',
         before: 'If you have reached that point and want the workflow mapped before anyone writes code, our ',
         href: '/services/software-development',
         anchor: 'custom software development service',
         after: ' starts with exactly that scoping step. It is a step that occasionally ends with us telling you to buy something instead.',
+      },
+      {
+        type: 'p-link',
+        before: 'Not sure which side of the line you are on? ',
+        href: '/contact',
+        anchor: 'Talk us through the workflow',
+        after: ' and we will tell you honestly whether to build or buy.',
       },
     ],
     faqs: [
@@ -769,7 +1077,7 @@ export const posts = [
       {
         question: 'How do I calculate whether custom software is worth it?',
         answer:
-          'Estimate the recurring cost of the current situation: hours per week spent on manual workarounds multiplied by a loaded hourly rate, plus subscription fees you would stop paying, plus any revenue lost to the limitation. Compare that annual figure against the build cost plus its ongoing maintenance. If the payback period is under about two years the case is usually strong. Beyond three, it rarely is.',
+          'Estimate the recurring cost of the current situation: weekly hours spent on workarounds multiplied by a loaded hourly rate, plus subscription fees you would stop paying, plus revenue lost to the limitation. Compare that yearly figure with the build cost plus maintenance. A payback period under about two years is usually a strong case.',
       },
       {
         question: 'Can I start with off-the-shelf and move to custom later?',
@@ -786,14 +1094,18 @@ export const posts = [
   {
     slug: 'what-is-ai-automation-small-business-examples',
     related: ['n8n-vs-make-vs-zapier', 'do-you-need-an-ai-chatbot'],
-    title: 'What is AI automation? Real examples for small businesses',
+    title: '5 AI Automation Examples for Small Business',
     excerpt:
-      'AI automation means software doing a repeatable task end to end without a person. Here is what that looks like in a real small business, and what it cannot do.',
+      'Five AI automation examples for small business: enquiries, follow-ups, paperwork, FAQs and bookings. What each does, what it costs to run, and where to start.',
     category: 'AI Automation',
     date: '2026-09-18',
-    readingTime: '5 min read',
+    readingTime: '8 min read',
     service: 'ai-automation',
     content: [
+      {
+        type: 'p',
+        text: 'The most useful AI automation examples for small business are ordinary ones: sorting enquiries, chasing quotes, entering invoices, answering repeat questions and managing bookings. Each takes a task your team does by hand every day and has software do it, with a person stepping in only where judgement is needed.',
+      },
       {
         type: 'p',
         text: 'AI automation is software carrying out a repeatable business task from start to finish without a person doing it by hand: reading an enquiry, deciding what it is, putting it in the right place and triggering the next step. It differs from ordinary automation in one respect. The steps that need judgement, like understanding what a customer actually wrote, are handled by an AI model instead of a rigid rule.',
@@ -851,7 +1163,29 @@ export const posts = [
         type: 'p',
         text: 'A reminder sent at a sensible interval on the channel the customer actually reads, with a one-tap way to confirm or move the booking, removes most of the phone calls and a meaningful share of the no-shows. When someone cancels, the freed slot can be offered automatically to anyone on a waiting list. The reminders themselves need no model at all. The AI part earns its place reading free-text replies like "can we do Thursday instead, after 4" and turning them into an actual reschedule.',
       },
-      { type: 'h2', text: 'What it costs to run' },
+      { type: 'h2', text: 'AI automation examples in a Pakistani small business' },
+      {
+        type: 'p',
+        text: 'These AI automation examples for small business apply anywhere, but they look slightly different here. A few local patterns make some of them especially worth doing.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'WhatsApp is the main inbox. For many Pakistani businesses most enquiries arrive on WhatsApp, not email, so the enquiry-sorting and FAQ examples should start there.',
+          'Mixed languages. Customers write in English, Urdu and Roman Urdu, sometimes in the same message. Current models handle this reasonably well, but test with real messages from your own customers before trusting it.',
+          'Cash-on-delivery confirmation. Online shops can send an automatic WhatsApp message asking customers to confirm a COD order before dispatch, and flag the ones that do not reply.',
+          'Paper still matters. Supplier bills, delivery challans and handwritten job sheets are common, which makes the paperwork example especially valuable.',
+          'Voice notes. Customers often send voice notes instead of typing. Decide early whether these are transcribed automatically or simply routed to a person.',
+        ],
+      },
+      {
+        type: 'p-link',
+        before: 'If an automation sends or receives WhatsApp messages at scale, it runs on the WhatsApp Business Platform, which Meta documents in its ',
+        href: 'https://developers.facebook.com/docs/whatsapp',
+        anchor: 'WhatsApp developer documentation',
+        after: '. Some message types on the platform are charged by Meta, so include them when you estimate running costs.',
+      },
+      { type: 'h2', text: 'What AI automation costs to run' },
       {
         type: 'p',
         text: 'Two costs, and they behave differently. The build is one-off, scoped like any small software project. Running it is ongoing and usage-based: the automation platform, and per-use charges for model calls and any messaging channel. For the volumes a typical small business generates, the running cost is usually modest. It does grow with usage, though, so estimate it against your real monthly volume before you commit.',
@@ -866,7 +1200,7 @@ export const posts = [
           'Replace the relationship. The parts of your business customers value are rarely the parts worth automating. Automate the retyping, not the conversation.',
         ],
       },
-      { type: 'h2', text: 'How to pick your first automation' },
+      { type: 'h2', text: 'How to pick your first AI automation' },
       {
         type: 'p',
         text: 'For one week, have your team note every task they do more than three times that involves moving information between two places. Pick the one with the highest count and the least judgement required. Automate exactly that, measure the hours it returns, and only then look at the next one.',
@@ -877,10 +1211,24 @@ export const posts = [
       },
       {
         type: 'p-link',
+        before: 'Once you know what to automate, the next choice is the tool. Our ',
+        href: '/blog/n8n-vs-make-vs-zapier',
+        anchor: 'n8n vs Make vs Zapier comparison',
+        after: ' explains which platform suits which kind of workflow.',
+      },
+      {
+        type: 'p-link',
         before: 'If you want help working out which task is worth automating first, instead of buying a tool and hoping, our ',
         href: '/services/ai-automation',
         anchor: 'AI automation service',
         after: ' starts by mapping how the work is done manually today, including the exceptions that usually break automations later.',
+      },
+      {
+        type: 'p-link',
+        before: 'Have a task in mind? ',
+        href: '/contact',
+        anchor: 'Tell us what your team repeats every day',
+        after: ' and we will tell you whether it is worth automating.',
       },
     ],
     faqs: [
@@ -902,7 +1250,7 @@ export const posts = [
       {
         question: 'What happens when the automation makes a mistake?',
         answer:
-          'A well-designed system assumes it will. Anywhere an error would be expensive there is a human approval step, every run is logged so a failure can be traced instead of guessed at, and there is a defined fallback, usually routing to a person. Ask about error handling before you ask about capability. It tells you more about how the system was built.',
+          'A well-designed system assumes it will. Anywhere an error would be expensive there is a human approval step, every run is logged so failures can be traced, and there is a defined fallback, usually routing to a person. Ask about error handling before you ask about capability. It tells you more about how the system was built.',
       },
       {
         question: 'How long does it take to set up an automation?',
@@ -914,21 +1262,30 @@ export const posts = [
   {
     slug: 'n8n-vs-make-vs-zapier',
     related: ['what-is-ai-automation-small-business-examples'],
-    title: 'n8n vs Make vs Zapier: which should a small business use?',
+    title: 'n8n vs Make vs Zapier Comparison (2026)',
     excerpt:
-      'Zapier for simple connections and speed, Make for complex branching visually, n8n when you need self-hosting or volume without per-task pricing. How to choose.',
+      'An honest n8n vs Make vs Zapier comparison for small businesses: pricing models, data control, complexity and upkeep, and the five questions that decide it.',
     category: 'AI Automation',
     date: '2026-09-18',
-    readingTime: '5 min read',
+    readingTime: '7 min read',
     service: 'ai-automation',
     content: [
       {
         type: 'p',
-        text: 'Pick Zapier if you want the widest app support and the fastest setup and you are automating straightforward A-to-B connections. Pick Make when your workflows branch, loop and transform data and you want to see that logic laid out visually. Pick n8n when you need to self-host for data control, or when your volume makes per-task pricing painful.',
+        text: 'The short n8n vs Make vs Zapier comparison: pick Zapier if you want the widest app support and the fastest setup and you are automating straightforward A-to-B connections. Pick Make when your workflows branch, loop and transform data and you want to see that logic laid out visually. Pick n8n when you need to self-host for data control, or when your volume makes per-task pricing painful.',
       },
       {
         type: 'p',
         text: 'All three do the same fundamental job: watch for something happening in one system and make something happen in another. They differ in how much complexity they let you express, how they charge, and who holds your data. That last one decides it more often than people expect.',
+      },
+      { type: 'h2', text: 'n8n vs Make vs Zapier at a glance' },
+      {
+        type: 'ul',
+        items: [
+          'Zapier. Largest app catalogue, easiest to learn, priced per task. Best for simple connections at low volume, maintained by non-technical staff.',
+          'Make. A visual, diagram-style builder, priced per operation and usually more economical than Zapier at similar volume. Best for workflows that branch, loop and transform data.',
+          'n8n. Self-hosted or cloud, extensible with code, and no per-task meter when self-hosted. Best for sensitive data, high volume or custom logic, with someone technical to run it.',
+        ],
       },
       { type: 'h2', text: 'Zapier: the default for a reason' },
       {
@@ -974,7 +1331,7 @@ export const posts = [
         type: 'p',
         text: 'This is the honest argument for having someone technical involved in anything load-bearing. Building the happy path takes an afternoon on any of these tools. Making it fail safely, log usefully and recover on its own is the actual engineering. That is what separates an automation you can depend on from one that quietly stops working.',
       },
-      { type: 'h2', text: 'The questions that actually decide it' },
+      { type: 'h2', text: 'n8n vs Make vs Zapier: the questions that decide it' },
       {
         type: 'ul',
         items: [
@@ -984,6 +1341,27 @@ export const posts = [
           'Who maintains it? If the answer is a non-technical person, Zapier’s simplicity has real value. If it is a developer, n8n’s flexibility does.',
           'Are your apps supported? Check before committing. A missing connector is workable through a generic HTTP request, but only if someone is comfortable doing that.',
         ],
+      },
+      { type: 'h2', text: 'Paying for and running these tools from Pakistan' },
+      {
+        type: 'p',
+        text: 'All three are international products, and a few practical points apply to Pakistani businesses in particular.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Billing in dollars. Zapier and Make subscriptions, and n8n’s cloud plans, are billed in USD on an international card. The rupee cost moves with the exchange rate, so budget with some headroom.',
+          'Server costs for self-hosting. A self-hosted n8n server from an international provider is usually billed in dollars too. Local hosting is possible, but check reliability and backup arrangements carefully.',
+          'Local apps. Pakistani services such as JazzCash, Easypaisa, local SMS gateways and couriers may not have ready-made connectors on any of the three. Check first. If not, you will need generic HTTP requests, which are easier in Make or n8n.',
+          'Who holds the account. Make sure the subscription and credentials sit in a business account you control, not a freelancer’s personal one.',
+        ],
+      },
+      {
+        type: 'p-link',
+        before: 'If you are considering self-hosting, read n8n’s own ',
+        href: 'https://docs.n8n.io/hosting/',
+        anchor: 'self-hosting documentation',
+        after: ' first. It sets out what running your own instance involves.',
       },
       { type: 'h2', text: 'What most small businesses should actually do' },
       {
@@ -996,7 +1374,14 @@ export const posts = [
       },
       {
         type: 'p',
-        text: 'And it is worth saying that the platform is the least important decision here. A well-mapped workflow will work on all three. A badly mapped one will fail on all three, having cost the same to build.',
+        text: 'And whatever any n8n vs Make vs Zapier comparison concludes, the platform is the least important decision here. A well-mapped workflow will work on all three. A badly mapped one will fail on all three, having cost the same to build.',
+      },
+      {
+        type: 'p-link',
+        before: 'If you are still deciding what to automate in the first place, start with our ',
+        href: '/blog/what-is-ai-automation-small-business-examples',
+        anchor: 'AI automation examples for small business',
+        after: ' before choosing a platform.',
       },
       {
         type: 'p-link',
@@ -1004,6 +1389,13 @@ export const posts = [
         href: '/services/ai-automation',
         anchor: 'AI automation service',
         after: ' covers how that choice gets made, and who holds the credentials afterwards.',
+      },
+      {
+        type: 'p-link',
+        before: 'Want a second opinion on your platform choice? ',
+        href: '/contact',
+        anchor: 'Describe the workflow to us',
+        after: ' and we will recommend a tool, with the reasoning.',
       },
     ],
     faqs: [
@@ -1035,23 +1427,23 @@ export const posts = [
       'what-is-ai-automation-small-business-examples',
       'whatsapp-first-lead-capture-for-local-business',
     ],
-    title: 'Do you actually need an AI chatbot for your business?',
+    title: 'Does My Business Need an AI Chatbot?',
     excerpt:
-      'Probably not, unless you are losing enquiries outside working hours or answering the same questions daily. The honest test, and what a good one must do.',
+      'Does my business need an AI chatbot? Usually not, unless you lose enquiries after hours or answer the same questions all day. Run this two-week test first.',
     category: 'AI Automation',
     date: '2026-09-18',
-    readingTime: '5 min read',
+    readingTime: '7 min read',
     service: 'ai-automation',
     content: [
       {
         type: 'p',
-        text: 'Most businesses do not need an AI chatbot. You need one if you are losing enquiries because nobody answers outside working hours, or if your team spends a meaningful part of every day typing the same dozen answers. If neither is true, a clear contact page and a visible phone number will serve you better.',
+        text: 'Does my business need an AI chatbot? For most businesses, the honest answer is no. You need one if you are losing enquiries because nobody answers outside working hours, or if your team spends a meaningful part of every day typing the same dozen answers. If neither is true, a clear contact page and a visible phone number will serve you better.',
       },
       {
         type: 'p',
         text: 'Chatbots became fashionable, which means a lot of them were installed for no reason and now sit on websites annoying visitors who wanted a phone number. This post is about telling the two situations apart honestly.',
       },
-      { type: 'h2', text: 'When a chatbot genuinely earns its place' },
+      { type: 'h2', text: 'When your business does need an AI chatbot' },
       {
         type: 'ul',
         items: [
@@ -1071,14 +1463,14 @@ export const posts = [
           'You want it because competitors have one. Not a reason. Several of theirs are probably making things worse for their visitors too.',
         ],
       },
-      { type: 'h2', text: 'The test worth running before you decide' },
+      { type: 'h2', text: 'A two-week test: does your business need an AI chatbot?' },
       {
         type: 'p',
         text: 'For two weeks, log every enquiry: when it arrived, what was asked, how long the reply took, and whether it converted. Two numbers fall out. The share arriving outside hours, and the share whose questions were answerable from information already on your website.',
       },
       {
         type: 'p',
-        text: 'If both numbers are small, you have your answer and you have saved yourself a project. If either is large, you now know exactly what the bot needs to handle, which is most of the specification for building one properly.',
+        text: 'If both numbers are small, you have answered "does my business need an AI chatbot?" and saved yourself a project. If either is large, you now know exactly what the bot needs to handle, which is most of the specification for building one properly.',
       },
       { type: 'h2', text: 'What separates a useful bot from an irritating one' },
       {
@@ -1116,6 +1508,27 @@ export const posts = [
         type: 'p',
         text: 'If you are going to do this at all, put it where your customers already are, not where it is easiest to install.',
       },
+      { type: 'h2', text: 'Language, voice notes and local expectations' },
+      {
+        type: 'p',
+        text: 'For businesses in Pakistan, a few practical details decide whether a chatbot helps or frustrates.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Mixed languages. Customers write in English, Urdu and Roman Urdu, often mixing them. Test the bot with real messages your customers have sent, not tidy examples you wrote yourself.',
+          'Voice notes. Many people send a voice note instead of typing. Decide what the bot does with them, whether that is transcribing them or passing them straight to a person.',
+          'Expectations of a person. Many customers expect to reach a human quickly. Say clearly that they are talking to an assistant, and make the route to a person obvious.',
+          'Hours that change. Ramadan timings, Eid closures and public holidays need updating in the bot’s information, or it will confidently give the wrong hours.',
+        ],
+      },
+      {
+        type: 'p-link',
+        before: 'A WhatsApp assistant runs on the WhatsApp Business Platform rather than the free app, and Meta sets the rules for automated messaging there. The official ',
+        href: 'https://business.whatsapp.com/',
+        anchor: 'WhatsApp Business site',
+        after: ' explains what each option allows.',
+      },
       { type: 'h2', text: 'What it costs to run' },
       {
         type: 'p',
@@ -1127,10 +1540,24 @@ export const posts = [
       },
       {
         type: 'p-link',
+        before: 'If WhatsApp is where your enquiries already arrive, our guide to ',
+        href: '/blog/whatsapp-first-lead-capture-for-local-business',
+        anchor: 'WhatsApp lead generation for small business',
+        after: ' covers the setup to get right before adding any automation.',
+      },
+      {
+        type: 'p-link',
         before: 'If the two-week log suggests a bot would actually earn its place, our ',
         href: '/services/ai-automation',
         anchor: 'AI chatbot and automation service',
         after: ' covers assistants for websites and WhatsApp that answer from your own information and hand off to your team with the conversation attached.',
+      },
+      {
+        type: 'p-link',
+        before: 'Ran the test and the numbers look big? ',
+        href: '/contact',
+        anchor: 'Share the results with us',
+        after: ' and we will tell you what a bot should and should not handle.',
       },
     ],
     faqs: [
@@ -1159,21 +1586,21 @@ export const posts = [
   {
     slug: 'how-to-hire-a-software-house-in-lahore',
     related: ['custom-software-cost-pakistan', 'custom-software-vs-off-the-shelf'],
-    title: 'How to hire a software house in Lahore: a checklist',
+    title: 'How to Choose a Software House in Lahore',
     excerpt:
-      'Ask for a named team, a written scope, code ownership in the contract and a reference you can call. The questions that separate a studio from a sales pitch.',
+      'How to choose a software house in Lahore: ask for a named team, a written scope, code ownership in the contract and a reference you can call. Get the checklist.',
     category: 'Software Development',
     date: '2026-09-18',
-    readingTime: '5 min read',
+    readingTime: '7 min read',
     service: 'software-development',
     content: [
       {
         type: 'p',
-        text: 'Hire on four things: a written scope that says what is explicitly excluded, the names of the people who will actually build it, a contract stating you own the code and accounts, and at least one past client you can speak to directly. A studio that supplies all four is in a different category from one that supplies a portfolio and a price.',
+        text: 'Knowing how to choose a software house in Lahore comes down to four things: a written scope that says what is explicitly excluded, the names of the people who will actually build it, a contract stating you own the code and accounts, and at least one past client you can speak to directly. A studio that supplies all four is in a different category from one that supplies a portfolio and a price.',
       },
       {
         type: 'p',
-        text: 'Lahore has a deep pool of genuinely good engineering talent and, like any large market, a long tail of outfits that sell well and deliver poorly. The difficulty for a non-technical buyer is that both look identical on a website. This checklist is about the questions that separate them before you have paid anything.',
+        text: 'Lahore has a deep pool of genuinely good engineering talent and, like any large market, a long tail of outfits that sell well and deliver poorly. The difficulty for a non-technical buyer is that both look identical on a website. This checklist shows how to choose a software house in Lahore by asking the questions that separate the two before you have paid anything.',
       },
       { type: 'h2', text: 'Before you contact anyone' },
       {
@@ -1184,7 +1611,7 @@ export const posts = [
         type: 'p',
         text: 'Without it, every studio scopes something slightly different, you receive four quotes for four different projects, and the cheapest wins by having understood the least.',
       },
-      { type: 'h2', text: 'What to ask in the first conversation' },
+      { type: 'h2', text: 'What to ask a Lahore software house in the first call' },
       {
         type: 'ul',
         items: [
@@ -1219,7 +1646,18 @@ export const posts = [
           'Ask to see code, or a repository, or a technical walkthrough of something they built. You do not need to read it. You are checking that a real one exists and that they are comfortable showing it.',
         ],
       },
-      { type: 'h2', text: 'The warning signs' },
+      {
+        type: 'p',
+        text: 'Two official checks are also worth a few minutes. A registered company can be looked up with the Securities and Exchange Commission of Pakistan, and many software houses also register with the Pakistan Software Export Board.',
+      },
+      {
+        type: 'p-link',
+        before: 'PSEB explains its registration scheme for IT and software companies on the ',
+        href: 'https://www.pseb.org.pk/',
+        anchor: 'Pakistan Software Export Board website',
+        after: '. Registration is not compulsory for every studio, so treat it as one signal among several, not a guarantee.',
+      },
+      { type: 'h2', text: 'Warning signs when choosing a software house' },
       {
         type: 'ul',
         items: [
@@ -1229,6 +1667,21 @@ export const posts = [
           'Pressure to sign quickly, or a discount that expires. Engineering capacity does not work that way.',
           'Refusing to confirm code ownership. This is disqualifying on its own, whatever else is on offer.',
           'A quote far below every other. Usually the backend, the testing or the post-launch relationship has quietly been excluded.',
+        ],
+      },
+      { type: 'h2', text: 'What is specific to choosing in Lahore' },
+      {
+        type: 'p',
+        text: 'Lahore has software houses of every size, from large firms in Arfa Software Technology Park to small studios in Gulberg, DHA and Johar Town, plus many fully remote teams. The address matters less than how they work, but a few local points are worth checking.',
+      },
+      {
+        type: 'ul',
+        items: [
+          'Visit the office if you can. A short meeting in person tells you how many people actually work there and whether the team you were shown exists.',
+          'Ask which currency they invoice in. Some Lahore studios quote in USD even for local clients, which moves the rupee cost with the exchange rate.',
+          'Ask whether sales tax on services is included. In Punjab it is collected by the Punjab Revenue Authority, and quotes are not always clear about it.',
+          'Agree support over holidays. Settle how urgent issues are handled during Eid and other public holidays, especially for anything your customers rely on.',
+          'Ask how they handle staff changes. Developers do change jobs, so ask how the studio documents work and hands it over internally when someone leaves.',
         ],
       },
       { type: 'h2', text: 'On price, and on rates' },
@@ -1260,10 +1713,24 @@ export const posts = [
       },
       {
         type: 'p-link',
+        before: 'Once you have a shortlist, compare quotes on the same basis. Our guide to ',
+        href: '/blog/custom-software-cost-pakistan',
+        anchor: 'custom software development cost in Pakistan',
+        after: ' explains what belongs in each proposal and why quotes for the same brief differ.',
+      },
+      {
+        type: 'p-link',
         before: 'If you want to see how one studio answers these questions before you ask them, our ',
         href: '/services/software-development',
         anchor: 'software development service',
         after: ' sets out the scoping and architecture stages, what each produces, and what you receive at handover.',
+      },
+      {
+        type: 'p-link',
+        before: 'Shortlisting studios now? ',
+        href: '/contact',
+        anchor: 'Put these questions to us',
+        after: ' and judge our answers against everyone else’s.',
       },
     ],
     faqs: [
