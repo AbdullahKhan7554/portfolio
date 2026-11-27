@@ -34,6 +34,7 @@ export const PROJECT_TYPES = [
   { id: 'homeservices', label: 'Home Services' },
   { id: 'business', label: 'Business' },
   { id: 'restaurant', label: 'Restaurant' },
+  { id: 'production', label: 'Video Production' },
   { id: 'live', label: 'Live Clients' },
 ];
 
@@ -470,7 +471,7 @@ export const caseStudies = [
     type: 'business',
     niche: 'Business Solutions',
     year: '2025',
-    liveUrl: 'https://forward-solution.vercel.app',
+    liveUrl: 'https://www.agriprompakistan.com',
     isLive: true,
     featured: true,
     image: '/images/work/agriprom.png',
@@ -485,6 +486,40 @@ export const caseStudies = [
     results: [
       { value: 1, suffix: '', label: 'Live deployment' },
       { value: 100, suffix: '%', label: 'Mobile-first delivery' },
+    ],
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'Vercel'],
+  },
+  {
+    slug: 'paper-boat',
+    /** Which /services/<slug> page this build belongs under. */
+    service: 'web-development',
+    seoTitle: 'Paper Boat — Video Production Company Website Case Study',
+    seoDescription:
+      'A Next.js website for Paper Boat, a Lahore creative production house: ten services, a filterable video portfolio, client testimonials and a direct enquiry path.',
+    title: 'Paper Boat',
+    client: 'Paper Boat',
+    type: 'production',
+    niche: 'Live Client · Video Production',
+    year: '2026',
+    liveUrl: 'https://www.paperboat.live',
+    isLive: true,
+    featured: true,
+    image: '/paperboat.png',
+    summary:
+      'A portfolio-led website for a Lahore creative production house. The films do the selling, the services are laid out plainly, and enquiries go straight to a form or WhatsApp.',
+    problem:
+      'A production company is judged on its work, so the site had to put films front and centre, explain a wide service range without clutter, and turn interest from brands into a brief.',
+    solution: [
+      'Filterable video portfolio across showreel, corporate, hospitality, commercial and events work',
+      'Ten service lines, from brand films and video ads to drone cinematography and post-production',
+      'Client logos and testimonials surfaced on the homepage for trust',
+      'Enquiry form with industry selection, plus WhatsApp and an embedded studio map',
+    ],
+    // Feature-based outcomes only: no traffic or enquiry figures to cite.
+    results: [
+      { value: 10, label: 'Service lines presented' },
+      { label: 'Filterable video portfolio' },
+      { label: 'Form + WhatsApp enquiries' },
     ],
     tech: ['Next.js', 'React', 'Tailwind CSS', 'Vercel'],
   },
@@ -540,19 +575,13 @@ export function getFeaturedCaseStudies() {
  * is the ordering mechanism, so reordering the showcase never means moving
  * 25-line object literals around. Anything absent from this list is hidden from
  * /work (its detail page still resolves by direct URL).
- *
- * TODO — awaiting case-study data (year, summary, problem, solution, results,
- * tech) before these can be added:
- *   'paper-boat'  → slot 5, screenshot ready at /images/work/paperboat.png,
- *                   live at https://paperboat.live
- *   'seven-guys'  → slot 7, no screenshot supplied either
  */
 export const SHOWCASE_ORDER = [
+  'forward-solution', // Agriprom
+  'paper-boat',
   'builtu-gym',
   'xtreme-fitness',
-  'forward-solution', // Agriprom
   'scissors-vip-salon',
-  // 'paper-boat',     // slot 5 — awaiting case-study data
   'electronics-store', // New Multi Electronics (NME)
   'seven-guys',
 ];
