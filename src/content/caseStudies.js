@@ -166,7 +166,7 @@ export const caseStudies = [
     type: 'fitness',
     niche: 'Live Client · Custom Domain',
     year: '2025',
-    liveUrl: 'https://builtugym.com',
+    liveUrl: 'https://www.builtugym.com',
     isLive: true,
     featured: true,
     image: '/images/work/builtu.png',
